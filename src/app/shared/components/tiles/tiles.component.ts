@@ -11,5 +11,4 @@ export class TilesComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

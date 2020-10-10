@@ -1,10 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-const routes: Routes = [];
+import {ErrorComponent} from "./error/error.component";
+
+const routes: Routes = [
+  {path: '', redirectTo: '/auth/sign-in', pathMatch: 'full'},
+  {path: '404', component: ErrorComponent},
+];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {enableTracing: true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

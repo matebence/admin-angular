@@ -1,3 +1,5 @@
+@import url("fonts.css");
+
 :root {
   --blue: #4e73df;
   --indigo: #6610f2;
@@ -25,7 +27,7 @@
   --breakpoint-md: 768px;
   --breakpoint-lg: 992px;
   --breakpoint-xl: 1200px;
-  --font-family-sans-serif: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-family-sans-serif: "Palanquin", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
@@ -38,6 +40,12 @@
 html {
   font-family: sans-serif;
   line-height: 1.15;
+  scroll-behavior: smooth;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
@@ -48,7 +56,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 
 body {
   margin: 0;
-  font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: "Palanquin", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
@@ -81,7 +89,6 @@ abbr[title],
 abbr[data-original-title] {
   text-decoration: underline;
   -webkit-text-decoration: underline dotted;
-  text-decoration: underline dotted;
   cursor: help;
   border-bottom: 0;
   -webkit-text-decoration-skip-ink: none;
@@ -222,7 +229,6 @@ button {
 }
 
 button:focus {
-  outline: 1px dotted;
   outline: 5px auto -webkit-focus-ring-color;
 }
 
@@ -1900,7 +1906,7 @@ pre code {
   opacity: 1;
 }
 
-.form-control::-ms-input-placeholder {
+.form-control:-ms-input-placeholder {
   color: #858796;
   opacity: 1;
 }
@@ -4600,7 +4606,7 @@ input[type="button"].btn-block {
     margin-left: -0.75rem;
   }
   .card-deck .card {
-    flex: 1 0 0%;
+    flex: 1 0 0;
     margin-right: 0.75rem;
     margin-bottom: 0;
     margin-left: 0.75rem;
@@ -4617,7 +4623,7 @@ input[type="button"].btn-block {
     flex-flow: row wrap;
   }
   .card-group > .card {
-    flex: 1 0 0%;
+    flex: 1 0 0;
     margin-bottom: 0;
   }
   .card-group > .card + .card {
@@ -5831,11 +5837,10 @@ a.close.disabled {
   z-index: 1070;
   display: block;
   margin: 0;
-  font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: "Palanquin", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
-  text-align: left;
   text-align: start;
   text-decoration: none;
   text-shadow: none;
@@ -5944,11 +5949,10 @@ a.close.disabled {
   z-index: 1060;
   display: block;
   max-width: 276px;
-  font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: "Palanquin", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
-  text-align: left;
   text-align: start;
   text-decoration: none;
   text-shadow: none;
@@ -9752,7 +9756,7 @@ html {
 }
 
 body {
-  height: 100%;
+  height: 100vh;
 }
 
 a:focus {
@@ -10463,7 +10467,6 @@ a:focus {
   }
   .sidebar .nav-item .nav-link {
     display: block;
-    width: 100%;
     text-align: left;
     padding: 1rem;
     width: 14rem;
@@ -10808,17 +10811,18 @@ a:focus {
   background-size: cover;
 }
 
-form.user .custom-checkbox.small label {
+form.auth .custom-checkbox.small label {
   line-height: 1.5rem;
 }
 
-form.user .form-control-user {
+form.auth .form-control-user {
   font-size: 0.8rem;
   border-radius: 10rem;
   padding: 1.5rem 1rem;
 }
 
-form.user .btn-user {
+form.auth .btn-send,
+form.auth .btn-login {
   font-size: 0.8rem;
   border-radius: 10rem;
   padding: 0.75rem 1rem;
@@ -10904,6 +10908,12 @@ form.user .btn-user {
   position: relative;
   line-height: 1;
   width: 12.5rem;
+}
+
+@media (orientation: landscape) and (max-height: 420px) {
+  body {
+    height: unset;
+  }
 }
 
 @-webkit-keyframes noise-anim {

@@ -11,5 +11,4 @@ export class AccountsComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

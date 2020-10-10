@@ -11,5 +11,4 @@ export class BarComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

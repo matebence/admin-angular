@@ -1,0 +1,11 @@
+form.auth button.btn-send {
+  font-size: 0.8rem;
+  color: #ffffff;
+  border-radius: 10rem;
+  background-color: #176c9d;
+  padding: 0.75rem 1rem;
+}
+
+form.auth button.btn-send:hover {
+  background-color: #1796dc;
+}

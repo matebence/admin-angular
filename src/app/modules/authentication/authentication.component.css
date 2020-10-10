@@ -17,7 +17,3 @@ div.bg-gradient-primary:before {
   opacity: 0.9;
   background-color: #176c9d;
 }
-
-div.bg-gradient-primary div.card-body {
-  padding: 0;
-}

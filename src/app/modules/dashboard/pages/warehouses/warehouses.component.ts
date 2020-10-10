@@ -11,5 +11,4 @@ export class WarehousesComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

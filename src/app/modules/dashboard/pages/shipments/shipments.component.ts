@@ -11,5 +11,4 @@ export class ShipmentsComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }
