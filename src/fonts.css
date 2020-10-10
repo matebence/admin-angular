@@ -1,0 +1,34 @@
+@font-face {
+  font-family: Palanquin-Bold;
+  src: url(assets/font/Palanquin-Bold.ttf);
+}
+
+@font-face {
+  font-family: Palanquin-ExtraLight;
+  src: url(assets/font/Palanquin-ExtraLight.ttf);
+}
+
+@font-face {
+  font-family: Palanquin-Light;
+  src: url(assets/font/Palanquin-Light.ttf);
+}
+
+@font-face {
+  font-family: Palanquin-Medium;
+  src: url(assets/font/Palanquin-Medium.ttf);
+}
+
+@font-face {
+  font-family: Palanquin;
+  src: url(assets/font/Palanquin-Regular.ttf);
+}
+
+@font-face {
+  font-family: Palanquin-SemiBold;
+  src: url(assets/font/Palanquin-SemiBold.ttf);
+}
+
+@font-face {
+  font-family: Palanquin-Thin;
+  src: url(assets/font/Palanquin-Thin.ttf);
+}
