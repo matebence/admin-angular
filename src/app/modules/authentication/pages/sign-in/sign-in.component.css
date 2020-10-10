@@ -1,0 +1,15 @@
+div.text-center img.logo-primary {
+  margin-bottom: 2rem;
+  width: 10rem;
+}
+
+div.text-center a {
+  color: #176c9d;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+div.text-center a:hover {
+  text-decoration: none;
+  color: #1796dc;
+}
