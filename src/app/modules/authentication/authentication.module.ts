@@ -13,16 +13,18 @@ import {AuthenticationRoutingModule} from "./authentication-routing.module";
 
 @NgModule({
   declarations: [
-    AuthComponent,
     LinkDirective,
+    AuthComponent,
     ResetComponent,
-    SignInComponent,
     ButtonDirective,
+    SignInComponent,
     ForgetPasswordComponent
   ],
   imports: [
     CommonModule,
     AuthenticationRoutingModule
-  ]
+  ],
+  exports: [LinkDirective, ButtonDirective]
 })
-export class AuthenticationModule{}
+export class AuthenticationModule {
+}

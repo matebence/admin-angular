@@ -36,6 +36,7 @@ div#error .inner h1 {
 
 div#error .inner p {
   font-size: 2em;
+  font-weight: 700;
   color: #ffffff;
   margin: 3rem;
 }
@@ -46,16 +47,9 @@ div#error .inner a {
   border: solid 0.1rem #ffffff;
   text-transform: inherit;
   border-radius: 0.5rem;
-  background-color: #ffffff;
   text-decoration: none;
-  color: #176c9d;
   padding: 0.5rem 1rem;
   margin: 0;
-}
-
-div#error .inner > a:hover {
-  background-color: #176c9d;
-  color: #ffffff;
 }
 
 @media (max-width: 992px) {
