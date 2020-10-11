@@ -7,6 +7,7 @@ import {AuthComponent} from "./pages/sign-in/components/auth/auth.component";
 import {ResetComponent} from "./pages/forget-password/components/reset/reset.component";
 import {ForgetPasswordComponent} from "./pages/forget-password/forget-password.component";
 
+import {SharedModule} from "../../shared/shared.module";
 import {AuthenticationRoutingModule} from "./authentication-routing.module";
 
 @NgModule({
@@ -18,6 +19,7 @@ import {AuthenticationRoutingModule} from "./authentication-routing.module";
     ForgetPasswordComponent
   ],
   imports: [
+    SharedModule,
     CommonModule,
     AuthenticationRoutingModule
   ],
