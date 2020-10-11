@@ -1,22 +1,19 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 
+import {CardComponent} from "./components/card/card.component";
 import {SignInComponent} from "./pages/sign-in/sign-in.component";
 import {AuthComponent} from "./pages/sign-in/components/auth/auth.component";
 import {ResetComponent} from "./pages/forget-password/components/reset/reset.component";
 import {ForgetPasswordComponent} from "./pages/forget-password/forget-password.component";
 
-import {LinkDirective} from "../../shared/directives/link/link.directive";
-import {ButtonDirective} from "../../shared/directives/button/button.directive";
-
 import {AuthenticationRoutingModule} from "./authentication-routing.module";
 
 @NgModule({
   declarations: [
-    LinkDirective,
+    CardComponent,
     AuthComponent,
     ResetComponent,
-    ButtonDirective,
     SignInComponent,
     ForgetPasswordComponent
   ],
@@ -24,7 +21,7 @@ import {AuthenticationRoutingModule} from "./authentication-routing.module";
     CommonModule,
     AuthenticationRoutingModule
   ],
-  exports: [LinkDirective, ButtonDirective]
+  exports: [CardComponent]
 })
 export class AuthenticationModule {
 }
