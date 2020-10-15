@@ -1,0 +1,607 @@
+{
+  "gateway": {
+    "value": "{host}/",
+    "services": {
+      "account-service": {
+        "value": "account-service/api/",
+        "models": {
+          "roles": {
+            "create": {
+              "value": "roles/"
+            },
+            "update": {
+              "value": "roles/{id}/"
+            },
+            "delete": {
+              "value": "roles/{id}/"
+            },
+            "get": {
+              "value": "roles/{id}/"
+            },
+            "getAll": {
+              "value": "roles/page/{page}/limit/{limit}/"
+            },
+            "search": {
+              "value": "roles/search/"
+            },
+            "join": {
+              "value": "join/{column}/"
+            }
+          },
+          "privileges": {
+            "create": {
+              "value": "privileges/"
+            },
+            "update": {
+              "value": "privileges/{id}/"
+            },
+            "delete": {
+              "value": "privileges/{id}/"
+            },
+            "get": {
+              "value": "privileges/{id}/"
+            },
+            "getAll": {
+              "value": "privileges/page/{page}/limit/{limit}/"
+            },
+            "search": {
+              "value": "privileges/search/"
+            },
+            "join": {
+              "value": "join/{column}/"
+            }
+          },
+          "accounts": {
+            "create": {
+              "value": "accounts/"
+            },
+            "update": {
+              "value": "accounts/{id}/"
+            },
+            "delete": {
+              "value": "accounts/{id}/"
+            },
+            "get": {
+              "value": "accounts/{id}/"
+            },
+            "getAll": {
+              "value": "accounts/page/{page}/limit/{limit}/"
+            },
+            "search": {
+              "value": "accounts/search/"
+            },
+            "join": {
+              "value": "join/{column}/"
+            }
+          },
+          "preferences": {
+            "create": {
+              "value": "preferences/"
+            },
+            "update": {
+              "value": "preferences/{id}/"
+            },
+            "delete": {
+              "value": "preferences/{id}/"
+            },
+            "get": {
+              "value": "preferences/{id}/"
+            },
+            "getAll": {
+              "value": "preferences/page/{page}/limit/{limit}/"
+            },
+            "search": {
+              "value": "preferences/search/"
+            },
+            "join": {
+              "value": "join/{column}/"
+            }
+          }
+        }
+      },
+      "authorization-server": {
+        "value": "authorization-server/",
+        "models": {
+          "signIn": {
+            "value": "signin/"
+          },
+          "signUp": {
+            "value": "signup/"
+          },
+          "signOut": {
+            "value": "signout/"
+          },
+          "forgetPassword": {
+            "value": "forgetpassword/"
+          },
+          "activate": {
+            "value": "signup/account/{accountId}/token/{token}/"
+          },
+          "recover": {
+            "value": "forgetpassword/account/{accountId}/token/{token}/"
+          }
+        }
+      },
+      "messaging-service": {
+        "value": "messaging-service/api/",
+        "models": {
+          "status": {
+            "create": {
+              "value": "status/"
+            },
+            "update": {
+              "value": "status/{id}/"
+            },
+            "delete": {
+              "value": "status/{id}/"
+            },
+            "get": {
+              "value": "status/{id}/"
+            },
+            "getAll": {
+              "value": "status/page/{page}/limit/{limit}/"
+            },
+            "search": {
+              "value": "status/search/"
+            },
+            "join": {
+              "value": "join/{column}/"
+            }
+          },
+          "conversation": {
+            "create": {
+              "value": "conversation/"
+            },
+            "update": {
+              "value": "conversation/{id}/"
+            },
+            "delete": {
+              "value": "conversation/{id}/"
+            },
+            "get": {
+              "value": "conversation/{id}/"
+            },
+            "getAll": {
+              "value": "conversation/page/{page}/limit/{limit}/"
+            },
+            "search": {
+              "value": "conversation/search/"
+            },
+            "join": {
+              "value": "join/{column}/"
+            }
+          },
+          "communications": {
+            "create": {
+              "value": "communications/"
+            },
+            "update": {
+              "value": "communications/{id}/"
+            },
+            "delete": {
+              "value": "communications/{id}/"
+            },
+            "get": {
+              "value": "communications/{id}/"
+            },
+            "getAll": {
+              "value": "communications/page/{page}/limit/{limit}/"
+            },
+            "search": {
+              "value": "communications/search/"
+            },
+            "join": {
+              "value": "join/{column}/"
+            }
+          }
+        }
+      },
+      "parcel-service": {
+        "value": "parcel-service/api/",
+        "models": {
+          "categories": {
+            "create": {
+              "value": "categories/"
+            },
+            "update": {
+              "value": "categories/{id}/"
+            },
+            "delete": {
+              "value": "categories/{id}/"
+            },
+            "get": {
+              "value": "categories/{id}/"
+            },
+            "getAll": {
+              "value": "categories/page/{page}/limit/{limit}/"
+            },
+            "search": {
+              "value": "categories/search/"
+            },
+            "join": {
+              "value": "join/{column}/"
+            }
+          },
+          "ratings": {
+            "create": {
+              "value": "ratings/"
+            },
+            "update": {
+              "value": "ratings/{id}/"
+            },
+            "delete": {
+              "value": "ratings/{id}/"
+            },
+            "get": {
+              "value": "ratings/{id}/"
+            },
+            "getAll": {
+              "value": "ratings/page/{page}/limit/{limit}/"
+            },
+            "search": {
+              "value": "ratings/search/"
+            },
+            "join": {
+              "value": "join/{column}/"
+            }
+          },
+          "parcels": {
+            "create": {
+              "value": "parcels/"
+            },
+            "update": {
+              "value": "parcels/{id}/"
+            },
+            "delete": {
+              "value": "parcels/{id}/"
+            },
+            "get": {
+              "value": "parcels/{id}/"
+            },
+            "getAll": {
+              "value": "parcels/page/{page}/limit/{limit}/"
+            },
+            "search": {
+              "value": "parcels/search/"
+            },
+            "join": {
+              "value": "join/{column}/"
+            }
+          }
+        }
+      },
+      "place-service": {
+        "value": "place-service/api/",
+        "models": {
+          "regions":{
+            "create": {
+              "value": "regions/"
+            },
+            "update": {
+              "value": "regions/{id}/"
+            },
+            "delete": {
+              "value": "regions/{id}/"
+            },
+            "get": {
+              "value": "regions/{id}/"
+            },
+            "getAll": {
+              "value": "regions/page/{page}/limit/{limit}/"
+            },
+            "search": {
+              "value": "regions/search/"
+            },
+            "join": {
+              "value": "join/{column}/"
+            }
+          },
+          "districts": {
+            "create": {
+              "value": "districts/"
+            },
+            "update": {
+              "value": "districts/{id}/"
+            },
+            "delete": {
+              "value": "districts/{id}/"
+            },
+            "get": {
+              "value": "districts/{id}/"
+            },
+            "getAll": {
+              "value": "districts/page/{page}/limit/{limit}/"
+            },
+            "search": {
+              "value": "districts/search/"
+            },
+            "join": {
+              "value": "join/{column}/"
+            }
+          },
+          "villages": {
+            "create": {
+              "value": "villages/"
+            },
+            "update": {
+              "value": "villages/{id}/"
+            },
+            "delete": {
+              "value": "villages/{id}/"
+            },
+            "get": {
+              "value": "villages/{id}/"
+            },
+            "getAll": {
+              "value": "villages/page/{page}/limit/{limit}/"
+            },
+            "search": {
+              "value": "villages/search/"
+            },
+            "join": {
+              "value": "join/{column}/"
+            }
+          }
+        }
+      },
+      "shipment-service": {
+        "value": "shipment-service/api/",
+        "models": {
+          "status": {
+            "create": {
+              "value": "status/"
+            },
+            "update": {
+              "value": "status/{id}/"
+            },
+            "delete": {
+              "value": "status/{id}/"
+            },
+            "get": {
+              "value": "status/{id}/"
+            },
+            "getAll": {
+              "value": "status/page/{page}/limit/{limit}/"
+            },
+            "search": {
+              "value": "status/search/"
+            },
+            "join": {
+              "value": "join/{column}/"
+            }
+          },
+          "invoices": {
+            "create": {
+              "value": "invoices/"
+            },
+            "update": {
+              "value": "invoices/{id}/"
+            },
+            "delete": {
+              "value": "invoices/{id}/"
+            },
+            "get": {
+              "value": "invoices/{id}/"
+            },
+            "getAll": {
+              "value": "invoices/page/{page}/limit/{limit}/"
+            },
+            "search": {
+              "value": "invoices/search/"
+            },
+            "join": {
+              "value": "join/{column}/"
+            }
+          },
+          "shipments": {
+            "create": {
+              "value": "shipments/"
+            },
+            "update": {
+              "value": "shipments/{id}/"
+            },
+            "delete": {
+              "value": "shipments/{id}/"
+            },
+            "get": {
+              "value": "shipments/{id}/"
+            },
+            "getAll": {
+              "value": "shipments/page/{page}/limit/{limit}/"
+            },
+            "search": {
+              "value": "shipments/search/"
+            },
+            "join": {
+              "value": "join/{column}/"
+            }
+          },
+          "prices": {
+            "update": {
+              "value": "prices/{id}/"
+            },
+            "get": {
+              "value": "prices/{id}/"
+            }
+          }
+        }
+      },
+      "user-service": {
+        "value": "user-service/api/",
+        "models": {
+          "genders": {
+            "create": {
+              "value": "genders/"
+            },
+            "update": {
+              "value": "genders/{id}/"
+            },
+            "delete": {
+              "value": "genders/{id}/"
+            },
+            "get": {
+              "value": "genders/{id}/"
+            },
+            "getAll": {
+              "value": "genders/page/{page}/limit/{limit}/"
+            },
+            "search": {
+              "value": "genders/search/"
+            },
+            "join": {
+              "value": "join/{column}/"
+            }
+          },
+          "payments": {
+            "create": {
+              "value": "payments/"
+            },
+            "update": {
+              "value": "payments/{id}/"
+            },
+            "delete": {
+              "value": "payments/{id}/"
+            },
+            "get": {
+              "value": "payments/{id}/"
+            },
+            "getAll": {
+              "value": "payments/page/{page}/limit/{limit}/"
+            },
+            "search": {
+              "value": "payments/search/"
+            },
+            "join": {
+              "value": "join/{column}/"
+            }
+          },
+          "payouts": {
+            "create": {
+              "value": "payouts/"
+            },
+            "update": {
+              "value": "payouts/{id}/"
+            },
+            "delete": {
+              "value": "payouts/{id}/"
+            },
+            "get": {
+              "value": "payouts/{id}/"
+            },
+            "getAll": {
+              "value": "payouts/page/{page}/limit/{limit}/"
+            },
+            "search": {
+              "value": "payouts/search/"
+            },
+            "join": {
+              "value": "join/{column}/"
+            }
+          },
+          "users": {
+            "create": {
+              "value": "users/"
+            },
+            "update": {
+              "value": "users/{id}/"
+            },
+            "delete": {
+              "value": "users/{id}/"
+            },
+            "get": {
+              "value": "users/{id}/"
+            },
+            "getAll": {
+              "value": "users/page/{page}/limit/{limit}/"
+            },
+            "search": {
+              "value": "users/search/"
+            },
+            "join": {
+              "value": "join/{column}/"
+            }
+          }
+        }
+      },
+      "vehicle-service": {
+        "value": "vehicle-service/api/",
+        "models": {
+          "types": {
+            "create": {
+              "value": "types/"
+            },
+            "update": {
+              "value": "types/{id}/"
+            },
+            "delete": {
+              "value": "types/{id}/"
+            },
+            "get": {
+              "value": "types/{id}/"
+            },
+            "getAll": {
+              "value": "types/page/{page}/limit/{limit}/"
+            },
+            "search": {
+              "value": "types/search/"
+            },
+            "join": {
+              "value": "join/{column}/"
+            }
+          },
+          "vehicles": {
+            "create": {
+              "value": "vehicles/"
+            },
+            "update": {
+              "value": "vehicles/{id}/"
+            },
+            "delete": {
+              "value": "vehicles/{id}/"
+            },
+            "get": {
+              "value": "vehicles/{id}/"
+            },
+            "getAll": {
+              "value": "vehicles/page/{page}/limit/{limit}/"
+            },
+            "search": {
+              "value": "vehicles/search/"
+            },
+            "join": {
+              "value": "join/{column}/"
+            }
+          }
+        }
+      },
+      "warehouse-service": {
+        "value": "warehouse-service/api",
+        "models": {
+          "warehouses": {
+            "create": {
+              "value": "warehouses/"
+            },
+            "update": {
+              "value": "warehouses/{id}/"
+            },
+            "delete": {
+              "value": "warehouses/{id}/"
+            },
+            "get": {
+              "value": "warehouses/{id}/"
+            },
+            "getAll": {
+              "value": "warehouses/page/{page}/limit/{limit}/"
+            },
+            "search": {
+              "value": "warehouses/search/"
+            },
+            "join": {
+              "value": "join/{column}/"
+            }
+          }
+        }
+      }
+    }
+  }
+}
