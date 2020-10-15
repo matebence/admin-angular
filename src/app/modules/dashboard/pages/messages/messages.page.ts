@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './messages.page.html',
   styleUrls: ['./messages.page.css']
 })
-export class MessagesComponent implements OnInit {
+export class MessagesPage implements OnInit {
 
   constructor() { }
 

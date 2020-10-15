@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import {ErrorComponent} from "./error/error.component";
+import {ErrorPage} from "./error/error.page";
 
 const routes: Routes = [
   {path: '', redirectTo: '/auth/sign-in', pathMatch: 'full'},
-  {path: '404', component: ErrorComponent},
+  {path: '404', component: ErrorPage},
 ];
 
 @NgModule({
