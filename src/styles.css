@@ -10815,7 +10815,8 @@ form.auth .custom-checkbox.small label {
   line-height: 1.5rem;
 }
 
-form.auth .form-control-user {
+form.auth .form-control-email,
+form.auth .form-control-password{
   font-size: 0.8rem;
   border-radius: 10rem;
   padding: 1.5rem 1rem;

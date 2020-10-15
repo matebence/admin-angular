@@ -4,3 +4,13 @@ form.auth button.btn-login {
   border-radius: 10rem;
   padding: 0.75rem 1rem;
 }
+
+form.auth input[type="email"].ng-invalid.ng-touched,
+form.auth input[type="password"].ng-invalid.ng-touched {
+  border: 0.1rem solid #ff0600;
+}
+
+form.auth input[type="email"].ng-valid.ng-touched,
+form.auth input[type="password"].ng-valid.ng-touched {
+  border: 0.1rem solid #018000;
+}
