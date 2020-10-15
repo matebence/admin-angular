@@ -1,8 +1,8 @@
 import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
 
-import {SignInComponent} from "./pages/sign-in/sign-in.component";
-import {ForgetPasswordComponent} from "./pages/forget-password/forget-password.component";
+import {SignInComponent} from "./pages/sign-in/sign-in.page";
+import {ForgetPasswordComponent} from "./pages/forget-password/forget-password.page";
 
 const routes: Routes = [
   {path: 'auth', redirectTo: '/auth/sign-in', pathMatch: 'full'},
