@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import {ErrorPage} from "./error/error.page";
+import {ErrorPage} from './error/error.page';
 
 const routes: Routes = [
   {path: '', redirectTo: '/auth/sign-in', pathMatch: 'full'},

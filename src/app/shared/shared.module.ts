@@ -1,8 +1,8 @@
-import {NgModule} from "@angular/core";
-import {CommonModule} from "@angular/common";
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import {LinkDirective} from "./directives/link/link.directive";
-import {ButtonDirective} from "./directives/button/button.directive";
+import {LinkDirective} from './directives/link/link.directive';
+import {ButtonDirective} from './directives/button/button.directive';
 
 @NgModule({
   declarations: [

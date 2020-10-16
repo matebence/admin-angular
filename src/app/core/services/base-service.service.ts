@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 import {HttpErrorResponse} from '@angular/common/http';
 
 @Injectable()
-export class BaseService<T> {
+export class BaseService {
 
   public constructor() {
   }

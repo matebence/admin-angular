@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
-import {FormGroup} from "@angular/forms";
-import {HttpParams} from "@angular/common/http";
-import {catchError} from "rxjs/internal/operators";
+import {FormGroup} from '@angular/forms';
+import {HttpParams} from '@angular/common/http';
+import {catchError} from 'rxjs/internal/operators';
 
-import {BaseService} from "../base-service.service";
-import {RequestHTTP} from "../../http/request.http";
-import {RouteBuilder} from "../../http/route-builder.http";
-import {environment} from "../../../../environments/environment";
-import {SignIn} from "../../../shared/models/services/account/account.model";
+import {BaseService} from '../base-service.service';
+import {RequestHTTP} from '../../http/request.http';
+import {RouteBuilder} from '../../http/route-builder.http';
+import {environment} from '../../../../environments/environment';
+import {SignIn} from '../../../shared/models/services/account/account.model';
 
 @Injectable()
 export class AccountService extends BaseService {
@@ -17,7 +17,7 @@ export class AccountService extends BaseService {
   }
 
   public signIn(payload: FormGroup) {
-    const url = this.routeBuilder.service("authorization-server").model("signIn").action("create").build();
+    const url = this.routeBuilder.service('authorization-server').model('signIn').action('create').build();
     const pyaload = new HttpParams({
       fromObject: {
         username: payload.value.user.name,

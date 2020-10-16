@@ -1,8 +1,8 @@
-import {Injectable} from "@angular/core";
+import {Injectable} from '@angular/core';
 
 import routes from '../../configs/routes.config.json';
-import {environment} from "../../../environments/environment";
-import {RouterModel, RouterPath, RouterService} from "../../shared/models/http/router/router.model";
+import {environment} from '../../../environments/environment';
+import {RouterModel, RouterPath, RouterService} from '../../shared/models/http/router/router.model';
 
 @Injectable()
 export class RouteBuilder {
@@ -13,7 +13,7 @@ export class RouteBuilder {
   private routerService: RouterService;
 
   public constructor() {
-    this.routerHost = routes.gateway.value.replace("{host}", environment.HOST_BLESK)
+    this.routerHost = routes.gateway.value.replace('{host}', environment.HOST_BLESK)
   }
 
   public service(service: string): this {
