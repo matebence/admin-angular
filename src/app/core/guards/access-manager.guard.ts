@@ -4,8 +4,8 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angul
 @Injectable()
 export class AccessManagerGuard implements CanActivate {
 
-  constructor() {}
+  public constructor() {}
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
   }
 }

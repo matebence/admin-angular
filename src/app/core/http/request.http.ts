@@ -13,10 +13,10 @@ export class RequestHTTP<T> {
   private readonly POST: string = 'POST';
   private readonly DELETE: string = 'DELETE';
 
-  constructor(private httpClient: HttpClient) {
+  public constructor(private httpClient: HttpClient) {
   }
 
-  get(headers: HttpHeaders, params: HttpParams) {
+  public get(headers: HttpHeaders, params: HttpParams) {
     return this.httpClient.request(new HttpRequest(this.GET, environment.HOST_BLESK, {
       observe: 'body',
       responseType: 'json',
@@ -25,7 +25,7 @@ export class RequestHTTP<T> {
     }));
   }
 
-  put(headers: HttpHeaders, params: HttpParams, payload: T) {
+  public put(headers: HttpHeaders, params: HttpParams, payload: T) {
     return this.httpClient.request(new HttpRequest(this.PUT, environment.HOST_BLESK, payload, {
       observe: 'body',
       responseType: 'json',
@@ -34,7 +34,7 @@ export class RequestHTTP<T> {
     }));
   }
 
-  post(headers: HttpHeaders, payload: T) {
+  public post(headers: HttpHeaders, payload: T) {
     return this.httpClient.request(new HttpRequest(this.POST, environment.HOST_BLESK, payload, {
       observe: 'body',
       responseType: 'json',
@@ -42,7 +42,7 @@ export class RequestHTTP<T> {
     }));
   }
 
-  delete(headers: HttpHeaders, params: HttpParams) {
+  public delete(headers: HttpHeaders, params: HttpParams) {
     return this.httpClient.request(new HttpRequest(this.DELETE, environment.HOST_BLESK, {
       observe: 'body',
       responseType: 'json',

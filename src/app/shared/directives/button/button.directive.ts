@@ -4,23 +4,23 @@ import {Directive, Renderer2, ElementRef, HostListener, HostBinding, OnInit, Inp
   selector: '[appButtonHover]'
 })
 export class ButtonDirective implements OnInit {
-  @Input() backgroundInput: string = '#176c9d';
-  @Input() backgroundHoverInput: string = '#1796dc';
+  @Input() public backgroundInput: string = '#176c9d';
+  @Input() public backgroundHoverInput: string = '#1796dc';
 
-  @HostBinding('style.backgroundColor') backgroundColor: string;
+  @HostBinding('style.backgroundColor') public backgroundColor: string;
 
-  constructor(private elRef: ElementRef, private renderer: Renderer2) {
+  public constructor(private elRef: ElementRef, private renderer: Renderer2) {
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.backgroundColor = this.backgroundInput;
   }
 
-  @HostListener('mouseenter') mouseover(eventData: Event) {
+  @HostListener('mouseenter') public mouseover(eventData: Event) {
     this.backgroundColor = this.backgroundHoverInput;
   }
 
-  @HostListener('mouseleave') mouseleave(eventData: Event) {
+  @HostListener('mouseleave') public mouseleave(eventData: Event) {
     this.backgroundColor = this.backgroundInput;
   }
 }

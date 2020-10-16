@@ -5,5 +5,5 @@ import {BaseServiceService} from "../base-service.service";
 @Injectable()
 export class VehicleServiceService extends BaseServiceService {
 
-  constructor() { }
+  public constructor() { }
 }

@@ -3,7 +3,7 @@ import {CommonModule} from "@angular/common";
 import {HttpClientModule} from "@angular/common/http";
 import {BrowserModule} from "@angular/platform-browser";
 
-import {RouteBuilder} from "./http/RouteBuilder.http";
+import {RouteBuilder} from "./http/route-builder.http";
 
 import {ErrorPage} from "./error/error.page";
 

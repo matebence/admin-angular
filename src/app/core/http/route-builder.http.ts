@@ -12,7 +12,7 @@ export class RouteBuilder {
   private routerModel: RouterModel;
   private routerService: RouterService;
 
-  constructor() {
+  public constructor() {
     this.routerHost = routes.gateway.value.replace("{host}", environment.HOST_BLESK)
   }
 

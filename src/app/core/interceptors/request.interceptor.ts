@@ -5,9 +5,9 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class RequestInterceptor implements HttpInterceptor {
 
-  constructor() {}
+  public constructor() {}
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req);
   }
 }
