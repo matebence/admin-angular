@@ -1,6 +1,4 @@
 import {NgModule} from '@angular/core';
-import {HttpClientModule} from "@angular/common/http";
-import {BrowserModule} from '@angular/platform-browser';
 
 import {AuthenticationPage} from './modules/authentication/authentication.page';
 
@@ -13,8 +11,6 @@ import {AuthenticationModule} from "./modules/authentication/authentication.modu
   ],
   imports: [
     CoreModule,
-    BrowserModule,
-    HttpClientModule,
     AuthenticationModule
   ],
   providers: [],

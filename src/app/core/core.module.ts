@@ -1,5 +1,9 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
+import {HttpClientModule} from "@angular/common/http";
+import {BrowserModule} from "@angular/platform-browser";
+
+import {RouteBuilder} from "./http/RouteBuilder.http";
 
 import {ErrorPage} from "./error/error.page";
 
@@ -13,7 +17,12 @@ import {CoreRoutingModule} from "./core-routing.module";
   imports: [
     CommonModule,
     SharedModule,
+    BrowserModule,
+    HttpClientModule,
     CoreRoutingModule
+  ],
+  providers: [
+    RouteBuilder
   ],
   exports: [ErrorPage, CoreRoutingModule]
 })
