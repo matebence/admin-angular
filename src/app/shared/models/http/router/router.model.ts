@@ -8,11 +8,11 @@ export interface RouterService {
 }
 
 export interface RouterModel {
-  "create"?: RouterPath,
-  "update": RouterPath,
-  "delete"?: RouterPath,
   "get": RouterPath,
+  "update": RouterPath,
+  "join"?: RouterPath
+  "create"?: RouterPath,
+  "delete"?: RouterPath,
   "getAll"?: RouterPath,
   "search"?: RouterPath,
-  "join"?: RouterPath
 }

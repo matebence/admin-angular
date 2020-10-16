@@ -32,9 +32,7 @@ export class RouteBuilder {
   }
 
   public params(params: Object[]): this {
-    params.forEach(e => {
-      this.routerPath.value = this.routerPath.value.replace(Object.keys(e).toString(), Object.values(e).toString())
-    });
+    params.forEach(e => {this.routerPath.value = this.routerPath.value.replace(Object.keys(e).toString(), Object.values(e).toString())});
     return this
   }
 

@@ -1,6 +1,14 @@
-form.auth button.btn-send {
+form.reset button.btn-send {
   font-size: 0.8rem;
   color: #ffffff;
   border-radius: 10rem;
   padding: 0.75rem 1rem;
+}
+
+form.reset input[type="email"].ng-invalid.ng-touched {
+  border: 0.1rem solid #ff0600;
+}
+
+form.reset input[type="email"].ng-valid.ng-touched {
+  border: 0.1rem solid #018000;
 }
