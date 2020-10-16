@@ -1,4 +1,7 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()" class="auth">
+<div *ngIf="error" class="alert alert-danger" role="alert">
+  {{error.message}}
+</div>
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="auth">
   <div formGroupName="user">
     <div class="form-group">
       <input
@@ -33,7 +36,7 @@
     </div>
   </div>
   <button
-    [disabled] = "!form.get('user.name').valid || !form.get('user.password').valid"
+    [disabled] = "!formGroup.get('user.name').valid || !formGroup.get('user.password').valid"
     appButtonHover
     class="btn btn-primary btn-login btn-block">
     Prihlásiť sa

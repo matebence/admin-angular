@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 
 import routes from '../../configs/routes.config.json';
 import {environment} from '../../../environments/environment';
-import {RouterModel, RouterPath, RouterService} from '../../shared/models/http/router/router.model';
+import {RouterModel, RouterPath, RouterService} from '../../shared/models/router/router.model';
 
 @Injectable()
 export class RouteBuilder {

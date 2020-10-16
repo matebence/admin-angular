@@ -1,5 +1,5 @@
+import {Observable} from 'rxjs/index';
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
 import {map} from 'rxjs/internal/operators';
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from '@angular/common/http';
 

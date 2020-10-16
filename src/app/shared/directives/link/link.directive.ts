@@ -18,19 +18,19 @@ export class LinkDirective implements OnInit {
   public constructor(private elRef: ElementRef, private renderer: Renderer2) {
   }
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.color = this.colorInput;
     this.textDecoration = 'none';
     this.backgroundColor = this.backgroundInput;
   }
 
-  @HostListener('mouseenter') public mouseover(eventData: Event) {
+  @HostListener('mouseenter') public mouseover(eventData: Event): void {
     this.textDecoration = 'none';
     this.color = this.colorHoverInput;
     this.backgroundColor = this.backgroundHoverInput;
   }
 
-  @HostListener('mouseleave') public mouseleave(eventData: Event) {
+  @HostListener('mouseleave') public mouseleave(eventData: Event): void {
     this.color = this.colorInput;
     this.backgroundColor = this.backgroundInput;
   }

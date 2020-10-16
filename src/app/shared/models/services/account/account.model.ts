@@ -1,3 +1,5 @@
+import {Reason} from "../../common/common.model";
+
 export interface SignIn {
   access_token: string,
   token_type: string,
@@ -49,19 +51,9 @@ export interface Activation {
   nav: Hateoas
 }
 
-export interface Reason {
-  info: string
-}
-
 export interface Hateoas {
   signin?: string,
   forgetpassword?: string,
   signup?: string,
   home?: string
-}
-
-export interface Error {
-  timestamp: string,
-  message: string,
-  error: boolean
 }

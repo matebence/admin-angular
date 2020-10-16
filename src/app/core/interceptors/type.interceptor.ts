@@ -2,10 +2,8 @@ import {Observable} from 'rxjs/index';
 import {Injectable} from '@angular/core';
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 
-import {environment} from '../../../environments/environment';
-
 @Injectable()
-export class BasicInterceptor implements HttpInterceptor {
+export class TypeInterceptor implements HttpInterceptor {
 
   public constructor() {
   }
@@ -13,9 +11,12 @@ export class BasicInterceptor implements HttpInterceptor {
   public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (req.url.split('/').includes('signin')) {
       return next.handle(req.clone({
-        headers: req.headers.set('Authorization', 'Basic ' + btoa(environment.CLIENT_ID + ':' + environment.CLIENT_SECRET))
+        headers: req.headers.set('Content-Type', 'application/x-www-form-urlencoded')
+      }));
+    } else {
+      return next.handle(req.clone({
+        headers: req.headers.set('Content-Type', 'application/json')
       }));
     }
-    return next.handle(req);
   }
 }

@@ -13,6 +13,7 @@ import {ErrorPage} from './error/error.page';
 
 import {SharedModule} from '../shared/shared.module';
 import {CoreRoutingModule} from './core-routing.module';
+import {TypeInterceptor} from "./interceptors/type.interceptor";
 import {ResponseInterceptor} from './interceptors/response.interceptor';
 
 @NgModule({
@@ -30,6 +31,7 @@ import {ResponseInterceptor} from './interceptors/response.interceptor';
     RequestHTTP,
     RouteBuilder,
     AccountService,
+    {provide: HTTP_INTERCEPTORS, useClass: TypeInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: BasicInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ResponseInterceptor, multi: true}

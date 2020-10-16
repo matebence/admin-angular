@@ -1,4 +1,7 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()" class="reset">
+<div *ngIf="error" class="alert alert-danger" role="alert">
+  {{error.message}}
+</div>
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="reset">
   <div formGroupName="user">
     <div class="form-group">
       <input
@@ -12,7 +15,7 @@
     </div>
   </div>
   <button
-    [disabled] = "!form.get('user.email').valid"
+    [disabled] = "!formGroup.get('user.email').valid"
     appButtonHover
     class="btn btn-primary btn-send btn-block">
     Odoslať
