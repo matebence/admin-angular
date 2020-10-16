@@ -1,14 +1,11 @@
+import {throwError} from 'rxjs';
 import {Injectable} from '@angular/core';
-import {Observable, throwError} from 'rxjs';
-import {catchError, retry} from 'rxjs/operators';
-import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
-
-import {RouteBuilder} from "../http/route-builder.http";
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Injectable()
-export class BaseServiceService {
+export class BaseService<T> {
 
-  public constructor(private httpClient: HttpClient, private routeBuilder: RouteBuilder) {
+  public constructor() {
   }
 
   protected handleError(error: HttpErrorResponse) {

@@ -1,12 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams, HttpRequest} from '@angular/common/http';
 
-import {environment} from './environment';
-
-import 'rxjs/Rx';
-
 @Injectable()
-export class RequestHTTP<T> {
+export class RequestHTTP {
 
   private readonly GET: string = 'GET';
   private readonly PUT: string = 'PUT';
@@ -16,38 +12,42 @@ export class RequestHTTP<T> {
   public constructor(private httpClient: HttpClient) {
   }
 
-  public get(headers: HttpHeaders, params: HttpParams) {
-    return this.httpClient.request(new HttpRequest(this.GET, environment.HOST_BLESK, {
+  public get(url: string, params: HttpParams, headers?: HttpHeaders) {
+    return this.httpClient.request(new HttpRequest(this.GET, url,  {
+      params: params,
       observe: 'body',
-      responseType: 'json',
       headers: headers,
-      params: params
+      responseType: 'json',
+      reportProgress: true
     }));
   }
 
-  public put(headers: HttpHeaders, params: HttpParams, payload: T) {
-    return this.httpClient.request(new HttpRequest(this.PUT, environment.HOST_BLESK, payload, {
+  public put(url: string, payload: any, params: HttpParams, headers?: HttpHeaders) {
+    return this.httpClient.request(new HttpRequest(this.PUT, url, payload, {
+      params: params,
       observe: 'body',
-      responseType: 'json',
       headers: headers,
-      params: params
+      responseType: 'json',
+      reportProgress: true
     }));
   }
 
-  public post(headers: HttpHeaders, payload: T) {
-    return this.httpClient.request(new HttpRequest(this.POST, environment.HOST_BLESK, payload, {
+  public post(url: string, payload: any, headers?: HttpHeaders) {
+    return this.httpClient.request(new HttpRequest(this.POST, url, payload, {
       observe: 'body',
-      responseType: 'json',
       headers: headers,
+      responseType: 'json',
+      reportProgress: true,
     }));
   }
 
-  public delete(headers: HttpHeaders, params: HttpParams) {
-    return this.httpClient.request(new HttpRequest(this.DELETE, environment.HOST_BLESK, {
+  public delete(url: string, params: HttpParams, headers?: HttpHeaders) {
+    return this.httpClient.request(new HttpRequest(this.DELETE, url, {
+      params: params,
       observe: 'body',
-      responseType: 'json',
       headers: headers,
-      params: params
+      responseType: 'json',
+      reportProgress: true
     }));
   }
 }
