@@ -3,7 +3,9 @@ import {switchMap} from 'rxjs/internal/operators';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 
+import {Error} from '../../../../shared/models/error/error.model';
 import {Recover} from '../../../../shared/models/services/account/account.model';
+
 import {AuthorizationService} from '../../../../core/services/authorization-server/authorization.service';
 
 @Component({

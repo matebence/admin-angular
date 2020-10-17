@@ -8,11 +8,12 @@ import {EventEmitter, Injectable} from '@angular/core';
 import {BaseService} from '../base.service';
 import {PersistenceService} from '../persistence-service/persistence.service';
 
+import {environment} from '../../../../environments/environment';
+
+import {ForgetPassword, Recover, SignIn, SignOut} from '../../../shared/models/services/account/account.model';
+
 import {RequestHTTP} from '../../http/request.http';
 import {RouteBuilder} from '../../http/route-builder.http';
-
-import {environment} from '../../../../environments/environment';
-import {ForgetPassword, Recover, SignIn, SignOut} from '../../../shared/models/services/account/account.model';
 
 @Injectable()
 export class AuthorizationService extends BaseService {
@@ -56,10 +57,14 @@ export class AuthorizationService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: SignIn) => {
         this.setSignInData(data);
-        this.persistenceService.set('accountData', this.getSignInData());
-        this.persistenceService.append('accountData', {expirationDate: new Date(new Date().getTime() + data.expires_in * 1000)});
-        this.router.navigate(['/dashboard']);
 
+        this.persistenceService.set(environment.LOCAL_STORAGE_ACCOUNT_DATA, this.getSignInData());
+        this.persistenceService.append(environment.LOCAL_STORAGE_ACCOUNT_DATA, {
+          remain: formGroup.value.remain,
+          expirationDate: new Date(new Date().getTime() + data.expires_in * 1000)
+        });
+
+        this.router.navigate(['/dashboard']);
         return subject.next(true);
       });
     return subject.asObservable();
@@ -79,8 +84,8 @@ export class AuthorizationService extends BaseService {
       .subscribe((data: SignOut) => {
         this.setSignOutData(data);
         this.persistenceService.clear();
-        this.router.navigate(['/']);
 
+        this.router.navigate(['/']);
         return subject.next(true);
       });
     return subject.asObservable();
@@ -98,8 +103,8 @@ export class AuthorizationService extends BaseService {
       .post(url, formGroup.value.user)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: ForgetPassword) => {
-        this.setForgetPasswordData(data);
 
+        this.setForgetPasswordData(data);
         return subject.next(true);
       });
     return subject.asObservable();
@@ -118,8 +123,8 @@ export class AuthorizationService extends BaseService {
       .get(url)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: Recover) => {
-        this.setRecoverData(data);
 
+        this.setRecoverData(data);
         return subject.next(true);
       });
     return subject.asObservable();

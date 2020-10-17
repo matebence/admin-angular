@@ -10,7 +10,9 @@ const routes: Routes = [
   {path: 'auth', children: [
     {path: 'sign-in', component: SignInPage},
     {path: 'sign-out', component: SignOutPage},
-    {path: 'forget-password', component: ForgetPasswordPage},
+    {path:'forget-password', component: ForgetPasswordPage, children: [
+      {path: 'account/:account/token/:token', component: ForgetPasswordPage},
+    ]},
     {path: '**', redirectTo: '/error', pathMatch: 'full'},
   ]}
 ];
