@@ -32,9 +32,9 @@ const routes: Routes = [
     {path:'external', children: [
       {path: 'stripe', component: StripePage},
       {path: 'firebase', component: FirebasePage}
-    ]}
+    ]},
+    {path: '**', redirectTo: '/error', pathMatch: 'full'}
   ]},
-  {path: '**', redirectTo: '/404', pathMatch: 'full'},
 ];
 
 @NgModule({

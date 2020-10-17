@@ -4,8 +4,8 @@ import {Routes, RouterModule} from '@angular/router';
 import {ErrorPage} from './error/error.page';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/sign-in', pathMatch: 'full'},
-  {path: '404', component: ErrorPage},
+  {path: '', redirectTo: '/auth/sign-in', pathMatch: 'full'},
+  {path: 'error', component: ErrorPage}
 ];
 
 @NgModule({
