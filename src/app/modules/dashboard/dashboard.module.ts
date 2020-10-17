@@ -1,9 +1,13 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
+import {UsersPage} from './pages/users/users.page';
+import {EurekaPage} from "./pages/eureka/eureka.page";
+import {ZipkinPage} from "./pages/zipkin/zipkin.page";
+import {StripePage} from "./pages/stripe/stripe.page";
 import {PlacesPage} from './pages/places/places.page';
 import {ParcelsPage} from './pages/parcels/parcels.page';
-import {AccountsPage} from './pages/accounts/accounts.page';
+import {FirebasePage} from "./pages/firebase/firebase.page";
 import {MessagesPage} from './pages/messages/messages.page';
 import {VehiclesPage} from './pages/vehicles/vehicles.page';
 import {ShipmentsPage} from './pages/shipments/shipments.page';
@@ -23,9 +27,13 @@ import {DashboardRoutingModule} from './dashboard-routing.module';
 
 @NgModule({
   declarations: [
+    UsersPage,
     PlacesPage,
+    EurekaPage,
+    ZipkinPage,
+    StripePage,
     ParcelsPage,
-    AccountsPage,
+    FirebasePage,
     MessagesPage,
     VehiclesPage,
     ShipmentsPage,
