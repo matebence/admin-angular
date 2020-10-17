@@ -5,5 +5,7 @@ import {BaseService} from '../base.service';
 @Injectable()
 export class MessagingService extends BaseService {
 
-  public constructor() { }
+  public constructor() {
+    super();
+  }
 }

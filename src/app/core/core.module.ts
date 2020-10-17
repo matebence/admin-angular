@@ -5,6 +5,9 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import {RequestHTTP} from './http/request.http';
 import {RouteBuilder} from './http/route-builder.http';
+
+import {BaseService} from "./services/base.service";
+
 import {BasicInterceptor} from './interceptors/basic.interceptor';
 import {RequestInterceptor} from './interceptors/request.interceptor';
 
@@ -28,6 +31,7 @@ import {ResponseInterceptor} from './interceptors/response.interceptor';
   ],
   providers: [
     RequestHTTP,
+    BaseService,
     RouteBuilder,
     {provide: HTTP_INTERCEPTORS, useClass: TypeInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: BasicInterceptor, multi: true},
