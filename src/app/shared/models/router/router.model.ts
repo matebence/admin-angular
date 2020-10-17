@@ -1,18 +1,18 @@
 export interface RouterPath {
-  "value": string
+  value: string
 }
 
 export interface RouterService {
-  "value": string,
-  "models": RouterPath
+  value: string,
+  models: RouterPath
 }
 
 export interface RouterModel {
-  "get": RouterPath,
-  "update": RouterPath,
-  "join"?: RouterPath
-  "create"?: RouterPath,
-  "delete"?: RouterPath,
-  "getAll"?: RouterPath,
-  "search"?: RouterPath,
+  get: RouterPath,
+  update: RouterPath,
+  join?: RouterPath
+  create?: RouterPath,
+  delete?: RouterPath,
+  getAll?: RouterPath,
+  search?: RouterPath,
 }

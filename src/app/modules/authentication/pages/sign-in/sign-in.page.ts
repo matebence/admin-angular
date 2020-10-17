@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+
+import {SignOut} from '../../../../shared/models/services/account/account.model';
+
+import {AuthorizationService} from '../../../../core/services/authorization-server/authorization.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -7,8 +11,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignInPage implements OnInit {
 
-  public constructor() { }
+  public error: Error;
+  public signOut: SignOut;
+
+  public constructor(
+    private authorizationService: AuthorizationService) {
+  }
 
   public ngOnInit(): void {
+    this.error = this.authorizationService.getErrorData();
+    this.signOut = this.authorizationService.getSignOutData();
   }
 }

@@ -13,9 +13,10 @@ export class BasicInterceptor implements HttpInterceptor {
   public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (req.url.split('/').includes('signin')) {
       return next.handle(req.clone({
-        headers: req.headers.set('Authorization', 'Basic ' + btoa(environment.CLIENT_ID + ':' + environment.CLIENT_SECRET))
+        headers: req.headers.set(`Authorization`, `Basic ${btoa(environment.CLIENT_ID + ':' + environment.CLIENT_SECRET)}`)
       }));
     }
+
     return next.handle(req);
   }
 }

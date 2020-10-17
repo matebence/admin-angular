@@ -15,7 +15,9 @@ export class LinkDirective implements OnInit {
   @HostBinding('style.textDecoration') public textDecoration: string;
   @HostBinding('style.backgroundColor') public backgroundColor: string;
 
-  public constructor(private elRef: ElementRef, private renderer: Renderer2) {
+  public constructor(
+    private elRef: ElementRef,
+    private renderer: Renderer2) {
   }
 
   public ngOnInit(): void {

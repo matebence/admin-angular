@@ -6,7 +6,7 @@ import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from
 @Injectable()
 export class ResponseInterceptor implements HttpInterceptor {
 
-  constructor() {
+  public constructor() {
   }
 
   public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -17,6 +17,7 @@ export class ResponseInterceptor implements HttpInterceptor {
             console.log(event);
             console.groupEnd();
           }
+
           return event;
         })
       );

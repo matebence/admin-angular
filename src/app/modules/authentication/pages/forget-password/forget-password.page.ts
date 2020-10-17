@@ -4,7 +4,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 
 import {Recover} from '../../../../shared/models/services/account/account.model';
-import {AuthorizationService} from "../../../../core/services/authorization-server/authorization.service";
+import {AuthorizationService} from '../../../../core/services/authorization-server/authorization.service';
 
 @Component({
   selector: 'app-forget-password',
@@ -17,7 +17,10 @@ export class ForgetPasswordPage implements OnInit, OnDestroy {
   public recover: Recover;
   public subscriptions: Subscription[] = [];
 
-  public constructor(private router: Router, private activatedRoute: ActivatedRoute, private authorizationService: AuthorizationService) {
+  public constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private authorizationService: AuthorizationService) {
   }
 
   public ngOnInit(): void {

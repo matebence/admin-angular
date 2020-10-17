@@ -3,7 +3,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 import {ForgetPassword} from '../../../../../../shared/models/services/account/account.model';
-import {AuthorizationService} from "../../../../../../core/services/authorization-server/authorization.service";
+import {AuthorizationService} from '../../../../../../core/services/authorization-server/authorization.service';
 
 @Component({
   selector: 'app-reset',
@@ -24,7 +24,8 @@ export class ResetComponent implements OnInit, OnDestroy {
     }),
   });
 
-  public constructor(private authorizationService: AuthorizationService) {
+  public constructor(
+    private authorizationService: AuthorizationService) {
   }
 
   public ngOnInit(): void {

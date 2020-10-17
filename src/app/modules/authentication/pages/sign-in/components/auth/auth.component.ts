@@ -4,7 +4,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 import {Error} from '../../../../../../shared/models/error/error.model';
 import {SignIn} from '../../../../../../shared/models/services/account/account.model';
-import {AuthorizationService} from "../../../../../../core/services/authorization-server/authorization.service";
+import {AuthorizationService} from '../../../../../../core/services/authorization-server/authorization.service';
 
 @Component({
   selector: 'app-auth',
@@ -31,7 +31,8 @@ export class AuthComponent implements OnInit, OnDestroy {
     remain: new FormControl(false),
   });
 
-  public constructor(private authorizationService: AuthorizationService) {
+  public constructor(
+    private authorizationService: AuthorizationService) {
   }
 
   public ngOnInit(): void {

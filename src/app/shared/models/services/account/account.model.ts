@@ -1,4 +1,4 @@
-import {Reason} from "../../common/common.model";
+import {Reason} from '../../common/common.model';
 
 export interface SignIn {
   access_token: string,

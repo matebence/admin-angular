@@ -3,11 +3,11 @@ import {RouterModule, Routes} from '@angular/router';
 
 import {DashboardPage} from './dashboard.page';
 import {UsersPage} from './pages/users/users.page';
-import {EurekaPage} from "./pages/eureka/eureka.page";
-import {ZipkinPage} from "./pages/zipkin/zipkin.page";
-import {StripePage} from "./pages/stripe/stripe.page";
+import {EurekaPage} from './pages/eureka/eureka.page';
+import {ZipkinPage} from './pages/zipkin/zipkin.page';
+import {StripePage} from './pages/stripe/stripe.page';
 import {ParcelsPage} from './pages/parcels/parcels.page';
-import {FirebasePage} from "./pages/firebase/firebase.page";
+import {FirebasePage} from './pages/firebase/firebase.page';
 import {VehiclesPage} from './pages/vehicles/vehicles.page';
 import {MessagesPage} from './pages/messages/messages.page';
 import {ShipmentsPage} from './pages/shipments/shipments.page';
@@ -34,7 +34,7 @@ const routes: Routes = [
       {path: 'firebase', component: FirebasePage}
     ]},
     {path: '**', redirectTo: '/error', pathMatch: 'full'}
-  ]},
+  ]}
 ];
 
 @NgModule({

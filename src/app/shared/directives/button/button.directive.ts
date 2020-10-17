@@ -9,7 +9,9 @@ export class ButtonDirective implements OnInit {
 
   @HostBinding('style.backgroundColor') public backgroundColor: string;
 
-  public constructor(private elRef: ElementRef, private renderer: Renderer2) {
+  public constructor(
+    private elRef: ElementRef,
+    private renderer: Renderer2) {
   }
 
   public ngOnInit(): void {

@@ -5,6 +5,7 @@ import {ErrorPage} from './error/error.page';
 
 const routes: Routes = [
   {path: '', redirectTo: '/auth/sign-in', pathMatch: 'full'},
+  {path: 'dashboard', redirectTo: '/dashboard', pathMatch: 'full'},
   {path: 'error', component: ErrorPage}
 ];
 

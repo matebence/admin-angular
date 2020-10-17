@@ -5,7 +5,8 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 @Injectable()
 export class RequestHTTP {
 
-  public constructor(private httpClient: HttpClient) {
+  public constructor(
+    private httpClient: HttpClient) {
   }
 
   public get(url: string, params?: HttpParams, headers?: HttpHeaders): Observable<Object> {

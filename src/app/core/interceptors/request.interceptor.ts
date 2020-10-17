@@ -11,6 +11,7 @@ export class RequestInterceptor implements HttpInterceptor {
     console.group('From request interceptor');
     console.log(req);
     console.groupEnd();
+
     return next.handle(req);
   }
 }

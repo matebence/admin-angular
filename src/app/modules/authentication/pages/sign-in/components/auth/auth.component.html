@@ -1,4 +1,4 @@
-<div *ngIf="error && error.message" class="alert alert-danger" role="alert">
+<div *ngIf="signOut && signOut.message && signOut.error" class="alert alert-danger" role="alert">
   {{error.message}}
 </div>
 <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="auth">
