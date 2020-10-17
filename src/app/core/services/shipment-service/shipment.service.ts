@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import {BaseService} from '../base-service.service';
+import {BaseService} from '../base.service';
 
 @Injectable()
 export class ShipmentService extends BaseService {
