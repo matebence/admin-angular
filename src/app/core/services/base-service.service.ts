@@ -15,16 +15,27 @@ export class BaseService {
 
   protected handleError(error: HttpErrorResponse): Observable<never> {
     if (error.error instanceof ErrorEvent) {
-      console.log(error);
+      console.group(`Internal application error happened`);
       console.error('An error occurred:', error.error.message);
-    } else {
-      console.group(`Backend returned code ${error.status}, ` + `body was:`);
-      console.log(error.error);
+      console.log(error);
       console.groupEnd();
+    } else {
+      if (error.status > 0) {
+        console.group(`Backend error happened`);
+        console.error(`Returned code ${error.status}, ` + `body was:`);
+        console.log(error.error);
+        console.groupEnd();
+      } else {
+        console.group(`Server is down`);
+        console.error('An error occurred:', error.message);
+        console.log(error);
+        console.groupEnd();
+      }
     }
 
-    this.setErrorData(error.error);
-    return throwError(error.error.message);
+    const message = error.error.message ? error.error.message : 'Server je momentálne nedostupný';
+    this.setErrorData({timestamp: new Date().toISOString(), message: message, error: true});
+    return throwError(error.message);
   }
 
   public setErrorData(data: Error): void {
