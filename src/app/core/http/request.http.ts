@@ -1,4 +1,4 @@
-import {Observable} from "rxjs/index";
+import {Observable} from 'rxjs/index';
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 
@@ -8,7 +8,7 @@ export class RequestHTTP {
   public constructor(private httpClient: HttpClient) {
   }
 
-  public get(url: string, params: HttpParams, headers?: HttpHeaders): Observable<Object> {
+  public get(url: string, params?: HttpParams, headers?: HttpHeaders): Observable<Object> {
     return this.httpClient.get(url, {
       params: params,
       observe: 'body',
@@ -18,7 +18,7 @@ export class RequestHTTP {
     });
   }
 
-  public put(url: string, payload: any, params: HttpParams, headers?: HttpHeaders): Observable<Object> {
+  public put(url: string, payload: any, params?: HttpParams, headers?: HttpHeaders): Observable<Object> {
     return this.httpClient.put(url, payload, {
       params: params,
       observe: 'body',
@@ -37,7 +37,7 @@ export class RequestHTTP {
     });
   }
 
-  public delete(url: string, params: HttpParams, headers?: HttpHeaders): Observable<Object> {
+  public delete(url: string, params?: HttpParams, headers?: HttpHeaders): Observable<Object> {
     return this.httpClient.delete(url, {
       params: params,
       observe: 'body',

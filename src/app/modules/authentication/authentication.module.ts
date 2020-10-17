@@ -9,6 +9,8 @@ import {CardComponent} from './components/card/card.component';
 import {AuthComponent} from './pages/sign-in/components/auth/auth.component';
 import {ResetComponent} from './pages/forget-password/components/reset/reset.component';
 
+import {AuthorizationService} from "../../core/services/authorization-server/authorization.service";
+
 import {SharedModule} from '../../shared/shared.module';
 import {AuthenticationRoutingModule} from './authentication-routing.module';
 
@@ -25,6 +27,9 @@ import {AuthenticationRoutingModule} from './authentication-routing.module';
     CommonModule,
     ReactiveFormsModule,
     AuthenticationRoutingModule
+  ],
+  providers: [
+    AuthorizationService,
   ],
   exports: [CardComponent]
 })

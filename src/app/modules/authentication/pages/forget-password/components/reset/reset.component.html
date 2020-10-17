@@ -1,5 +1,5 @@
-<div *ngIf="error" class="alert alert-danger" role="alert">
-  {{error.message}}
+<div *ngIf="forgetPassword && forgetPassword.message" class="alert alert-success" role="alert">
+  {{forgetPassword.message}}
 </div>
 <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="reset">
   <div formGroupName="user">

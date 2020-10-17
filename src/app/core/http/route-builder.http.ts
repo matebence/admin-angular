@@ -13,7 +13,7 @@ export class RouteBuilder {
   private routerService: RouterService;
 
   public constructor() {
-    this.routerHost = routes.gateway.value.replace('{host}', environment.HOST_BLESK)
+    this.routerHost = routes.gateway.value.replace(`{host}`, environment.HOST_BLESK)
   }
 
   public service(service: string): this {
@@ -32,7 +32,7 @@ export class RouteBuilder {
   }
 
   public params(params: Object[]): this {
-    params.forEach(e => {this.routerPath.value = this.routerPath.value.replace(Object.keys(e).toString(), Object.values(e).toString())});
+    params.forEach(e => {this.routerPath.value = this.routerPath.value.replace(`{${Object.keys(e).toString()}}`, Object.values(e).toString())});
     return this
   }
 

@@ -1,10 +1,10 @@
-import {Subscription} from "rxjs/index";
+import {Subscription} from 'rxjs/index';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
-import {Error} from "../../../../../../shared/models/error/error.model";
-import {SignIn} from "../../../../../../shared/models/services/account/account.model";
-import {AccountService} from '../../../../../../core/services/account-service/account-service.service';
+import {Error} from '../../../../../../shared/models/error/error.model';
+import {SignIn} from '../../../../../../shared/models/services/account/account.model';
+import {AuthorizationService} from "../../../../../../core/services/authorization-server/authorization.service";
 
 @Component({
   selector: 'app-auth',
@@ -31,20 +31,22 @@ export class AuthComponent implements OnInit, OnDestroy {
     remain: new FormControl(false),
   });
 
-  public constructor(private accountService: AccountService) {
+  public constructor(private authorizationService: AuthorizationService) {
   }
 
   public ngOnInit(): void {
     this.subscriptions.push(
-      this.accountService.errorDataObservable
+      this.authorizationService.errorDataObservable
         .subscribe((error: Error) => {
           this.error = error;
+          this.signIn = null;
         })
     );
 
     this.subscriptions.push(
-      this.accountService.signInDataObservable
+      this.authorizationService.signInDataObservable
         .subscribe((signIn: SignIn) => {
+          this.error = null;
           this.signIn = signIn;
         })
     );
@@ -55,9 +57,10 @@ export class AuthComponent implements OnInit, OnDestroy {
   }
 
   public onSubmit(): void {
-    this.accountService
-      .signIn(this.formGroup)
-      .subscribe((result) => this.formGroup.reset())
-      .unsubscribe();
+    this.subscriptions.push(
+      this.authorizationService
+        .signIn(this.formGroup)
+        .subscribe((result: Boolean) => this.formGroup.reset())
+    );
   }
 }

@@ -1,9 +1,9 @@
-import {Subscription} from "rxjs/index";
+import {Subscription} from 'rxjs/index';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
-import {ForgetPassword} from "../../../../../../shared/models/services/account/account.model";
-import {AccountService} from "../../../../../../core/services/account-service/account-service.service";
+import {ForgetPassword} from '../../../../../../shared/models/services/account/account.model';
+import {AuthorizationService} from "../../../../../../core/services/authorization-server/authorization.service";
 
 @Component({
   selector: 'app-reset',
@@ -12,7 +12,6 @@ import {AccountService} from "../../../../../../core/services/account-service/ac
 })
 export class ResetComponent implements OnInit, OnDestroy {
 
-  public error: Error;
   public forgetPassword: ForgetPassword;
   public subscriptions: Subscription[] = [];
 
@@ -25,20 +24,14 @@ export class ResetComponent implements OnInit, OnDestroy {
     }),
   });
 
-  public constructor(private accountService: AccountService) {
+  public constructor(private authorizationService: AuthorizationService) {
   }
 
   public ngOnInit(): void {
     this.subscriptions.push(
-      this.accountService.errorDataObservable
-        .subscribe((error: Error) => {
-          this.error = error;
-        })
-    );
-
-    this.subscriptions.push(
-      this.accountService.forgetPasswordDataObservable
+      this.authorizationService.forgetPasswordDataObservable
         .subscribe((forgetPassword: ForgetPassword) => {
+          this.authorizationService.setErrorData(null);
           this.forgetPassword = forgetPassword;
         })
     );
@@ -49,9 +42,10 @@ export class ResetComponent implements OnInit, OnDestroy {
   }
 
   public onSubmit(): void {
-    this.accountService
-      .forgetPassword(this.formGroup)
-      .subscribe((result) => this.formGroup.reset())
-      .unsubscribe();
+    this.subscriptions.push(
+      this.authorizationService
+        .forgetPassword(this.formGroup)
+        .subscribe((result: Boolean) => this.formGroup.reset())
+    );
   }
 }

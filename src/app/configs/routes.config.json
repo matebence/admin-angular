@@ -124,12 +124,12 @@
           },
           "activate": {
             "get": {
-              "value": "signup/account/{accountId}/token/{token}"
+              "value": "signup/account/{account}/token/{token}"
             }
           },
           "recover": {
             "get": {
-              "value": "forgetpassword/account/{accountId}/token/{token}"
+              "value": "forgetpassword/account/{account}/token/{token}"
             }
           }
         }

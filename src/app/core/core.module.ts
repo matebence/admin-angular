@@ -7,7 +7,6 @@ import {RequestHTTP} from './http/request.http';
 import {RouteBuilder} from './http/route-builder.http';
 import {BasicInterceptor} from './interceptors/basic.interceptor';
 import {RequestInterceptor} from './interceptors/request.interceptor';
-import {AccountService} from './services/account-service/account-service.service';
 
 import {ErrorPage} from './error/error.page';
 
@@ -30,7 +29,6 @@ import {ResponseInterceptor} from './interceptors/response.interceptor';
   providers: [
     RequestHTTP,
     RouteBuilder,
-    AccountService,
     {provide: HTTP_INTERCEPTORS, useClass: TypeInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: BasicInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true},

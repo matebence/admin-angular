@@ -9,6 +9,15 @@ import {VehiclesPage} from './pages/vehicles/vehicles.page';
 import {ShipmentsPage} from './pages/shipments/shipments.page';
 import {WarehousesPage} from './pages/warehouses/warehouses.page';
 
+import {UserService} from "../../core/services/user-service/user.service";
+import {PlaceService} from "../../core/services/place-service/place.service";
+import {ParcelService} from "../../core/services/parcel-service/parcel.service";
+import {AccountService} from "../../core/services/account-service/account.service";
+import {VehicleService} from "../../core/services/vehicle-service/vehicle.service";
+import {ShipmentService} from "../../core/services/shipment-service/shipment.service";
+import {MessagingService} from "../../core/services/messaging-service/messaging.service";
+import {WarehouseService} from "../../core/services/warehouse-service/warehouse.service";
+
 import {SharedModule} from '../../shared/shared.module';
 import {DashboardRoutingModule} from './dashboard-routing.module';
 
@@ -26,6 +35,16 @@ import {DashboardRoutingModule} from './dashboard-routing.module';
     SharedModule,
     CommonModule,
     DashboardRoutingModule
+  ],
+  providers: [
+    UserService,
+    PlaceService,
+    ParcelService,
+    AccountService,
+    VehicleService,
+    ShipmentService,
+    MessagingService,
+    WarehouseService
   ]
 })
 export class DashboardModule {
