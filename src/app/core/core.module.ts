@@ -9,8 +9,7 @@ import {BaseService} from './services/base.service';
 import {PersistenceService} from './services/persistence-service/persistence.service';
 
 import {TypeInterceptor} from './interceptors/type.interceptor';
-import {BasicInterceptor} from './interceptors/basic.interceptor';
-import {BearerInterceptor} from './interceptors/bearer.interceptor';
+import {AuthorizationInterceptor} from './interceptors/authorization.interceptor';
 
 import {RequestHTTP} from './http/request.http';
 import {RouteBuilder} from './http/route-builder.http';
@@ -35,8 +34,7 @@ import {CoreRoutingModule} from './core-routing.module';
     RouteBuilder,
     PersistenceService,
     {provide: HTTP_INTERCEPTORS, useClass: TypeInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: BasicInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: BearerInterceptor, multi: true, deps: [PersistenceService]}
+    {provide: HTTP_INTERCEPTORS, useClass: AuthorizationInterceptor, multi: true, deps: [PersistenceService]}
   ],
   exports: [ErrorPage, CoreRoutingModule]
 })

@@ -9,14 +9,15 @@ export class TypeInterceptor implements HttpInterceptor {
   }
 
   public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (req.url.split('/').includes('signin')) {
-      return next.handle(req.clone({
-        headers: req.headers.set('Content-Type', 'application/x-www-form-urlencoded')
-      }));
+    const segments: string[] = req.url.split('/');
+    let cloned : HttpRequest<any>;
+
+    if (segments.includes('signin')) {
+      cloned = req.clone({headers: req.headers.set(`Content-Type`, `application/x-www-form-urlencoded`)});
     } else {
-      return next.handle(req.clone({
-        headers: req.headers.set('Content-Type', 'application/json')
-      }));
+      cloned = req.clone({headers: req.headers.set(`Content-Type`, `application/json`)});
     }
+
+    return next.handle(cloned);
   }
 }
