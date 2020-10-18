@@ -82,7 +82,6 @@ export class AuthorizationService extends BaseService {
         this.setSignOutData(data);
         this.persistenceService.clear();
 
-        this.router.navigate(['/auth/sign-out']);
         return subject.next(true);
       });
     return subject.asObservable();

@@ -1,4 +1,5 @@
 import {NgModule} from '@angular/core';
+import {Router} from "@angular/router";
 import {CommonModule} from '@angular/common';
 import {BrowserModule} from '@angular/platform-browser';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
@@ -7,7 +8,6 @@ import {ErrorPage} from './error/error.page';
 
 import {BaseService} from './services/base.service';
 import {PersistenceService} from './services/persistence-service/persistence.service';
-import {AuthorizationService} from './services/authorization-server/authorization.service';
 
 import {TypeInterceptor} from './interceptors/type.interceptor';
 import {AuthorizationInterceptor} from './interceptors/authorization.interceptor';
@@ -37,7 +37,7 @@ import {CoreRoutingModule} from './core-routing.module';
     PersistenceService,
     {provide: HTTP_INTERCEPTORS, useClass: TypeInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: AuthorizationInterceptor, multi: true, deps: [PersistenceService]},
-    {provide: HTTP_INTERCEPTORS, useClass: CredentialsExpirationInterceptor, multi: true, deps: [PersistenceService, AuthorizationService]}
+    {provide: HTTP_INTERCEPTORS, useClass: CredentialsExpirationInterceptor, multi: true, deps: [Router, PersistenceService]}
   ],
   exports: [ErrorPage, CoreRoutingModule]
 })
