@@ -59,9 +59,13 @@ export class AuthComponent implements OnInit, OnDestroy {
   }
 
   public onSubmit(): void {
+    const remain: boolean = this.formGroup.value.remain;
+    const userName: string = this.formGroup.value.user.name;
+    const password: string = this.formGroup.value.user.password;
+
     this.subscriptions.push(
       this.authorizationService
-        .signIn(this.formGroup)
+        .signIn(userName, password, remain)
         .subscribe((result: Boolean) => this.formGroup.reset())
     );
   }

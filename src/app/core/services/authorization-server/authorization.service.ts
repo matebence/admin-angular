@@ -1,4 +1,3 @@
-import {FormGroup} from '@angular/forms';
 import {Params, Router} from '@angular/router';
 import {Observable, Subject} from 'rxjs/index';
 import {HttpParams} from '@angular/common/http';
@@ -36,7 +35,8 @@ export class AuthorizationService extends BaseService {
     super();
   }
 
-  public signIn(formGroup: FormGroup): Observable<Boolean> {
+  public signIn(userName: string, password: string, remain: boolean, refreshToken?: string): Observable<Boolean> {
+    let payload: HttpParams;
     const subject = new Subject<Boolean>();
     const url = this.routeBuilder
       .service('authorization-server')
@@ -44,13 +44,22 @@ export class AuthorizationService extends BaseService {
       .action('create')
       .build();
 
-    const payload: HttpParams = new HttpParams({
-      fromObject: {
-        username: formGroup.value.user.name,
-        password: formGroup.value.user.password,
-        grant_type: environment.GRANT_TYPE_PASSWORD
-      }
-    });
+    if (refreshToken == null) {
+      payload = new HttpParams({
+        fromObject: {
+          username: userName,
+          password: password,
+          grant_type: environment.GRANT_TYPE_PASSWORD
+        }
+      });
+    } else {
+      payload = new HttpParams({
+        fromObject: {
+          refresh_token: refreshToken,
+          grant_type: environment.GRANT_TYPE_REFRESH_TOKEN
+        }
+      });
+    }
 
     this.requestHttp
       .post(url, payload)
@@ -59,7 +68,7 @@ export class AuthorizationService extends BaseService {
         this.setSignInData(data);
 
         this.persistenceService.set(environment.LOCAL_STORAGE_ACCOUNT_DATA, this.getSignInData());
-        this.persistenceService.append(environment.LOCAL_STORAGE_ACCOUNT_DATA, {remain: formGroup.value.remain});
+        this.persistenceService.append(environment.LOCAL_STORAGE_ACCOUNT_DATA, {remain: remain});
 
         this.router.navigate(['/dashboard']);
         return subject.next(true);
@@ -87,7 +96,7 @@ export class AuthorizationService extends BaseService {
     return subject.asObservable();
   }
 
-  public forgetPassword(formGroup: FormGroup): Observable<Boolean> {
+  public forgetPassword(email: string): Observable<Boolean> {
     const subject = new Subject<Boolean>();
     const url = this.routeBuilder
       .service('authorization-server')
@@ -96,7 +105,7 @@ export class AuthorizationService extends BaseService {
       .build();
 
     this.requestHttp
-      .post(url, formGroup.value.user)
+      .post(url, {email: email})
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: ForgetPassword) => {
 

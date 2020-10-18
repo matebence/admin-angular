@@ -43,9 +43,11 @@ export class ResetComponent implements OnInit, OnDestroy {
   }
 
   public onSubmit(): void {
+    const email: string = this.formGroup.value.user.email;
+
     this.subscriptions.push(
       this.authorizationService
-        .forgetPassword(this.formGroup)
+        .forgetPassword(email)
         .subscribe((result: Boolean) => this.formGroup.reset())
     );
   }

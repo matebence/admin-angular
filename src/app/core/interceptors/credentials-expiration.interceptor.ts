@@ -9,13 +9,15 @@ import {environment} from '../../../environments/environment';
 import {SignIn} from '../../shared/models/services/account/account.model';
 
 import {PersistenceService} from '../services/persistence-service/persistence.service';
+import {AuthorizationService} from '../services/authorization-server/authorization.service';
 
 @Injectable()
 export class CredentialsExpirationInterceptor implements HttpInterceptor {
 
   public constructor(
     private router: Router,
-    private persistenceService: PersistenceService) {
+    private persistenceService: PersistenceService,
+    private authorizationService: AuthorizationService) {
   }
 
   public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -31,12 +33,12 @@ export class CredentialsExpirationInterceptor implements HttpInterceptor {
 
               const expiration: number = (new Date().getTime() / 1000) + signIn.expires_in;
               const current: number  = new Date().getTime() / 1000;
-              const timer: number = (expiration - current);
+              const timer: number = (expiration - current) * 1000;
 
               setTimeout(() => {
                 signIn = <SignIn> this.persistenceService.get(environment.LOCAL_STORAGE_ACCOUNT_DATA);
                 if (signIn.remain) {
-                  console.log('send refresh');
+                  this.authorizationService.signIn(null, null, signIn.remain, signIn.refresh_token);
                 } else {
                   this.router.navigate(['/auth/sign-out']);
                 }
