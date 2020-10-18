@@ -1,7 +1,6 @@
 import {Subscription} from 'rxjs/index';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 
-import {Error} from '../../../../shared/models/error/error.model';
 import {SignIn, SignOut} from '../../../../shared/models/services/account/account.model';
 
 import {AuthorizationService} from '../../../../core/services/authorization-server/authorization.service';
@@ -17,8 +16,7 @@ export class SignOutPage implements OnInit, OnDestroy {
   public signOut: SignOut;
   public subscriptions: Subscription[] = [];
 
-  public constructor(
-    private authorizationService: AuthorizationService) {
+  public constructor(private authorizationService: AuthorizationService) {
   }
 
   public ngOnInit(): void {

@@ -285,7 +285,7 @@
       "place-service": {
         "value": "place-service/api/",
         "models": {
-          "regions":{
+          "regions": {
             "create": {
               "value": "regions"
             },

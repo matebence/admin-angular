@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { StripePage } from './stripe.page';
+import {StripePage} from './stripe.page';
 
 describe('StripePage', () => {
   let component: StripePage;
@@ -8,9 +8,9 @@ describe('StripePage', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ StripePage ]
+      declarations: [StripePage]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

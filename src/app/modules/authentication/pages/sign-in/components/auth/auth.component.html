@@ -36,7 +36,7 @@
     </div>
   </div>
   <button
-    [disabled] = "!formGroup.get('user.name').valid || !formGroup.get('user.password').valid"
+    [disabled]="!formGroup.get('user.name').valid || !formGroup.get('user.password').valid"
     appButtonHover
     class="btn btn-primary btn-login btn-block">
     Prihlásiť sa

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AppBootstrap } from './app.bootstrap';
+import {AppBootstrap} from './app.bootstrap';
 
 describe('AppBootstrap', () => {
   let component: AppBootstrap;
@@ -8,7 +8,7 @@ describe('AppBootstrap', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AppBootstrap ]
+      declarations: [AppBootstrap]
     })
       .compileComponents();
   });

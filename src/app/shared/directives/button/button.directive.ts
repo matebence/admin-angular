@@ -9,20 +9,21 @@ export class ButtonDirective implements OnInit {
 
   @HostBinding('style.backgroundColor') public backgroundColor: string;
 
-  public constructor(
-    private elRef: ElementRef,
-    private renderer: Renderer2) {
+  public constructor(private elRef: ElementRef,
+                     private renderer: Renderer2) {
   }
 
   public ngOnInit(): void {
     this.backgroundColor = this.backgroundInput;
   }
 
-  @HostListener('mouseenter') public mouseover(eventData: Event): void {
+  @HostListener('mouseenter')
+  public mouseover(eventData: Event): void {
     this.backgroundColor = this.backgroundHoverInput;
   }
 
-  @HostListener('mouseleave') public mouseleave(eventData: Event): void {
+  @HostListener('mouseleave')
+  public mouseleave(eventData: Event): void {
     this.backgroundColor = this.backgroundInput;
   }
 }

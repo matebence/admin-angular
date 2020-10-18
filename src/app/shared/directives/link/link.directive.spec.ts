@@ -1,4 +1,4 @@
-import { LinkDirective } from './link.directive';
+import {LinkDirective} from './link.directive';
 
 describe('LinkDirective', () => {
   it('should create an instance', () => {

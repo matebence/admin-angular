@@ -11,15 +11,14 @@ import {PersistenceService} from '../services/persistence-service/persistence.se
 @Injectable()
 export class AuthorizationInterceptor implements HttpInterceptor {
 
-  public constructor(
-    private persistenceService: PersistenceService) {
+  public constructor(private persistenceService: PersistenceService) {
   }
 
   public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const signIn: SignIn = <SignIn> this.persistenceService.get(environment.LOCAL_STORAGE_ACCOUNT_DATA);
 
     const segments: string[] = req.url.split('/');
-    let cloned : HttpRequest<any>;
+    let cloned: HttpRequest<any>;
 
     if ((!segments.includes('authorization-server') || segments.includes('signout')) && (signIn != null)) {
       const accessToken: string = signIn.access_token;

@@ -27,11 +27,10 @@ export class AuthorizationService extends BaseService {
   public signOutDataObservable: EventEmitter<SignOut> = new EventEmitter<SignOut>();
   public forgetPasswordDataObservable: EventEmitter<ForgetPassword> = new EventEmitter<ForgetPassword>();
 
-  public constructor(
-    private router: Router,
-    private requestHttp: RequestHTTP,
-    private routeBuilder: RouteBuilder,
-    private persistenceService: PersistenceService) {
+  public constructor(private router: Router,
+                     private requestHttp: RequestHTTP,
+                     private routeBuilder: RouteBuilder,
+                     private persistenceService: PersistenceService) {
     super();
   }
 
@@ -121,7 +120,7 @@ export class AuthorizationService extends BaseService {
       .service('authorization-server')
       .model('recover')
       .action('get')
-      .params(Object.entries(params).map(( [k, v] ) => ({ [k]: v })))
+      .params(Object.entries(params).map(([k, v]) => ({[k]: v})))
       .build();
 
     this.requestHttp

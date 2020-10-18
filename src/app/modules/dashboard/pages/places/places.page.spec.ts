@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PlacesComponent } from './places.page';
+import {PlacesComponent} from './places.page';
 
 describe('PlacesComponent', () => {
   let component: PlacesComponent;
@@ -8,9 +8,9 @@ describe('PlacesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PlacesComponent ]
+      declarations: [PlacesComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

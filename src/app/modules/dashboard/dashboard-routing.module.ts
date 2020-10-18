@@ -16,25 +16,33 @@ import {WarehousesPage} from './pages/warehouses/warehouses.page';
 // 21. Using Angular Modules & Optimizing Apps -> 15. Adding Lazy Loading to the Recipes Module
 // 24. Preloading Lazy Loaded Routes
 const routes: Routes = [
-  {path:'dashboard', component: DashboardPage, children: [
-    {path:'services', children: [
+  {
+    path: 'dashboard', component: DashboardPage, children: [
+    {
+      path: 'services', children: [
       {path: 'users', component: UsersPage},
       {path: 'parcels', component: ParcelsPage},
       {path: 'vehicles', component: VehiclesPage},
       {path: 'messages', component: MessagesPage},
       {path: 'shipments', component: ShipmentsPage},
       {path: 'warehouses', component: WarehousesPage}
-    ]},
-    {path:'internal', children: [
+    ]
+    },
+    {
+      path: 'internal', children: [
       {path: 'eureka', component: EurekaPage},
       {path: 'zipkin', component: ZipkinPage},
-    ]},
-    {path:'external', children: [
+    ]
+    },
+    {
+      path: 'external', children: [
       {path: 'stripe', component: StripePage},
       {path: 'firebase', component: FirebasePage}
-    ]},
+    ]
+    },
     {path: '**', redirectTo: '/error', pathMatch: 'full'}
-  ]}
+  ]
+  }
 ];
 
 @NgModule({
@@ -43,4 +51,5 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class DashboardRoutingModule {}
+export class DashboardRoutingModule {
+}

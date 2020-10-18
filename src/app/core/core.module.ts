@@ -38,7 +38,12 @@ import {CoreRoutingModule} from './core-routing.module';
     PersistenceService,
     {provide: HTTP_INTERCEPTORS, useClass: TypeInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: AuthorizationInterceptor, multi: true, deps: [PersistenceService]},
-    {provide: HTTP_INTERCEPTORS, useClass: CredentialsExpirationInterceptor, multi: true, deps: [Router, PersistenceService, AuthorizationService]}
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CredentialsExpirationInterceptor,
+      multi: true,
+      deps: [Router, PersistenceService, AuthorizationService]
+    }
   ],
   exports: [ErrorPage, CoreRoutingModule]
 })

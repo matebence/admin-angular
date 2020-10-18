@@ -31,8 +31,7 @@ export class AuthComponent implements OnInit, OnDestroy {
     remain: new FormControl(false),
   });
 
-  public constructor(
-    private authorizationService: AuthorizationService) {
+  public constructor(private authorizationService: AuthorizationService) {
   }
 
   public ngOnInit(): void {

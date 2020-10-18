@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ZipkinPage } from './zipkin.page';
+import {ZipkinPage} from './zipkin.page';
 
 describe('ZipkinPage', () => {
   let component: ZipkinPage;
@@ -8,9 +8,9 @@ describe('ZipkinPage', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ZipkinPage ]
+      declarations: [ZipkinPage]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

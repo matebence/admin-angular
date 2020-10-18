@@ -7,7 +7,8 @@ import {Component, OnInit} from '@angular/core';
 })
 export class SignInPage implements OnInit {
 
-  public constructor() { }
+  public constructor() {
+  }
 
   public ngOnInit(): void {
   }

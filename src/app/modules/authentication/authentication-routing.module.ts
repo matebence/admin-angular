@@ -8,14 +8,18 @@ import {ForgetPasswordPage} from './pages/forget-password/forget-password.page';
 
 const routes: Routes = [
   {path: 'auth', redirectTo: '/auth/sign-in', pathMatch: 'full'},
-  {path: 'auth', component: AuthenticationPage, children: [
+  {
+    path: 'auth', component: AuthenticationPage, children: [
     {path: 'sign-in', component: SignInPage},
     {path: 'sign-out', component: SignOutPage},
-    {path:'forget-password', component: ForgetPasswordPage, children: [
+    {
+      path: 'forget-password', component: ForgetPasswordPage, children: [
       {path: 'account/:account/token/:token', component: ForgetPasswordPage},
-    ]},
+    ]
+    },
     {path: '**', redirectTo: '/error', pathMatch: 'full'},
-  ]}
+  ]
+  }
 ];
 
 @NgModule({
@@ -24,4 +28,5 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AuthenticationRoutingModule {}
+export class AuthenticationRoutingModule {
+}

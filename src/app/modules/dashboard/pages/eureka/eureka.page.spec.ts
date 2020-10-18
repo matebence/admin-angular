@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { EurekaPage } from './eureka.page';
+import {EurekaPage} from './eureka.page';
 
 describe('EurekaPage', () => {
   let component: EurekaPage;
@@ -8,9 +8,9 @@ describe('EurekaPage', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EurekaPage ]
+      declarations: [EurekaPage]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

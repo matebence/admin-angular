@@ -24,8 +24,7 @@ export class ResetComponent implements OnInit, OnDestroy {
     }),
   });
 
-  public constructor(
-    private authorizationService: AuthorizationService) {
+  public constructor(private authorizationService: AuthorizationService) {
   }
 
   public ngOnInit(): void {

@@ -15,7 +15,7 @@
     </div>
   </div>
   <button
-    [disabled] = "!formGroup.get('user.email').valid"
+    [disabled]="!formGroup.get('user.email').valid"
     appButtonHover
     class="btn btn-primary btn-send btn-block">
     Odoslať

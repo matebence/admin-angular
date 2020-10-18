@@ -14,10 +14,9 @@ import {AuthorizationService} from '../services/authorization-server/authorizati
 @Injectable()
 export class CredentialsExpirationInterceptor implements HttpInterceptor {
 
-  public constructor(
-    private router: Router,
-    private persistenceService: PersistenceService,
-    private authorizationService: AuthorizationService) {
+  public constructor(private router: Router,
+                     private persistenceService: PersistenceService,
+                     private authorizationService: AuthorizationService) {
   }
 
   public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -32,7 +31,7 @@ export class CredentialsExpirationInterceptor implements HttpInterceptor {
               if (signIn == null || signIn.access_token == null) return event;
 
               const expiration: number = (new Date().getTime() / 1000) + signIn.expires_in;
-              const current: number  = new Date().getTime() / 1000;
+              const current: number = new Date().getTime() / 1000;
               const timer: number = (expiration - current) * 1000;
 
               setTimeout(() => {

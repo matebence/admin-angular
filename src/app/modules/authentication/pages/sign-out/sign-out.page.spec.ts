@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SignOutPage } from './sign-out.page';
+import {SignOutPage} from './sign-out.page';
 
 describe('SignOutPage', () => {
   let component: SignOutPage;
@@ -8,9 +8,9 @@ describe('SignOutPage', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SignOutPage ]
+      declarations: [SignOutPage]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

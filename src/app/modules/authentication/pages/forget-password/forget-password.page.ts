@@ -19,10 +19,9 @@ export class ForgetPasswordPage implements OnInit, OnDestroy {
   public recover: Recover;
   public subscriptions: Subscription[] = [];
 
-  public constructor(
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private authorizationService: AuthorizationService) {
+  public constructor(private router: Router,
+                     private activatedRoute: ActivatedRoute,
+                     private authorizationService: AuthorizationService) {
   }
 
   public ngOnInit(): void {
@@ -54,7 +53,7 @@ export class ForgetPasswordPage implements OnInit, OnDestroy {
           this.error = null;
           this.recover = recover;
         })
-      );
+    );
   }
 
   public ngOnDestroy(): void {

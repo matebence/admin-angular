@@ -10,7 +10,7 @@ export class TypeInterceptor implements HttpInterceptor {
 
   public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const segments: string[] = req.url.split('/');
-    let cloned : HttpRequest<any>;
+    let cloned: HttpRequest<any>;
 
     if (segments.includes('signin')) {
       cloned = req.clone({headers: req.headers.set(`Content-Type`, `application/x-www-form-urlencoded`)});
