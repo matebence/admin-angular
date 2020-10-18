@@ -5,12 +5,7 @@
         <img src="assets/img/blesk-default-logo.png" title="Company logo" alt="Company logo" class="logo-primary">
         <p class="mb-4">Manažujte všetko na jednom mieste!</p>
       </div>
-      <div *ngIf="signOut && signOut.message && signOut.error" class="alert alert-danger" role="alert">
-        {{signOut.message}}
-      </div>
-      <div *ngIf="signOut && signOut.message && !signOut.error" class="alert alert-success" role="alert">
-        {{signOut.message}}
-      </div>
+      <ng-content></ng-content>
       <app-auth></app-auth>
       <hr>
       <div class="text-center">

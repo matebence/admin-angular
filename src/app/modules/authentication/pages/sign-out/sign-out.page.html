@@ -1,1 +1,8 @@
-<p>sign-out works!</p>
+<app-sign-in>
+  <div *ngIf="signOut && signOut.message && signOut.error" class="alert alert-danger" role="alert">
+    {{signOut.message}}
+  </div>
+  <div *ngIf="signOut && signOut.message && !signOut.error" class="alert alert-success" role="alert">
+    {{signOut.message}}
+  </div>
+</app-sign-in>

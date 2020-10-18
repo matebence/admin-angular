@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
-import {DashboardPage} from "./dashboard.page";
+import {DashboardPage} from './dashboard.page';
 import {UsersPage} from './pages/users/users.page';
 import {EurekaPage} from './pages/eureka/eureka.page';
 import {ZipkinPage} from './pages/zipkin/zipkin.page';

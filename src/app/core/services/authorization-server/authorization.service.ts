@@ -59,10 +59,7 @@ export class AuthorizationService extends BaseService {
         this.setSignInData(data);
 
         this.persistenceService.set(environment.LOCAL_STORAGE_ACCOUNT_DATA, this.getSignInData());
-        this.persistenceService.append(environment.LOCAL_STORAGE_ACCOUNT_DATA, {
-          remain: formGroup.value.remain,
-          expirationDate: new Date(new Date().getTime() + data.expires_in * 1000)
-        });
+        this.persistenceService.append(environment.LOCAL_STORAGE_ACCOUNT_DATA, {remain: formGroup.value.remain});
 
         this.router.navigate(['/dashboard']);
         return subject.next(true);
@@ -85,7 +82,7 @@ export class AuthorizationService extends BaseService {
         this.setSignOutData(data);
         this.persistenceService.clear();
 
-        this.router.navigate(['/']);
+        this.router.navigate(['/auth/sign-out']);
         return subject.next(true);
       });
     return subject.asObservable();

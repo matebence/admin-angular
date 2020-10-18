@@ -34,7 +34,7 @@ export class ForgetPasswordPage implements OnInit, OnDestroy {
         })
     );
 
-    if (!this.activatedRoute.firstChild) return;
+    if (this.activatedRoute.firstChild == null) return;
 
     this.subscriptions.push(
       this.activatedRoute.firstChild.params

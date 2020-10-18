@@ -8,6 +8,7 @@ export interface SignIn {
   scope: string,
   account_id: number,
   user_name: string,
+  remain?: boolean,
   jti: string
 }
 

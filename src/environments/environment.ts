@@ -6,8 +6,8 @@ export const environment = {
   HOST_BLESK: 'http://192.168.99.100:8765',
   HOST_BLESK_WEBSOCKET: 'http://192.168.99.100:8765/websocket',
 
-  LOCAL_STORAGE_ACCOUNT_DATA: '"accountData"',
-  LOCAL_STORAGE_BROWSER_DATA: '"browserData"',
+  LOCAL_STORAGE_ACCOUNT_DATA: 'accountData',
+  LOCAL_STORAGE_BROWSER_DATA: 'browserData',
 
   GRANT_TYPE_PASSWORD: 'password',
   GRANT_TYPE_REFRESH_TOKEN: 'refresh_token',

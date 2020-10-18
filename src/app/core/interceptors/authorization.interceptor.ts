@@ -2,7 +2,7 @@ import {Observable} from 'rxjs/index';
 import {Injectable} from '@angular/core';
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 
-import {environment} from "../../../environments/environment";
+import {environment} from '../../../environments/environment';
 
 import {SignIn} from '../../shared/models/services/account/account.model';
 
@@ -21,7 +21,7 @@ export class AuthorizationInterceptor implements HttpInterceptor {
     const segments: string[] = req.url.split('/');
     let cloned : HttpRequest<any>;
 
-    if (!segments.includes('authorization-server') || segments.includes('signout')) {
+    if ((!segments.includes('authorization-server') || segments.includes('signout')) && (signIn != null)) {
       const accessToken: string = signIn.access_token;
       cloned = req.clone({headers: req.headers.set(`Authorization`, `Bearer ${accessToken}`)});
     } else if (segments.includes('authorization-server') && segments.includes('signin')) {

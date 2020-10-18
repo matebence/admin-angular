@@ -41,6 +41,7 @@ export class AuthComponent implements OnInit, OnDestroy {
         .subscribe((error: Error) => {
           this.error = error;
           this.signIn = null;
+          this.authorizationService.setSignOutData(null);
         })
     );
 
