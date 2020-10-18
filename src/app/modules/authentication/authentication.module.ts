@@ -7,6 +7,7 @@ import {AuthComponent} from './pages/sign-in/components/auth/auth.component';
 import {ResetComponent} from './pages/forget-password/components/reset/reset.component';
 
 import {SignInPage} from './pages/sign-in/sign-in.page';
+import {AuthenticationPage} from './authentication.page';
 import {SignOutPage} from './pages/sign-out/sign-out.page';
 import {ForgetPasswordPage} from './pages/forget-password/forget-password.page';
 
@@ -22,6 +23,7 @@ import {AuthenticationRoutingModule} from './authentication-routing.module';
     CardComponent,
     AuthComponent,
     ResetComponent,
+    AuthenticationPage,
     ForgetPasswordPage,
   ],
   imports: [
@@ -33,7 +35,7 @@ import {AuthenticationRoutingModule} from './authentication-routing.module';
   providers: [
     AuthorizationService
   ],
-  exports: [CardComponent]
+  exports: [AuthenticationPage]
 })
 export class AuthenticationModule {
 }

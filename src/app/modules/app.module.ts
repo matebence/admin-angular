@@ -1,14 +1,14 @@
 import {NgModule} from '@angular/core';
 
-import {AuthenticationPage} from './modules/authentication/authentication.page';
+import {AppBootstrap} from './app.bootstrap';
 
-import {CoreModule} from './core/core.module';
-import {DashboardModule} from './modules/dashboard/dashboard.module';
-import {AuthenticationModule} from './modules/authentication/authentication.module';
+import {CoreModule} from '../core/core.module';
+import {DashboardModule} from './dashboard/dashboard.module';
+import {AuthenticationModule} from './authentication/authentication.module';
 
 @NgModule({
   declarations: [
-    AuthenticationPage
+    AppBootstrap
   ],
   imports: [
     CoreModule,
@@ -16,7 +16,7 @@ import {AuthenticationModule} from './modules/authentication/authentication.modu
     AuthenticationModule,
   ],
   providers: [],
-  bootstrap: [AuthenticationPage]
+  bootstrap: [AppBootstrap]
 })
 export class AppModule {
 }
