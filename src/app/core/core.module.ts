@@ -15,6 +15,7 @@ import {AuthorizationInterceptor} from './interceptors/authorization.interceptor
 import {CredentialsExpirationInterceptor} from './interceptors/credentials-expiration.interceptor';
 
 import {RequestHTTP} from './http/request.http';
+import {RouteFilter} from './filter/route.filter';
 import {RouteBuilder} from './http/route-builder.http';
 
 import {SharedModule} from '../shared/shared.module';
@@ -35,15 +36,11 @@ import {CoreRoutingModule} from './core-routing.module';
     RequestHTTP,
     BaseService,
     RouteBuilder,
+    RouteFilter,
     PersistenceService,
     {provide: HTTP_INTERCEPTORS, useClass: TypeInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: AuthorizationInterceptor, multi: true, deps: [PersistenceService]},
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: CredentialsExpirationInterceptor,
-      multi: true,
-      deps: [Router, PersistenceService, AuthorizationService]
-    }
+    {provide: HTTP_INTERCEPTORS, useClass: CredentialsExpirationInterceptor, multi: true, deps: [Router, PersistenceService, AuthorizationService]}
   ],
   exports: [ErrorPage, CoreRoutingModule]
 })
