@@ -1,3 +1,4 @@
+import {Router} from '@angular/router';
 import {Subscription} from 'rxjs/index';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
@@ -29,7 +30,8 @@ export class AuthComponent implements OnInit, OnDestroy {
     remain: new FormControl(false),
   });
 
-  public constructor(private authorizationService: AuthorizationService) {
+  public constructor(private router: Router,
+                     private authorizationService: AuthorizationService) {
   }
 
   public ngOnInit(): void {
@@ -54,7 +56,11 @@ export class AuthComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.authorizationService
         .OAuth2Password(userName, password, remain)
-        .subscribe((result: Boolean) => this.formGroup.reset())
+        .subscribe((result: Boolean) => {
+          console.log(result);
+          this.formGroup.reset();
+          this.router.navigate(['/dashboard']);
+        })
     );
   }
 }

@@ -1,4 +1,4 @@
-import {Params, Router} from '@angular/router';
+import {Params} from '@angular/router';
 import {Observable, Subject} from 'rxjs/index';
 import {HttpParams} from '@angular/common/http';
 import {catchError} from 'rxjs/internal/operators';
@@ -27,8 +27,7 @@ export class AuthorizationService extends BaseService {
   public signOutDataObservable: EventEmitter<SignOut> = new EventEmitter<SignOut>();
   public forgetPasswordDataObservable: EventEmitter<ForgetPassword> = new EventEmitter<ForgetPassword>();
 
-  public constructor(private router: Router,
-                     private requestHttp: RequestHTTP,
+  public constructor(private requestHttp: RequestHTTP,
                      private routeBuilder: RouteBuilder,
                      private persistenceService: PersistenceService) {
     super();
@@ -70,9 +69,8 @@ export class AuthorizationService extends BaseService {
         this.setSignInData(data);
 
         this.persistenceService.set(environment.LOCAL_STORAGE_ACCOUNT_DATA, this.getSignInData());
-        this.persistenceService.append(environment.LOCAL_STORAGE_ACCOUNT_DATA, {remain: remain});
+        this.persistenceService.append(environment.LOCAL_STORAGE_ACCOUNT_DATA, {remain: remain, expirationDate: new Date(new Date().getTime() + data.expires_in * 1000)});
 
-        this.router.navigate(['/dashboard']);
         return subject.next(true);
       });
     return subject.asObservable();
