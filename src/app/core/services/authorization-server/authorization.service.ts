@@ -34,8 +34,28 @@ export class AuthorizationService extends BaseService {
     super();
   }
 
-  public signIn(userName: string, password: string, remain: boolean, refreshToken?: string): Observable<Boolean> {
-    let payload: HttpParams;
+  public OAuth2Password(userName: string, password: string, remain: boolean): Observable<Boolean> {
+    const httpParams = new HttpParams({
+      fromObject: {
+        username: userName,
+        password: password,
+        grant_type: environment.GRANT_TYPE_PASSWORD
+      }
+    });
+    return this.signIn(httpParams, remain);
+  }
+
+  public OAuth2RefreshToken(remain: boolean, refreshToken: string): Observable<Boolean> {
+    const httpParams = new HttpParams({
+      fromObject: {
+        refresh_token: refreshToken,
+        grant_type: environment.GRANT_TYPE_REFRESH_TOKEN
+      }
+    });
+    return this.signIn(httpParams, remain);
+  }
+
+  private signIn(httpParams: HttpParams, remain: boolean): Observable<Boolean> {
     const subject = new Subject<Boolean>();
     const url = this.routeBuilder
       .service('authorization-server')
@@ -43,25 +63,8 @@ export class AuthorizationService extends BaseService {
       .action('create')
       .build();
 
-    if (refreshToken == null) {
-      payload = new HttpParams({
-        fromObject: {
-          username: userName,
-          password: password,
-          grant_type: environment.GRANT_TYPE_PASSWORD
-        }
-      });
-    } else {
-      payload = new HttpParams({
-        fromObject: {
-          refresh_token: refreshToken,
-          grant_type: environment.GRANT_TYPE_REFRESH_TOKEN
-        }
-      });
-    }
-
     this.requestHttp
-      .post(url, payload)
+      .post(url, httpParams)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: SignIn) => {
         this.setSignInData(data);
