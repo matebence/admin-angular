@@ -59,7 +59,7 @@ export class AuthComponent implements OnInit, OnDestroy {
         .subscribe((result: Boolean) => {
           console.log(result);
           this.formGroup.reset();
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/dashboard/home']);
         })
     );
   }

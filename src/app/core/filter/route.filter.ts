@@ -29,7 +29,7 @@ export class RouteFilter {
     if (navigationEnd.url != '/auth/sign-out') {
       const signIn = <SignIn> this.persistenceService.get(environment.LOCAL_STORAGE_ACCOUNT_DATA);
       if (signIn == null || new Date() >= signIn.expirationDate) return;
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/dashboard/home']);
     }
   }
 }

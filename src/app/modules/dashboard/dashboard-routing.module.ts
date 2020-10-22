@@ -13,13 +13,12 @@ import {MessagesPage} from './pages/messages/messages.page';
 import {ShipmentsPage} from './pages/shipments/shipments.page';
 import {WarehousesPage} from './pages/warehouses/warehouses.page';
 
-// 21. Using Angular Modules & Optimizing Apps -> 15. Adding Lazy Loading to the Recipes Module
-// 24. Preloading Lazy Loaded Routes
 const routes: Routes = [
   {
-    path: 'dashboard', component: DashboardPage, children: [
+    path: '', children: [
+    {path: 'home', component: DashboardPage},
     {
-      path: 'services', children: [
+      path: 'services', component: DashboardPage, children: [
       {path: 'users', component: UsersPage},
       {path: 'parcels', component: ParcelsPage},
       {path: 'vehicles', component: VehiclesPage},
