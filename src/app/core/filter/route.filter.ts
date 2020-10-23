@@ -26,7 +26,8 @@ export class RouteFilter {
   }
 
   private autoSignIn(navigationEnd: NavigationEnd): void {
-    if (navigationEnd.url.includes('sign-out') || !navigationEnd.url.includes('dashboard')) {
+    const segments: string[] = navigationEnd.url.split('/');
+    if (!segments.includes('sign-out') && !segments.includes('dashboard')) {
       const signIn = <SignIn> this.persistenceService.get(environment.LOCAL_STORAGE_ACCOUNT_DATA);
       if (signIn == null || new Date() >= signIn.expirationDate) return;
       this.router.navigate(['/dashboard/home']);
