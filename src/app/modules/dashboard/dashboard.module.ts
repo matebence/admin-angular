@@ -1,6 +1,9 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
+import {RoleGuard} from '../../core/guards/role.guard';
+import {AuthGuard} from '../../core/guards/auth.guard';
+
 import {DashboardPage} from './dashboard.page';
 import {UsersPage} from './pages/users/users.page';
 import {EurekaPage} from './pages/eureka/eureka.page';
@@ -47,6 +50,8 @@ import {DashboardRoutingModule} from './dashboard-routing.module';
     DashboardRoutingModule
   ],
   providers: [
+    AuthGuard,
+    RoleGuard,
     UserService,
     PlaceService,
     ParcelService,

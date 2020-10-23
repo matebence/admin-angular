@@ -20,6 +20,7 @@
     "@angular/router": "~10.1.5",
     "@angular/forms": "~10.1.5",
     "@angular/core": "~10.1.5",
+    "jwt-decode": "^3.0.0",
     "bootstrap": "^4.5.2",
     "zone.js": "~0.10.2",
     "tslib": "^2.0.0",

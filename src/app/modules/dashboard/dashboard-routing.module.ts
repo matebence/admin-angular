@@ -1,6 +1,9 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
+import {AuthGuard} from '../../core/guards/auth.guard';
+import {RoleGuard} from '../../core/guards/role.guard';
+
 import {DashboardPage} from './dashboard.page';
 import {UsersPage} from './pages/users/users.page';
 import {EurekaPage} from './pages/eureka/eureka.page';
@@ -13,34 +16,39 @@ import {MessagesPage} from './pages/messages/messages.page';
 import {ShipmentsPage} from './pages/shipments/shipments.page';
 import {WarehousesPage} from './pages/warehouses/warehouses.page';
 
+import {environment} from '../../../environments/environment';
+
 const routes: Routes = [
   {
-    path: '', children: [
-    {path: 'home', component: DashboardPage},
-    {
-      path: 'services', component: DashboardPage, children: [
-      {path: 'users', component: UsersPage},
-      {path: 'parcels', component: ParcelsPage},
-      {path: 'vehicles', component: VehiclesPage},
-      {path: 'messages', component: MessagesPage},
-      {path: 'shipments', component: ShipmentsPage},
-      {path: 'warehouses', component: WarehousesPage}
+    path: '',
+    canActivate: [AuthGuard, RoleGuard],
+    data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
+    children: [
+      {path: 'home', component: DashboardPage},
+      {
+        path: 'services', component: DashboardPage, children: [
+        {path: 'users', component: UsersPage},
+        {path: 'parcels', component: ParcelsPage},
+        {path: 'vehicles', component: VehiclesPage},
+        {path: 'messages', component: MessagesPage},
+        {path: 'shipments', component: ShipmentsPage},
+        {path: 'warehouses', component: WarehousesPage}
+      ]
+      },
+      {
+        path: 'internal', children: [
+        {path: 'eureka', component: EurekaPage},
+        {path: 'zipkin', component: ZipkinPage},
+      ]
+      },
+      {
+        path: 'external', children: [
+        {path: 'stripe', component: StripePage},
+        {path: 'firebase', component: FirebasePage}
+      ]
+      },
+      {path: '**', redirectTo: '/error', pathMatch: 'full'}
     ]
-    },
-    {
-      path: 'internal', children: [
-      {path: 'eureka', component: EurekaPage},
-      {path: 'zipkin', component: ZipkinPage},
-    ]
-    },
-    {
-      path: 'external', children: [
-      {path: 'stripe', component: StripePage},
-      {path: 'firebase', component: FirebasePage}
-    ]
-    },
-    {path: '**', redirectTo: '/error', pathMatch: 'full'}
-  ]
   }
 ];
 
