@@ -1,9 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
-import {RoleGuard} from '../../core/guards/role.guard';
-import {AuthGuard} from '../../core/guards/auth.guard';
-
 import {DashboardPage} from './dashboard.page';
 import {UsersPage} from './pages/users/users.page';
 import {EurekaPage} from './pages/eureka/eureka.page';
@@ -17,14 +14,14 @@ import {VehiclesPage} from './pages/vehicles/vehicles.page';
 import {ShipmentsPage} from './pages/shipments/shipments.page';
 import {WarehousesPage} from './pages/warehouses/warehouses.page';
 
-import {UserService} from '../../core/services/user-service/user.service';
-import {PlaceService} from '../../core/services/place-service/place.service';
-import {ParcelService} from '../../core/services/parcel-service/parcel.service';
-import {AccountService} from '../../core/services/account-service/account.service';
-import {VehicleService} from '../../core/services/vehicle-service/vehicle.service';
-import {ShipmentService} from '../../core/services/shipment-service/shipment.service';
-import {MessagingService} from '../../core/services/messaging-service/messaging.service';
-import {WarehouseService} from '../../core/services/warehouse-service/warehouse.service';
+import {UserService} from './services/user-service/user.service';
+import {PlaceService} from './services/place-service/place.service';
+import {ParcelService} from './services/parcel-service/parcel.service';
+import {AccountService} from './services/account-service/account.service';
+import {VehicleService} from './services/vehicle-service/vehicle.service';
+import {ShipmentService} from './services/shipment-service/shipment.service';
+import {MessagingService} from './services/messaging-service/messaging.service';
+import {WarehouseService} from './services/warehouse-service/warehouse.service';
 
 import {SharedModule} from '../../shared/shared.module';
 import {DashboardRoutingModule} from './dashboard-routing.module';
@@ -50,8 +47,6 @@ import {DashboardRoutingModule} from './dashboard-routing.module';
     DashboardRoutingModule
   ],
   providers: [
-    AuthGuard,
-    RoleGuard,
     UserService,
     PlaceService,
     ParcelService,

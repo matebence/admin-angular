@@ -6,13 +6,19 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import {ErrorPage} from './error/error.page';
 
+import {FooterComponent} from './footer/footer.component';
+import {HeaderComponent} from './header/header.component';
+
 import {BaseService} from './services/base.service';
 import {PersistenceService} from './services/persistence-service/persistence.service';
-import {AuthorizationService} from './services/authorization-server/authorization.service';
+import {AuthorizationService} from '../modules/authentication/services/authorization-server/authorization.service';
 
 import {TypeInterceptor} from './interceptors/type.interceptor';
 import {AuthorizationInterceptor} from './interceptors/authorization.interceptor';
 import {CredentialsExpirationInterceptor} from './interceptors/credentials-expiration.interceptor';
+
+import {RoleGuard} from './guards/role.guard';
+import {AuthGuard} from './guards/auth.guard';
 
 import {RequestHTTP} from './http/request.http';
 import {RouteFilter} from './filter/route.filter';
@@ -23,7 +29,9 @@ import {CoreRoutingModule} from './core-routing.module';
 
 @NgModule({
   declarations: [
-    ErrorPage
+    ErrorPage,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,
@@ -33,6 +41,8 @@ import {CoreRoutingModule} from './core-routing.module';
     CoreRoutingModule
   ],
   providers: [
+    AuthGuard,
+    RoleGuard,
     RequestHTTP,
     BaseService,
     RouteBuilder,

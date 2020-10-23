@@ -9,7 +9,7 @@ import {environment} from '../../../environments/environment';
 import {SignIn} from '../../shared/models/services/account/account.model';
 
 import {PersistenceService} from '../services/persistence-service/persistence.service';
-import {AuthorizationService} from '../services/authorization-server/authorization.service';
+import {AuthorizationService} from '../../modules/authentication/services/authorization-server/authorization.service';
 
 @Injectable()
 export class CredentialsExpirationInterceptor implements HttpInterceptor {

@@ -11,7 +11,7 @@ import {AuthenticationPage} from './authentication.page';
 import {SignOutPage} from './pages/sign-out/sign-out.page';
 import {ForgetPasswordPage} from './pages/forget-password/forget-password.page';
 
-import {AuthorizationService} from '../../core/services/authorization-server/authorization.service';
+import {AuthorizationService} from './services/authorization-server/authorization.service';
 
 import {SharedModule} from '../../shared/shared.module';
 import {AuthenticationRoutingModule} from './authentication-routing.module';

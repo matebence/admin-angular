@@ -4,7 +4,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 import {Error} from '../../../../../../shared/models/error/error.model';
-import {AuthorizationService} from '../../../../../../core/services/authorization-server/authorization.service';
+import {AuthorizationService} from '../../../../services/authorization-server/authorization.service';
 
 @Component({
   selector: 'app-auth',

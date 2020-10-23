@@ -4,15 +4,15 @@ import {HttpParams} from '@angular/common/http';
 import {catchError} from 'rxjs/internal/operators';
 import {EventEmitter, Injectable} from '@angular/core';
 
-import {BaseService} from '../base.service';
-import {PersistenceService} from '../persistence-service/persistence.service';
+import {BaseService} from '../../../../core/services/base.service';
+import {PersistenceService} from '../../../../core/services/persistence-service/persistence.service';
 
-import {environment} from '../../../../environments/environment';
+import {environment} from '../../../../../environments/environment';
 
-import {ForgetPassword, Recover, SignIn, SignOut} from '../../../shared/models/services/account/account.model';
+import {ForgetPassword, Recover, SignIn, SignOut} from '../../../../shared/models/services/account/account.model';
 
-import {RequestHTTP} from '../../http/request.http';
-import {RouteBuilder} from '../../http/route-builder.http';
+import {RequestHTTP} from '../../../../core/http/request.http';
+import {RouteBuilder} from '../../../../core/http/route-builder.http';
 
 @Injectable()
 export class AuthorizationService extends BaseService {
