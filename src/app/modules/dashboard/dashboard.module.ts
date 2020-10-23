@@ -29,6 +29,8 @@ import {TableComponent} from './components/table/table.component';
 import {TilesComponent} from './components/tiles/tiles.component';
 import {HeaderComponent} from './components/header/header.component';
 import {FooterComponent} from './components/footer/footer.component';
+import {SearchComponent} from './components/search/search.component';
+import {ScrollComponent} from './components/scroll/scroll.component';
 import {NavItemComponent} from './components/nav-item/nav-item.component';
 
 import {SharedModule} from '../../shared/shared.module';
@@ -40,6 +42,8 @@ import {DashboardRoutingModule} from './dashboard-routing.module';
     NavComponent,
     TableComponent,
     TilesComponent,
+    SearchComponent,
+    ScrollComponent,
     HeaderComponent,
     FooterComponent,
     NavItemComponent,
