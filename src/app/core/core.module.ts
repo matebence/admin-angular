@@ -6,9 +6,6 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import {ErrorPage} from './error/error.page';
 
-import {FooterComponent} from './footer/footer.component';
-import {HeaderComponent} from './header/header.component';
-
 import {BaseService} from './services/base.service';
 import {PersistenceService} from './services/persistence-service/persistence.service';
 import {AuthorizationService} from '../modules/authentication/services/authorization-server/authorization.service';
@@ -30,8 +27,6 @@ import {CoreRoutingModule} from './core-routing.module';
 @NgModule({
   declarations: [
     ErrorPage,
-    HeaderComponent,
-    FooterComponent
   ],
   imports: [
     CommonModule,
@@ -43,11 +38,14 @@ import {CoreRoutingModule} from './core-routing.module';
   providers: [
     AuthGuard,
     RoleGuard,
-    RequestHTTP,
+
     BaseService,
-    RouteBuilder,
-    RouteFilter,
     PersistenceService,
+
+    RouteFilter,
+    RequestHTTP,
+    RouteBuilder,
+
     {provide: HTTP_INTERCEPTORS, useClass: TypeInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: AuthorizationInterceptor, multi: true, deps: [PersistenceService]},
     {provide: HTTP_INTERCEPTORS, useClass: CredentialsExpirationInterceptor, multi: true, deps: [Router, PersistenceService, AuthorizationService]}

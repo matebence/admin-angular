@@ -23,11 +23,27 @@ import {ShipmentService} from './services/shipment-service/shipment.service';
 import {MessagingService} from './services/messaging-service/messaging.service';
 import {WarehouseService} from './services/warehouse-service/warehouse.service';
 
+import {BarComponent} from './components/bar/bar.component';
+import {NavComponent} from './components/nav/nav.component';
+import {TableComponent} from './components/table/table.component';
+import {TilesComponent} from './components/tiles/tiles.component';
+import {HeaderComponent} from './components/header/header.component';
+import {FooterComponent} from './components/footer/footer.component';
+import {NavItemComponent} from './components/nav-item/nav-item.component';
+
 import {SharedModule} from '../../shared/shared.module';
 import {DashboardRoutingModule} from './dashboard-routing.module';
 
 @NgModule({
   declarations: [
+    BarComponent,
+    NavComponent,
+    TableComponent,
+    TilesComponent,
+    HeaderComponent,
+    FooterComponent,
+    NavItemComponent,
+
     UsersPage,
     PlacesPage,
     EurekaPage,

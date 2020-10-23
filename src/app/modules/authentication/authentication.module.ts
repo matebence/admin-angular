@@ -18,11 +18,12 @@ import {AuthenticationRoutingModule} from './authentication-routing.module';
 
 @NgModule({
   declarations: [
-    SignInPage,
-    SignOutPage,
     CardComponent,
     AuthComponent,
     ResetComponent,
+
+    SignInPage,
+    SignOutPage,
     AuthenticationPage,
     ForgetPasswordPage,
   ],
