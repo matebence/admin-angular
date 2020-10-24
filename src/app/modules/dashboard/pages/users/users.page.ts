@@ -11,5 +11,6 @@ export class UsersPage implements OnInit {
   }
 
   public ngOnInit(): void {
+    return;
   }
 }

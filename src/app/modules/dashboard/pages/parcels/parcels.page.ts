@@ -11,5 +11,6 @@ export class ParcelsPage implements OnInit {
   }
 
   public ngOnInit(): void {
+    return;
   }
 }

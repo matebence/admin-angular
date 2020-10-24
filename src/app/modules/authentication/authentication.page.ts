@@ -11,5 +11,6 @@ export class AuthenticationPage implements OnInit {
   }
 
   public ngOnInit(): void {
+    return;
   }
 }

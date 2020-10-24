@@ -54,9 +54,11 @@ export class ForgetPasswordPage implements OnInit, OnDestroy {
           this.recover = recover;
         })
     );
+    return;
   }
 
   public ngOnDestroy(): void {
     this.subscriptions.forEach(e => e.unsubscribe());
+    return;
   }
 }

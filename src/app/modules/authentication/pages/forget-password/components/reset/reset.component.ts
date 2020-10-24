@@ -35,10 +35,12 @@ export class ResetComponent implements OnInit, OnDestroy {
           this.forgetPassword = forgetPassword;
         })
     );
+    return;
   }
 
   public ngOnDestroy(): void {
     this.subscriptions.forEach(e => e.unsubscribe());
+    return;
   }
 
   public onSubmit(): void {
@@ -49,5 +51,6 @@ export class ResetComponent implements OnInit, OnDestroy {
         .forgetPassword(email)
         .subscribe((result: Boolean) => this.formGroup.reset())
     );
+    return;
   }
 }

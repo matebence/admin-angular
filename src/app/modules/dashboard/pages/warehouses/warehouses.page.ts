@@ -11,5 +11,6 @@ export class WarehousesPage implements OnInit {
   }
 
   public ngOnInit(): void {
+    return;
   }
 }

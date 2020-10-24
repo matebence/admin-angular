@@ -32,5 +32,6 @@ export class RouteFilter {
       if (signIn == null || new Date() >= signIn.expirationDate) return;
       this.router.navigate(['/dashboard/home']);
     }
+    return;
   }
 }

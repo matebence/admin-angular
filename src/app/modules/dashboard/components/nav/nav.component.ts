@@ -7,15 +7,12 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class NavComponent implements OnInit {
 
-  @Input('sidebarToggled') toggled: boolean;
+  @Input('navToogle') public toggle: boolean;
 
   public constructor() {
   }
 
   public ngOnInit(): void {
-  }
-
-  public onSideBarToggle(): void {
-    this.toggled = !this.toggled;
+    return;
   }
 }

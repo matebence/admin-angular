@@ -29,9 +29,11 @@ export class SignOutPage implements OnInit, OnDestroy {
         .signOut()
         .subscribe((result: Boolean) => console.log(result))
     );
+    return;
   }
 
   public ngOnDestroy(): void {
     this.subscriptions.forEach(e => e.unsubscribe());
+    return;
   }
 }

@@ -13,5 +13,6 @@ export class AppBootstrap implements OnInit {
   }
 
   public ngOnInit(): void {
+    return;
   }
 }

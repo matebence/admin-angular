@@ -11,5 +11,6 @@ export class VehiclesPage implements OnInit {
   }
 
   public ngOnInit(): void {
+    return;
   }
 }

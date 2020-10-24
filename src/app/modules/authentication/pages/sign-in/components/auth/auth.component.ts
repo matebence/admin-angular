@@ -23,7 +23,6 @@ export class AuthComponent implements OnInit, OnDestroy {
         updateOn: 'change'
       }),
       password: new FormControl(null, {
-        validators: [Validators.pattern('(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?:.{8}|.{30})'), Validators.required],
         updateOn: 'change'
       })
     }),
@@ -42,10 +41,12 @@ export class AuthComponent implements OnInit, OnDestroy {
           this.authorizationService.setSignOutData(null);
         })
     );
+    return;
   }
 
   public ngOnDestroy(): void {
     this.subscriptions.forEach(e => e.unsubscribe());
+    return;
   }
 
   public onSubmit(): void {
@@ -62,5 +63,6 @@ export class AuthComponent implements OnInit, OnDestroy {
           this.router.navigate(['/dashboard/home']);
         })
     );
+    return;
   }
 }

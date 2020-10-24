@@ -11,5 +11,6 @@ export class ShipmentsPage implements OnInit {
   }
 
   public ngOnInit(): void {
+    return;
   }
 }

@@ -1,13 +1,13 @@
 <div id="page-top">
   <div id="wrapper">
     <app-nav
-      [sidebarToggled]="toggled">
+      [navToogle]="toggle">
     </app-nav>
     <div id="content-wrapper" class="d-flex flex-column">
       <div id="content">
         <app-header
-          (onSidebarToggled)="onToogleChanged($event)"
-          [sidebarToggled]="toggled">
+          (onNavEvent)="onToogleResult($event)"
+          [navToogle]="toggle">
         </app-header>
         <div class="container-fluid">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -22,5 +22,10 @@
     </div>
   </div>
   <app-scroll></app-scroll>
-  <app-modal></app-modal>
+  <app-modal
+    (onModalEvent)="onModalResult($event)"
+    [modalTitle]="title"
+    [modalText]="text"
+    [modalNegativeButton]="negativeButton"
+    [modalPozitiveButton]="pozitiveButton"></app-modal>
 </div>

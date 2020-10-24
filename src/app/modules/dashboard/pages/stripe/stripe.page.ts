@@ -11,5 +11,6 @@ export class StripePage implements OnInit {
   }
 
   public ngOnInit(): void {
+    return;
   }
 }

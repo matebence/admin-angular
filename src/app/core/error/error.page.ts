@@ -11,5 +11,6 @@ export class ErrorPage implements OnInit {
   }
 
   public ngOnInit(): void {
+    return;
   }
 }

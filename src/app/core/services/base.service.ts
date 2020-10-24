@@ -40,7 +40,8 @@ export class BaseService {
 
   public setErrorData(data: Error): void {
     this.errorData = data;
-    this.errorDataObservable.emit(this.getErrorData())
+    this.errorDataObservable.emit(this.getErrorData());
+    return;
   }
 
   public getErrorData(): Error {

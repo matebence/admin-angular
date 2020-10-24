@@ -11,5 +11,6 @@ export class FirebasePage implements OnInit {
   }
 
   public ngOnInit(): void {
+    return;
   }
 }

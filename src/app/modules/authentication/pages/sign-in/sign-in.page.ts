@@ -11,5 +11,6 @@ export class SignInPage implements OnInit {
   }
 
   public ngOnInit(): void {
+    return;
   }
 }

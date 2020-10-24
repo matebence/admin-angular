@@ -11,5 +11,6 @@ export class ZipkinPage implements OnInit {
   }
 
   public ngOnInit(): void {
+    return;
   }
 }

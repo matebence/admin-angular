@@ -137,7 +137,8 @@ export class AuthorizationService extends BaseService {
 
   public setRecoverData(data: Recover): void {
     this.recoverData = data;
-    this.recoverDataObservable.emit(this.getRecoverData())
+    this.recoverDataObservable.emit(this.getRecoverData());
+    return;
   }
 
   public getRecoverData(): Recover {
@@ -146,7 +147,8 @@ export class AuthorizationService extends BaseService {
 
   public setForgetPasswordData(data: ForgetPassword): void {
     this.forgetPasswordData = data;
-    this.forgetPasswordDataObservable.emit(this.getForgetPasswordData())
+    this.forgetPasswordDataObservable.emit(this.getForgetPasswordData());
+    return;
   }
 
   public getForgetPasswordData(): ForgetPassword {
@@ -155,7 +157,8 @@ export class AuthorizationService extends BaseService {
 
   public setSignOutData(data: SignOut): void {
     this.signOutData = data;
-    this.signOutDataObservable.emit(this.getSignOutData())
+    this.signOutDataObservable.emit(this.getSignOutData());
+    return;
   }
 
   public getSignOutData(): SignOut {
@@ -164,7 +167,8 @@ export class AuthorizationService extends BaseService {
 
   public setSignInData(data: SignIn): void {
     this.signInData = data;
-    this.signInDataObservable.emit(this.getSignInData())
+    this.signInDataObservable.emit(this.getSignInData());
+    return;
   }
 
   public getSignInData(): SignIn {

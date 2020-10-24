@@ -23,6 +23,7 @@ export class LinkDirective implements OnInit {
     this.color = this.colorInput;
     this.textDecoration = 'none';
     this.backgroundColor = this.backgroundInput;
+    return;
   }
 
   @HostListener('mouseenter')
@@ -30,11 +31,13 @@ export class LinkDirective implements OnInit {
     this.textDecoration = 'none';
     this.color = this.colorHoverInput;
     this.backgroundColor = this.backgroundHoverInput;
+    return;
   }
 
   @HostListener('mouseleave')
   public mouseleave(eventData: Event): void {
     this.color = this.colorInput;
     this.backgroundColor = this.backgroundInput;
+    return;
   }
 }

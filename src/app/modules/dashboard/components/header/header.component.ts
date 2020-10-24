@@ -7,17 +7,20 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  @Output('onSidebarToggled') public onToogled = new EventEmitter<boolean>();
-  @Input('sidebarToggled') public toggled: boolean;
+  @Output('onNavEvent') public onToogle = new EventEmitter<boolean>();
+
+  @Input('navToogle') public toggle: boolean;
 
   public constructor() {
   }
 
   public ngOnInit(): void {
+    return;
   }
 
-  public onSideBarToggle(): void {
-    this.toggled = !this.toggled;
-    this.onToogled.emit(this.toggled);
+  public onNavToggle(): void {
+    this.toggle = !this.toggle;
+    this.onToogle.emit(this.toggle);
+    return;
   }
 }

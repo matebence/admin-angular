@@ -10,5 +10,6 @@ export class CardComponent implements OnInit {
   public constructor() { }
 
   public ngOnInit(): void {
+    return;
   }
 }

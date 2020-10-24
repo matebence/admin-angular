@@ -15,6 +15,7 @@ export class PersistenceService extends BaseService {
     } catch (e) {
       console.error('Error saving to localStorage', e);
     }
+    return;
   }
 
   public get(key: string): Object {
@@ -42,6 +43,7 @@ export class PersistenceService extends BaseService {
     } catch (e) {
       console.error('Error clearing localStorage', e);
     }
+    return;
   }
 
   public append(key: string, data: any): void {
@@ -51,6 +53,7 @@ export class PersistenceService extends BaseService {
     } catch (e) {
       console.error('Error appending data to existing item in localStorage', e);
     }
+    return;
   }
 
   public drop(key: string): Boolean {

@@ -11,5 +11,6 @@ export class TableComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+    return;
   }
 }

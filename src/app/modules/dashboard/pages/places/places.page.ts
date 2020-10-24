@@ -11,5 +11,6 @@ export class PlacesPage implements OnInit {
   }
 
   public ngOnInit(): void {
+    return;
   }
 }
