@@ -11129,6 +11129,8 @@ a:focus {
 .sidebar {
   width: 6.5rem;
   min-height: 100vh;
+  overflow: auto;
+  height: 100vh;
 }
 
 .sidebar .nav-item {
@@ -11358,7 +11360,7 @@ a:focus {
   }
 
   .sidebar.toggled {
-    overflow: visible;
+    overflow: auto;
     width: 6.5rem !important;
   }
 

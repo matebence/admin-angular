@@ -2,6 +2,10 @@ ul.navbar-nav.bg-gradient-primary.sidebar.sidebar-dark.accordion#accordionSideba
   width: 7rem;
 }
 
+ul.navbar-nav.bg-gradient-primary.sidebar.sidebar-dark.accordion.toggled#accordionSidebar a div img.logo-primary {
+  width: 4rem;
+}
+
 @media (max-width: 767px) {
   ul.navbar-nav.bg-gradient-primary.sidebar.sidebar-dark.accordion#accordionSidebar a div img.logo-primary {
     width: 4rem;

@@ -1,9 +1,15 @@
 <div id="page-top">
   <div id="wrapper">
-    <app-nav></app-nav>
+    <app-nav
+      (onSidebarToggled)="onToogleChanged($event)"
+      [sidebarToggled]="toggled">
+    </app-nav>
     <div id="content-wrapper" class="d-flex flex-column">
       <div id="content">
-        <app-header></app-header>
+        <app-header
+          (onSidebarToggled)="onToogleChanged($event)"
+          [sidebarToggled]="toggled">
+        </app-header>
         <div class="container-fluid">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Domov</h1>
