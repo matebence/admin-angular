@@ -1,5 +1,5 @@
 <ul [ngClass]="toggle ? 'toggled' : ''" class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+  <a class="sidebar-brand d-flex align-items-center justify-content-center" routerLink="/dashboard/home">
     <div class="sidebar-brand-icon rotate-n-15">
       <i class="fas fa-laugh-wink"></i>
     </div>
@@ -8,8 +8,11 @@
     </div>
   </a>
   <hr class="sidebar-divider my-0">
-  <li class="nav-item active">
-    <a class="nav-link" href="index.html">
+  <li
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{exact: true}"
+    class="nav-item">
+    <a class="nav-link" routerLink="/dashboard/home">
       <i class="fas fa-home"></i>
       <span>Domov</span></a>
   </li>
@@ -17,7 +20,10 @@
   <div class="sidebar-heading">
     Služby
   </div>
-  <li class="nav-item">
+  <li
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{exact: true}"
+    class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#users" aria-expanded="true"
        aria-controls="users">
       <i class="fas fa-users"></i>
@@ -26,13 +32,16 @@
     <div id="users" class="collapse" aria-labelledby="users" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Možnosti:</h6>
-        <a class="collapse-item" href="#">Zoznam</a>
-        <a class="collapse-item" href="#">Hľadať</a>
-        <a class="collapse-item" href="#">Nový</a>
+        <a class="collapse-item" routerLink="/dashboard/services/users">Zoznam</a>
+        <a class="collapse-item" routerLink="/dashboard/services/users/search">Hľadať</a>
+        <a class="collapse-item" routerLink="/dashboard/services/users/new">Nový</a>
       </div>
     </div>
   </li>
-  <li class="nav-item">
+  <li
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{exact: true}"
+    class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#shipments"
        aria-expanded="true" aria-controls="shipments">
       <i class="fas fa-shipping-fast"></i>
@@ -41,13 +50,16 @@
     <div id="shipments" class="collapse" aria-labelledby="shipments" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Možnosti:</h6>
-        <a class="collapse-item" href="#">Zoznam</a>
-        <a class="collapse-item" href="#">Hľadať</a>
-        <a class="collapse-item" href="#">Nový</a>
+        <a class="collapse-item" routerLink="/dashboard/services/shipments">Zoznam</a>
+        <a class="collapse-item" routerLink="/dashboard/services/shipments/search">Hľadať</a>
+        <a class="collapse-item" routerLink="/dashboard/services/shipments/new">Nový</a>
       </div>
     </div>
   </li>
-  <li class="nav-item">
+  <li
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{exact: true}"
+    class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#parcels"
        aria-expanded="true" aria-controls="parcels">
       <i class="fas fa-boxes"></i>
@@ -56,13 +68,16 @@
     <div id="parcels" class="collapse" aria-labelledby="parcels" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Možnosti:</h6>
-        <a class="collapse-item" href="#">Zoznam</a>
-        <a class="collapse-item" href="#">Hľadať</a>
-        <a class="collapse-item" href="#">Nový</a>
+        <a class="collapse-item" routerLink="/dashboard/services/parcels">Zoznam</a>
+        <a class="collapse-item" routerLink="/dashboard/services/parcels/search">Hľadať</a>
+        <a class="collapse-item" routerLink="/dashboard/services/parcels/new">Nový</a>
       </div>
     </div>
   </li>
-  <li class="nav-item">
+  <li
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{exact: true}"
+    class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#communications"
        aria-expanded="true" aria-controls="communications">
       <i class="fas fa-comments"></i>
@@ -71,13 +86,16 @@
     <div id="communications" class="collapse" aria-labelledby="communications" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Možnosti:</h6>
-        <a class="collapse-item" href="#">Zoznam</a>
-        <a class="collapse-item" href="#">Hľadať</a>
-        <a class="collapse-item" href="#">Nový</a>
+        <a class="collapse-item" routerLink="/dashboard/services/messages">Zoznam</a>
+        <a class="collapse-item" routerLink="/dashboard/services/messages/search">Hľadať</a>
+        <a class="collapse-item" routerLink="/dashboard/services/messages/new">Nový</a>
       </div>
     </div>
   </li>
-  <li class="nav-item">
+  <li
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{exact: true}"
+    class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#places"
        aria-expanded="true" aria-controls="places">
       <i class="fas fa-globe"></i>
@@ -86,13 +104,16 @@
     <div id="places" class="collapse" aria-labelledby="places" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Možnosti:</h6>
-        <a class="collapse-item" href="#">Zoznam</a>
-        <a class="collapse-item" href="#">Hľadať</a>
-        <a class="collapse-item" href="#">Nový</a>
+        <a class="collapse-item" routerLink="/dashboard/services/places">Zoznam</a>
+        <a class="collapse-item" routerLink="/dashboard/services/places/search">Hľadať</a>
+        <a class="collapse-item" routerLink="/dashboard/services/places/new">Nový</a>
       </div>
     </div>
   </li>
-  <li class="nav-item">
+  <li
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{exact: true}"
+    class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#warehouses"
        aria-expanded="true" aria-controls="warehouses">
       <i class="fas fa-warehouse"></i>
@@ -101,9 +122,9 @@
     <div id="warehouses" class="collapse" aria-labelledby="warehouses" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Možnosti:</h6>
-        <a class="collapse-item" href="#">Zoznam</a>
-        <a class="collapse-item" href="#">Hľadať</a>
-        <a class="collapse-item" href="#">Nový</a>
+        <a class="collapse-item" routerLink="/dashboard/services/warehouses">Zoznam</a>
+        <a class="collapse-item" routerLink="/dashboard/services/warehouses/search">Hľadať</a>
+        <a class="collapse-item" routerLink="/dashboard/services/warehouses/new">Nový</a>
       </div>
     </div>
   </li>
@@ -111,7 +132,10 @@
   <div class="sidebar-heading">
     Analýza
   </div>
-  <li class="nav-item">
+  <li
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{exact: true}"
+    class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#graph"
        aria-expanded="true" aria-controls="graph">
       <i class="fas fa-chart-pie"></i>
@@ -120,16 +144,19 @@
     <div id="graph" class="collapse" aria-labelledby="graph" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Možnosti:</h6>
-        <a class="collapse-item" href="#">Poživatelia</a>
-        <a class="collapse-item" href="#">Zásielky</a>
-        <a class="collapse-item" href="#">Balíky</a>
-        <a class="collapse-item" href="#">Kommunikacia</a>
-        <a class="collapse-item" href="#">Krajiny</a>
-        <a class="collapse-item" href="#">Sklady</a>
+        <a class="collapse-item" routerLink="/dashboard/services/graph/users">Poživatelia</a>
+        <a class="collapse-item" routerLink="/dashboard/services/graph/shipments">Zásielky</a>
+        <a class="collapse-item" routerLink="/dashboard/services/graph/parcels">Balíky</a>
+        <a class="collapse-item" routerLink="/dashboard/services/graph/messages">Kommunikacia</a>
+        <a class="collapse-item" routerLink="/dashboard/services/graph/places">Krajiny</a>
+        <a class="collapse-item" routerLink="/dashboard/services/graph/warehouses">Sklady</a>
       </div>
     </div>
   </li>
-  <li class="nav-item">
+  <li
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{exact: true}"
+    class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#profit"
        aria-expanded="true" aria-controls="profit">
       <i class="fas fa-money-bill-alt"></i>
@@ -138,8 +165,8 @@
     <div id="profit" class="collapse" aria-labelledby="profit" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Možnosti:</h6>
-        <a class="collapse-item" href="#">Aktuálny</a>
-        <a class="collapse-item" href="#">Editovať</a>
+        <a class="collapse-item" routerLink="/dashboard/services/profit/current">Aktuálny</a>
+        <a class="collapse-item" routerLink="/dashboard/services/profit/edit">Editovať</a>
       </div>
     </div>
   </li>
@@ -147,23 +174,35 @@
   <div class="sidebar-heading">
     Aplikácia
   </div>
-  <li class="nav-item">
-    <a class="nav-link" href="charts.html">
+  <li
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{exact: true}"
+    class="nav-item">
+    <a class="nav-link" routerLink="/dashboard/services/internal/zipkin">
       <i class="fas fa-chart-bar"></i>
       <span>Zipkin</span></a>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" href="charts.html">
+  <li
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{exact: true}"
+    class="nav-item">
+    <a class="nav-link" routerLink="/dashboard/services/internal/eureka">
       <i class="fas fa-server"></i>
       <span>Eureka</span></a>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" href="charts.html">
+  <li
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{exact: true}"
+    class="nav-item">
+    <a class="nav-link" routerLink="/dashboard/services/external/stripe">
       <i class="fab fa-stripe-s"></i>
       <span>Stripe</span></a>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" href="charts.html">
+  <li
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{exact: true}"
+    class="nav-item">
+    <a class="nav-link" routerLink="/dashboard/services/external/firebase">
       <i class="fas fa-fire"></i>
       <span>Firebase</span></a>
   </li>

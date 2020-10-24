@@ -23,6 +23,7 @@ export class AuthComponent implements OnInit, OnDestroy {
         updateOn: 'change'
       }),
       password: new FormControl(null, {
+        validators: [Validators.pattern('(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?:.{8}|.{30})'), Validators.required],
         updateOn: 'change'
       })
     }),

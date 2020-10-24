@@ -17,3 +17,15 @@ div.bg-gradient-primary:before {
   opacity: 0.9;
   background-color: #176c9d;
 }
+
+@media (max-width: 360px) {
+  div.bg-gradient-primary:before {
+    position: fixed;
+  }
+}
+
+@media (max-width: 320px) {
+  div.bg-gradient-primary {
+    height: unset;
+  }
+}
