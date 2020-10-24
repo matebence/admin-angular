@@ -1,0 +1,9 @@
+ul.navbar-nav.bg-gradient-primary.sidebar.sidebar-dark.accordion#accordionSidebar a div img.logo-primary {
+  width: 7rem;
+}
+
+@media (max-width: 767px) {
+  ul.navbar-nav.bg-gradient-primary.sidebar.sidebar-dark.accordion#accordionSidebar a div img.logo-primary {
+    width: 4rem;
+  }
+}
