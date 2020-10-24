@@ -1,6 +1,4 @@
 @import url("fonts.css");
-@import url("../node_modules/bootstrap/dist/css/bootstrap.min.css");
-@import url("../node_modules/@fortawesome/fontawesome-free/css/all.css");
 
 :root {
   --blue: #4e73df;
@@ -2585,7 +2583,7 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background: #176c9d;
+  background-color: #4e73df;
 }
 
 .btn-primary:hover {
@@ -6913,6 +6911,10 @@ button.bg-dark:focus {
 }
 
 @media (min-width: 576px) {
+  .d-none {
+    display: block !important;
+  }
+
   .d-sm-none {
     display: none !important;
   }
@@ -11129,8 +11131,6 @@ a:focus {
 .sidebar {
   width: 6.5rem;
   min-height: 100vh;
-  overflow: auto;
-  height: 100vh;
 }
 
 .sidebar .nav-item {

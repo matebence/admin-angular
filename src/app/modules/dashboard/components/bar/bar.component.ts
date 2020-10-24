@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-bar',
@@ -6,6 +6,8 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./bar.component.css']
 })
 export class BarComponent implements OnInit {
+
+  @Input('sidebarToggled') toggled: boolean;
 
   public constructor() {
   }
