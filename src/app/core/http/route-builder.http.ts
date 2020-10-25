@@ -1,23 +1,24 @@
 import {Injectable} from '@angular/core';
 
-import routes from '../../configs/routes.config.json';
+import routeConfig from '../../configs/routes.config.json';
+
 import {environment} from '../../../environments/environment';
+
 import {RouterModel, RouterPath, RouterService} from '../../shared/models/router/router.model';
 
 @Injectable()
 export class RouteBuilder {
 
-  private routerHost: string;
   private routerPath: RouterPath;
   private routerModel: RouterModel;
   private routerService: RouterService;
+  private routerHost: string = routeConfig.gateway.value.replace(`{host}`, environment.HOST_BLESK);
 
   public constructor() {
-    this.routerHost = routes.gateway.value.replace(`{host}`, environment.HOST_BLESK)
   }
 
   public service(service: string): this {
-    this.routerService = routes.gateway.services[service];
+    this.routerService = routeConfig.gateway.services[service];
     return this;
   }
 
@@ -32,9 +33,7 @@ export class RouteBuilder {
   }
 
   public params(params: Object[]): this {
-    params.forEach(e => {
-      this.routerPath.value = this.routerPath.value.replace(`{${Object.keys(e).toString()}}`, Object.values(e).toString())
-    });
+    params.forEach(e => {this.routerPath.value = this.routerPath.value.replace(`{${Object.keys(e).toString()}}`, Object.values(e).toString())});
     return this
   }
 

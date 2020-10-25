@@ -1,4 +1,5 @@
 import {NgModule} from '@angular/core';
+import {FormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
 
@@ -63,6 +64,7 @@ import {DashboardRoutingModule} from './dashboard-routing.module';
     WarehousesPage,
   ],
   imports: [
+    FormsModule,
     SharedModule,
     CommonModule,
     DashboardRoutingModule

@@ -18,7 +18,7 @@ div.bg-gradient-primary:before {
   background-color: #176c9d;
 }
 
-@media (max-width: 360px) {
+@media (max-width: 380px) {
   div.bg-gradient-primary:before {
     position: fixed;
   }

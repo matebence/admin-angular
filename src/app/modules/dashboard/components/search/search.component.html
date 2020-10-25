@@ -1,7 +1,56 @@
 <form class="d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
   <div class="input-group">
-    <input type="text" class="form-control bg-light border-0 small" placeholder="Hľadať (sekcia : príkaz) ..."
-           aria-label="Search" aria-describedby="basic-addon2">
+    <input
+      #searchInput
+      type="text"
+      [(ngModel)]="keyWord"
+      [ngModelOptions]="{standalone: true}"
+      (input)="onAutoComplete()"
+      class="form-control bg-light border-0 small"
+      placeholder="Hľadať (sekcia : príkaz) ..."
+      aria-label="Search"
+      aria-describedby="basic-addon2">
+
+    <div class="input-group-append">
+      <ul
+        *ngIf="searchResult.group.constructor.name === 'Array'"
+        class="autocomplete">
+        <li
+          *ngFor="let result of searchResult.group; let i = index"
+          class="form-control autocomplete-item bg-light">
+          <a
+            (click)="onAutoCompleteSelection(result.group)">
+            {{result.group}} =>
+          </a>
+        </li>
+      </ul>
+      <ul
+        *ngIf="searchResult.title.constructor.name === 'Array'"
+        class="autocomplete">
+        <li
+          *ngFor="let result of searchResult.title; let i = index"
+          class="form-control autocomplete-item bg-light">
+          <a
+            (click)="onAutoCompleteSelection(result.title)">
+            {{searchResult.group}} => {{result.title}}
+          </a>
+        </li>
+      </ul>
+      <ul
+        *ngIf="searchResult.action.constructor.name === 'Array'"
+        class="autocomplete">
+        <li
+          *ngFor="let result of searchResult.action; let i = index"
+          class="form-control autocomplete-item bg-light">
+          <a
+            (click)="onAutoCompleteSelection(result.title)"
+            [routerLink]="result.route.main">
+            {{searchResult.group}} => {{searchResult.title}} => {{result.title}}
+          </a>
+        </li>
+      </ul>
+    </div>
+
     <div class="input-group-append">
       <button appButtonHover class="btn btn-primary" type="button">
         <i class="fas fa-search fa-sm"></i>

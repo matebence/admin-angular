@@ -5,11 +5,17 @@ export interface Navigation {
 
 export interface Details {
   title: string,
-  icon: string,
-  route: Route
+  icon?: string,
+  route?: Route
 }
 
 export interface Route {
   main: string,
-  sub: Details[]
+  sub?: Details[]
+}
+
+export interface NavigationResult {
+  group: Navigation[] | string,
+  title: Details[] | string,
+  action: Details[]
 }

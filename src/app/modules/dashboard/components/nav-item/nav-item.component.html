@@ -7,38 +7,24 @@
   [routerLinkActiveOptions]="{exact: true}"
   class="nav-item">
   <a
-    *ngIf="details.route.main === '#'; else externalUrl"
     class="nav-link collapsed"
     [href]="details.route.main"
     data-toggle="collapse"
-    [attr.data-target]="'#' + details.title"
+    [attr.data-target]="'#' + details.title.replace(' ', '')"
     aria-expanded="true"
-    [attr.aria-controls]="details.title">
+    [attr.aria-controls]="details.title.replace(' ', '')">
     <i [class]="details.icon"></i>
     <span>{{details.title}}</span>
   </a>
-  <ng-template #externalUrl>
-    <a
-      *ngIf="details.route.main !== '#'"
-      class="nav-link collapsed"
-      [routerLink]="details.route.main"
-      data-toggle="collapse"
-      [attr.data-target]="'#' + details.title"
-      aria-expanded="true"
-      [attr.aria-controls]="details.title">
-      <i [class]="details.icon"></i>
-      <span>{{details.title}}</span>
-    </a>
-  </ng-template>
   <div
     *ngIf="details.route.sub.length !== 0"
-    [id]="details.title"
+    [id]="details.title.replace(' ', '')"
     class="collapse"
-    [attr.aria-labelledby]="details.title"
+    [attr.aria-labelledby]="details.title.replace(' ', '')"
     data-parent="#accordionSidebar">
     <div class="bg-white py-2 collapse-inner rounded">
       <h6 class="collapse-header">Možnosti:</h6>
-      <a *ngFor="let route of details.route.sub; let i = index" class="collapse-item" [routerLink]="route.route">{{route.title}}</a>
+      <a *ngFor="let detail of details.route.sub; let i = index" class="collapse-item" [routerLink]="detail.route.main">{{detail.title}}</a>
     </div>
   </div>
 </li>

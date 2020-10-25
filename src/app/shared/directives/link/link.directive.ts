@@ -11,18 +11,15 @@ export class LinkDirective implements OnInit {
   @Input() public backgroundInput: string = 'transparent';
   @Input() public backgroundHoverInput: string = 'transparent';
 
-  @HostBinding('style.color') public color: string;
-  @HostBinding('style.textDecoration') public textDecoration: string;
-  @HostBinding('style.backgroundColor') public backgroundColor: string;
+  @HostBinding('style.color') public color: string = this.colorInput;
+  @HostBinding('style.textDecoration') public textDecoration: string = 'none';
+  @HostBinding('style.backgroundColor') public backgroundColor: string = this.backgroundInput;
 
   public constructor(private elRef: ElementRef,
                      private renderer: Renderer2) {
   }
 
   public ngOnInit(): void {
-    this.color = this.colorInput;
-    this.textDecoration = 'none';
-    this.backgroundColor = this.backgroundInput;
     return;
   }
 

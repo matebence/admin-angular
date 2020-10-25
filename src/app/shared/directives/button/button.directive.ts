@@ -7,14 +7,13 @@ export class ButtonDirective implements OnInit {
   @Input() public backgroundInput: string = '#176c9d';
   @Input() public backgroundHoverInput: string = '#1796dc';
 
-  @HostBinding('style.backgroundColor') public backgroundColor: string;
+  @HostBinding('style.backgroundColor') public backgroundColor: string = this.backgroundInput;
 
   public constructor(private elRef: ElementRef,
                      private renderer: Renderer2) {
   }
 
   public ngOnInit(): void {
-    this.backgroundColor = this.backgroundInput;
     return;
   }
 
