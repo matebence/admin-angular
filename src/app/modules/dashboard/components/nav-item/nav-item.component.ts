@@ -1,4 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+
+import {Details} from '../../../../shared/models/components/navigation.model';
 
 @Component({
   selector: 'app-nav-item',
@@ -6,6 +8,9 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./nav-item.component.css']
 })
 export class NavItemComponent implements OnInit {
+
+  @Input('navGroup') public group: string;
+  @Input('navDetails') public details: Details;
 
   public constructor() {
   }

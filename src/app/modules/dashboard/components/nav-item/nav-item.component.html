@@ -1,1 +1,45 @@
-<p>nav-item works!</p>
+<div class="sidebar-heading">
+  {{group}}
+</div>
+<li
+  *ngFor="let details of details; let i = index"
+  routerLinkActive="active"
+  [routerLinkActiveOptions]="{exact: true}"
+  class="nav-item">
+  <a
+    *ngIf="details.route.main === '#'; else externalUrl"
+    class="nav-link collapsed"
+    [href]="details.route.main"
+    data-toggle="collapse"
+    [attr.data-target]="'#' + details.title"
+    aria-expanded="true"
+    [attr.aria-controls]="details.title">
+    <i [class]="details.icon"></i>
+    <span>{{details.title}}</span>
+  </a>
+  <ng-template #externalUrl>
+    <a
+      *ngIf="details.route.main !== '#'"
+      class="nav-link collapsed"
+      [routerLink]="details.route.main"
+      data-toggle="collapse"
+      [attr.data-target]="'#' + details.title"
+      aria-expanded="true"
+      [attr.aria-controls]="details.title">
+      <i [class]="details.icon"></i>
+      <span>{{details.title}}</span>
+    </a>
+  </ng-template>
+  <div
+    *ngIf="details.route.sub.length !== 0"
+    [id]="details.title"
+    class="collapse"
+    [attr.aria-labelledby]="details.title"
+    data-parent="#accordionSidebar">
+    <div class="bg-white py-2 collapse-inner rounded">
+      <h6 class="collapse-header">Možnosti:</h6>
+      <a *ngFor="let route of details.route.sub; let i = index" class="collapse-item" [routerLink]="route.route">{{route.title}}</a>
+    </div>
+  </div>
+</li>
+<hr class="sidebar-divider">

@@ -1,0 +1,242 @@
+[
+  {
+    "group": "",
+    "details": [
+      {
+        "title": "Domov",
+        "icon": "fas fa-home",
+        "route": {
+          "main": "/dashboard/home",
+          "sub": []
+        }
+      }
+    ]
+  },
+  {
+    "group": "Služby",
+    "details": [
+      {
+        "title": "Používatelia",
+        "icon": "fas fa-users",
+        "route": {
+          "main": "#",
+          "sub": [
+            {
+              "title": "Zoznam",
+              "route": "/dashboard/services/users"
+            },
+            {
+              "title": "Hľadať",
+              "route": "/dashboard/services/users/search"
+            },
+            {
+              "title": "Nový",
+              "route": "/dashboard/services/users/new"
+            }
+          ]
+        }
+      },
+      {
+        "title": "Zásielky",
+        "icon": "fas fa-shipping-fast",
+        "route": {
+          "main": "#",
+          "sub": [
+            {
+              "title": "Zoznam",
+              "route": "/dashboard/services/shipments"
+            },
+            {
+              "title": "Hľadať",
+              "route": "/dashboard/services/shipments/search"
+            },
+            {
+              "title": "Nový",
+              "route": "/dashboard/services/shipments/new"
+            }
+          ]
+        }
+      },
+      {
+        "title": "Balíky",
+        "icon": "fas fa-boxes",
+        "route": {
+          "main": "#",
+          "sub": [
+            {
+              "title": "Zoznam",
+              "route": "/dashboard/services/parcels"
+            },
+            {
+              "title": "Hľadať",
+              "route": "/dashboard/services/parcels/search"
+            },
+            {
+              "title": "Nový",
+              "route": "/dashboard/services/parcels/new"
+            }
+          ]
+        }
+      },
+      {
+        "title": "Kommunikácia",
+        "icon": "fas fa-comments",
+        "route": {
+          "main": "#",
+          "sub": [
+            {
+              "title": "Zoznam",
+              "route": "/dashboard/services/messages"
+            },
+            {
+              "title": "Hľadať",
+              "route": "/dashboard/services/messages/search"
+            },
+            {
+              "title": "Nový",
+              "route": "/dashboard/services/messages/new"
+            }
+          ]
+        }
+      },
+      {
+        "title": "Krajiny",
+        "icon": "fas fa-globe",
+        "route": {
+          "main": "#",
+          "sub": [
+            {
+              "title": "Zoznam",
+              "route": "/dashboard/services/places"
+            },
+            {
+              "title": "Hľadať",
+              "route": "/dashboard/services/places/search"
+            },
+            {
+              "title": "Nový",
+              "route": "/dashboard/services/places/new"
+            }
+          ]
+        }
+      },
+      {
+        "title": "Sklady",
+        "icon": "fas fa-warehouse",
+        "route": {
+          "main": "#",
+          "sub": [
+            {
+              "title": "Zoznam",
+              "route": "/dashboard/services/warehouses"
+            },
+            {
+              "title": "Hľadať",
+              "route": "/dashboard/services/warehouses/search"
+            },
+            {
+              "title": "Nový",
+              "route": "/dashboard/services/warehouses/new"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "group": "Analýza",
+    "details": [
+      {
+        "title": "Grafy",
+        "icon": "fas fa-chart-pie",
+        "route": {
+          "main": "#",
+          "sub": [
+            {
+              "title": "Poživatelia",
+              "route": "/dashboard/services/graph/users"
+            },
+            {
+              "title": "Zásielky",
+              "route": "/dashboard/services/graph/shipments"
+            },
+            {
+              "title": "Balíky",
+              "route": "/dashboard/services/graph/parcels"
+            },
+            {
+              "title": "Kommunikacia",
+              "route": "/dashboard/services/graph/messages"
+            },
+            {
+              "title": "Krajiny",
+              "route": "/dashboard/services/graph/places"
+            },
+            {
+              "title": "Sklady",
+              "route": "/dashboard/services/graph/warehouses"
+            }
+          ]
+        }
+      },
+      {
+        "title": "Profit",
+        "icon": "fas fa-money-bill-alt",
+        "route": {
+          "main": "#",
+          "sub": [
+            {
+              "title": "Aktuálny",
+              "route": "/dashboard/services/profit/current"
+            },
+            {
+              "title": "Editovať",
+              "route": "/dashboard/services/profit/current"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "group": "Aplikácia",
+    "details": [
+      {
+        "title": "Zipkin",
+        "icon": "fas fa-chart-bar",
+        "group": "Aplikácia",
+        "route": {
+          "main": "/dashboard/services/internal/zipkin",
+          "sub": []
+        }
+      },
+      {
+        "title": "Eureka",
+        "icon": "fas fa-server",
+        "group": "Aplikácia",
+        "route": {
+          "main": "/dashboard/services/internal/eureka",
+          "sub": []
+        }
+      },
+      {
+        "title": "Stripe",
+        "icon": "fab fa-stripe-s",
+        "group": "Aplikácia",
+        "route": {
+          "main": "/dashboard/services/external/stripe",
+          "sub": []
+        }
+      },
+      {
+        "title": "Firebase",
+        "icon": "fas fa-fire",
+        "group": "Aplikácia",
+        "route": {
+          "main": "/dashboard/services/external/firebase",
+          "sub": []
+        }
+      }
+    ]
+  }
+]

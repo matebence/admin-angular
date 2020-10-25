@@ -9,13 +9,9 @@ import {HomePage} from './pages/home/home.page';
 import {UsersPage} from './pages/users/users.page';
 import {GraphPage} from './pages/graph/graph.page';
 import {ProfitPage} from './pages/profit/profit.page';
-import {EurekaPage} from './pages/eureka/eureka.page';
-import {ZipkinPage} from './pages/zipkin/zipkin.page';
-import {StripePage} from './pages/stripe/stripe.page';
 import {PlacesPage} from './pages/places/places.page';
 import {ProfilePage} from './pages/profile/profile.page';
 import {ParcelsPage} from './pages/parcels/parcels.page';
-import {FirebasePage} from './pages/firebase/firebase.page';
 import {VehiclesPage} from './pages/vehicles/vehicles.page';
 import {MessagesPage} from './pages/messages/messages.page';
 import {ShipmentsPage} from './pages/shipments/shipments.page';
@@ -107,14 +103,46 @@ const routes: Routes = [
         },
         {
           path: 'internal', children: [
-          {path: 'eureka', component: EurekaPage},
-          {path: 'zipkin', component: ZipkinPage},
+          {
+            path: 'eureka',
+            resolve: {
+              url: 'externalUrlRedirectResolver'
+            },
+            data: {
+              externalUrl: 'http://192.168.99.100:8761'
+            }
+          },
+          {
+            path: 'zipkin',
+            resolve: {
+              url: 'externalUrlRedirectResolver'
+            },
+            data: {
+              externalUrl: 'http://192.168.99.100:9411'
+            }
+          }
         ]
         },
         {
           path: 'external', children: [
-          {path: 'stripe', component: StripePage},
-          {path: 'firebase', component: FirebasePage}
+          {
+            path: 'stripe',
+            resolve: {
+              url: 'externalUrlRedirectResolver'
+            },
+            data: {
+              externalUrl: 'https://dashboard.stripe.com/login'
+            }
+          },
+          {
+            path: 'firebase',
+            resolve: {
+              url: 'externalUrlRedirectResolver'
+            },
+            data: {
+              externalUrl: 'https://firebase.google.com/'
+            }
+          }
         ]
         }
       ]

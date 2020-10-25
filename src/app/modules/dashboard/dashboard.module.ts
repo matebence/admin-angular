@@ -1,18 +1,15 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
 
 import {DashboardPage} from './dashboard.page';
 import {HomePage} from './pages/home/home.page';
 import {GraphPage} from './pages/graph/graph.page';
 import {UsersPage} from './pages/users/users.page';
 import {ProfitPage} from './pages/profit/profit.page';
-import {EurekaPage} from './pages/eureka/eureka.page';
-import {ZipkinPage} from './pages/zipkin/zipkin.page';
-import {StripePage} from './pages/stripe/stripe.page';
 import {PlacesPage} from './pages/places/places.page';
 import {ParcelsPage} from './pages/parcels/parcels.page';
 import {ProfilePage} from './pages/profile/profile.page';
-import {FirebasePage} from './pages/firebase/firebase.page';
 import {MessagesPage} from './pages/messages/messages.page';
 import {VehiclesPage} from './pages/vehicles/vehicles.page';
 import {ShipmentsPage} from './pages/shipments/shipments.page';
@@ -56,13 +53,9 @@ import {DashboardRoutingModule} from './dashboard-routing.module';
     GraphPage,
     UsersPage,
     PlacesPage,
-    EurekaPage,
-    ZipkinPage,
     ProfitPage,
-    StripePage,
     ProfilePage,
     ParcelsPage,
-    FirebasePage,
     MessagesPage,
     VehiclesPage,
     DashboardPage,
@@ -82,7 +75,8 @@ import {DashboardRoutingModule} from './dashboard-routing.module';
     VehicleService,
     ShipmentService,
     MessagingService,
-    WarehouseService
+    WarehouseService,
+    {provide: 'externalUrlRedirectResolver', useValue: (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {window.open((route.data as any).externalUrl);}}
   ]
 })
 export class DashboardModule {
