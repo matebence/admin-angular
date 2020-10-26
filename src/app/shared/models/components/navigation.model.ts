@@ -6,6 +6,7 @@ export interface Navigation {
 export interface Details {
   title: string,
   icon?: string,
+  authorities?: string[],
   route?: Route
 }
 

@@ -2,29 +2,35 @@
   {{group}}
 </div>
 <li
-  *ngFor="let details of details; let i = index"
+  *ngFor="let detail of details; let j = index"
   routerLinkActive="active"
   [routerLinkActiveOptions]="{exact: true}"
   class="nav-item">
   <a
     class="nav-link collapsed"
-    [href]="details.route.main"
+    [href]="detail.route.main"
     data-toggle="collapse"
-    [attr.data-target]="'#' + details.title.replace(' ', '')"
+    [attr.data-target]="'#' + detail.title.replace(' ', '')"
     aria-expanded="true"
-    [attr.aria-controls]="details.title.replace(' ', '')">
-    <i [class]="details.icon"></i>
-    <span>{{details.title}}</span>
+    [attr.aria-controls]="detail.title.replace(' ', '')">
+    <i [class]="detail.icon"></i>
+    <span>{{detail.title}}</span>
   </a>
   <div
-    *ngIf="details.route.sub.length !== 0"
-    [id]="details.title.replace(' ', '')"
+    *ngIf="detail.route.sub.length !== 0"
+    [id]="detail.title.replace(' ', '')"
     class="collapse"
-    [attr.aria-labelledby]="details.title.replace(' ', '')"
+    [attr.aria-labelledby]="detail.title.replace(' ', '')"
     data-parent="#accordionSidebar">
     <div class="bg-white py-2 collapse-inner rounded">
       <h6 class="collapse-header">Možnosti:</h6>
-      <a *ngFor="let detail of details.route.sub; let i = index" class="collapse-item" [routerLink]="detail.route.main">{{detail.title}}</a>
+      <span
+        *ngFor="let nav of detail.route.sub; let k = index">
+        <a
+          *ngIf="onShowNavigationOption(nav)"
+          class="collapse-item"
+          [routerLink]="nav.route.main">{{nav.title}}</a>
+      </span>
     </div>
   </div>
 </li>

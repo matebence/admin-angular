@@ -18,4 +18,12 @@ export class NavItemComponent implements OnInit {
   public ngOnInit(): void {
     return;
   }
+
+  public onShowNavigationOption(details: Details): boolean {
+    if (details.hasOwnProperty('authorities')) {
+      return details.authorities.some(r => ['ROLE_MANAGER'].includes(r));
+    } else {
+      return false;
+    }
+  }
 }

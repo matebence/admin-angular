@@ -10,6 +10,10 @@
           "sub": [
             {
               "title": "Domov",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
               "route": {
                 "main": "/dashboard/home"
               }
@@ -30,18 +34,30 @@
           "sub": [
             {
               "title": "Zoznam",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
               "route": {
                 "main": "/dashboard/services/users"
               }
             },
             {
               "title": "Hľadať",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
               "route": {
                 "main": "/dashboard/services/users/search"
               }
             },
             {
               "title": "Nový",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
               "route": {
                 "main": "/dashboard/services/users/new"
               }
@@ -57,12 +73,20 @@
           "sub": [
             {
               "title": "Zoznam",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
               "route": {
                 "main": "/dashboard/services/shipments"
               }
             },
             {
               "title": "Hľadať",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
               "route": {
                 "main": "/dashboard/services/shipments/search"
               }
@@ -84,18 +108,30 @@
           "sub": [
             {
               "title": "Zoznam",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
               "route": {
                 "main": "/dashboard/services/parcels"
               }
             },
             {
               "title": "Hľadať",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
               "route": {
                 "main": "/dashboard/services/parcels/search"
               }
             },
             {
               "title": "Nový",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
               "route": {
                 "main": "/dashboard/services/parcels/new"
               }
@@ -111,18 +147,30 @@
           "sub": [
             {
               "title": "Zoznam",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
               "route": {
                 "main": "/dashboard/services/messages"
               }
             },
             {
               "title": "Hľadať",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
               "route": {
                 "main": "/dashboard/services/messages/search"
               }
             },
             {
               "title": "Nový",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
               "route": {
                 "main": "/dashboard/services/messages/new"
               }
@@ -138,18 +186,29 @@
           "sub": [
             {
               "title": "Zoznam",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
               "route": {
                 "main": "/dashboard/services/places"
               }
             },
             {
               "title": "Hľadať",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
               "route": {
                 "main": "/dashboard/services/places/search"
               }
             },
             {
               "title": "Nový",
+              "authorities": [
+                "ROLE_ADMIN"
+              ],
               "route": {
                 "main": "/dashboard/services/places/new"
               }
@@ -165,18 +224,29 @@
           "sub": [
             {
               "title": "Zoznam",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
               "route": {
                 "main": "/dashboard/services/warehouses"
               }
             },
             {
               "title": "Hľadať",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
               "route": {
                 "main": "/dashboard/services/warehouses/search"
               }
             },
             {
               "title": "Nový",
+              "authorities": [
+                "ROLE_ADMIN"
+              ],
               "route": {
                 "main": "/dashboard/services/warehouses/new"
               }
@@ -197,36 +267,60 @@
           "sub": [
             {
               "title": "Použivatelia",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
               "route": {
                 "main": "/dashboard/services/graph/users"
               }
             },
             {
               "title": "Zásielky",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
               "route": {
                 "main": "/dashboard/services/graph/shipments"
               }
             },
             {
               "title": "Balíky",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
               "route": {
                 "main": "/dashboard/services/graph/parcels"
               }
             },
             {
               "title": "Kommunikacia",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
               "route": {
                 "main": "/dashboard/services/graph/messages"
               }
             },
             {
               "title": "Krajiny",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
               "route": {
                 "main": "/dashboard/services/graph/places"
               }
             },
             {
               "title": "Sklady",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
               "route": {
                 "main": "/dashboard/services/graph/warehouses"
               }
@@ -242,12 +336,19 @@
           "sub": [
             {
               "title": "Aktuálny",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
               "route": {
                 "main": "/dashboard/services/profit/current"
               }
             },
             {
               "title": "Editovať",
+              "authorities": [
+                "ROLE_ADMIN"
+              ],
               "route": {
                 "main": "/dashboard/services/profit/current"
               }
@@ -268,6 +369,9 @@
           "sub": [
             {
               "title": "Otvoriť",
+              "authorities": [
+                "ROLE_ADMIN"
+              ],
               "route": {
                 "main": "/dashboard/services/internal/zipkin"
               }
@@ -283,6 +387,9 @@
           "sub": [
             {
               "title": "Otvoriť",
+              "authorities": [
+                "ROLE_ADMIN"
+              ],
               "route": {
                 "main": "/dashboard/services/internal/eureka"
               }
@@ -298,6 +405,9 @@
           "sub": [
             {
               "title": "Otvoriť",
+              "authorities": [
+                "ROLE_ADMIN"
+              ],
               "route": {
                 "main": "/dashboard/services/external/stripe"
               }
@@ -313,6 +423,9 @@
           "sub": [
             {
               "title": "Otvoriť",
+              "authorities": [
+                "ROLE_ADMIN"
+              ],
               "route": {
                 "main": "/dashboard/services/external/firebase"
               }
