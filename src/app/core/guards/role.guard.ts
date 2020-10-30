@@ -1,35 +1,33 @@
-import JWTDecoder from 'jwt-decode';
 import {Injectable} from '@angular/core';
-import {Router, CanActivate, ActivatedRouteSnapshot} from '@angular/router';
+import {CanActivate, CanActivateChild, Router} from '@angular/router';
 
 import {environment} from '../../../environments/environment';
 
-import {SignIn} from '../../shared/models/services/account/account.model';
+import {RouteDataTransport} from '../../shared/models/router/router.model';
 
-import {PersistenceService} from '../services/persistence-service/persistence.service';
+import {SecurityService} from '../../modules/dashboard/services/security-service/security.service';
 
 @Injectable()
-export class RoleGuard implements CanActivate {
+export class RoleGuard implements CanActivate, CanActivateChild {
 
   public constructor(private router: Router,
-                     private persistenceService: PersistenceService) {
+                     private securityService: SecurityService) {
   }
 
-  public canActivate(route: ActivatedRouteSnapshot): boolean {
-    const result: boolean = this.isInRole(route);
-    if (!result) {
-      this.router.navigate(['/dashboard/home']);
-      this.persistenceService.clear();
-      return result;
+  public canActivate(routeDataTransport: RouteDataTransport): boolean {
+    if (this.securityService.isInRole(routeDataTransport.data.roles)) {
+      return true;
+    } else {
+      if (this.securityService.isInRole([environment.APP_ROLE_MANAGER, environment.APP_ROLE_ADMIN])) {
+        this.router.navigate(['/dashboard/home']);
+      } else {
+        this.router.navigate(['/auth/sign-out']);
+      }
+      return false;
     }
-    return result;
   }
 
-  protected isInRole(route: ActivatedRouteSnapshot): boolean {
-    const signIn = <SignIn> this.persistenceService.get(environment.LOCAL_STORAGE_ACCOUNT_DATA);
-    const accessToken: string = signIn.access_token;
-    const tokenPayload = JWTDecoder(accessToken);
-
-    return route.data.roles.some(r => tokenPayload.authorities.includes(r));
+  public canActivateChild(routeDataTransport: RouteDataTransport): boolean {
+    return this.canActivate(routeDataTransport)
   }
 }

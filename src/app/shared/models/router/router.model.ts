@@ -16,3 +16,11 @@ export interface RouterModel {
   getAll?: RouterPath,
   search?: RouterPath,
 }
+
+export interface RouteDataTransport {
+  data: RouterData
+}
+
+export interface RouterData {
+  roles?: string[]
+}

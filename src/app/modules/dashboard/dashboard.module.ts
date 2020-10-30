@@ -61,7 +61,7 @@ import {DashboardRoutingModule} from './dashboard-routing.module';
     VehiclesPage,
     DashboardPage,
     ShipmentsPage,
-    WarehousesPage,
+    WarehousesPage
   ],
   imports: [
     FormsModule,
@@ -78,7 +78,11 @@ import {DashboardRoutingModule} from './dashboard-routing.module';
     ShipmentService,
     MessagingService,
     WarehouseService,
-    {provide: 'externalUrlRedirectResolver', useValue: (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {window.open((route.data as any).externalUrl);}}
+    {
+      provide: 'externalUrlRedirectResolver', useValue: (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+      window.open((route.data as any).externalUrl);
+    }
+    }
   ]
 })
 export class DashboardModule {

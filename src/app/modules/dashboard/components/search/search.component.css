@@ -36,7 +36,8 @@ form div.input-group-append ul.autocomplete li.autocomplete-item a {
   color: #6e707e;
 }
 
-form div.input-group-append ul.autocomplete li.autocomplete-item:hover {
+form div.input-group-append ul.autocomplete li.autocomplete-item:hover,
+form div.input-group-append ul.autocomplete li.autocomplete-item.keyNavigation {
   cursor: pointer;
   background: #e7e8eb !important;
 }

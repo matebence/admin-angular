@@ -66,10 +66,8 @@ export class AuthorizationService extends BaseService {
       .post(url, httpParams)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: SignIn) => {
-        this.setSignInData(data);
-
+        this.setSignInData({...data, remain: remain, expirationDate: new Date(new Date().getTime() + data.expires_in * 1000)});
         this.persistenceService.set(environment.LOCAL_STORAGE_ACCOUNT_DATA, this.getSignInData());
-        this.persistenceService.append(environment.LOCAL_STORAGE_ACCOUNT_DATA, {remain: remain, expirationDate: new Date(new Date().getTime() + data.expires_in * 1000)});
 
         return subject.next(true);
       });

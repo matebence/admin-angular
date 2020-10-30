@@ -16,7 +16,6 @@ export interface Route {
 }
 
 export interface NavigationResult {
-  group: Navigation[] | string,
-  title: Details[] | string,
-  action: Details[]
+  result: string,
+  route?: string
 }

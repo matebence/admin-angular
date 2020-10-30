@@ -93,6 +93,10 @@
             },
             {
               "title": "Nový",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
               "route": {
                 "main": "/dashboard/services/shipments/new"
               }

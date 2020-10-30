@@ -8,6 +8,7 @@ import {ErrorPage} from './error/error.page';
 
 import {BaseService} from './services/base.service';
 import {PersistenceService} from './services/persistence-service/persistence.service';
+import {SecurityService} from '../modules/dashboard/services/security-service/security.service';
 import {AuthorizationService} from '../modules/authentication/services/authorization-server/authorization.service';
 
 import {TypeInterceptor} from './interceptors/type.interceptor';
@@ -40,6 +41,7 @@ import {CoreRoutingModule} from './core-routing.module';
     RoleGuard,
 
     BaseService,
+    SecurityService,
     PersistenceService,
 
     RouteFilter,

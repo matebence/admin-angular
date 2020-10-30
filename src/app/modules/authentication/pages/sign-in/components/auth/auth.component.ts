@@ -23,7 +23,7 @@ export class AuthComponent implements OnInit, OnDestroy {
         updateOn: 'change'
       }),
       password: new FormControl(null, {
-        validators: [Validators.pattern('(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?:.{8}|.{30})'), Validators.required],
+        // validators: [Validators.pattern('(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?:.{8}|.{30})'), Validators.required],
         updateOn: 'change'
       })
     }),
@@ -59,7 +59,7 @@ export class AuthComponent implements OnInit, OnDestroy {
       this.authorizationService
         .OAuth2Password(userName, password, remain)
         .subscribe((result: Boolean) => {
-          console.log(result);
+          if (!result) return;
           this.formGroup.reset();
           this.router.navigate(['/dashboard/home']);
         })
