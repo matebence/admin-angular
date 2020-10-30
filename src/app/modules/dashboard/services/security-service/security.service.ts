@@ -29,6 +29,11 @@ export class SecurityService extends BaseService {
     return signIn.user_name;
   }
 
+  public getAccountId(): number {
+    const signIn = <SignIn> this.persistenceService.get(environment.LOCAL_STORAGE_ACCOUNT_DATA);
+    return signIn.account_id;
+  }
+
   public getAuthorities(): string[] {
     const signIn = <SignIn> this.persistenceService.get(environment.LOCAL_STORAGE_ACCOUNT_DATA);
     const jwt: any = JWTDecoder(signIn.access_token);

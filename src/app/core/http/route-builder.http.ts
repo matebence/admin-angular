@@ -4,12 +4,12 @@ import routeConfig from '../../configs/routes.config.json';
 
 import {environment} from '../../../environments/environment';
 
-import {RouterModel, RouterPath, RouterService} from '../../shared/models/router/router.model';
+import {RouterModel, RouterAction, RouterService} from '../../shared/models/router/router.model';
 
 @Injectable()
 export class RouteBuilder {
 
-  private routerPath: RouterPath;
+  private routerPath: string;
   private routerModel: RouterModel;
   private routerService: RouterService;
   private routerHost: string = routeConfig.gateway.value.replace(`{host}`, environment.HOST_BLESK);
@@ -28,16 +28,17 @@ export class RouteBuilder {
   }
 
   public action(action: string): this {
-    this.routerPath = this.routerModel[action];
+    const routerAction: RouterAction = this.routerModel[action];
+    this.routerPath = routerAction.value;
     return this;
   }
 
   public params(params: Object[]): this {
-    params.forEach(e => {this.routerPath.value = this.routerPath.value.replace(`{${Object.keys(e).toString()}}`, Object.values(e).toString())});
+    params.forEach(e => {this.routerPath = this.routerPath.replace(`{${Object.keys(e).toString()}}`, Object.values(e).toString())});
     return this
   }
 
   public build(): string {
-    return `${this.routerHost}${this.routerService.value}${this.routerPath.value}`;
+    return `${this.routerHost}${this.routerService.value}${this.routerPath}`;
   }
 }

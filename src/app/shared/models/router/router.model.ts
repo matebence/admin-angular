@@ -1,20 +1,5 @@
-export interface RouterPath {
+export interface RouterAction {
   value: string
-}
-
-export interface RouterService {
-  value: string,
-  models: RouterPath
-}
-
-export interface RouterModel {
-  get: RouterPath,
-  update: RouterPath,
-  join?: RouterPath
-  create?: RouterPath,
-  delete?: RouterPath,
-  getAll?: RouterPath,
-  search?: RouterPath,
 }
 
 export interface RouteDataTransport {
@@ -23,4 +8,19 @@ export interface RouteDataTransport {
 
 export interface RouterData {
   roles?: string[]
+}
+
+export interface RouterService {
+  value: string,
+  models: RouterAction
+}
+
+export interface RouterModel {
+  get: RouterAction,
+  update: RouterAction,
+  join?: RouterAction
+  create?: RouterAction,
+  delete?: RouterAction,
+  getAll?: RouterAction,
+  search?: RouterAction,
 }

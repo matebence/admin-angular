@@ -53,6 +53,7 @@ export class SearchComponent implements OnInit {
         element[this.selectedIndex].classList.add('keyNavigation');
       }
     }
+    return;
   }
 
   public onSelectedResult(result: NavigationResult): void {
@@ -70,6 +71,7 @@ export class SearchComponent implements OnInit {
 
     this.keyWord = segments.filter(e => e.length > 0).join(':');
     if (result.route !== '') this.router.navigate([result.route]);
+    return;
   }
 
   public onAutoComplete(): void {
@@ -78,27 +80,35 @@ export class SearchComponent implements OnInit {
       if (this.keyWord.length === index) return;
       const segments: string[] = this.keyWord.split(':');
       const navigation: Navigation[] = navigationConfig.filter(e => e.group.toLowerCase().includes(segments[index].toLowerCase()));
-      this.searchResult = navigation.map(e => {return {result: e.group, route: ''}});
+      this.searchResult = navigation.map(e => {
+        return {result: e.group, route: ''}
+      });
 
       index++;
 
       if (segments.length < index + 1) return;
       const details: Details[] = navigation.pop().details.filter(e => e.title.toLowerCase().includes(segments[index].toLowerCase()));
-      this.searchResult = details.map(e => {return {result: e.title, route: ''}});
+      this.searchResult = details.map(e => {
+        return {result: e.title, route: ''}
+      });
 
       index++;
 
       if (segments.length < index + 1) return;
       const action: Details[] = details.pop().route.sub.filter(e => e.title.toLowerCase().includes(segments[index].toLowerCase()) && this.securityService.isInRole(e.authorities));
-      this.searchResult = action.map(e => {return {result: e.title, route: e.route.main}});
+      this.searchResult = action.map(e => {
+        return {result: e.title, route: e.route.main}
+      });
     } catch (e) {
       this.searchResult = []
     }
+    return;
   }
 
   private onClearSearchResult(): void {
     this.selectedIndex = -1;
     this.searchResult = [];
     this.keyWord = null;
+    return;
   }
 }
