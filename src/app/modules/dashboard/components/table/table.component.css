@@ -1,0 +1,4 @@
+div.card.mb-4 {
+  overflow: auto;
+  height: calc(100vh - 10rem);
+}

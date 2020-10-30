@@ -8196,7 +8196,7 @@ button.bg-dark:focus {
 
 .mb-4,
 .my-4 {
-  margin-bottom: 1.5rem !important;
+  margin-bottom: 1rem !important;
 }
 
 .ml-4,
@@ -10633,11 +10633,6 @@ a:focus {
   flex: 1 0 auto;
 }
 
-.container, .container-fluid, .container-sm, .container-md, .container-lg, .container-xl {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-}
-
 .scroll-to-top {
   position: fixed;
   right: 1rem;
@@ -12091,7 +12086,7 @@ form.auth .btn-login {
 }
 
 footer.sticky-footer {
-  padding: 2rem 0;
+  padding: 1rem 0;
   flex-shrink: 0;
 }
 
