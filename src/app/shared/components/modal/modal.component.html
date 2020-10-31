@@ -1,4 +1,4 @@
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" [id]="id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -10,9 +10,23 @@
       </div>
       <div class="modal-body">{{text}}</div>
       <div class="modal-footer">
-        <button class="btn btn-secondary" type="button" data-dismiss="modal" (click)="onNegativeButtonClick()">{{negativeButton}}</button>
-        <button appLinkHover colorInput="#ffffff" colorHoverInput="#ffffff" backgroundInput="#176c9d"
-                backgroundHoverInput="#1796dc" class="btn btn-primary" type="button" data-dismiss="modal" (click)="onPozitiveButtonClick()">
+        <button
+          class="btn btn-secondary"
+          type="button"
+          data-dismiss="modal"
+          (click)="onNegativeButtonClick()">
+          {{negativeButton}}
+        </button>
+        <button
+          appLinkHover
+          colorInput="#ffffff"
+          colorHoverInput="#ffffff"
+          backgroundInput="#176c9d"
+          backgroundHoverInput="#1796dc"
+          class="btn btn-primary"
+          type="button"
+          data-dismiss="modal"
+          (click)="onPozitiveButtonClick()">
           {{pozitiveButton}}
         </button>
       </div>

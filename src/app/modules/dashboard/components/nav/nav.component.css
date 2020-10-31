@@ -11,3 +11,9 @@ ul.navbar-nav.bg-gradient-primary.sidebar.sidebar-dark.accordion.toggled#accordi
     width: 4rem;
   }
 }
+
+@media (max-width: 767px) {
+  ul.navbar-nav.bg-gradient-primary.sidebar.sidebar-dark.accordion#accordionSidebar {
+    height: 100%;
+  }
+}

@@ -9,12 +9,14 @@ export class ModalComponent implements OnInit {
 
   @Output('onModalEvent') public onButtonClick = new EventEmitter<boolean>();
 
+  @Input('modalId') public id: string;
   @Input('modalText') public text: string;
   @Input('modalTitle') public title: string;
   @Input('modalNegativeButton') public negativeButton: string;
   @Input('modalPozitiveButton') public pozitiveButton: string;
 
-  public constructor() { }
+  public constructor() {
+  }
 
   public ngOnInit(): void {
     return;

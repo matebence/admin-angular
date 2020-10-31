@@ -1,0 +1,25 @@
+{
+  "pager": {
+    "display": true,
+    "perPage": 20
+  },
+  "actions": {
+    "columnTitle": "Možnosti"
+  },
+  "add": {
+    "addButtonContent": "<i class='fas fa-plus-square'></i>",
+    "createButtonContent": "<i class='fas fa-check-square'></i>",
+    "cancelButtonContent": "<i class='fas fa-window-close'></i>",
+    "confirmCreate": true
+  },
+  "edit": {
+    "editButtonContent": "<i class='fas fa-edit'></i>",
+    "saveButtonContent": "<i class='fas fa-check-square'></i>",
+    "cancelButtonContent": "<i class='fas fa-window-close'></i>",
+    "confirmSave": true
+  },
+  "delete": {
+    "deleteButtonContent": "<i class='fas fa-minus-square'></i>",
+    "confirmDelete": true
+  }
+}

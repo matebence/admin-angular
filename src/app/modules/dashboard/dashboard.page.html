@@ -19,6 +19,7 @@
   </div>
   <app-modal
     (onModalEvent)="onModalResult($event)"
+    [modalId]="'logoutModal'"
     [modalTitle]="title"
     [modalText]="text"
     [modalNegativeButton]="negativeButton"

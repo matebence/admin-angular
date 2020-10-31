@@ -1,6 +1,6 @@
 <div class="card mb-4">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+    <h6 class="m-0 font-weight-bold text-primary">{{header}}</h6>
   </div>
   <div class="card-body">
     <div class="table-responsive">
@@ -12,8 +12,15 @@
         (deleteConfirm)="onDeleteConfirm($event)"
         (editConfirm)="onSaveConfirm($event)"
         [settings]="settings"
-        [source]="data">
+        [source]="source">
       </ng2-smart-table>
     </div>
   </div>
 </div>
+<app-modal
+  (onModalEvent)="onModalResult($event)"
+  [modalId]="'tableModal'"
+  [modalTitle]="title"
+  [modalText]="text"
+  [modalNegativeButton]="negativeButton"
+  [modalPozitiveButton]="pozitiveButton"></app-modal>
