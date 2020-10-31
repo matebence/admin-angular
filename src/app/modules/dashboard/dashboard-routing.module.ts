@@ -6,18 +6,37 @@ import {RoleGuard} from '../../core/guards/role.guard';
 
 import {environment} from '../../../environments/environment';
 
+import {UsersComponent} from './pages/user/components/users/users.component';
+import {RolesComponent} from './pages/account/components/roles/roles.component';
+import {TypesComponent} from './pages/vehicle/components/types/types.component';
+import {GendersComponent} from './pages/user/components/genders/genders.component';
+import {PayoutsComponent} from './pages/user/components/payouts/payouts.component';
+import {StatusComponent} from './pages/shipment/components/status/status.component';
+import {RegionsComponent} from './pages/place/components/regions/regions.component';
+import {RatingsComponent} from './pages/parcel/components/ratings/ratings.component';
+import {ParcelsComponent} from './pages/parcel/components/parcels/parcels.component';
+import {PaymentsComponent} from './pages/user/components/payments/payments.component';
+import {VillagesComponent} from './pages/place/components/villages/villages.component';
+import {AccountsComponent} from './pages/account/components/accounts/accounts.component';
+import {VehiclesComponent} from './pages/vehicle/components/vehicles/vehicles.component';
+import {DistrictsComponent} from './pages/place/components/districts/districts.component';
+import {InvoicesComponent} from './pages/shipment/components/invoices/invoices.component';
+import {ShipmentsComponent} from './pages/shipment/components/shipments/shipments.component';
+import {CategoriesComponent} from './pages/parcel/components/categories/categories.component';
+import {PrivilegesComponent} from './pages/account/components/privileges/privileges.component';
+import {PreferencesComponent} from './pages/account/components/preferences/preferences.component';
+
 import {DashboardPage} from './dashboard.page';
 import {HomePage} from './pages/home/home.page';
-import {UsersPage} from './pages/users/users.page';
+import {UserPage} from './pages/user/user.page';
 import {GraphPage} from './pages/graph/graph.page';
-import {ProfitPage} from './pages/profit/profit.page';
-import {PlacesPage} from './pages/places/places.page';
+import {PlacePage} from './pages/place/place.page';
+import {ParcelPage} from './pages/parcel/parcel.page';
 import {ProfilePage} from './pages/profile/profile.page';
-import {ParcelsPage} from './pages/parcels/parcels.page';
-import {VehiclesPage} from './pages/vehicles/vehicles.page';
-import {MessagesPage} from './pages/messages/messages.page';
-import {ShipmentsPage} from './pages/shipments/shipments.page';
-import {WarehousesPage} from './pages/warehouses/warehouses.page';
+import {CompanyPage} from './pages/company/company.page';
+import {VehiclePage} from './pages/vehicle/vehicle.page';
+import {AccountPage} from './pages/account/account.page';
+import {ShipmentPage} from './pages/shipment/shipment.page';
 
 const routes: Routes = [
   {
@@ -42,163 +61,154 @@ const routes: Routes = [
         children: [
           {
             path: 'users',
-            component: UsersPage,
+            component: UserPage,
             data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
             children: [
               {
-                path: 'new',
+                path: 'table',
+                component: UsersComponent,
                 data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
               },
               {
-                path: 'edit/:id',
+                path: 'table/payouts',
+                component: PayoutsComponent,
                 data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
               },
               {
-                path: 'remove/:id',
+                path: 'table/payments',
+                component: PaymentsComponent,
                 data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
               },
               {
-                path: 'search',
+                path: 'table/genders',
+                component: GendersComponent,
+                data: {roles: [environment.APP_ROLE_ADMIN]},
+              }
+            ]
+          },
+          {
+            path: 'accounts',
+            component: AccountPage,
+            data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
+            children: [
+              {
+                path: 'table',
+                component: AccountsComponent,
                 data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
+              },
+              {
+                path: 'table/preferences',
+                component: PreferencesComponent,
+                data: {roles: [environment.APP_ROLE_ADMIN]},
+              },
+              {
+                path: 'table/privileges',
+                component: PrivilegesComponent,
+                data: {roles: [environment.APP_ROLE_ADMIN]},
+              },
+              {
+                path: 'table/roles',
+                component: RolesComponent,
+                data: {roles: [environment.APP_ROLE_ADMIN]},
+              }
+            ]
+          },
+          {
+            path: 'shipments',
+            component: ShipmentPage,
+            data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
+            children: [
+              {
+                path: 'table',
+                component: ShipmentsComponent,
+                data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
+              },
+              {
+                path: 'table/invoices',
+                component: InvoicesComponent,
+                data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
+              },
+              {
+                path: 'table/status',
+                component: StatusComponent,
+                data: {roles: [environment.APP_ROLE_ADMIN]},
+              }
+            ]
+          },
+          {
+            path: 'parcels',
+            component: ParcelPage,
+            data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
+            children: [
+              {
+                path: 'table',
+                component: ParcelsComponent,
+                data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
+              },
+              {
+                path: 'table/ratings',
+                component: RatingsComponent,
+                data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
+              },
+              {
+                path: 'table/categories',
+                component: CategoriesComponent,
+                data: {roles: [environment.APP_ROLE_ADMIN]},
               },
             ]
           },
           {
             path: 'places',
-            component: PlacesPage,
+            component: PlacePage,
             data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
             children: [
               {
-                path: 'new',
+                path: 'table/regions',
+                component: RegionsComponent,
                 data: {roles: [environment.APP_ROLE_ADMIN]},
               },
               {
-                path: 'edit/:id',
-                data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
+                path: 'table/districts',
+                component: DistrictsComponent,
+                data: {roles: [environment.APP_ROLE_ADMIN]},
               },
               {
-                path: 'remove/:id',
-                data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
-              },
-              {
-                path: 'search',
-                data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
-              },
-            ]
-          },
-          {
-            path: 'parcels',
-            component: ParcelsPage,
-            data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
-            children: [
-              {
-                path: 'new',
-                data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
-              },
-              {
-                path: 'edit/:id',
-                data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
-              },
-              {
-                path: 'remove/:id',
-                data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
-              },
-              {
-                path: 'search',
-                data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
-              },
+                path: 'table/villages',
+                component: VillagesComponent,
+                data: {roles: [environment.APP_ROLE_ADMIN]},
+              }
             ]
           },
           {
             path: 'vehicles',
-            component: VehiclesPage,
+            component: VehiclePage,
             data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
             children: [
               {
-                path: 'new',
+                path: 'table',
+                component: VehiclesComponent,
                 data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
               },
               {
-                path: 'edit/:id',
-                data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
-              },
-              {
-                path: 'remove/:id',
-                data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
-              },
-              {
-                path: 'search',
-                data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
-              },
+                path: 'table/types',
+                component: TypesComponent,
+                data: {roles: [environment.APP_ROLE_ADMIN]},
+              }
             ]
           },
           {
-            path: 'messages',
-            component: MessagesPage,
+            path: 'company',
+            component: CompanyPage,
             data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
             children: [
               {
-                path: 'new',
-                data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
-              },
-              {
-                path: 'edit/:id',
-                data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
-              },
-              {
-                path: 'remove/:id',
-                data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
-              },
-              {
-                path: 'search',
-                data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
-              },
-            ]
-          },
-          {
-            path: 'shipments',
-            component: ShipmentsPage,
-            data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
-            children: [
-              {
-                path: 'new',
-                data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
-              },
-              {
-                path: 'edit/:id',
-                data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
-              },
-              {
-                path: 'remove/:id',
-                data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
-              },
-              {
-                path: 'search',
-                data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
-              },
-            ]
-          },
-          {
-            path: 'warehouses',
-            component: WarehousesPage,
-            data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
-            children: [
-              {
-                path: 'new',
+                path: 'profit',
                 data: {roles: [environment.APP_ROLE_ADMIN]},
               },
               {
-                path: 'edit/:id',
-                data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
-              },
-              {
-                path: 'remove/:id',
-                data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
-              },
-              {
-                path: 'search',
-                data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
-              },
+                path: 'warehouses',
+                data: {roles: [environment.APP_ROLE_ADMIN]},
+              }
             ]
           },
           {
@@ -229,21 +239,6 @@ const routes: Routes = [
               {
                 path: 'warehouses',
                 data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
-              }
-            ]
-          },
-          {
-            path: 'profit',
-            component: ProfitPage,
-            data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
-            children: [
-              {
-                path: 'current',
-                data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]}
-              },
-              {
-                path: 'edit',
-                data: {roles: [environment.APP_ROLE_ADMIN]}
               }
             ]
           },

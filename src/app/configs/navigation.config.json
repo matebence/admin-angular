@@ -1,6 +1,6 @@
 [
   {
-    "group": "Blesk",
+    "group": "Domov",
     "details": [
       {
         "title": "Ovládací panel",
@@ -9,13 +9,32 @@
           "main": "#",
           "sub": [
             {
-              "title": "Domov",
+              "title": "Zobraziť",
               "authorities": [
                 "ROLE_ADMIN",
                 "ROLE_MANAGER"
               ],
               "route": {
                 "main": "/dashboard/home"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "title": "Používateľské konto",
+        "icon": "fas fa-user-circle",
+        "route": {
+          "main": "#",
+          "sub": [
+            {
+              "title": "Zobraziť",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
+              "route": {
+                "main": "/dashboard/profile"
               }
             }
           ]
@@ -39,27 +58,82 @@
                 "ROLE_MANAGER"
               ],
               "route": {
-                "main": "/dashboard/services/users"
+                "main": "/dashboard/services/users/table"
               }
             },
             {
-              "title": "Hľadať",
+              "title": "Výplaty",
               "authorities": [
                 "ROLE_ADMIN",
                 "ROLE_MANAGER"
               ],
               "route": {
-                "main": "/dashboard/services/users/search"
+                "main": "/dashboard/services/users/table/payouts"
               }
             },
             {
-              "title": "Nový",
+              "title": "Platby",
               "authorities": [
                 "ROLE_ADMIN",
                 "ROLE_MANAGER"
               ],
               "route": {
-                "main": "/dashboard/services/users/new"
+                "main": "/dashboard/services/users/table/payments"
+              }
+            },
+            {
+              "title": "Pohlavia",
+              "authorities": [
+                "ROLE_ADMIN"
+              ],
+              "route": {
+                "main": "/dashboard/services/users/table/genders"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "title": "Kontá",
+        "icon": "fas fa-id-card",
+        "route": {
+          "main": "#",
+          "sub": [
+            {
+              "title": "Zoznam",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
+              "route": {
+                "main": "/dashboard/services/accounts/table"
+              }
+            },
+            {
+              "title": "Preferencie",
+              "authorities": [
+                "ROLE_ADMIN"
+              ],
+              "route": {
+                "main": "/dashboard/services/accounts/table/preferences"
+              }
+            },
+            {
+              "title": "Privilégia",
+              "authorities": [
+                "ROLE_ADMIN"
+              ],
+              "route": {
+                "main": "/dashboard/services/accounts/table/privileges"
+              }
+            },
+            {
+              "title": "Role",
+              "authorities": [
+                "ROLE_ADMIN"
+              ],
+              "route": {
+                "main": "/dashboard/services/accounts/table/roles"
               }
             }
           ]
@@ -78,27 +152,26 @@
                 "ROLE_MANAGER"
               ],
               "route": {
-                "main": "/dashboard/services/shipments"
+                "main": "/dashboard/services/shipments/table"
               }
             },
             {
-              "title": "Hľadať",
+              "title": "Faktúry",
               "authorities": [
                 "ROLE_ADMIN",
                 "ROLE_MANAGER"
               ],
               "route": {
-                "main": "/dashboard/services/shipments/search"
+                "main": "/dashboard/services/shipments/table/invoices"
               }
             },
             {
-              "title": "Nový",
+              "title": "Statusy",
               "authorities": [
-                "ROLE_ADMIN",
-                "ROLE_MANAGER"
+                "ROLE_ADMIN"
               ],
               "route": {
-                "main": "/dashboard/services/shipments/new"
+                "main": "/dashboard/services/shipments/table/status"
               }
             }
           ]
@@ -117,66 +190,26 @@
                 "ROLE_MANAGER"
               ],
               "route": {
-                "main": "/dashboard/services/parcels"
+                "main": "/dashboard/services/parcels/table"
               }
             },
             {
-              "title": "Hľadať",
+              "title": "Kategórie",
               "authorities": [
-                "ROLE_ADMIN",
-                "ROLE_MANAGER"
+                "ROLE_ADMIN"
               ],
               "route": {
-                "main": "/dashboard/services/parcels/search"
+                "main": "/dashboard/services/parcels/table/categories"
               }
             },
             {
-              "title": "Nový",
+              "title": "Ohodnotenia",
               "authorities": [
                 "ROLE_ADMIN",
                 "ROLE_MANAGER"
               ],
               "route": {
-                "main": "/dashboard/services/parcels/new"
-              }
-            }
-          ]
-        }
-      },
-      {
-        "title": "Kommunikácia",
-        "icon": "fas fa-comments",
-        "route": {
-          "main": "#",
-          "sub": [
-            {
-              "title": "Zoznam",
-              "authorities": [
-                "ROLE_ADMIN",
-                "ROLE_MANAGER"
-              ],
-              "route": {
-                "main": "/dashboard/services/messages"
-              }
-            },
-            {
-              "title": "Hľadať",
-              "authorities": [
-                "ROLE_ADMIN",
-                "ROLE_MANAGER"
-              ],
-              "route": {
-                "main": "/dashboard/services/messages/search"
-              }
-            },
-            {
-              "title": "Nový",
-              "authorities": [
-                "ROLE_ADMIN",
-                "ROLE_MANAGER"
-              ],
-              "route": {
-                "main": "/dashboard/services/messages/new"
+                "main": "/dashboard/services/parcels/table/ratings"
               }
             }
           ]
@@ -189,32 +222,81 @@
           "main": "#",
           "sub": [
             {
+              "title": "Kraje",
+              "authorities": [
+                "ROLE_ADMIN"
+              ],
+              "route": {
+                "main": "/dashboard/services/places/table/regions"
+              }
+            },
+            {
+              "title": "Okresy",
+              "authorities": [
+                "ROLE_ADMIN"
+              ],
+              "route": {
+                "main": "/dashboard/services/places/table/districts"
+              }
+            },
+            {
+              "title": "Mestá a obce",
+              "authorities": [
+                "ROLE_ADMIN"
+              ],
+              "route": {
+                "main": "/dashboard/services/places/table/villages"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "title": "Vozidlá",
+        "icon": "fas fa-car",
+        "route": {
+          "main": "#",
+          "sub": [
+            {
               "title": "Zoznam",
               "authorities": [
                 "ROLE_ADMIN",
                 "ROLE_MANAGER"
               ],
               "route": {
-                "main": "/dashboard/services/places"
+                "main": "/dashboard/services/vehicles/table"
               }
             },
             {
-              "title": "Hľadať",
-              "authorities": [
-                "ROLE_ADMIN",
-                "ROLE_MANAGER"
-              ],
-              "route": {
-                "main": "/dashboard/services/places/search"
-              }
-            },
-            {
-              "title": "Nový",
+              "title": "Typy",
               "authorities": [
                 "ROLE_ADMIN"
               ],
               "route": {
-                "main": "/dashboard/services/places/new"
+                "main": "/dashboard/services/vehicles/table/types"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "group": "Firma",
+    "details": [
+      {
+        "title": "Profit",
+        "icon": "fas fa-money-bill-alt",
+        "route": {
+          "main": "#",
+          "sub": [
+            {
+              "title": "Nastaviť",
+              "authorities": [
+                "ROLE_ADMIN"
+              ],
+              "route": {
+                "main": "/dashboard/services/company/profit"
               }
             }
           ]
@@ -227,32 +309,12 @@
           "main": "#",
           "sub": [
             {
-              "title": "Zoznam",
-              "authorities": [
-                "ROLE_ADMIN",
-                "ROLE_MANAGER"
-              ],
-              "route": {
-                "main": "/dashboard/services/warehouses"
-              }
-            },
-            {
-              "title": "Hľadať",
-              "authorities": [
-                "ROLE_ADMIN",
-                "ROLE_MANAGER"
-              ],
-              "route": {
-                "main": "/dashboard/services/warehouses/search"
-              }
-            },
-            {
-              "title": "Nový",
+              "title": "Nastaviť",
               "authorities": [
                 "ROLE_ADMIN"
               ],
               "route": {
-                "main": "/dashboard/services/warehouses/new"
+                "main": "/dashboard/services/company/warehouses"
               }
             }
           ]
@@ -280,6 +342,16 @@
               }
             },
             {
+              "title": "Kontá",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
+              "route": {
+                "main": "/dashboard/services/graph/accounts"
+              }
+            },
+            {
               "title": "Zásielky",
               "authorities": [
                 "ROLE_ADMIN",
@@ -300,16 +372,6 @@
               }
             },
             {
-              "title": "Kommunikacia",
-              "authorities": [
-                "ROLE_ADMIN",
-                "ROLE_MANAGER"
-              ],
-              "route": {
-                "main": "/dashboard/services/graph/messages"
-              }
-            },
-            {
               "title": "Krajiny",
               "authorities": [
                 "ROLE_ADMIN",
@@ -320,41 +382,13 @@
               }
             },
             {
-              "title": "Sklady",
+              "title": "Vozidlá",
               "authorities": [
                 "ROLE_ADMIN",
                 "ROLE_MANAGER"
               ],
               "route": {
-                "main": "/dashboard/services/graph/warehouses"
-              }
-            }
-          ]
-        }
-      },
-      {
-        "title": "Profit",
-        "icon": "fas fa-money-bill-alt",
-        "route": {
-          "main": "#",
-          "sub": [
-            {
-              "title": "Aktuálny",
-              "authorities": [
-                "ROLE_ADMIN",
-                "ROLE_MANAGER"
-              ],
-              "route": {
-                "main": "/dashboard/services/profit/current"
-              }
-            },
-            {
-              "title": "Editovať",
-              "authorities": [
-                "ROLE_ADMIN"
-              ],
-              "route": {
-                "main": "/dashboard/services/profit/current"
+                "main": "/dashboard/services/graph/vehicles"
               }
             }
           ]
