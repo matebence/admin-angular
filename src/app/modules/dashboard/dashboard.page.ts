@@ -22,7 +22,7 @@ export class DashboardPage implements OnInit {
     return;
   }
 
-  public onToogleResult(status: boolean): void {
+  public onNavEvent(status: boolean): void {
     this.toggle = status;
     return;
   }

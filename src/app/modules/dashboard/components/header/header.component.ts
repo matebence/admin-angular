@@ -7,7 +7,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  @Output('onNavEvent') public onToogle = new EventEmitter<boolean>();
+  @Output('navEvent') public onToogle = new EventEmitter<boolean>();
 
   @Input('navToogle') public toggle: boolean;
 

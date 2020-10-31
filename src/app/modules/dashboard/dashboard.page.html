@@ -6,7 +6,7 @@
     <div id="content-wrapper" class="d-flex flex-column">
       <div id="content">
         <app-header
-          (onNavEvent)="onToogleResult($event)"
+          (navEvent)="onNavEvent($event)"
           [navToogle]="toggle">
         </app-header>
         <div class="container-fluid">
@@ -18,7 +18,7 @@
     </div>
   </div>
   <app-modal
-    (onModalEvent)="onModalResult($event)"
+    (modalResult)="onModalResult($event)"
     [modalId]="'logoutModal'"
     [modalTitle]="title"
     [modalText]="text"
