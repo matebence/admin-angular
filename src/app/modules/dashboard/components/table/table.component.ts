@@ -1,7 +1,4 @@
-declare const $: any;
-
-import {LocalDataSource} from 'ng2-smart-table';
-
+import {Row} from 'ng2-smart-table/lib/lib/data-set/row';
 import {Component, Input, OnInit, ViewEncapsulation, EventEmitter, Output} from '@angular/core';
 
 @Component({
@@ -12,18 +9,13 @@ import {Component, Input, OnInit, ViewEncapsulation, EventEmitter, Output} from 
 })
 export class TableComponent implements OnInit {
 
-  @Output('tableResult') public onTableAction = new EventEmitter<LocalDataSource>();
+  @Output('tableEditData') public editData = new EventEmitter<Row>();
+  @Output('tableDeleteData') public deleteData = new EventEmitter<Row>();
+  @Output('tableCreateData') public createData = new EventEmitter<Boolean>();
 
   @Input('tableSource') public source: any;
   @Input('tableHeader') public header: string;
   @Input('tableSettings') public settings: any;
-
-  private event: any;
-
-  public text: string;
-  public title: string;
-  public negativeButton: string;
-  public pozitiveButton: string;
 
   public constructor() {
   }
@@ -32,43 +24,18 @@ export class TableComponent implements OnInit {
     return;
   }
 
-  public onCreateConfirm(event): void {
-    $('#tableModal').modal('show');
-    this.event = event;
-    this.text = 'Vytvorenie položky je potrebné potrvdiť';
-    this.title = 'Vytvorenie';
-    this.negativeButton = 'Zrušiť';
-    this.pozitiveButton = 'Áno, vytvoriť';
+  public onCreate(): void {
+    this.createData.emit(true);
     return;
   }
 
-  public onDeleteConfirm(event): void {
-    $('#tableModal').modal('show');
-    this.event = event;
-    this.text = 'Naozaj chcete odstrániť položku?';
-    this.title = 'Odstránenie';
-    this.negativeButton = 'Zrušiť';
-    this.pozitiveButton = 'Áno, odstrániť';
+  public onDelete(row: Row): void {
+    this.deleteData.emit(row);
     return;
   }
 
-  public onSaveConfirm(event): void {
-    $('#tableModal').modal('show');
-    this.event = event;
-    this.text = 'Uplatnenie zmien je potrebné potvrdiť';
-    this.title = 'Editovanie';
-    this.negativeButton = 'Zrušiť';
-    this.pozitiveButton = 'Potvrdiť';
-    return;
-  }
-
-  public onModalResult(event): void {
-    if (event) {
-      this.onTableAction.emit(this.event);
-      this.event.confirm.resolve();
-    } else {
-      this.event.confirm.reject();
-    }
+  public onEdit(row: Row): void {
+    this.editData.emit(row);
     return;
   }
 }

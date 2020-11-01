@@ -14,7 +14,7 @@ import {PersistenceService} from '../../../../core/services/persistence-service/
 export class SignOutPage implements OnInit, OnDestroy {
 
   public signOut: SignOut;
-  public subscriptions: Subscription[] = [];
+  private subscriptions: Subscription[] = [];
 
   public constructor(private persistenceService: PersistenceService,
                      private authorizationService: AuthorizationService) {

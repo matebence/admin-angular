@@ -1,16 +1,15 @@
-import {CellEditorComponent} from "../../../../components/table/table-cell/cell-editor/cell-editor.component";
 declare const $: any;
 
 import {Subscription} from 'rxjs/index';
 import {LocalDataSource} from 'ng2-smart-table';
+import {Row} from 'ng2-smart-table/lib/lib/data-set/row';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 
-import tableConfig from '../../../../../../configs/table.config.json';
+import userTableConfig from '../../../../../../configs/js/table.user.config.js';
 
 import {User} from '../../../../../../shared/models/services/user/user.model';
 
 import {UserService} from '../../../../services/user-service/user.service';
-import {TableCellComponent} from "../../../../components/table/table-cell/table-cell.component";
 
 @Component({
   selector: 'app-users',
@@ -24,58 +23,12 @@ export class UsersComponent implements OnInit, OnDestroy {
   public negativeButton: string;
   public pozitiveButton: string;
 
+  private row: Row;
   public source: LocalDataSource;
   public header: string = 'Používatelia';
+  private subscriptions: Subscription[] = [];
 
-  public subscriptions: Subscription[] = [];
-
-  public settings: any = {
-    ...tableConfig,
-    columns: {
-      userId: {
-        title: 'ID',
-        addable: false,
-        editable: false
-      },
-      accountId: {
-        title: 'ID používateľa'
-      },
-      email: {
-        title: 'Email',
-        addable: false,
-        editable: false
-      },
-      userName: {
-        title: 'Používateľské meno',
-        addable: false,
-        editable: false
-      },
-      places: {
-        title: 'Miesto',
-        type: 'custom',
-        renderComponent: TableCellComponent,
-        editor: {
-          type: 'custom',
-          component: CellEditorComponent,
-        }
-      },
-      firstName: {
-        title: 'Meno'
-      },
-      lastName: {
-        title: 'Priezvisko'
-      },
-      gender: {
-        title: 'Pohlavie'
-      },
-      balance: {
-        title: 'Zostatok'
-      },
-      tel: {
-        title: 'Tel. číslo'
-      }
-    }
-  };
+  public settings: any = userTableConfig;
 
   public constructor(private userService: UserService) {
   }
@@ -87,8 +40,9 @@ export class UsersComponent implements OnInit, OnDestroy {
           $('#userModal').modal('show');
           this.title = 'Chyba';
           this.text = error.message;
-          this.negativeButton = 'Zatvoriť';
-          this.pozitiveButton = 'Synchronizovať zoznam';
+          this.negativeButton = 'Zrušiť';
+          this.pozitiveButton = 'Zatvoriť';
+          this.row = null;
         })
     );
 
@@ -108,28 +62,34 @@ export class UsersComponent implements OnInit, OnDestroy {
     return;
   }
 
-  public onTableResult(event: any): void {
-    this.subscriptions.push(event.source.onAddedSource.subscribe(this.onDataAdded.bind(this)));
-    this.subscriptions.push(event.source.onUpdatedSource.subscribe(this.onDataUpdated.bind(this)));
-    this.subscriptions.push(event.source.onRemovedSource.subscribe(this.onDataRemoved.bind(this)));
+  public onTableCreateData(row: Boolean): void {
     return;
   }
 
-  public onModalResult(event): void {
-    if (event) this.userService.getAll(1, 100);
+  public onTableDeleteData(row: Row): void {
+    $('#userModal').modal('show');
+    this.text = 'Naozaj chcete odstrániť položku?';
+    this.title = 'Odstránenie';
+    this.negativeButton = 'Zrušiť';
+    this.pozitiveButton = 'Áno, odstrániť';
+
+    this.row = row;
     return;
   }
 
-  private onDataAdded(data: User): void {
+  public onTableEditData(row: Row): void {
+    this.row = row;
     return;
   }
 
-  private onDataUpdated(data: User): void {
-    return;
-  }
-
-  private onDataRemoved(data: User): void {
-    this.userService.delete(data.accountId);
+  public onModalResult(event: Boolean): void {
+    if (!event || this.row == null) return;
+    setTimeout(() => this.userService.delete(this.row.data.accountId)
+      .subscribe(result => {
+        if (!result) return;
+        this.source.remove(this.row.getData());
+        this.row = null;
+      }), 1000);
     return;
   }
 }

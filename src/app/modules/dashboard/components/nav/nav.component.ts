@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 
-import navigationConfig from '../../../../configs/navigation.config.json'
+import navigationConfig from '../../../../configs/json/navigation.config.json'
 
 import {Navigation} from '../../../../shared/models/components/navigation.model';
 

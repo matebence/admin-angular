@@ -1,5 +1,7 @@
 <app-table
-  (tableResult)="onTableResult($event)"
+  (tableCreateData)="onTableCreateData($event)"
+  (tableDeleteData)="onTableDeleteData($event)"
+  (tableEditData)="onTableEditData($event)"
   [tableHeader]="header"
   [tableSettings]="settings"
   [tableSource]="source"></app-table>

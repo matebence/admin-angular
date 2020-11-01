@@ -1,7 +1,6 @@
 import {Subscription} from 'rxjs/index';
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 
-import {Error} from '../../../../shared/models/error/error.model';
 import {User} from '../../../../shared/models/services/user/user.model';
 
 import {UserService} from '../../services/user-service/user.service';
@@ -14,9 +13,8 @@ import {SecurityService} from '../../services/security-service/security.service'
 })
 export class BarComponent implements OnInit, OnDestroy {
 
-  public error: Error;
   public user: User;
-  public subscriptions: Subscription[] = [];
+  private subscriptions: Subscription[] = [];
 
   @Input('navToogle') public toggle: boolean;
 
@@ -26,17 +24,8 @@ export class BarComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.subscriptions.push(
-      this.userService.errorDataObservable
-        .subscribe((error: Error) => {
-          this.error = error;
-          this.user = null;
-        })
-    );
-
-    this.subscriptions.push(
       this.userService.getDataObservable
         .subscribe((user: User) => {
-          this.error = null;
           this.user = user;
         })
     );

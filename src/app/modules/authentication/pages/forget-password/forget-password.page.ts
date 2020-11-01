@@ -17,7 +17,7 @@ export class ForgetPasswordPage implements OnInit, OnDestroy {
 
   public error: Error;
   public recover: Recover;
-  public subscriptions: Subscription[] = [];
+  private subscriptions: Subscription[] = [];
 
   public constructor(private router: Router,
                      private activatedRoute: ActivatedRoute,

@@ -14,7 +14,7 @@ import {AuthorizationService} from '../../../../services/authorization-server/au
 export class AuthComponent implements OnInit, OnDestroy {
 
   public error: Error;
-  public subscriptions: Subscription[] = [];
+  private subscriptions: Subscription[] = [];
 
   public formGroup: FormGroup = new FormGroup({
     user: new FormGroup({

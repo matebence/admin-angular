@@ -13,7 +13,7 @@ import {AuthorizationService} from '../../../../services/authorization-server/au
 export class ResetComponent implements OnInit, OnDestroy {
 
   public forgetPassword: ForgetPassword;
-  public subscriptions: Subscription[] = [];
+  private subscriptions: Subscription[] = [];
 
   public formGroup: FormGroup = new FormGroup({
     user: new FormGroup({
