@@ -12,12 +12,10 @@ export class HateoasInterceptor implements HttpInterceptor {
   public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req)
       .pipe(map((event: HttpEvent<any>) => {
-          if (event instanceof HttpResponse && event.body.hasOwnProperty('_embedded')) {
-            let clone: HttpResponse = event.clone();
+          if (event instanceof HttpResponse && event.body != null && event.body.hasOwnProperty('_embedded')) {
             if (event.body._embedded.hasOwnProperty('usersList')) {
-              clone.body = event.body._embedded.usersList;
+              return event.clone({body: event.body._embedded.usersList});
             }
-            return clone;
           }
           return event;
         })

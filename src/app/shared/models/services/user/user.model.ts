@@ -4,22 +4,7 @@ export interface User {
   userName: string,
   email: string,
   accountId: number,
-  places: {
-    '@id': number,
-    placeId: number,
-    users: number,
-    country: string,
-    region: string,
-    district: string,
-    place: string,
-    street: string,
-    zip: number,
-    code: string,
-    createdAt: Date,
-    updatedAt: Date,
-    deletedAt: Date,
-    deleted: boolean
-  },
+  places: Place,
   firstName: string,
   lastName: string,
   gender: string,
@@ -33,6 +18,23 @@ export interface User {
   payment: Payment,
   deleted: boolean,
   '_links': Hateoas
+}
+
+export interface Place {
+  '@id': number,
+  placeId: number,
+  users: number,
+  country: string,
+  region: string,
+  district: string,
+  place: string,
+  street: string,
+  zip: number,
+  code: string,
+  createdAt: Date,
+  updatedAt: Date,
+  deletedAt: Date,
+  deleted: boolean
 }
 
 export interface Payout {

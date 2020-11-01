@@ -1,4 +1,12 @@
 <app-table
+  (tableResult)="onTableResult($event)"
   [tableHeader]="header"
   [tableSettings]="settings"
   [tableSource]="source"></app-table>
+<app-modal
+  (modalResult)="onModalResult($event)"
+  [modalId]="'userModal'"
+  [modalTitle]="title"
+  [modalText]="text"
+  [modalNegativeButton]="negativeButton"
+  [modalPozitiveButton]="pozitiveButton"></app-modal>

@@ -13,7 +13,7 @@ import {RouteBuilder} from '../../../../core/http/route-builder.http';
 export class UserService extends BaseService {
 
   private getData: User = null;
-  private getAllData: User = null;
+  private getAllData: User[] = null;
 
   public getDataObservable: EventEmitter<User> = new EventEmitter<User>();
   public getAllDataObservable: EventEmitter<User[]> = new EventEmitter<User[]>();
@@ -21,6 +21,24 @@ export class UserService extends BaseService {
   public constructor(private requestHttp: RequestHTTP,
                      private routeBuilder: RouteBuilder,) {
     super();
+  }
+
+  public delete(id: number) {
+    const subject = new Subject<Boolean>();
+    const url = this.routeBuilder
+      .service('user-service')
+      .model('users')
+      .action('delete')
+      .params([{id: id}])
+      .build();
+
+    this.requestHttp
+      .delete(url)
+      .pipe(catchError(super.handleError.bind(this)))
+      .subscribe(() => {
+        return subject.next(true);
+      });
+    return subject.asObservable();
   }
 
   public get(id: number) {
@@ -80,6 +98,6 @@ export class UserService extends BaseService {
   }
 
   public getGetAllData(): User[] {
-    return Object.assign({}, this.getAllData);
+    return Object.assign([], this.getAllData);
   }
 }

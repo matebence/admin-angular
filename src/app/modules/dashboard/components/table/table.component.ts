@@ -1,6 +1,8 @@
 declare const $: any;
 
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {LocalDataSource} from 'ng2-smart-table';
+
+import {Component, Input, OnInit, ViewEncapsulation, EventEmitter, Output} from '@angular/core';
 
 @Component({
   selector: 'app-table',
@@ -9,6 +11,8 @@ import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
   encapsulation: ViewEncapsulation.None
 })
 export class TableComponent implements OnInit {
+
+  @Output('tableResult') public onTableAction = new EventEmitter<LocalDataSource>();
 
   @Input('tableSource') public source: any;
   @Input('tableHeader') public header: string;
@@ -35,6 +39,7 @@ export class TableComponent implements OnInit {
     this.title = 'Vytvorenie';
     this.negativeButton = 'Zrušiť';
     this.pozitiveButton = 'Áno, vytvoriť';
+    return;
   }
 
   public onDeleteConfirm(event): void {
@@ -44,6 +49,7 @@ export class TableComponent implements OnInit {
     this.title = 'Odstránenie';
     this.negativeButton = 'Zrušiť';
     this.pozitiveButton = 'Áno, odstrániť';
+    return;
   }
 
   public onSaveConfirm(event): void {
@@ -53,13 +59,16 @@ export class TableComponent implements OnInit {
     this.title = 'Editovanie';
     this.negativeButton = 'Zrušiť';
     this.pozitiveButton = 'Potvrdiť';
+    return;
   }
 
   public onModalResult(event): void {
     if (event) {
+      this.onTableAction.emit(this.event);
       this.event.confirm.resolve();
     } else {
       this.event.confirm.reject();
     }
+    return;
   }
 }

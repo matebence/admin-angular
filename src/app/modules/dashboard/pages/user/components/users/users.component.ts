@@ -1,3 +1,5 @@
+declare const $: any;
+
 import {Subscription} from 'rxjs/index';
 import {LocalDataSource} from 'ng2-smart-table';
 import {Component, OnDestroy, OnInit} from '@angular/core';
@@ -15,47 +17,45 @@ import {UserService} from '../../../../services/user-service/user.service';
 })
 export class UsersComponent implements OnInit, OnDestroy {
 
+  public text: string;
+  public title: string;
+  public negativeButton: string;
+  public pozitiveButton: string;
+
+  public source: LocalDataSource;
+  public header: string = 'Používatelia';
+
+  public subscriptions: Subscription[] = [];
+
   public settings: any = {
     ...tableConfig,
     columns: {
       userId: {
-        title: 'ID konta'
+        title: 'ID',
+        addable: false,
+        editable: false
       },
       accountId: {
         title: 'ID používateľa'
       },
       email: {
-        editable: false,
+        title: 'Email',
         addable: false,
-        title: 'Email'
+        editable: false
       },
       userName: {
-        editable: false,
+        title: 'Používateľské meno',
         addable: false,
-        title: 'Používateľské meno'
+        editable: false
       },
-      country: {
-        title: 'Štát',
-        valuePrepareFunction: (cell, row) => {
-          return row.places.country;
-        }
-      },
-      region: {
-        title: 'Kraj',
-        valuePrepareFunction: (cell, row) => {
-          return row.places.region;
-        }
-      },
-      district: {
-        title: 'Okres',
-        valuePrepareFunction: (cell, row) => {
-          return row.places.district;
-        }
-      },
-      zip: {
-        title: 'PSČ',
-        valuePrepareFunction: (cell, row) => {
-          return row.places.zip;
+      places: {
+        title: 'Miesto',
+        valuePrepareFunction: (places) => {
+          return `${places.country}, ${places.region}, ${places.district}`;
+        },
+        editor: {
+          type: 'custom',
+          component: TableEditorComponent,
         }
       },
       firstName: {
@@ -76,11 +76,6 @@ export class UsersComponent implements OnInit, OnDestroy {
     }
   };
 
-  public error: Error;
-  public source: any = LocalDataSource;
-  public header: string = 'Používatelia';
-  public subscriptions: Subscription[] = [];
-
   public constructor(private userService: UserService) {
   }
 
@@ -88,16 +83,18 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.userService.errorDataObservable
         .subscribe((error: Error) => {
-          this.error = error;
-          this.user = null;
+          $('#userModal').modal('show');
+          this.title = 'Chyba';
+          this.text = error.message;
+          this.negativeButton = 'Zatvoriť';
+          this.pozitiveButton = 'Synchronizovať zoznam';
         })
     );
 
     this.subscriptions.push(
       this.userService.getAllDataObservable
         .subscribe((users: User[]) => {
-          this.error = null;
-          this.source = new LocalDataSource(Object.values(users));
+          this.source = new LocalDataSource(users);
         })
     );
 
@@ -107,6 +104,31 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.subscriptions.forEach(e => e.unsubscribe());
+    return;
+  }
+
+  public onTableResult(event: any): void {
+    this.subscriptions.push(event.source.onAddedSource.subscribe(this.onDataAdded.bind(this)));
+    this.subscriptions.push(event.source.onUpdatedSource.subscribe(this.onDataUpdated.bind(this)));
+    this.subscriptions.push(event.source.onRemovedSource.subscribe(this.onDataRemoved.bind(this)));
+    return;
+  }
+
+  public onModalResult(event): void {
+    if (event) this.userService.getAll(1, 100);
+    return;
+  }
+
+  private onDataAdded(data: User): void {
+    return;
+  }
+
+  private onDataUpdated(data: User): void {
+    return;
+  }
+
+  private onDataRemoved(data: User): void {
+    this.userService.delete(data.accountId);
     return;
   }
 }
