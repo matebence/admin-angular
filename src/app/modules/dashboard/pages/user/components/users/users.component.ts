@@ -1,3 +1,4 @@
+import {CellEditorComponent} from "../../../../components/table/table-cell/cell-editor/cell-editor.component";
 declare const $: any;
 
 import {Subscription} from 'rxjs/index';
@@ -9,6 +10,7 @@ import tableConfig from '../../../../../../configs/table.config.json';
 import {User} from '../../../../../../shared/models/services/user/user.model';
 
 import {UserService} from '../../../../services/user-service/user.service';
+import {TableCellComponent} from "../../../../components/table/table-cell/table-cell.component";
 
 @Component({
   selector: 'app-users',
@@ -50,8 +52,11 @@ export class UsersComponent implements OnInit, OnDestroy {
       },
       places: {
         title: 'Miesto',
-        valuePrepareFunction: (places) => {
-          return `${places.country}, ${places.region}, ${places.district}`;
+        type: 'custom',
+        renderComponent: TableCellComponent,
+        editor: {
+          type: 'custom',
+          component: CellEditorComponent,
         }
       },
       firstName: {

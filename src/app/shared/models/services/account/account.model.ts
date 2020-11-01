@@ -18,7 +18,6 @@ export interface SignUp {
   message: string,
   error: boolean,
   reason: Reason,
-  nav: Hateoas
 }
 
 export interface SignOut {
@@ -26,7 +25,6 @@ export interface SignOut {
   message: string,
   error: boolean,
   reason: Reason,
-  nav: Hateoas
 }
 
 export interface ForgetPassword {
@@ -34,7 +32,6 @@ export interface ForgetPassword {
   message: string,
   error: boolean,
   reason: Reason,
-  nav: Hateoas
 }
 
 export interface Recover {
@@ -42,7 +39,6 @@ export interface Recover {
   message: string,
   error: boolean,
   reason: Reason,
-  nav: Hateoas
 }
 
 export interface Activation {
@@ -50,12 +46,4 @@ export interface Activation {
   message: string,
   error: boolean,
   reason: Reason,
-  nav: Hateoas
-}
-
-export interface Hateoas {
-  signin?: string,
-  forgetpassword?: string,
-  signup?: string,
-  home?: string
 }

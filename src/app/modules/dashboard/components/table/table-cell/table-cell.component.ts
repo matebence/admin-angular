@@ -1,14 +1,16 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+
+import {ViewCell} from 'ng2-smart-table';
 
 @Component({
-  selector: 'app-table-cell',
   templateUrl: './table-cell.component.html',
-  styleUrls: ['./table-cell.component.css']
 })
-export class TableCellComponent implements OnInit {
+export class TableCellComponent implements ViewCell, OnInit {
 
-  public constructor() {
-  }
+  public attribute: string = 'country';
+
+  @Input() public value: any;
+  @Input() public rowData: any;
 
   public ngOnInit(): void {
     return;

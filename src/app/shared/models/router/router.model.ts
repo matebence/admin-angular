@@ -16,11 +16,11 @@ export interface RouterService {
 }
 
 export interface RouterModel {
-  get: RouterAction,
-  update: RouterAction,
-  join?: RouterAction
   create?: RouterAction,
+  update: RouterAction,
   delete?: RouterAction,
+  get: RouterAction,
   getAll?: RouterAction,
   search?: RouterAction,
+  join?: RouterAction
 }

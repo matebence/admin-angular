@@ -1,16 +1,26 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ViewChild, ElementRef, AfterViewInit} from '@angular/core';
+import {DefaultEditor} from 'ng2-smart-table';
 
 @Component({
-  selector: 'app-cell-editor',
   templateUrl: './cell-editor.component.html',
-  styleUrls: ['./cell-editor.component.css']
 })
-export class CellEditorComponent implements OnInit {
+export class CellEditorComponent extends DefaultEditor implements AfterViewInit {
 
-  public constructor() {
+  @ViewChild('name') name: ElementRef;
+
+  constructor() {
+    super();
   }
 
-  public ngOnInit(): void {
-    return;
+  ngAfterViewInit() {
+    if (this.cell.newValue !== '') {
+      this.name.nativeElement.value = this.cell.value.country;
+    }
+  }
+
+  updateValue() {
+    this.cell.value.country = this.name.nativeElement.value;
+    console.log(this.cell.value);
+    this.cell.newValue = this.cell.value;
   }
 }

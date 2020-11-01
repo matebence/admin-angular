@@ -1,0 +1,10 @@
+<input [ngClass]="inputClass"
+       #name
+       class="form-control short-input"
+       [name]="cell.getId()"
+       [disabled]="!cell.isEditable()"
+       [placeholder]="cell.getTitle()"
+       (click)="onClick.emit($event)"
+       (keyup)="updateValue()"
+       (keydown.enter)="onEdited.emit($event)"
+       (keydown.esc)="onStopEditing.emit()">
