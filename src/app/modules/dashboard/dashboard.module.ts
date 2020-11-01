@@ -42,8 +42,9 @@ import {RegionsComponent} from './pages/place/components/regions/regions.compone
 import {StatusComponent} from './pages/shipment/components/status/status.component';
 import {RatingsComponent} from './pages/parcel/components/ratings/ratings.component';
 import {ParcelsComponent} from './pages/parcel/components/parcels/parcels.component';
-import {VillagesComponent} from './pages/place/components/villages/villages.component';
 import {PaymentsComponent} from './pages/user/components/payments/payments.component';
+import {TableCellComponent} from './components/table/table-cell/table-cell.component';
+import {VillagesComponent} from './pages/place/components/villages/villages.component';
 import {VehiclesComponent} from './pages/vehicle/components/vehicles/vehicles.component';
 import {AccountsComponent} from './pages/account/components/accounts/accounts.component';
 import {DistrictsComponent} from './pages/place/components/districts/districts.component';
@@ -52,6 +53,7 @@ import {ShipmentsComponent} from './pages/shipment/components/shipments/shipment
 import {CategoriesComponent} from './pages/parcel/components/categories/categories.component';
 import {PrivilegesComponent} from './pages/account/components/privileges/privileges.component';
 import {PreferencesComponent} from './pages/account/components/preferences/preferences.component';
+import {CellEditorComponent} from './components/table/table-cell/cell-editor/cell-editor.component';
 
 import {SharedModule} from '../../shared/shared.module';
 import {DashboardRoutingModule} from './dashboard-routing.module';
@@ -82,6 +84,8 @@ import {DashboardRoutingModule} from './dashboard-routing.module';
     AccountsComponent,
     ShipmentsComponent,
     DistrictsComponent,
+    TableCellComponent,
+    CellEditorComponent,
     PrivilegesComponent,
     CategoriesComponent,
     PreferencesComponent,
@@ -114,7 +118,11 @@ import {DashboardRoutingModule} from './dashboard-routing.module';
     ShipmentService,
     MessagingService,
     WarehouseService,
-    {provide: 'externalUrlRedirectResolver', useValue: (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {window.open((route.data as any).externalUrl);}}
+    {
+      provide: 'externalUrlRedirectResolver', useValue: (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+      window.open((route.data as any).externalUrl);
+    }
+    }
   ]
 })
 export class DashboardModule {
