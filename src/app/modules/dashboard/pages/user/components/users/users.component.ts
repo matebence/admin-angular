@@ -52,10 +52,6 @@ export class UsersComponent implements OnInit, OnDestroy {
         title: 'Miesto',
         valuePrepareFunction: (places) => {
           return `${places.country}, ${places.region}, ${places.district}`;
-        },
-        editor: {
-          type: 'custom',
-          component: TableEditorComponent,
         }
       },
       firstName: {
