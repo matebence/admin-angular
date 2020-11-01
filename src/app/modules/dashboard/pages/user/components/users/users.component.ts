@@ -84,7 +84,7 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   public onModalResult(event: Boolean): void {
     if (!event || this.row == null) return;
-    setTimeout(() => this.userService.delete(this.row.data.accountId)
+    setTimeout(() => this.userService.delete(this.row.getData().accountId)
       .subscribe(result => {
         if (!result) return;
         this.source.remove(this.row.getData());
