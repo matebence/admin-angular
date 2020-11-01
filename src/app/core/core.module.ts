@@ -12,6 +12,7 @@ import {SecurityService} from '../modules/dashboard/services/security-service/se
 import {AuthorizationService} from '../modules/authentication/services/authorization-server/authorization.service';
 
 import {TypeInterceptor} from './interceptors/type.interceptor';
+import {HateoasInterceptor} from './interceptors/hateoas.interceptor';
 import {AuthorizationInterceptor} from './interceptors/authorization.interceptor';
 import {CredentialsExpirationInterceptor} from './interceptors/credentials-expiration.interceptor';
 
@@ -49,6 +50,7 @@ import {CoreRoutingModule} from './core-routing.module';
     RouteBuilder,
 
     {provide: HTTP_INTERCEPTORS, useClass: TypeInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: HateoasInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: AuthorizationInterceptor, multi: true, deps: [PersistenceService]},
     {provide: HTTP_INTERCEPTORS, useClass: CredentialsExpirationInterceptor, multi: true, deps: [Router, PersistenceService, AuthorizationService]}
   ],

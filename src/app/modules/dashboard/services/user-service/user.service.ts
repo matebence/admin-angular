@@ -12,9 +12,11 @@ import {RouteBuilder} from '../../../../core/http/route-builder.http';
 @Injectable()
 export class UserService extends BaseService {
 
-  private userData: User = null;
+  private getData: User = null;
+  private getAllData: User = null;
 
-  public userDataObservable: EventEmitter<User> = new EventEmitter<User>();
+  public getDataObservable: EventEmitter<User> = new EventEmitter<User>();
+  public getAllDataObservable: EventEmitter<User[]> = new EventEmitter<User[]>();
 
   public constructor(private requestHttp: RequestHTTP,
                      private routeBuilder: RouteBuilder,) {
@@ -35,19 +37,49 @@ export class UserService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: User) => {
 
-        this.setUserData(data);
+        this.setGetData(data);
         return subject.next(true);
       });
     return subject.asObservable();
   }
 
-  public setUserData(data: User): void {
-    this.userData = data;
-    this.userDataObservable.emit(this.getUserData());
+  public getAll(page: number, limit: number) {
+    const subject = new Subject<Boolean>();
+    const url = this.routeBuilder
+      .service('user-service')
+      .model('users')
+      .action('getAll')
+      .params([{page: page}, {limit: limit}])
+      .build();
+
+    this.requestHttp
+      .get(url)
+      .pipe(catchError(super.handleError.bind(this)))
+      .subscribe((data: User[]) => {
+
+        this.setGetAllData(data);
+        return subject.next(true);
+      });
+    return subject.asObservable();
+  }
+
+  public setGetData(data: User): void {
+    this.getData = data;
+    this.getDataObservable.emit(this.getGetData());
     return;
   }
 
-  public getUserData(): User {
-    return Object.assign({}, this.userData);
+  public getGetData(): User {
+    return Object.assign({}, this.getData);
+  }
+
+  public setGetAllData(data: User[]): void {
+    this.getAllData = data;
+    this.getAllDataObservable.emit(this.getGetAllData());
+    return;
+  }
+
+  public getGetAllData(): User[] {
+    return Object.assign({}, this.getAllData);
   }
 }

@@ -1,132 +1,112 @@
-import {Component, OnInit} from '@angular/core';
+import {Subscription} from 'rxjs/index';
+import {LocalDataSource} from 'ng2-smart-table';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 
 import tableConfig from '../../../../../../configs/table.config.json';
+
+import {User} from '../../../../../../shared/models/services/user/user.model';
+
+import {UserService} from '../../../../services/user-service/user.service';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent implements OnInit, OnDestroy {
 
-  header = 'Používatelia';
-
-  settings = {
+  public settings: any = {
     ...tableConfig,
     columns: {
-      id: {
-        title: 'ID'
+      userId: {
+        title: 'ID konta'
       },
-      name: {
-        title: 'Full Name',
-        defaultValue: 'Ervin Howell',
-        editor: {
-          type: 'list',
-          config: {
-            list: [
-              {value: 'Ervin Howell', title: 'Ervin Howell'},
-              {value: 'Leanne Graham', title: 'Leanne Graham'}
-            ],
-          },
-        }
-      },
-      username: {
-        title: 'User Name'
+      accountId: {
+        title: 'ID používateľa'
       },
       email: {
         editable: false,
         addable: false,
         title: 'Email'
+      },
+      userName: {
+        editable: false,
+        addable: false,
+        title: 'Používateľské meno'
+      },
+      country: {
+        title: 'Štát',
+        valuePrepareFunction: (cell, row) => {
+          return row.places.country;
+        }
+      },
+      region: {
+        title: 'Kraj',
+        valuePrepareFunction: (cell, row) => {
+          return row.places.region;
+        }
+      },
+      district: {
+        title: 'Okres',
+        valuePrepareFunction: (cell, row) => {
+          return row.places.district;
+        }
+      },
+      zip: {
+        title: 'PSČ',
+        valuePrepareFunction: (cell, row) => {
+          return row.places.zip;
+        }
+      },
+      firstName: {
+        title: 'Meno'
+      },
+      lastName: {
+        title: 'Priezvisko'
+      },
+      gender: {
+        title: 'Pohlavie'
+      },
+      balance: {
+        title: 'Zostatok'
+      },
+      tel: {
+        title: 'Tel. číslo'
       }
     }
   };
 
-  source = [
-    {
-      id: 1,
-      name: 'Leanne Graham',
-      username: 'Bret',
-      email: 'Sincere@april.biz'
-    },
-    {
-      id: 2,
-      name: 'Ervin Howell',
-      username: 'Antonette',
-      email: 'Shanna@melissa.tv'
-    },
-    {
-      id: 2,
-      name: 'Ervin Howell',
-      username: 'Antonette',
-      email: 'Shanna@melissa.tv'
-    },
-    {
-      id: 2,
-      name: 'Ervin Howell',
-      username: 'Antonette',
-      email: 'Shanna@melissa.tv'
-    },
-    {
-      id: 2,
-      name: 'Ervin Howell',
-      username: 'Antonette',
-      email: 'Shanna@melissa.tv'
-    },
-    {
-      id: 2,
-      name: 'Ervin Howell',
-      username: 'Antonette',
-      email: 'Shanna@melissa.tv'
-    },
-    {
-      id: 2,
-      name: 'Ervin Howell',
-      username: 'Antonette',
-      email: 'Shanna@melissa.tv'
-    },
-    {
-      id: 2,
-      name: 'Ervin Howell',
-      username: 'Antonette',
-      email: 'Shanna@melissa.tv'
-    },
-    {
-      id: 2,
-      name: 'Ervin Howell',
-      username: 'Antonette',
-      email: 'Shanna@melissa.tv'
-    },
-    {
-      id: 2,
-      name: 'Ervin Howell',
-      username: 'Antonette',
-      email: 'Shanna@melissa.tv'
-    },
-    {
-      id: 2,
-      name: 'Ervin Howell',
-      username: 'Antonette',
-      email: 'Shanna@melissa.tv'
-    },
-    {
-      id: 2,
-      name: 'Ervin Howell',
-      username: 'Antonette',
-      email: 'Shanna@melissa.tv'
-    },
+  public error: Error;
+  public source: any = LocalDataSource;
+  public header: string = 'Používatelia';
+  public subscriptions: Subscription[] = [];
 
-    {
-      id: 11,
-      name: 'Nicholas DuBuque',
-      username: 'Nicholas.Stanton',
-      email: 'Rey.Padberg@rosamond.biz'
-    }
-  ];
-
-  public constructor() {
+  public constructor(private userService: UserService) {
   }
 
   public ngOnInit(): void {
+    this.subscriptions.push(
+      this.userService.errorDataObservable
+        .subscribe((error: Error) => {
+          this.error = error;
+          this.user = null;
+        })
+    );
+
+    this.subscriptions.push(
+      this.userService.getAllDataObservable
+        .subscribe((users: User[]) => {
+          this.error = null;
+          this.source = new LocalDataSource(Object.values(users));
+        })
+    );
+
+    this.userService.getAll(1, 100);
+    return;
+  }
+
+  public ngOnDestroy(): void {
+    this.subscriptions.forEach(e => e.unsubscribe());
     return;
   }
 }

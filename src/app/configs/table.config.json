@@ -1,4 +1,5 @@
 {
+  "noDataMessage": "Nenašli sa žiadné dáta",
   "pager": {
     "display": true,
     "perPage": 20

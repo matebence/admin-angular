@@ -1,5 +1,5 @@
 import {Subscription} from 'rxjs/index';
-import {Component, Input, OnChanges, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 
 import {Error} from '../../../../shared/models/error/error.model';
 import {User} from '../../../../shared/models/services/user/user.model';
@@ -12,7 +12,7 @@ import {SecurityService} from '../../services/security-service/security.service'
   templateUrl: './bar.component.html',
   styleUrls: ['./bar.component.css']
 })
-export class BarComponent implements OnInit, OnDestroy, OnChanges {
+export class BarComponent implements OnInit, OnDestroy {
 
   public error: Error;
   public user: User;
@@ -34,16 +34,13 @@ export class BarComponent implements OnInit, OnDestroy, OnChanges {
     );
 
     this.subscriptions.push(
-      this.userService.userDataObservable
+      this.userService.getDataObservable
         .subscribe((user: User) => {
           this.error = null;
           this.user = user;
         })
     );
-    return;
-  }
 
-  public ngOnChanges(): void {
     this.userService.get(this.securityService.getAccountId());
     return;
   }
