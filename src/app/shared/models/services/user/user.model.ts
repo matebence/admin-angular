@@ -1,5 +1,5 @@
 import {Place} from './place.model';
-import {Payout} from './payout.moel';
+import {Payout} from './payout.model';
 import {Payment} from './payment.model';
 
 export interface User {

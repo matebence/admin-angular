@@ -15,6 +15,8 @@ export class HateoasInterceptor implements HttpInterceptor {
           if (event instanceof HttpResponse && event.body != null && event.body.hasOwnProperty('_embedded')) {
             if (event.body._embedded.hasOwnProperty('usersList')) {
               return event.clone({body: event.body._embedded.usersList});
+            } else if (event.body._embedded.hasOwnProperty('gendersList')) {
+              return event.clone({body: event.body._embedded.gendersList});
             }
           }
           return event;
