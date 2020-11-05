@@ -5,7 +5,7 @@ import {LocalDataSource} from 'ng2-smart-table';
 import {Row} from 'ng2-smart-table/lib/lib/data-set/row';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 
-import genderTableConfig from '../../../../../../configs/js/table.gender.config.js';
+import genderTableConfig from '../../../../../../configs/js/user/table.gender.config.js';
 
 import {Gender} from '../../../../../../shared/models/services/user/gender.model';
 

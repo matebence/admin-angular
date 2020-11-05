@@ -1,4 +1,4 @@
-import tableConfig from '../json/table.config.json';
+import tableConfig from '../../json/ng-table/table.config.json';
 
 export default {
   ...tableConfig,

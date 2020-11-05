@@ -1,1 +1,13 @@
-<p>profit works!</p>
+<app-table
+  (tableCreateData)="onTableCreateData($event)"
+  (tableEditData)="onTableEditData($event)"
+  [tableHeader]="header"
+  [tableSettings]="settings"
+  [tableSource]="source"></app-table>
+<app-modal
+  (modalResult)="onModalResult($event)"
+  [modalId]="'profitModal'"
+  [modalTitle]="title"
+  [modalText]="text"
+  [modalNegativeButton]="negativeButton"
+  [modalPozitiveButton]="pozitiveButton"></app-modal>

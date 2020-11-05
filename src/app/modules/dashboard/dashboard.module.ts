@@ -23,6 +23,7 @@ import {PayoutService} from './services/user-service/payout.service';
 import {GenderService} from './services/user-service/gender.service';
 import {RegionService} from './services/place-service/region.service';
 import {PaymentService} from './services/user-service/payment.service';
+import {PriceService} from './services/shipment-service/price.service';
 import {RatingService} from './services/parcel-service/rating.service';
 import {ParcelService} from './services/parcel-service/parcel.service';
 import {VillageService} from './services/place-service/village.service';
@@ -137,6 +138,7 @@ import {DashboardRoutingModule} from './dashboard-routing.module';
     UserService,
     TypeService,
     RoleService,
+    PriceService,
     ParcelService,
     PayoutService,
     RegionService,
@@ -155,11 +157,7 @@ import {DashboardRoutingModule} from './dashboard-routing.module';
     WarehouseService,
     PreferenceService,
 
-    {
-      provide: 'externalUrlRedirectResolver', useValue: (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
-      window.open((route.data as any).externalUrl);
-    }
-    }
+    {provide: 'externalUrlRedirectResolver', useValue: (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {window.open((route.data as any).externalUrl);}}
   ]
 })
 export class DashboardModule {

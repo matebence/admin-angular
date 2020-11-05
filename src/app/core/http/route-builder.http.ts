@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 
-import routeConfig from '../../configs/json/routes.config.json';
+import routeConfig from '../../configs/json/http-builder/routes.config.json';
 
 import {environment} from '../../../environments/environment';
 

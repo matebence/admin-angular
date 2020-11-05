@@ -5,7 +5,7 @@ import {LocalDataSource} from 'ng2-smart-table';
 import {Row} from 'ng2-smart-table/lib/lib/data-set/row';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 
-import userTableConfig from '../../../../../../configs/js/table.user.config.js';
+import userTableConfig from '../../../../../../configs/js/user/table.user.config.js';
 
 import {User} from '../../../../../../shared/models/services/user/user.model';
 

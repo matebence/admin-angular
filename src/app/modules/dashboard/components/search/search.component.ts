@@ -1,7 +1,7 @@
 import {Router} from '@angular/router';
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 
-import navigationConfig from '../../../../configs/json/navigation.config.json';
+import navigationConfig from '../../../../configs/json/app-nav/navigation.config.json';
 
 import {Details, Navigation, NavigationResult} from '../../../../shared/models/components/navigation.model';
 
