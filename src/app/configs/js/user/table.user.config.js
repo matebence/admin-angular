@@ -43,7 +43,7 @@ export default {
       filter: false,
       valuePrepareFunction: (places) => {
         return `${places.country}, ${places.region}, ${places.district}, ${places.place}, ${places.street}, ${places.zip}`;
-      },
+      }
     }
   }
 };
