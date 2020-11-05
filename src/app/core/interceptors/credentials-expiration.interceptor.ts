@@ -6,7 +6,7 @@ import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from
 
 import {environment} from '../../../environments/environment';
 
-import {SignIn} from '../../shared/models/services/account/account.model';
+import {SignIn} from '../../shared/models/services/authorization/authorization.model';
 
 import {PersistenceService} from '../services/persistence-service/persistence.service';
 import {AuthorizationService} from '../../modules/authentication/services/authorization-server/authorization.service';

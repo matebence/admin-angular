@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 
 import {environment} from '../../../../../environments/environment';
 
-import {SignIn} from '../../../../shared/models/services/account/account.model';
+import {SignIn} from '../../../../shared/models/services/authorization/authorization.model';
 
 import {BaseService} from '../../../../core/services/base.service';
 import {PersistenceService} from '../../../../core/services/persistence-service/persistence.service';

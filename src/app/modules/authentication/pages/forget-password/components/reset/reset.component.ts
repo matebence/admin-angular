@@ -2,8 +2,8 @@ import {Subscription} from 'rxjs/index';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
-import {ForgetPassword} from '../../../../../../shared/models/services/account/account.model';
 import {AuthorizationService} from '../../../../services/authorization-server/authorization.service';
+import {ForgetPassword} from '../../../../../../shared/models/services/authorization/authorization.model';
 
 @Component({
   selector: 'app-reset',

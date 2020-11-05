@@ -9,7 +9,7 @@ import {PersistenceService} from '../../../../core/services/persistence-service/
 
 import {environment} from '../../../../../environments/environment';
 
-import {ForgetPassword, Recover, SignIn, SignOut} from '../../../../shared/models/services/account/account.model';
+import {ForgetPassword, Recover, SignIn, SignOut} from '../../../../shared/models/services/authorization/authorization.model';
 
 import {RequestHTTP} from '../../../../core/http/request.http';
 import {RouteBuilder} from '../../../../core/http/route-builder.http';

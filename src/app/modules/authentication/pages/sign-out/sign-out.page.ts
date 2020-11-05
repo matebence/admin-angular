@@ -1,7 +1,7 @@
 import {Subscription} from 'rxjs/index';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 
-import {SignOut} from '../../../../shared/models/services/account/account.model';
+import {SignOut} from '../../../../shared/models/services/authorization/authorization.model';
 
 import {AuthorizationService} from '../../services/authorization-server/authorization.service';
 import {PersistenceService} from '../../../../core/services/persistence-service/persistence.service';

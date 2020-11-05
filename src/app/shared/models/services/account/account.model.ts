@@ -1,49 +1,26 @@
-import {Reason} from '../../common/common.model';
+import {Role} from './role.model';
 
-export interface SignIn {
-  access_token: string,
-  token_type: string,
-  refresh_token: string,
-  expires_in: number,
-  scope: string,
-  account_id: number,
-  user_name: string,
-  jti: string
-  remain?: boolean,
-  expirationDate?: Date,
+export interface Account {
+  accountId: number,
+  login: Login,
+  accountRoles: Role[],
+  userName: string,
+  email: string,
+  password: string,
+  activated: boolean,
+  createdAt: Date,
+  updatedAt: Date,
+  deletedAt: Date,
+  deleted: boolean
 }
 
-export interface SignUp {
-  timestamp: string,
-  message: string,
-  error: boolean,
-  reason: Reason,
-}
-
-export interface SignOut {
-  timestamp: string,
-  message: string,
-  error: boolean,
-  reason: Reason,
-}
-
-export interface ForgetPassword {
-  timestamp: string,
-  message: string,
-  error: boolean,
-  reason: Reason,
-}
-
-export interface Recover {
-  timestamp: string,
-  message: string,
-  error: boolean,
-  reason: Reason,
-}
-
-export interface Activation {
-  timestamp: string,
-  message: string,
-  error: boolean,
-  reason: Reason,
+export interface Login {
+  loginId: number,
+  accounts: number,
+  lastLogin: string,
+  ipAddress: string,
+  createdAt: Date,
+  updatedAt: Date,
+  deletedAt: Date,
+  deleted: boolean
 }
