@@ -16,6 +16,7 @@ form div.input-group-append ul.autocomplete {
   top: 2.5rem;
   list-style: none;
   padding: 0;
+  z-index: 999;
 }
 
 form div.input-group-append ul.autocomplete li.autocomplete-item {
