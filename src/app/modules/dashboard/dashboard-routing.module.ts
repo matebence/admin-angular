@@ -10,6 +10,7 @@ import {UsersComponent} from './pages/user/components/users/users.component';
 import {RolesComponent} from './pages/account/components/roles/roles.component';
 import {TypesComponent} from './pages/vehicle/components/types/types.component';
 import {GendersComponent} from './pages/user/components/genders/genders.component';
+import {ProfitComponent} from './pages/company/components/profit/profit.component';
 import {PayoutsComponent} from './pages/user/components/payouts/payouts.component';
 import {StatusComponent} from './pages/shipment/components/status/status.component';
 import {RegionsComponent} from './pages/place/components/regions/regions.component';
@@ -21,10 +22,17 @@ import {AccountsComponent} from './pages/account/components/accounts/accounts.co
 import {VehiclesComponent} from './pages/vehicle/components/vehicles/vehicles.component';
 import {DistrictsComponent} from './pages/place/components/districts/districts.component';
 import {InvoicesComponent} from './pages/shipment/components/invoices/invoices.component';
+import {UserGraphComponent} from './pages/graph/components/user-graph/user-graph.component';
 import {ShipmentsComponent} from './pages/shipment/components/shipments/shipments.component';
 import {CategoriesComponent} from './pages/parcel/components/categories/categories.component';
 import {PrivilegesComponent} from './pages/account/components/privileges/privileges.component';
+import {PlaceGraphComponent} from './pages/graph/components/place-graph/place-graph.component';
+import {WarehousesComponent} from './pages/company/components/warehouses/warehouses.component';
+import {ParcelGraphComponent} from './pages/graph/components/parcel-graph/parcel-graph.component';
 import {PreferencesComponent} from './pages/account/components/preferences/preferences.component';
+import {VehicleGraphComponent} from './pages/graph/components/vehicle-graph/vehicle-graph.component';
+import {AccountGraphComponent} from './pages/graph/components/account-graph/account-graph.component';
+import {ShipmentGraphComponent} from './pages/graph/components/shipment-graph/shipment-graph.component';
 
 import {DashboardPage} from './dashboard.page';
 import {HomePage} from './pages/home/home.page';
@@ -203,10 +211,12 @@ const routes: Routes = [
             children: [
               {
                 path: 'profit',
+                component: ProfitComponent,
                 data: {roles: [environment.APP_ROLE_ADMIN]},
               },
               {
                 path: 'warehouses',
+                component: WarehousesComponent,
                 data: {roles: [environment.APP_ROLE_ADMIN]},
               }
             ]
@@ -218,26 +228,32 @@ const routes: Routes = [
             children: [
               {
                 path: 'users',
+                component: UserGraphComponent,
+                data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
+              },
+              {
+                path: 'accounts',
+                component: AccountGraphComponent,
                 data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
               },
               {
                 path: 'shipments',
+                component: ShipmentGraphComponent,
                 data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
               },
               {
                 path: 'parcels',
-                data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
-              },
-              {
-                path: 'messages',
+                component: ParcelGraphComponent,
                 data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
               },
               {
                 path: 'places',
+                component: PlaceGraphComponent,
                 data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
               },
               {
-                path: 'warehouses',
+                path: 'vehicles',
+                component: VehicleGraphComponent,
                 data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
               }
             ]
