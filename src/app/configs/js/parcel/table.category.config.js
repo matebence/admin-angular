@@ -8,16 +8,6 @@ export default {
     },
     name: {
       title: 'Názov'
-    },
-    vehRegNum: {
-      title: 'EČV'
-    },
-    region: {
-      title: 'Kraj',
-      filter: false,
-      valuePrepareFunction: (region) => {
-        return `${region.name}`;
-      }
     }
   }
 };

@@ -53,7 +53,7 @@ export class UsersComponent implements OnInit, OnDestroy {
         })
     );
 
-    this.userService.getAll(1, 100);
+    this.userService.getAll(0, 100);
     return;
   }
 

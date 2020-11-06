@@ -135,6 +135,13 @@ const routes: Routes = [
                 path: 'table/invoices',
                 component: InvoicesComponent,
                 data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
+                children: [
+                  {
+                    path: ':id',
+                    component: InvoicesComponent,
+                    data: {roles: [environment.APP_ROLE_ADMIN]},
+                  }
+                ]
               },
               {
                 path: 'table/status',

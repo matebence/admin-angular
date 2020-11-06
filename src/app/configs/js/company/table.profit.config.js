@@ -4,9 +4,7 @@ export default {
   ...tableConfig,
   columns: {
     _id: {
-      title: 'ID',
-      addable: false,
-      editable: false
+      title: 'ID'
     },
     price: {
       title: 'Profit'

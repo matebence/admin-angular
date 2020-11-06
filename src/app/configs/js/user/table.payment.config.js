@@ -4,9 +4,7 @@ export default {
   ...tableConfig,
   columns: {
     paymentId: {
-      title: 'ID',
-      addable: false,
-      editable: false
+      title: 'ID'
     },
     users: {
       title: 'Používateľ',
@@ -29,6 +27,7 @@ export default {
     },
     refunded: {
       title: 'Vrátené',
+      filter: false,
       valuePrepareFunction: (accapted) => {
         return accapted ? 'Áno' : 'Nie';
       }

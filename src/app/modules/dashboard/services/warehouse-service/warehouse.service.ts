@@ -21,7 +21,7 @@ export class WarehouseService extends BaseService {
     super();
   }
 
-  public delete(id: number) {
+  public delete(id: string) {
     const subject = new Subject<Boolean>();
     const url = this.routeBuilder
       .service('warehouse-service')

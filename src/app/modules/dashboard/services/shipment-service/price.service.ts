@@ -21,7 +21,7 @@ export class PriceService extends BaseService {
     super();
   }
 
-  public get(id: number) {
+  public get(id: string) {
     const subject = new Subject<Boolean>();
     const url = this.routeBuilder
       .service('shipment-service')

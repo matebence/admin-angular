@@ -21,6 +21,14 @@ export class HateoasInterceptor implements HttpInterceptor {
               return event.clone({body: event.body._embedded.paymentsList});
             } else if (event.body._embedded.hasOwnProperty('payoutsList')) {
               return event.clone({body: event.body._embedded.payoutsList});
+            } else if (event.body._embedded.hasOwnProperty('accountsList')) {
+              return event.clone({body: event.body._embedded.accountsList});
+            } else if (event.body._embedded.hasOwnProperty('rolesList')) {
+              return event.clone({body: event.body._embedded.rolesList});
+            } else if (event.body._embedded.hasOwnProperty('privilegesList')) {
+              return event.clone({body: event.body._embedded.privilegesList});
+            } else if (event.body._embedded.hasOwnProperty('preferencesList')) {
+              return event.clone({body: event.body._embedded.preferencesList});
             }
           } else if (event instanceof HttpResponse && event.body != null && event.body.hasOwnProperty('data')) {
             return event.clone({body: event.body.data});

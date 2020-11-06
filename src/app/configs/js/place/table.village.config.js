@@ -4,9 +4,7 @@ export default {
   ...tableConfig,
   columns: {
     id: {
-      title: 'ID',
-      addable: false,
-      editable: false
+      title: 'ID'
     },
     fullName: {
       title: 'Názov'

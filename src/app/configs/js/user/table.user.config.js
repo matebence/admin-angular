@@ -4,22 +4,16 @@ export default {
   ...tableConfig,
   columns: {
     userId: {
-      title: 'ID',
-      addable: false,
-      editable: false
+      title: 'ID'
     },
     accountId: {
       title: 'ID používateľa'
     },
     email: {
-      title: 'Email',
-      addable: false,
-      editable: false
+      title: 'Email'
     },
     userName: {
-      title: 'Používateľské meno',
-      addable: false,
-      editable: false
+      title: 'Používateľské meno'
     },
     firstName: {
       title: 'Meno'
@@ -31,11 +25,9 @@ export default {
       title: 'Pohlavie'
     },
     tel: {
-      filter: false,
       title: 'Tel. číslo'
     },
     balance: {
-      filter: false,
       title: 'Zostatok'
     },
     places: {

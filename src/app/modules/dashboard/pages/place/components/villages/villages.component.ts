@@ -25,7 +25,7 @@ export class VillagesComponent implements OnInit, OnDestroy {
 
   private row: Row;
   public source: LocalDataSource;
-  public header: string = 'Okresy';
+  public header: string = 'Mestá a obce';
   private subscriptions: Subscription[] = [];
 
   public settings: any = villageTableConfig;

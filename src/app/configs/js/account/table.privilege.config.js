@@ -3,7 +3,7 @@ import tableConfig from '../../json/ng-table/table.config.json';
 export default {
   ...tableConfig,
   columns: {
-    genderId: {
+    privilegeId: {
       title: 'ID'
     },
     name: {

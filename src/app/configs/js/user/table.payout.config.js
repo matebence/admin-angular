@@ -4,9 +4,7 @@ export default {
   ...tableConfig,
   columns: {
     payoutId: {
-      title: 'ID',
-      addable: false,
-      editable: false
+      title: 'ID'
     },
     users: {
       title: 'Používateľ',
@@ -23,6 +21,7 @@ export default {
     },
     accapted: {
       title: 'Schválené',
+      filter: false,
       valuePrepareFunction: (accapted) => {
         return accapted ? 'Áno' : 'Nie';
       }
