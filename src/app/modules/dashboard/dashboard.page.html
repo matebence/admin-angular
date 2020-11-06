@@ -10,8 +10,10 @@
           [navToogle]="toggle">
         </app-header>
         <div class="container-fluid">
-          <router-outlet></router-outlet>
-          <ng-content></ng-content>
+          <div id="container-wrapper">
+            <router-outlet></router-outlet>
+            <ng-content></ng-content>
+          </div>
         </div>
       </div>
       <app-footer></app-footer>

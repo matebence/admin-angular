@@ -617,10 +617,12 @@ pre code {
 }
 
 .row {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   margin-right: -0.75rem;
   margin-left: -0.75rem;
+  margin: 0 auto;
 }
 
 .no-gutters {
@@ -4753,6 +4755,10 @@ input[type="button"].btn-block {
   flex: 1 1 auto;
   min-height: 1px;
   padding: 0 !important;
+}
+
+.card-body.with-padding {
+  padding: 1.25rem !important;
 }
 
 .card-title {
