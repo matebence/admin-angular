@@ -54,8 +54,8 @@ export class AuthorizationService extends BaseService {
     return this.signIn(httpParams, remain);
   }
 
-  private signIn(httpParams: HttpParams, remain: boolean): Observable<Boolean> {
-    const subject = new Subject<Boolean>();
+  private signIn(httpParams: HttpParams, remain: boolean): Observable<boolean> {
+    const subject = new Subject<boolean>();
     const url = this.routeBuilder
       .service('authorization-server')
       .model('signIn')
@@ -74,8 +74,8 @@ export class AuthorizationService extends BaseService {
     return subject.asObservable();
   }
 
-  public signOut(): Observable<Boolean> {
-    const subject = new Subject<Boolean>();
+  public signOut(): Observable<boolean> {
+    const subject = new Subject<boolean>();
     const url = this.routeBuilder
       .service('authorization-server')
       .model('signOut')
@@ -94,8 +94,8 @@ export class AuthorizationService extends BaseService {
     return subject.asObservable();
   }
 
-  public forgetPassword(email: string): Observable<Boolean> {
-    const subject = new Subject<Boolean>();
+  public forgetPassword(email: string): Observable<boolean> {
+    const subject = new Subject<boolean>();
     const url = this.routeBuilder
       .service('authorization-server')
       .model('forgetPassword')
@@ -113,8 +113,8 @@ export class AuthorizationService extends BaseService {
     return subject.asObservable();
   }
 
-  public recover(params: Params): Observable<Boolean> {
-    const subject = new Subject<Boolean>();
+  public recover(params: Params): Observable<boolean> {
+    const subject = new Subject<boolean>();
     const url = this.routeBuilder
       .service('authorization-server')
       .model('recover')

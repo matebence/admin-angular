@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
 import {ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
@@ -47,6 +47,7 @@ import {FooterComponent} from './components/footer/footer.component';
 import {SearchComponent} from './components/search/search.component';
 import {NavItemComponent} from './components/nav-item/nav-item.component';
 import {UsersComponent} from './pages/user/components/users/users.component';
+import { AssistentComponent } from './components/assistent/assistent.component';
 import {TypesComponent} from './pages/vehicle/components/types/types.component';
 import {RolesComponent} from './pages/account/components/roles/roles.component';
 import {ProfitComponent} from './pages/company/components/profit/profit.component';
@@ -73,6 +74,7 @@ import {PreferencesComponent} from './pages/account/components/preferences/prefe
 import {VehicleGraphComponent} from './pages/graph/components/vehicle-graph/vehicle-graph.component';
 import {AccountGraphComponent} from './pages/graph/components/account-graph/account-graph.component';
 import {ShipmentGraphComponent} from './pages/graph/components/shipment-graph/shipment-graph.component';
+import { RegionsFormComponent } from './pages/place/components/regions/sub/regions-form/regions-form.component';
 
 import {SharedModule} from '../../shared/shared.module';
 import {DashboardRoutingModule} from './dashboard-routing.module';
@@ -102,6 +104,7 @@ import {DashboardRoutingModule} from './dashboard-routing.module';
     PaymentsComponent,
     VillagesComponent,
     AccountsComponent,
+    AssistentComponent,
     ShipmentsComponent,
     DistrictsComponent,
     UserGraphComponent,
@@ -110,11 +113,12 @@ import {DashboardRoutingModule} from './dashboard-routing.module';
     CategoriesComponent,
     WarehousesComponent,
     ParcelGraphComponent,
+    RegionsFormComponent,
     PreferencesComponent,
     VehicleGraphComponent,
     AccountGraphComponent,
-    ShipmentGraphComponent,
 
+    ShipmentGraphComponent,
     HomePage,
     UserPage,
     GraphPage,
@@ -131,6 +135,7 @@ import {DashboardRoutingModule} from './dashboard-routing.module';
     FormsModule,
     SharedModule,
     CommonModule,
+    ReactiveFormsModule,
     Ng2SmartTableModule,
     DashboardRoutingModule
   ],

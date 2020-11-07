@@ -21,6 +21,7 @@ import {CredentialsExpirationInterceptor} from './interceptors/credentials-expir
 
 import {RoleGuard} from './guards/role.guard';
 import {AuthGuard} from './guards/auth.guard';
+import {LeaveGuard} from './guards/leave.guard';
 
 import {RequestHTTP} from './http/request.http';
 import {RouteFilter} from './filter/route.filter';
@@ -46,6 +47,7 @@ import {CoreRoutingModule} from './core-routing.module';
   providers: [
     AuthGuard,
     RoleGuard,
+    LeaveGuard,
 
     BaseService,
     SecurityService,

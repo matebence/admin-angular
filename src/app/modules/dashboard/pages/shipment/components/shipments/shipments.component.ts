@@ -82,7 +82,7 @@ export class ShipmentsComponent implements OnInit, OnDestroy {
     return;
   }
 
-  public onModalResult(event: Boolean): void {
+  public onModalResult(event: boolean): void {
     if (!event || this.row == null) return;
     setTimeout(() => this.shipmentService.delete(this.row.getData()._id)
       .subscribe(result => {

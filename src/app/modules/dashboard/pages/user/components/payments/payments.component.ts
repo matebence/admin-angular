@@ -82,7 +82,7 @@ export class PaymentsComponent implements OnInit, OnDestroy {
     return;
   }
 
-  public onModalResult(event: Boolean): void {
+  public onModalResult(event: boolean): void {
     if (!event || this.row == null) return;
     setTimeout(() => this.paymentService.delete(this.row.getData().paymentId)
       .subscribe(result => {

@@ -79,7 +79,7 @@ export class ProfitComponent implements OnInit, OnDestroy {
     return;
   }
 
-  public onModalResult(event: Boolean): void {
+  public onModalResult(event: boolean): void {
     return;
   }
 }

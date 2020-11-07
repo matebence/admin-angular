@@ -65,7 +65,8 @@ export class InvoicesComponent implements OnInit, OnDestroy {
           link.href = objectUrl;
           link.download = Date.now().toString();
           link.dispatchEvent(new MouseEvent('click', {bubbles: true, cancelable: true, view: window}));
-          setTimeout(() => {window.URL.revokeObjectURL(objectUrl); link.remove();}, 100);}));
+          setTimeout(() => {window.URL.revokeObjectURL(objectUrl); link.remove();}, 100);})
+    );
 
     this.invoiceService.getAll(1, 100);
     if (this.activatedRoute.firstChild == null) return;
@@ -104,7 +105,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     return;
   }
 
-  public onModalResult(event: Boolean): void {
+  public onModalResult(event: boolean): void {
     if (!event || this.row == null) return;
     setTimeout(() => this.invoiceService.delete(this.row.getData()._id)
       .subscribe(result => {

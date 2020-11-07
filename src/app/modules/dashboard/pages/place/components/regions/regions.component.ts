@@ -1,5 +1,6 @@
 declare const $: any;
 
+import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs/index';
 import {LocalDataSource} from 'ng2-smart-table';
 import {Row} from 'ng2-smart-table/lib/lib/data-set/row';
@@ -30,7 +31,9 @@ export class RegionsComponent implements OnInit, OnDestroy {
 
   public settings: any = regionTableConfig;
 
-  public constructor(private regionService: RegionService) {
+  public constructor(private router: Router,
+                     private activatedRoute: ActivatedRoute,
+                     private regionService: RegionService) {
   }
 
   public ngOnInit(): void {
@@ -63,6 +66,7 @@ export class RegionsComponent implements OnInit, OnDestroy {
   }
 
   public onTableCreateData(row: Boolean): void {
+    if (row) this.router.navigate(['new'], {relativeTo: this.activatedRoute});
     return;
   }
 
@@ -78,11 +82,12 @@ export class RegionsComponent implements OnInit, OnDestroy {
   }
 
   public onTableEditData(row: Row): void {
+    this.router.navigate(['edit', row.getData().id], {relativeTo: this.activatedRoute});
     this.row = row;
     return;
   }
 
-  public onModalResult(event: Boolean): void {
+  public onModalResult(event: boolean): void {
     if (!event || this.row == null) return;
     setTimeout(() => this.regionService.delete(this.row.getData().id)
       .subscribe(result => {

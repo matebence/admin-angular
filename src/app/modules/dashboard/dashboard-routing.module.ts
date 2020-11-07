@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 
 import {AuthGuard} from '../../core/guards/auth.guard';
 import {RoleGuard} from '../../core/guards/role.guard';
+import {LeaveGuard} from '../../core/guards/leave.guard';
 
 import {environment} from '../../../environments/environment';
 
@@ -33,6 +34,7 @@ import {PreferencesComponent} from './pages/account/components/preferences/prefe
 import {VehicleGraphComponent} from './pages/graph/components/vehicle-graph/vehicle-graph.component';
 import {AccountGraphComponent} from './pages/graph/components/account-graph/account-graph.component';
 import {ShipmentGraphComponent} from './pages/graph/components/shipment-graph/shipment-graph.component';
+import {RegionsFormComponent} from './pages/place/components/regions/sub/regions-form/regions-form.component';
 
 import {DashboardPage} from './dashboard.page';
 import {HomePage} from './pages/home/home.page';
@@ -181,6 +183,20 @@ const routes: Routes = [
                 path: 'table/regions',
                 component: RegionsComponent,
                 data: {roles: [environment.APP_ROLE_ADMIN]},
+                children: [
+                  {
+                    path: 'new',
+                    component: RegionsFormComponent,
+                    canDeactivate: [LeaveGuard],
+                    data: {roles: [environment.APP_ROLE_ADMIN]}
+                  },
+                  {
+                    path: 'edit/:id',
+                    component: RegionsFormComponent,
+                    canDeactivate: [LeaveGuard],
+                    data: {roles: [environment.APP_ROLE_ADMIN]}
+                  }
+                ]
               },
               {
                 path: 'table/districts',

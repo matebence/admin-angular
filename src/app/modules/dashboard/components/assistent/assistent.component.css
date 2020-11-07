@@ -1,0 +1,9 @@
+div.card.shadow.mb-4 {
+  max-height: 28rem;
+  overflow: auto;
+}
+
+ul.list {
+  list-style: none;
+  padding: 0;
+}

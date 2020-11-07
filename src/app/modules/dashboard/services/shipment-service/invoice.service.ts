@@ -24,7 +24,7 @@ export class InvoiceService extends BaseService {
   }
 
   public delete(id: number) {
-    const subject = new Subject<Boolean>();
+    const subject = new Subject<boolean>();
     const url = this.routeBuilder
       .service('shipment-service')
       .model('invoices')
@@ -42,7 +42,7 @@ export class InvoiceService extends BaseService {
   }
 
   public get(id: string) {
-    const subject = new Subject<Boolean>();
+    const subject = new Subject<boolean>();
     const url = this.routeBuilder
       .service('shipment-service')
       .model('invoices')
@@ -62,7 +62,7 @@ export class InvoiceService extends BaseService {
   }
 
   public getAll(page: number, limit: number) {
-    const subject = new Subject<Boolean>();
+    const subject = new Subject<boolean>();
     const url = this.routeBuilder
       .service('shipment-service')
       .model('invoices')

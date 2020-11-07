@@ -82,7 +82,7 @@ export class VehiclesComponent implements OnInit, OnDestroy {
     return;
   }
 
-  public onModalResult(event: Boolean): void {
+  public onModalResult(event: boolean): void {
     if (!event || this.row == null) return;
     setTimeout(() => this.vehicleService.delete(this.row.getData()._id)
       .subscribe(result => {

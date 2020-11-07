@@ -82,7 +82,7 @@ export class AccountsComponent implements OnInit, OnDestroy {
     return;
   }
 
-  public onModalResult(event: Boolean): void {
+  public onModalResult(event: boolean): void {
     if (!event || this.row == null) return;
     setTimeout(() => this.accountService.delete(this.row.getData().accountId)
       .subscribe(result => {

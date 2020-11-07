@@ -82,7 +82,7 @@ export class PrivilegesComponent implements OnInit, OnDestroy {
     return;
   }
 
-  public onModalResult(event: Boolean): void {
+  public onModalResult(event: boolean): void {
     if (!event || this.row == null) return;
     setTimeout(() => this.privilegeService.delete(this.row.getData().privilegeId)
       .subscribe(result => {

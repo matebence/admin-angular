@@ -82,7 +82,7 @@ export class GendersComponent implements OnInit, OnDestroy {
     return;
   }
 
-  public onModalResult(event: Boolean): void {
+  public onModalResult(event: boolean): void {
     if (!event || this.row == null) return;
     setTimeout(() => this.genderService.delete(this.row.getData().genderId)
       .subscribe(result => {

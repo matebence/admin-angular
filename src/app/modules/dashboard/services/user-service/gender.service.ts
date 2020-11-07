@@ -22,7 +22,7 @@ export class GenderService extends BaseService {
   }
 
   public delete(id: number) {
-    const subject = new Subject<Boolean>();
+    const subject = new Subject<boolean>();
     const url = this.routeBuilder
       .service('user-service')
       .model('genders')
@@ -40,7 +40,7 @@ export class GenderService extends BaseService {
   }
 
   public getAll(page: number, limit: number) {
-    const subject = new Subject<Boolean>();
+    const subject = new Subject<boolean>();
     const url = this.routeBuilder
       .service('user-service')
       .model('genders')

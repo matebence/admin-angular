@@ -82,7 +82,7 @@ export class PreferencesComponent implements OnInit, OnDestroy {
     return;
   }
 
-  public onModalResult(event: Boolean): void {
+  public onModalResult(event: boolean): void {
     if (!event || this.row == null) return;
     setTimeout(() => this.preferenceService.delete(this.row.getData().preferenceId)
       .subscribe(result => {

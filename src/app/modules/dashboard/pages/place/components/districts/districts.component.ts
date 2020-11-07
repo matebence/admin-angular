@@ -82,7 +82,7 @@ export class DistrictsComponent implements OnInit, OnDestroy {
     return;
   }
 
-  public onModalResult(event: Boolean): void {
+  public onModalResult(event: boolean): void {
     if (!event || this.row == null) return;
     setTimeout(() => this.districtService.delete(this.row.getData().id)
       .subscribe(result => {

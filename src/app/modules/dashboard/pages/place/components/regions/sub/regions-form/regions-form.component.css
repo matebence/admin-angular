@@ -1,0 +1,11 @@
+a.btn.btn-secondary {
+  float: right;
+}
+
+form.region input[type="text"].ng-invalid.ng-touched {
+  border: 0.1rem solid #ff0600;
+}
+
+form.region input[type="text"].ng-valid.ng-touched {
+  border: 0.1rem solid #018000;
+}
