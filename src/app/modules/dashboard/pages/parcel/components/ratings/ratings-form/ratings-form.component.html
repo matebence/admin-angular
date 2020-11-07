@@ -1,1 +1,25 @@
-<p>ratings-form works!</p>
+<div class="row">
+  <div class="col-lg-6 mb-4">
+    <app-assistent
+      [formAssistent]="assistent"
+      [formIllustration]="illustration"
+      [formAssistentOptions]="assistentOptions">
+    </app-assistent>
+  </div>
+  <div class="col-lg-6 mb-4">
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">{{formTitle}}</h6>
+      </div>
+      <div class="card-body with-padding">
+      </div>
+    </div>
+  </div>
+</div>
+<app-modal
+  (modalResult)="canDeactivate($event)"
+  [modalId]="'regionFormModal'"
+  [modalTitle]="title"
+  [modalText]="text"
+  [modalNegativeButton]="negativeButton"
+  [modalPozitiveButton]="pozitiveButton"></app-modal>
