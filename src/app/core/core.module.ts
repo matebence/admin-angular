@@ -1,7 +1,10 @@
 import {NgModule} from '@angular/core';
 import {Router} from '@angular/router';
 import {CommonModule} from '@angular/common';
+import {LoadingBarModule} from '@ngx-loading-bar/core';
 import {BrowserModule} from '@angular/platform-browser';
+import {LoadingBarRouterModule} from '@ngx-loading-bar/router';
+import {LoadingBarHttpClientModule} from '@ngx-loading-bar/http-client';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import {ErrorPage} from './error/error.page';
@@ -35,7 +38,10 @@ import {CoreRoutingModule} from './core-routing.module';
     SharedModule,
     BrowserModule,
     HttpClientModule,
-    CoreRoutingModule
+    LoadingBarModule,
+    CoreRoutingModule,
+    LoadingBarRouterModule,
+    LoadingBarHttpClientModule
   ],
   providers: [
     AuthGuard,
@@ -54,7 +60,7 @@ import {CoreRoutingModule} from './core-routing.module';
     {provide: HTTP_INTERCEPTORS, useClass: AuthorizationInterceptor, multi: true, deps: [PersistenceService]},
     {provide: HTTP_INTERCEPTORS, useClass: CredentialsExpirationInterceptor, multi: true, deps: [Router, PersistenceService, AuthorizationService]}
   ],
-  exports: [ErrorPage, CoreRoutingModule]
+  exports: [ErrorPage, CoreRoutingModule, LoadingBarRouterModule, LoadingBarHttpClientModule, LoadingBarModule]
 })
 export class CoreModule {
 }
