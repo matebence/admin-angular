@@ -47,7 +47,7 @@ import {FooterComponent} from './components/footer/footer.component';
 import {SearchComponent} from './components/search/search.component';
 import {NavItemComponent} from './components/nav-item/nav-item.component';
 import {UsersComponent} from './pages/user/components/users/users.component';
-import { AssistentComponent } from './components/assistent/assistent.component';
+import {AssistentComponent} from './components/assistent/assistent.component';
 import {TypesComponent} from './pages/vehicle/components/types/types.component';
 import {RolesComponent} from './pages/account/components/roles/roles.component';
 import {ProfitComponent} from './pages/company/components/profit/profit.component';
@@ -69,12 +69,32 @@ import {CategoriesComponent} from './pages/parcel/components/categories/categori
 import {WarehousesComponent} from './pages/company/components/warehouses/warehouses.component';
 import {PrivilegesComponent} from './pages/account/components/privileges/privileges.component';
 import {PlaceGraphComponent} from './pages/graph/components/place-graph/place-graph.component';
+import {UsersFormComponent} from './pages/user/components/users/users-form/users-form.component';
 import {ParcelGraphComponent} from './pages/graph/components/parcel-graph/parcel-graph.component';
 import {PreferencesComponent} from './pages/account/components/preferences/preferences.component';
+import {RolesFormComponent} from './pages/account/components/roles/roles-form/roles-form.component';
+import {TypesFormComponent} from './pages/vehicle/components/types/types-form/types-form.component';
 import {VehicleGraphComponent} from './pages/graph/components/vehicle-graph/vehicle-graph.component';
 import {AccountGraphComponent} from './pages/graph/components/account-graph/account-graph.component';
 import {ShipmentGraphComponent} from './pages/graph/components/shipment-graph/shipment-graph.component';
-import { RegionsFormComponent } from './pages/place/components/regions/sub/regions-form/regions-form.component';
+import {ProfitFormComponent} from './pages/company/components/profit/profit-form/profit-form.component';
+import {StatusFormComponent} from './pages/shipment/components/status/status-form/status-form.component';
+import {PayoutsFormComponent} from './pages/user/components/payouts/payouts-form/payouts-form.component';
+import {GendersFormComponent} from './pages/user/components/genders/genders-form/genders-form.component';
+import {RegionsFormComponent} from './pages/place/components/regions/regions-form/regions-form.component';
+import {ParcelsFormComponent} from './pages/parcel/components/parcels/parcels-form/parcels-form.component';
+import {RatingsFormComponent} from './pages/parcel/components/ratings/ratings-form/ratings-form.component';
+import {PaymentsFormComponent} from './pages/user/components/payments/payments-form/payments-form.component';
+import {VillagesFormComponent} from './pages/place/components/villages/villages-form/villages-form.component';
+import {AccountsFormComponent} from './pages/account/components/accounts/accounts-form/accounts-form.component';
+import {VehiclesFormComponent} from './pages/vehicle/components/vehicles/vehicles-form/vehicles-form.component';
+import {InvoicesFormComponent} from './pages/shipment/components/invoices/invoices-form/invoices-form.component';
+import {DistrictsFormComponent} from './pages/place/components/districts/districts-form/districts-form.component';
+import {ShipmentsFormComponent} from './pages/shipment/components/shipments/shipments-form/shipments-form.component';
+import {CategoriesFormComponent} from './pages/parcel/components/categories/categories-form/categories-form.component';
+import {PrivilegesFormComponent} from './pages/account/components/privileges/privileges-form/privileges-form.component';
+import {WarehousesFormComponent} from './pages/company/components/warehouses/warehouses-form/warehouses-form.component';
+import {PreferencesFormComponent} from './pages/account/components/preferences/preferences-form/preferences-form.component';
 
 import {SharedModule} from '../../shared/shared.module';
 import {DashboardRoutingModule} from './dashboard-routing.module';
@@ -107,18 +127,39 @@ import {DashboardRoutingModule} from './dashboard-routing.module';
     AssistentComponent,
     ShipmentsComponent,
     DistrictsComponent,
+    UsersFormComponent,
+    TypesFormComponent,
+    RolesFormComponent,
     UserGraphComponent,
     PlaceGraphComponent,
     PrivilegesComponent,
+    ProfitFormComponent,
+    StatusFormComponent,
     CategoriesComponent,
     WarehousesComponent,
     ParcelGraphComponent,
+    ParcelsFormComponent,
+    RatingsFormComponent,
+    PayoutsFormComponent,
+    GendersFormComponent,
     RegionsFormComponent,
     PreferencesComponent,
-    VehicleGraphComponent,
     AccountGraphComponent,
-
+    AccountsFormComponent,
+    VillagesFormComponent,
+    InvoicesFormComponent,
+    VehiclesFormComponent,
+    PaymentsFormComponent,
+    VehicleGraphComponent,
     ShipmentGraphComponent,
+    DistrictsFormComponent,
+    ShipmentsFormComponent,
+    PrivilegesFormComponent,
+    WarehousesFormComponent,
+    CategoriesFormComponent,
+
+    PreferencesFormComponent,
+
     HomePage,
     UserPage,
     GraphPage,

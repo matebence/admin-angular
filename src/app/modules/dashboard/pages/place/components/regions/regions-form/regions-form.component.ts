@@ -5,11 +5,11 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
-import {RegionService} from '../../../../../../services/place-service/region.service';
+import {RegionService} from '../../../../../services/place-service/region.service';
 
-import {CanComponentDeactivate} from '../../../../../../../../core/guards/leave.guard';
+import {CanComponentDeactivate} from '../../../../../../../core/guards/leave.guard';
 
-import {Region} from '../../../../../../../../shared/models/services/place/region.model';
+import {Region} from '../../../../../../../shared/models/services/place/region.model';
 
 @Component({
   selector: 'app-regions-form',
