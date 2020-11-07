@@ -1,4 +1,4 @@
-import {Subject} from 'rxjs/index';
+import {Observable, Subject} from 'rxjs/index';
 import {catchError} from 'rxjs/internal/operators';
 import {EventEmitter, Injectable} from '@angular/core';
 
@@ -19,6 +19,26 @@ export class PriceService extends BaseService {
   public constructor(private requestHttp: RequestHTTP,
                      private routeBuilder: RouteBuilder,) {
     super();
+  }
+
+  public update(price: Price): Observable<boolean> {
+    const subject = new Subject<boolean>();
+    const url = this.routeBuilder
+      .service('shipment-service')
+      .model('prices')
+      .action('update')
+      .params([{id: price._id}])
+      .build();
+
+    this.requestHttp
+      .put(url, price)
+      .pipe(catchError(super.handleError.bind(this)))
+      .subscribe(() => {
+
+        this.setGetData(price);
+        return subject.next(true);
+      });
+    return subject.asObservable();
   }
 
   public get(id: string) {

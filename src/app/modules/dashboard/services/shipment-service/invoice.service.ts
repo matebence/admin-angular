@@ -1,4 +1,5 @@
-import {Subject} from 'rxjs/index';
+import {FormGroup} from '@angular/forms';
+import {Observable, Subject} from 'rxjs/index';
 import {catchError} from 'rxjs/internal/operators';
 import {EventEmitter, Injectable} from '@angular/core';
 
@@ -13,14 +14,61 @@ import {RouteBuilder} from '../../../../core/http/route-builder.http';
 export class InvoiceService extends BaseService {
 
   private getData: Blob = null;
+  private createData: Invoice = null;
   private getAllData: Invoice[] = null;
 
   public getDataObservable: EventEmitter<Blob> = new EventEmitter<Blob>();
+  public createDataObservable: EventEmitter<Invoice> = new EventEmitter<Invoice>();
   public getAllDataObservable: EventEmitter<Invoice[]> = new EventEmitter<Invoice[]>();
 
   public constructor(private requestHttp: RequestHTTP,
                      private routeBuilder: RouteBuilder,) {
     super();
+  }
+
+  public create(formGroup: FormGroup): Observable<boolean> {
+    const subject = new Subject<boolean>();
+    const url = this.routeBuilder
+      .service('shipment-service')
+      .model('invoices')
+      .action('create')
+      .build();
+
+    this.requestHttp
+      .post(url, formGroup.value)
+      .pipe(catchError(super.handleError.bind(this)))
+      .subscribe((data: Invoice) => {
+
+        this.setCreateData(data);
+        let invoices: Invoice[] = this.getGetAllData();
+        invoices.push(data);
+        this.setGetAllData(invoices);
+
+        return subject.next(true);
+      });
+    return subject.asObservable();
+  }
+
+  public update(invoice: Invoice): Observable<boolean> {
+    const subject = new Subject<boolean>();
+    const url = this.routeBuilder
+      .service('shipment-service')
+      .model('invoices')
+      .action('update')
+      .params([{id: invoice._id}])
+      .build();
+
+    this.requestHttp
+      .put(url, invoice)
+      .pipe(catchError(super.handleError.bind(this)))
+      .subscribe(() => {
+        let invoices: Invoice[] = this.getGetAllData().filter(e => e._id != invoice._id);
+        invoices.push(invoice);
+        this.setGetAllData(invoices);
+
+        return subject.next(true);
+      });
+    return subject.asObservable();
   }
 
   public delete(id: number) {
@@ -79,6 +127,16 @@ export class InvoiceService extends BaseService {
         return subject.next(true);
       });
     return subject.asObservable();
+  }
+
+  public setCreateData(data: Invoice): void {
+    this.createData = data;
+    this.createDataObservable.emit(this.getCreateData());
+    return;
+  }
+
+  public getCreateData(): Invoice {
+    return Object.assign({}, this.createData);
   }
 
   public setGetData(data: Blob): void {
