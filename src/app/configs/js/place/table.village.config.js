@@ -9,6 +9,9 @@ export default {
     fullName: {
       title: 'Názov'
     },
+    zip: {
+      title: 'PSČ'
+    },
     district: {
       title: 'Okres',
       filter: false,

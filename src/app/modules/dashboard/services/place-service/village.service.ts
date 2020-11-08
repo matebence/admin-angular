@@ -1,7 +1,7 @@
 import {FormGroup} from '@angular/forms';
 import {Observable, Subject} from 'rxjs/index';
-import {catchError} from 'rxjs/internal/operators';
 import {EventEmitter, Injectable} from '@angular/core';
+import {catchError, switchMap} from 'rxjs/internal/operators';
 
 import {BaseService} from '../../../../core/services/base.service';
 
@@ -9,6 +9,9 @@ import {Village} from '../../../../shared/models/services/place/village.model';
 
 import {RequestHTTP} from '../../../../core/http/request.http';
 import {RouteBuilder} from '../../../../core/http/route-builder.http';
+
+import {RegionService} from './region.service';
+import {DistrictService} from './district.service';
 
 @Injectable()
 export class VillageService extends BaseService {
@@ -20,7 +23,9 @@ export class VillageService extends BaseService {
   public getAllDataObservable: EventEmitter<Village[]> = new EventEmitter<Village[]>();
 
   public constructor(private requestHttp: RequestHTTP,
-                     private routeBuilder: RouteBuilder,) {
+                     private routeBuilder: RouteBuilder,
+                     private regionService: RegionService,
+                     private districtService: DistrictService) {
     super();
   }
 
@@ -35,15 +40,20 @@ export class VillageService extends BaseService {
     this.requestHttp
       .post(url, formGroup.value)
       .pipe(catchError(super.handleError.bind(this)))
-      .subscribe((data: Village) => {
-
+      .pipe(switchMap((data: Village) => {
         this.setCreateData(data);
+        this.districtService.get(data.districtId);
+        return this.regionService.get(data.regionId);
+      }))
+      .subscribe((result: boolean) => {
+        if (!result) return;
         let villages: Village[] = this.getGetAllData();
-        villages.push(data);
+        villages.unshift({...this.getCreateData(), region: this.regionService.getGetData(), district: this.districtService.getGetData()});
         this.setGetAllData(villages);
 
         return subject.next(true);
       });
+
     return subject.asObservable();
   }
 

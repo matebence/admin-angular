@@ -2,6 +2,7 @@ declare const $: any;
 
 import {Subscription} from 'rxjs/index';
 import {LocalDataSource} from 'ng2-smart-table';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Row} from 'ng2-smart-table/lib/lib/data-set/row';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 
@@ -30,7 +31,9 @@ export class VillagesComponent implements OnInit, OnDestroy {
 
   public settings: any = villageTableConfig;
 
-  public constructor(private villageService: VillageService) {
+  public constructor(private router: Router,
+                     private activatedRoute: ActivatedRoute,
+                     private villageService: VillageService) {
   }
 
   public ngOnInit(): void {
@@ -63,6 +66,7 @@ export class VillagesComponent implements OnInit, OnDestroy {
   }
 
   public onTableCreateData(row: Boolean): void {
+    if (row) this.router.navigate(['new'], {relativeTo: this.activatedRoute});
     return;
   }
 
@@ -78,6 +82,7 @@ export class VillagesComponent implements OnInit, OnDestroy {
   }
 
   public onTableEditData(row: Row): void {
+    this.router.navigate(['edit', row.getData().id], {relativeTo: this.activatedRoute});
     this.row = row;
     return;
   }

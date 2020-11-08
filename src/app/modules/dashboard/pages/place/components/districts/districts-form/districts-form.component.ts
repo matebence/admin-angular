@@ -29,6 +29,7 @@ export class DistrictsFormComponent implements OnInit, OnDestroy, CanComponentDe
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť nový okres pre aplikáciu Blesk.';
   public assistentOptions: any = [{title: 'Kraje', link: '/dashboard/services/places/table/regions'}, {title: 'Mestá a obce', link: '/dashboard/services/places/table/villages'}];
 
+  public regionSelect: number = 1;
   public formButton: string = 'Vytvoriť';
   public formTitle: string = 'Vytvorenie nového okresu';
 
@@ -58,9 +59,9 @@ export class DistrictsFormComponent implements OnInit, OnDestroy, CanComponentDe
   });
 
   public constructor(private router: Router,
-                     private districtService: DistrictService,
                      private regionService: RegionService,
-                     private activatedRoute: ActivatedRoute) {
+                     private activatedRoute: ActivatedRoute,
+                     private districtService: DistrictService) {
   }
 
   public ngOnInit(): void {

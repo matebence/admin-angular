@@ -2,6 +2,10 @@ a.btn.btn-secondary {
   float: right;
 }
 
+button.btn.btn-primary {
+  margin-right: 0.5rem;
+}
+
 form.region input[type="text"].ng-invalid.ng-touched,
 form.region input[type="number"].ng-invalid.ng-touched,
 form.region select.ng-invalid.ng-touched {
@@ -21,7 +25,8 @@ form.region select.ng-valid.ng-touched {
 }
 
 @media (max-width: 388px) {
-  a.btn.btn-secondary {
+  a.btn.btn-secondary,
+  button.btn.btn-primary {
     margin-top: 1rem;
   }
 }

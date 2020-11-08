@@ -14,9 +14,11 @@ import {RouteBuilder} from '../../../../core/http/route-builder.http';
 @Injectable()
 export class DistrictService extends BaseService {
 
+  private getData: District = null;
   private createData: District = null;
   private getAllData: District[] = null;
 
+  public getDataObservable: EventEmitter<District> = new EventEmitter<District>();
   public createDataObservable: EventEmitter<District> = new EventEmitter<District>();
   public getAllDataObservable: EventEmitter<District[]> = new EventEmitter<District[]>();
 
@@ -96,6 +98,26 @@ export class DistrictService extends BaseService {
     return subject.asObservable();
   }
 
+  public get(id: number) {
+    const subject = new Subject<boolean>();
+    const url = this.routeBuilder
+      .service('place-service')
+      .model('districts')
+      .action('get')
+      .params([{id: id}])
+      .build();
+
+    this.requestHttp
+      .get(url)
+      .pipe(catchError(super.handleError.bind(this)))
+      .subscribe((data: District) => {
+
+        this.setGetData(data);
+        return subject.next(true);
+      });
+    return subject.asObservable();
+  }
+
   public getAll(page: number, limit: number) {
     const subject = new Subject<boolean>();
     const url = this.routeBuilder
@@ -124,6 +146,16 @@ export class DistrictService extends BaseService {
 
   public getCreateData(): District {
     return Object.assign({}, this.createData);
+  }
+
+  public setGetData(data: District): void {
+    this.getData = data;
+    this.getDataObservable.emit(this.getGetData());
+    return;
+  }
+
+  public getGetData(): District {
+    return Object.assign({}, this.getData);
   }
 
   public setGetAllData(data: District[]): void {
