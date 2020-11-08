@@ -71,7 +71,7 @@ export class InvoiceService extends BaseService {
     return subject.asObservable();
   }
 
-  public delete(id: number) {
+  public delete(id: string) {
     const subject = new Subject<boolean>();
     const url = this.routeBuilder
       .service('shipment-service')
