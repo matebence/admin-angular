@@ -282,24 +282,23 @@ const routes: Routes = [
               {
                 path: 'table/invoices',
                 component: InvoicesComponent,
-                data: {roles: [environment.APP_ROLE_ADMIN]},
+                data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
                 children: [
                   {
                     path: ':id',
-                    component: InvoicesComponent,
-                    data: {roles: [environment.APP_ROLE_ADMIN]}
+                    data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]}
                   },
                   {
                     path: 'new',
                     component: InvoicesFormComponent,
                     canDeactivate: [LeaveGuard],
-                    data: {roles: [environment.APP_ROLE_ADMIN]}
+                    data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]}
                   },
                   {
                     path: 'edit/:id',
                     component: InvoicesFormComponent,
                     canDeactivate: [LeaveGuard],
-                    data: {roles: [environment.APP_ROLE_ADMIN]}
+                    data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]}
                   }
                 ]
               },
