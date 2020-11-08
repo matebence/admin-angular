@@ -82,6 +82,9 @@ export class WarehouseService extends BaseService {
       .delete(url)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
+        let warehouses: Warehouse[] = this.getGetAllData().filter(e => e._id != id);
+        this.setGetAllData(warehouses);
+
         return subject.next(true);
       });
     return subject.asObservable();

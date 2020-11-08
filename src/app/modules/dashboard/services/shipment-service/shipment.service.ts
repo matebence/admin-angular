@@ -82,6 +82,9 @@ export class ShipmentService extends BaseService {
       .delete(url)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
+        let shipments: Shipment[] = this.getGetAllData().filter(e => e._id != id);
+        this.setGetAllData(shipments);
+
         return subject.next(true);
       });
     return subject.asObservable();

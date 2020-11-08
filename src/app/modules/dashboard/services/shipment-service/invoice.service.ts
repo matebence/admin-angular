@@ -84,6 +84,9 @@ export class InvoiceService extends BaseService {
       .delete(url)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
+        let invoices: Invoice[] = this.getGetAllData().filter(e => e._id != id);
+        this.setGetAllData(invoices);
+
         return subject.next(true);
       });
     return subject.asObservable();

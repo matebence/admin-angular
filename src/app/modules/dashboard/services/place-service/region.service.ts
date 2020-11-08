@@ -84,6 +84,9 @@ export class RegionService extends BaseService {
       .delete(url)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
+        let regions: Region[] = this.getGetAllData().filter(e => e.id != id);
+        this.setGetAllData(regions);
+
         return subject.next(true);
       });
     return subject.asObservable();

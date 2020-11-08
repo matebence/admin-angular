@@ -82,6 +82,9 @@ export class PreferenceService extends BaseService {
       .delete(url)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
+        let preferences: Preference[] = this.getGetAllData().filter(e => e.preferenceId != id);
+        this.setGetAllData(preferences);
+
         return subject.next(true);
       });
     return subject.asObservable();

@@ -82,6 +82,9 @@ export class StatusService extends BaseService {
       .delete(url)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
+        let status: Status[] = this.getGetAllData().filter(e => e._id != id);
+        this.setGetAllData(status);
+
         return subject.next(true);
       });
     return subject.asObservable();

@@ -82,6 +82,9 @@ export class PaymentService extends BaseService {
       .delete(url)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
+        let payments: Payment[] = this.getGetAllData().filter(e => e.paymentId != id);
+        this.setGetAllData(payments);
+
         return subject.next(true);
       });
     return subject.asObservable();

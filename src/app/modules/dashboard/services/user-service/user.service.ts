@@ -84,6 +84,9 @@ export class UserService extends BaseService {
       .delete(url)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
+        let users: User[] = this.getGetAllData().filter(e => e.userId != id);
+        this.setGetAllData(users);
+
         return subject.next(true);
       });
     return subject.asObservable();

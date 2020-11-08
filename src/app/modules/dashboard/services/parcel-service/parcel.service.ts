@@ -82,6 +82,9 @@ export class ParcelService extends BaseService {
       .delete(url)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
+        let parcels: Parcel[] = this.getGetAllData().filter(e => e.id != id);
+        this.setGetAllData(parcels);
+
         return subject.next(true);
       });
     return subject.asObservable();

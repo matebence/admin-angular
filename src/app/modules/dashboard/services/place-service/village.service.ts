@@ -92,6 +92,9 @@ export class VillageService extends BaseService {
       .delete(url)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
+        let villages: Village[] = this.getGetAllData().filter(e => e.id != id);
+        this.setGetAllData(villages);
+
         return subject.next(true);
       });
     return subject.asObservable();

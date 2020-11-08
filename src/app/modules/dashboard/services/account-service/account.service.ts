@@ -82,6 +82,9 @@ export class AccountService extends BaseService {
       .delete(url)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
+        let accounts: Account[] = this.getGetAllData().filter(e => e.accountId != id);
+        this.setGetAllData(accounts);
+
         return subject.next(true);
       });
     return subject.asObservable();

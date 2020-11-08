@@ -82,6 +82,9 @@ export class RoleService extends BaseService {
       .delete(url)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
+        let roles: Role[] = this.getGetAllData().filter(e => e.roleId != id);
+        this.setGetAllData(roles);
+
         return subject.next(true);
       });
     return subject.asObservable();

@@ -82,6 +82,9 @@ export class CategoryService extends BaseService {
       .delete(url)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
+        let categories: Category[] = this.getGetAllData().filter(e => e.id != id);
+        this.setGetAllData(categories);
+
         return subject.next(true);
       });
     return subject.asObservable();

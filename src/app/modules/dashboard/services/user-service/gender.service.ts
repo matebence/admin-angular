@@ -82,6 +82,9 @@ export class GenderService extends BaseService {
       .delete(url)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
+        let genders: Gender[] = this.getGetAllData().filter(e => e.genderId != id);
+        this.setGetAllData(genders);
+
         return subject.next(true);
       });
     return subject.asObservable();

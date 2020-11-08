@@ -82,6 +82,9 @@ export class PrivilegeService extends BaseService {
       .delete(url)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
+        let privileges: Privilege[] = this.getGetAllData().filter(e => e.privilegeId != id);
+        this.setGetAllData(privileges);
+
         return subject.next(true);
       });
     return subject.asObservable();

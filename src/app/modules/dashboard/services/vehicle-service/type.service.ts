@@ -82,6 +82,9 @@ export class TypeService extends BaseService {
       .delete(url)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
+        let types: Type[] = this.getGetAllData().filter(e => e._id != id);
+        this.setGetAllData(types);
+
         return subject.next(true);
       });
     return subject.asObservable();

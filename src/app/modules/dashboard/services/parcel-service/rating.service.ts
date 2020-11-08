@@ -82,6 +82,9 @@ export class RatingService extends BaseService {
       .delete(url)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
+        let ratings: Rating[] = this.getGetAllData().filter(e => e.id != id);
+        this.setGetAllData(ratings);
+
         return subject.next(true);
       });
     return subject.asObservable();

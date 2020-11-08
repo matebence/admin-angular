@@ -82,6 +82,9 @@ export class VehicleService extends BaseService {
       .delete(url)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
+        let vehicles: Vehicle[] = this.getGetAllData().filter(e => e._id != id);
+        this.setGetAllData(vehicles);
+
         return subject.next(true);
       });
     return subject.asObservable();

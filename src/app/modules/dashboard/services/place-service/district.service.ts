@@ -93,6 +93,9 @@ export class DistrictService extends BaseService {
       .delete(url)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
+        let districts: District[] = this.getGetAllData().filter(e => e.id != id);
+        this.setGetAllData(districts);
+
         return subject.next(true);
       });
     return subject.asObservable();

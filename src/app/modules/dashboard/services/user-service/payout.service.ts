@@ -82,6 +82,9 @@ export class PayoutService extends BaseService {
       .delete(url)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
+        let payouts: Payout[] = this.getGetAllData().filter(e => e.payoutId != id);
+        this.setGetAllData(payouts);
+
         return subject.next(true);
       });
     return subject.asObservable();
