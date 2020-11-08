@@ -82,10 +82,8 @@ export class DistrictsFormComponent implements OnInit, OnDestroy, CanComponentDe
           .pop();
 
         if (this.district == null) return;
-
-        this.formGroup.setValue({name: this.district.name, vehRegNum: this.district.vehRegNum, code: this.district.code, regionId: this.district.regionId, use: this.district.use});
-
         this.regionSelect = this.district.regionId;
+        this.formGroup.setValue({name: this.district.name, vehRegNum: this.district.vehRegNum, code: this.district.code, regionId: this.district.regionId, use: this.district.use});
 
         this.formButton = 'Aktualizovať';
         this.formTitle = 'Aktualizovanie okresu';

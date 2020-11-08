@@ -55,8 +55,8 @@ export class TypesFormComponent implements OnInit, OnDestroy, CanComponentDeacti
           .pop();
 
         if (this.type == null) return;
-
         this.formGroup.setValue({name: this.type.name});
+
         this.formButton = 'Aktualizovať';
         this.formTitle = 'Aktualizovanie typu dopravného prostriedka';
         this.assistent = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte aktualizovať dopravný prostriedok pre aplikáciu Blesk.';

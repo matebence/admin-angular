@@ -87,6 +87,7 @@ export class PaymentsComponent implements OnInit, OnDestroy {
     setTimeout(() => this.paymentService.delete(this.row.getData().paymentId)
       .subscribe(result => {
         if (!result) return;
+
         this.source.remove(this.row.getData());
         this.row = null;
       }), 1000);

@@ -100,11 +100,9 @@ export class VillagesFormComponent implements OnInit, OnDestroy, CanComponentDea
           .pop();
 
         if (this.village == null) return;
-
-        this.formGroup.setValue({fullName: this.village.fullName, shortName: this.village.shortName, zip: this.village.zip, use: this.village.use, regionId: this.village.regionId, districtId: this.village.districtId });
-
         this.regionSelect = this.village.regionId;
         this.districtSelect = this.village.districtId;
+        this.formGroup.setValue({fullName: this.village.fullName, shortName: this.village.shortName, zip: this.village.zip, use: this.village.use, regionId: this.village.regionId, districtId: this.village.districtId });
 
         this.formButton = 'Aktualizovať';
         this.formTitle = 'Aktualizovanie mesta/obce';

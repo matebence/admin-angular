@@ -87,6 +87,7 @@ export class PrivilegesComponent implements OnInit, OnDestroy {
     setTimeout(() => this.privilegeService.delete(this.row.getData().privilegeId)
       .subscribe(result => {
         if (!result) return;
+
         this.source.remove(this.row.getData());
         this.row = null;
       }), 1000);

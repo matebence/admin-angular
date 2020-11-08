@@ -60,6 +60,7 @@ export class AuthComponent implements OnInit, OnDestroy {
         .OAuth2Password(userName, password, remain)
         .subscribe((result: boolean) => {
           if (!result) return;
+
           this.formGroup.reset();
           this.router.navigate(['/dashboard/home']);
         })

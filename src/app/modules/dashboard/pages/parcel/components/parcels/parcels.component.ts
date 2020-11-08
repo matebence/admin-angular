@@ -87,6 +87,7 @@ export class ParcelsComponent implements OnInit, OnDestroy {
     setTimeout(() => this.parcelService.delete(this.row.getData().id)
       .subscribe(result => {
         if (!result) return;
+
         this.source.remove(this.row.getData());
         this.row = null;
       }), 1000);

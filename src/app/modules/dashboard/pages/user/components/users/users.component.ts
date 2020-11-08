@@ -87,6 +87,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     setTimeout(() => this.userService.delete(this.row.getData().accountId)
       .subscribe(result => {
         if (!result) return;
+
         this.source.remove(this.row.getData());
         this.row = null;
       }), 1000);

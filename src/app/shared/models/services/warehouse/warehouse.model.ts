@@ -1,5 +1,5 @@
 export interface Warehouse {
-  regions: Region[],
+  regions: any,
   _id: string,
   name: string,
   country: string,

@@ -2,6 +2,7 @@ declare const $: any;
 
 import {Subscription} from 'rxjs/index';
 import {LocalDataSource} from 'ng2-smart-table';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Row} from 'ng2-smart-table/lib/lib/data-set/row';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 
@@ -30,7 +31,9 @@ export class WarehousesComponent implements OnInit, OnDestroy {
 
   public settings: any = warehouseTableConfig;
 
-  public constructor(private warehouseService: WarehouseService) {
+  public constructor(private router: Router,
+                     private activatedRoute: ActivatedRoute,
+                     private warehouseService: WarehouseService) {
   }
 
   public ngOnInit(): void {
@@ -63,6 +66,7 @@ export class WarehousesComponent implements OnInit, OnDestroy {
   }
 
   public onTableCreateData(row: boolean): void {
+    if (row) this.router.navigate(['new'], {relativeTo: this.activatedRoute});
     return;
   }
 
@@ -78,6 +82,7 @@ export class WarehousesComponent implements OnInit, OnDestroy {
   }
 
   public onTableEditData(row: Row): void {
+    this.router.navigate(['edit', row.getData()._id], {relativeTo: this.activatedRoute});
     this.row = row;
     return;
   }
@@ -87,6 +92,7 @@ export class WarehousesComponent implements OnInit, OnDestroy {
     setTimeout(() => this.warehouseService.delete(this.row.getData()._id)
       .subscribe(result => {
         if (!result) return;
+
         this.source.remove(this.row.getData());
         this.row = null;
       }), 1000);

@@ -93,11 +93,10 @@ export class VehiclesFormComponent implements OnInit, OnDestroy, CanComponentDea
           .pop();
 
         if (this.vehicle == null) return;
-
-        this.formGroup.setValue({name: this.vehicle.name, courier: this.vehicle.courier, type: this.vehicle.type});
-
         this.typeSelect = this.vehicle.type._id;
         this.courierSelect = this.vehicle.courier.courierId;
+        this.formGroup.setValue({name: this.vehicle.name, courier: this.vehicle.courier, type: this.vehicle.type});
+
 
         this.formButton = 'Aktualizovať';
         this.formTitle = 'Aktualizovanie dopravného prostriedka';

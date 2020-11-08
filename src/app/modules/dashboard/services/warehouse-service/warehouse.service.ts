@@ -1,6 +1,6 @@
 import {FormGroup} from '@angular/forms';
 import {Observable, Subject} from 'rxjs/index';
-import {catchError} from 'rxjs/internal/operators';
+import {catchError, switchMap} from 'rxjs/internal/operators';
 import {EventEmitter, Injectable} from '@angular/core';
 
 import {BaseService} from '../../../../core/services/base.service';
@@ -9,6 +9,8 @@ import {Warehouse} from '../../../../shared/models/services/warehouse/warehouse.
 
 import {RequestHTTP} from '../../../../core/http/request.http';
 import {RouteBuilder} from '../../../../core/http/route-builder.http';
+import {RegionService} from "../place-service/region.service";
+import {Region} from "../../../../shared/models/services/place/region.model";
 
 @Injectable()
 export class WarehouseService extends BaseService {
@@ -20,7 +22,8 @@ export class WarehouseService extends BaseService {
   public getAllDataObservable: EventEmitter<Warehouse[]> = new EventEmitter<Warehouse[]>();
 
   public constructor(private requestHttp: RequestHTTP,
-                     private routeBuilder: RouteBuilder,) {
+                     private routeBuilder: RouteBuilder,
+                     private regionService: RegionService) {
     super();
   }
 
@@ -35,11 +38,16 @@ export class WarehouseService extends BaseService {
     this.requestHttp
       .post(url, formGroup.value)
       .pipe(catchError(super.handleError.bind(this)))
-      .subscribe((data: Warehouse) => {
-
+      .pipe(switchMap((data: Warehouse) => {
         this.setCreateData(data);
+        return this.regionService.getAll(1, 100);
+      }))
+      .subscribe((result: boolean) => {
+        if (!result) return;
+
         let warehouses: Warehouse[] = this.getGetAllData();
-        warehouses.unshift(data);
+        const regions: Region[] = this.regionService.getGetAllData().filter(e => formGroup.value.regions.includes(e.id));
+        warehouses.unshift({...this.getCreateData(), regions: regions});
         this.setGetAllData(warehouses);
 
         return subject.next(true);
@@ -59,9 +67,15 @@ export class WarehouseService extends BaseService {
     this.requestHttp
       .put(url, warehouse)
       .pipe(catchError(super.handleError.bind(this)))
-      .subscribe(() => {
+      .pipe(switchMap(() => {
+        return this.regionService.getAll(1, 100);
+      }))
+      .subscribe((result: boolean) => {
+        if (!result) return;
+
         let warehouses: Warehouse[] = this.getGetAllData().filter(e => e._id != warehouse._id);
-        warehouses.unshift(warehouse);
+        const regions: Region[] = this.regionService.getGetAllData().filter(e => warehouse.regions.includes(e.id));
+        warehouses.unshift({...warehouse, regions: regions});
         this.setGetAllData(warehouses);
 
         return subject.next(true);

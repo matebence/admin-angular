@@ -87,6 +87,7 @@ export class RolesComponent implements OnInit, OnDestroy {
     setTimeout(() => this.roleService.delete(this.row.getData().roleId)
       .subscribe(result => {
         if (!result) return;
+
         this.source.remove(this.row.getData());
         this.row = null;
       }), 1000);

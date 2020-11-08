@@ -60,8 +60,8 @@ export class RegionsFormComponent implements OnInit, OnDestroy, CanComponentDeac
           .pop();
 
         if (this.region == null) return;
-
         this.formGroup.setValue({name: this.region.name, shortcut: this.region.shortcut, use: this.region.use});
+
         this.formButton = 'Aktualizovať';
         this.formTitle = 'Aktualizovanie kraja';
         this.assistent = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte aktualizovať kraj pre aplikáciu Blesk.';

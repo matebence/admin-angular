@@ -41,10 +41,11 @@ export class DistrictService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .pipe(switchMap((data: District) => {
         this.setCreateData(data);
-        return this.regionService.get(data.regionId)
+        return this.regionService.get(formGroup.value.regionId)
       }))
       .subscribe((result: boolean) => {
         if (!result) return;
+
         let districts: District[] = this.getGetAllData();
         districts.unshift({...this.getCreateData(), region: this.regionService.getGetData()});
         this.setGetAllData(districts);
@@ -71,6 +72,7 @@ export class DistrictService extends BaseService {
       }))
       .subscribe((result: boolean) => {
         if (!result) return;
+
         let districts: District[] = this.getGetAllData().filter(e => e.id != district.id);
         districts.unshift({...district, region: this.regionService.getGetData()});
         this.setGetAllData(districts);

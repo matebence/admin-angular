@@ -87,6 +87,7 @@ export class PayoutsComponent implements OnInit, OnDestroy {
     setTimeout(() => this.payoutService.delete(this.row.getData().payoutId)
       .subscribe(result => {
         if (!result) return;
+
         this.source.remove(this.row.getData());
         this.row = null;
       }), 1000);

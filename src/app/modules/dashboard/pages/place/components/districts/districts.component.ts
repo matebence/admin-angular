@@ -92,6 +92,7 @@ export class DistrictsComponent implements OnInit, OnDestroy {
     setTimeout(() => this.districtService.delete(this.row.getData().id)
       .subscribe(result => {
         if (!result) return;
+
         this.source.remove(this.row.getData());
         this.row = null;
       }), 1000);

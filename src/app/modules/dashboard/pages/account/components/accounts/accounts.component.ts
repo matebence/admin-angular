@@ -87,6 +87,7 @@ export class AccountsComponent implements OnInit, OnDestroy {
     setTimeout(() => this.accountService.delete(this.row.getData().accountId)
       .subscribe(result => {
         if (!result) return;
+
         this.source.remove(this.row.getData());
         this.row = null;
       }), 1000);
