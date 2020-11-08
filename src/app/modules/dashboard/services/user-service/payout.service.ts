@@ -39,7 +39,7 @@ export class PayoutService extends BaseService {
 
         this.setCreateData(data);
         let payouts: Payout[] = this.getGetAllData();
-        payouts.push(data);
+        payouts.unshift(data);
         this.setGetAllData(payouts);
 
         return subject.next(true);
@@ -61,7 +61,7 @@ export class PayoutService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
         let payouts: Payout[] = this.getGetAllData().filter(e => e.payoutId != payout.payoutId);
-        payouts.push(payout);
+        payouts.unshift(payout);
         this.setGetAllData(payouts);
 
         return subject.next(true);

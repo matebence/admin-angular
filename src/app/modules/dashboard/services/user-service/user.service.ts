@@ -5,6 +5,7 @@ import {EventEmitter, Injectable} from '@angular/core';
 
 import {BaseService} from '../../../../core/services/base.service';
 
+import {Search} from '../../../../shared/models/common/search.model';
 import {User} from '../../../../shared/models/services/user/user.model';
 
 import {RequestHTTP} from '../../../../core/http/request.http';
@@ -16,10 +17,12 @@ export class UserService extends BaseService {
   private getData: User = null;
   private createData: User = null;
   private getAllData: User[] = null;
+  private searchData: User[] = null;
 
   public getDataObservable: EventEmitter<User> = new EventEmitter<User>();
   public createDataObservable: EventEmitter<User> = new EventEmitter<User>();
   public getAllDataObservable: EventEmitter<User[]> = new EventEmitter<User[]>();
+  public searchDataObservable: EventEmitter<User[]> = new EventEmitter<User[]>();
 
   public constructor(private requestHttp: RequestHTTP,
                      private routeBuilder: RouteBuilder,) {
@@ -41,7 +44,7 @@ export class UserService extends BaseService {
 
         this.setCreateData(data);
         let users: User[] = this.getGetAllData();
-        users.push(data);
+        users.unshift(data);
         this.setGetAllData(users);
 
         return subject.next(true);
@@ -63,7 +66,7 @@ export class UserService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
         let users: User[] = this.getGetAllData().filter(e => e.userId != user.userId);
-        users.push(user);
+        users.unshift(user);
         this.setGetAllData(users);
 
         return subject.next(true);
@@ -132,6 +135,25 @@ export class UserService extends BaseService {
     return subject.asObservable();
   }
 
+  public search(search: Search): Observable<boolean> {
+    const subject = new Subject<boolean>();
+    const url = this.routeBuilder
+      .service('user-service')
+      .model('users')
+      .action('search')
+      .build();
+
+    this.requestHttp
+      .post(url, search)
+      .pipe(catchError(super.handleError.bind(this)))
+      .subscribe((data: User[]) => {
+
+        this.setSearchData(data);
+        return subject.next(true);
+      });
+    return subject.asObservable();
+  }
+
   public setCreateData(data: User): void {
     this.createData = data;
     this.createDataObservable.emit(this.getCreateData());
@@ -160,5 +182,15 @@ export class UserService extends BaseService {
 
   public getGetAllData(): User[] {
     return Object.assign([], this.getAllData);
+  }
+
+  public setSearchData(data: User[]): void {
+    this.searchData = data;
+    this.searchDataObservable.emit(this.getSearchData());
+    return;
+  }
+
+  public getSearchData(): User[] {
+    return Object.assign([], this.searchData);
   }
 }

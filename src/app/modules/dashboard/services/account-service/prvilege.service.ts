@@ -39,7 +39,7 @@ export class PrivilegeService extends BaseService {
 
         this.setCreateData(data);
         let privileges: Privilege[] = this.getGetAllData();
-        privileges.push(data);
+        privileges.unshift(data);
         this.setGetAllData(privileges);
 
         return subject.next(true);
@@ -61,7 +61,7 @@ export class PrivilegeService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
         let privileges: Privilege[] = this.getGetAllData().filter(e => e.privilegeId != privilege.privilegeId);
-        privileges.push(privilege);
+        privileges.unshift(privilege);
         this.setGetAllData(privileges);
 
         return subject.next(true);

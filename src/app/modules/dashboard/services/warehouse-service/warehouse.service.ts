@@ -39,7 +39,7 @@ export class WarehouseService extends BaseService {
 
         this.setCreateData(data);
         let warehouses: Warehouse[] = this.getGetAllData();
-        warehouses.push(data);
+        warehouses.unshift(data);
         this.setGetAllData(warehouses);
 
         return subject.next(true);
@@ -61,7 +61,7 @@ export class WarehouseService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
         let warehouses: Warehouse[] = this.getGetAllData().filter(e => e._id != warehouse._id);
-        warehouses.push(warehouse);
+        warehouses.unshift(warehouse);
         this.setGetAllData(warehouses);
 
         return subject.next(true);

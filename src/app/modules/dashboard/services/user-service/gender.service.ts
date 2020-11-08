@@ -39,7 +39,7 @@ export class GenderService extends BaseService {
 
         this.setCreateData(data);
         let genders: Gender[] = this.getGetAllData();
-        genders.push(data);
+        genders.unshift(data);
         this.setGetAllData(genders);
 
         return subject.next(true);
@@ -61,7 +61,7 @@ export class GenderService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
         let genders: Gender[] = this.getGetAllData().filter(e => e.genderId != gender.genderId);
-        genders.push(gender);
+        genders.unshift(gender);
         this.setGetAllData(genders);
 
         return subject.next(true);

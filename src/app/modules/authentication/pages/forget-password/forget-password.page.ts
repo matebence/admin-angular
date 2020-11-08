@@ -44,7 +44,7 @@ export class ForgetPasswordPage implements OnInit, OnDestroy {
             return this.authorizationService.recover(params)
           }
         }))
-        .subscribe((recover: Boolean) => console.log(recover))
+        .subscribe((recover: boolean) => console.log(recover))
     );
 
     this.subscriptions.push(

@@ -39,7 +39,7 @@ export class CategoryService extends BaseService {
 
         this.setCreateData(data);
         let categories: Category[] = this.getGetAllData();
-        categories.push(data);
+        categories.unshift(data);
         this.setGetAllData(categories);
 
         return subject.next(true);
@@ -61,7 +61,7 @@ export class CategoryService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
         let categories: Category[] = this.getGetAllData().filter(e => e.id != category.id);
-        categories.push(category);
+        categories.unshift(category);
         this.setGetAllData(categories);
 
         return subject.next(true);

@@ -65,7 +65,7 @@ export class TypesComponent implements OnInit, OnDestroy {
     return;
   }
 
-  public onTableCreateData(row: Boolean): void {
+  public onTableCreateData(row: boolean): void {
     if (row) this.router.navigate(['new'], {relativeTo: this.activatedRoute});
     return;
   }

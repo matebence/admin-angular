@@ -32,7 +32,7 @@ export class SignOutPage implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.authorizationService
         .signOut()
-        .subscribe((result: Boolean) => console.log(result))
+        .subscribe((result: boolean) => console.log(result))
     );
     return;
   }

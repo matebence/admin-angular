@@ -39,7 +39,7 @@ export class RatingService extends BaseService {
 
         this.setCreateData(data);
         let ratings: Rating[] = this.getGetAllData();
-        ratings.push(data);
+        ratings.unshift(data);
         this.setGetAllData(ratings);
 
         return subject.next(true);
@@ -61,7 +61,7 @@ export class RatingService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
         let ratings: Rating[] = this.getGetAllData().filter(e => e.id != rating.id);
-        ratings.push(rating);
+        ratings.unshift(rating);
         this.setGetAllData(ratings);
 
         return subject.next(true);

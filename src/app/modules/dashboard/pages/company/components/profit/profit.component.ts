@@ -70,7 +70,7 @@ export class ProfitComponent implements OnInit, OnDestroy {
     return;
   }
 
-  public onTableCreateData(row: Boolean): void {
+  public onTableCreateData(row: boolean): void {
     return;
   }
 

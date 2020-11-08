@@ -41,7 +41,7 @@ export class InvoiceService extends BaseService {
 
         this.setCreateData(data);
         let invoices: Invoice[] = this.getGetAllData();
-        invoices.push(data);
+        invoices.unshift(data);
         this.setGetAllData(invoices);
 
         return subject.next(true);
@@ -63,7 +63,7 @@ export class InvoiceService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
         let invoices: Invoice[] = this.getGetAllData().filter(e => e._id != invoice._id);
-        invoices.push(invoice);
+        invoices.unshift(invoice);
         this.setGetAllData(invoices);
 
         return subject.next(true);

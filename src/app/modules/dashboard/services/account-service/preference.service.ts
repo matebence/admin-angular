@@ -39,7 +39,7 @@ export class PreferenceService extends BaseService {
 
         this.setCreateData(data);
         let preferences: Preference[] = this.getGetAllData();
-        preferences.push(data);
+        preferences.unshift(data);
         this.setGetAllData(preferences);
 
         return subject.next(true);
@@ -61,7 +61,7 @@ export class PreferenceService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
         let preferences: Preference[] = this.getGetAllData().filter(e => e.preferenceId != preference.preferenceId);
-        preferences.push(preference);
+        preferences.unshift(preference);
         this.setGetAllData(preferences);
 
         return subject.next(true);

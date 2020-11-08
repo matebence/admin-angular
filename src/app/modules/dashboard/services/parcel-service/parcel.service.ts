@@ -39,7 +39,7 @@ export class ParcelService extends BaseService {
 
         this.setCreateData(data);
         let parcels: Parcel[] = this.getGetAllData();
-        parcels.push(data);
+        parcels.unshift(data);
         this.setGetAllData(parcels);
 
         return subject.next(true);
@@ -61,7 +61,7 @@ export class ParcelService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
         let parcels: Parcel[] = this.getGetAllData().filter(e => e.id != parcel.id);
-        parcels.push(parcel);
+        parcels.unshift(parcel);
         this.setGetAllData(parcels);
 
         return subject.next(true);

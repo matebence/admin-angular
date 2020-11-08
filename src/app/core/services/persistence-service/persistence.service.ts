@@ -27,7 +27,7 @@ export class PersistenceService extends BaseService {
     }
   }
 
-  public remove(key: string): Boolean {
+  public remove(key: string): boolean {
     try {
       localStorage.removeItem(key);
       return true;
@@ -56,7 +56,7 @@ export class PersistenceService extends BaseService {
     return;
   }
 
-  public drop(key: string): Boolean {
+  public drop(key: string): boolean {
     try {
       const existingData = JSON.parse(localStorage.getItem(key));
       delete existingData[key];

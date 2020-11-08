@@ -49,7 +49,7 @@ export class ResetComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.authorizationService
         .forgetPassword(email)
-        .subscribe((result: Boolean) => this.formGroup.reset())
+        .subscribe((result: boolean) => this.formGroup.reset())
     );
     return;
   }

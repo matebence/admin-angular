@@ -1,14 +1,18 @@
 import {FormGroup} from '@angular/forms';
 import {Observable, Subject} from 'rxjs/index';
-import {catchError} from 'rxjs/internal/operators';
 import {EventEmitter, Injectable} from '@angular/core';
+import {catchError, switchMap} from 'rxjs/internal/operators';
 
+import {TypeService} from './type.service';
+import {UserService} from '../user-service/user.service';
 import {BaseService} from '../../../../core/services/base.service';
 
 import {Vehicle} from '../../../../shared/models/services/vehicle/vehicle.model';
 
 import {RequestHTTP} from '../../../../core/http/request.http';
 import {RouteBuilder} from '../../../../core/http/route-builder.http';
+import {Type} from "../../../../shared/models/services/vehicle/type.model";
+import {User} from "../../../../shared/models/services/user/user.model";
 
 @Injectable()
 export class VehicleService extends BaseService {
@@ -19,7 +23,9 @@ export class VehicleService extends BaseService {
   public createDataObservable: EventEmitter<Vehicle> = new EventEmitter<Vehicle>();
   public getAllDataObservable: EventEmitter<Vehicle[]> = new EventEmitter<Vehicle[]>();
 
-  public constructor(private requestHttp: RequestHTTP,
+  public constructor(private typeService: TypeService,
+                     private userService: UserService,
+                     private requestHttp: RequestHTTP,
                      private routeBuilder: RouteBuilder,) {
     super();
   }
@@ -35,11 +41,17 @@ export class VehicleService extends BaseService {
     this.requestHttp
       .post(url, formGroup.value)
       .pipe(catchError(super.handleError.bind(this)))
-      .subscribe((data: Vehicle) => {
-
+      .pipe(switchMap((data: Vehicle) => {
         this.setCreateData(data);
+        this.typeService.get(formGroup.value.type);
+        return this.userService.get(formGroup.value.courier);
+      }))
+      .subscribe((result: boolean) => {
+        if (!result) return;
+
         let vehicles: Vehicle[] = this.getGetAllData();
-        vehicles.push(data);
+        const user: User = this.userService.getGetData();
+        vehicles.unshift({...this.getCreateData(), courier: {courierId: user.accountId, userName: user.userName, email: user.email}, type: this.typeService.getGetData()});
         this.setGetAllData(vehicles);
 
         return subject.next(true);
@@ -59,9 +71,16 @@ export class VehicleService extends BaseService {
     this.requestHttp
       .put(url, vehicle)
       .pipe(catchError(super.handleError.bind(this)))
-      .subscribe(() => {
+      .pipe(switchMap(() => {
+        this.typeService.get(vehicle.type._id);
+        return this.userService.get(vehicle.courier.courierId);
+      }))
+      .subscribe((result: boolean) => {
+        if (!result) return;
+
+        const user: User = this.userService.getGetData();
         let vehicles: Vehicle[] = this.getGetAllData().filter(e => e._id != vehicle._id);
-        vehicles.push(vehicle);
+        vehicles.unshift({...vehicle, courier: {courierId: user.accountId, userName: user.userName, email: user.email}, type: this.typeService.getGetData()});
         this.setGetAllData(vehicles);
 
         return subject.next(true);

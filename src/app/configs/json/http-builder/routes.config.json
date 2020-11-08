@@ -25,7 +25,7 @@
               "value": "roles/search"
             },
             "join": {
-              "value": "join/{column}"
+              "value": "roles/join/{column}"
             }
           },
           "privileges": {
@@ -48,7 +48,7 @@
               "value": "privileges/search"
             },
             "join": {
-              "value": "join/{column}"
+              "value": "privileges/join/{column}"
             }
           },
           "accounts": {
@@ -71,7 +71,7 @@
               "value": "accounts/search"
             },
             "join": {
-              "value": "join/{column}"
+              "value": "accounts/join/{column}"
             }
           },
           "preferences": {
@@ -94,7 +94,7 @@
               "value": "preferences/search"
             },
             "join": {
-              "value": "join/{column}"
+              "value": "preferences/join/{column}"
             }
           }
         }
@@ -157,7 +157,7 @@
               "value": "status/search"
             },
             "join": {
-              "value": "join/{column}"
+              "value": "status/join/{column}"
             }
           },
           "conversation": {
@@ -180,7 +180,7 @@
               "value": "conversation/search"
             },
             "join": {
-              "value": "join/{column}"
+              "value": "conversation/join/{column}"
             }
           },
           "communications": {
@@ -203,7 +203,7 @@
               "value": "communications/search"
             },
             "join": {
-              "value": "join/{column}"
+              "value": "communications/join/{column}"
             }
           }
         }
@@ -231,7 +231,7 @@
               "value": "categories/search"
             },
             "join": {
-              "value": "join/{column}"
+              "value": "categories/join/{column}"
             }
           },
           "ratings": {
@@ -254,7 +254,7 @@
               "value": "ratings/search"
             },
             "join": {
-              "value": "join/{column}"
+              "value": "ratings/join/{column}"
             }
           },
           "parcels": {
@@ -277,7 +277,7 @@
               "value": "parcels/search"
             },
             "join": {
-              "value": "join/{column}"
+              "value": "parcels/join/{column}"
             }
           }
         }
@@ -305,7 +305,7 @@
               "value": "regions/search"
             },
             "join": {
-              "value": "join/{column}"
+              "value": "regions/join/{column}"
             }
           },
           "districts": {
@@ -328,7 +328,7 @@
               "value": "districts/search"
             },
             "join": {
-              "value": "join/{column}"
+              "value": "districts/join/{column}"
             }
           },
           "villages": {
@@ -351,7 +351,7 @@
               "value": "villages/search"
             },
             "join": {
-              "value": "join/{column}"
+              "value": "villages/join/{column}"
             }
           }
         }
@@ -379,7 +379,7 @@
               "value": "status/search"
             },
             "join": {
-              "value": "join/{column}"
+              "value": "status/join/{column}"
             }
           },
           "invoices": {
@@ -402,7 +402,7 @@
               "value": "invoices/search"
             },
             "join": {
-              "value": "join/{column}"
+              "value": "invoices/join/{column}"
             }
           },
           "shipments": {
@@ -425,7 +425,7 @@
               "value": "shipments/search"
             },
             "join": {
-              "value": "join/{column}"
+              "value": "shipments/join/{column}"
             }
           },
           "prices": {
@@ -461,7 +461,7 @@
               "value": "genders/search"
             },
             "join": {
-              "value": "join/{column}"
+              "value": "genders/join/{column}"
             }
           },
           "payments": {
@@ -484,7 +484,7 @@
               "value": "payments/search"
             },
             "join": {
-              "value": "join/{column}"
+              "value": "payments/join/{column}"
             }
           },
           "payouts": {
@@ -507,7 +507,7 @@
               "value": "payouts/search"
             },
             "join": {
-              "value": "join/{column}"
+              "value": "payouts/join/{column}"
             }
           },
           "users": {
@@ -530,7 +530,7 @@
               "value": "users/search"
             },
             "join": {
-              "value": "join/{column}"
+              "value": "users/join/{column}"
             }
           }
         }
@@ -558,7 +558,7 @@
               "value": "types/search"
             },
             "join": {
-              "value": "join/{column}"
+              "value": "types/join/{column}"
             }
           },
           "vehicles": {
@@ -581,7 +581,7 @@
               "value": "vehicles/search"
             },
             "join": {
-              "value": "join/{column}"
+              "value": "vehicles/join/{column}"
             }
           }
         }
@@ -609,7 +609,7 @@
               "value": "warehouses/search"
             },
             "join": {
-              "value": "join/{column}"
+              "value": "warehouses/join/{column}"
             }
           }
         }

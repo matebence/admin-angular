@@ -69,9 +69,14 @@ export class VillageService extends BaseService {
     this.requestHttp
       .put(url, village)
       .pipe(catchError(super.handleError.bind(this)))
-      .subscribe(() => {
+      .pipe(switchMap(() => {
+        this.districtService.get(village.districtId);
+        return this.regionService.get(village.regionId);
+      }))
+      .subscribe((result: boolean) => {
+        if (!result) return;
         let villages: Village[] = this.getGetAllData().filter(e => e.id != village.id);
-        villages.push(village);
+        villages.unshift({...village, region: this.regionService.getGetData(), district: this.districtService.getGetData()});
         this.setGetAllData(villages);
 
         return subject.next(true);

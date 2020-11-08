@@ -39,7 +39,7 @@ export class ShipmentService extends BaseService {
 
         this.setCreateData(data);
         let shipments: Shipment[] = this.getGetAllData();
-        shipments.push(data);
+        shipments.unshift(data);
         this.setGetAllData(shipments);
 
         return subject.next(true);
@@ -61,7 +61,7 @@ export class ShipmentService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
         let shipments: Shipment[] = this.getGetAllData().filter(e => e._id != shipment._id);
-        shipments.push(shipment);
+        shipments.unshift(shipment);
         this.setGetAllData(shipments);
 
         return subject.next(true);

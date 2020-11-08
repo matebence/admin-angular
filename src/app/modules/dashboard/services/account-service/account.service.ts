@@ -39,7 +39,7 @@ export class AccountService extends BaseService {
 
         this.setCreateData(data);
         let accounts: Account[] = this.getGetAllData();
-        accounts.push(data);
+        accounts.unshift(data);
         this.setGetAllData(accounts);
 
         return subject.next(true);
@@ -61,7 +61,7 @@ export class AccountService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
         let accounts: Account[] = this.getGetAllData().filter(e => e.accountId != account.accountId);
-        accounts.push(account);
+        accounts.unshift(account);
         this.setGetAllData(accounts);
 
         return subject.next(true);

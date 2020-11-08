@@ -39,7 +39,7 @@ export class StatusService extends BaseService {
 
         this.setCreateData(data);
         let status: Status[] = this.getGetAllData();
-        status.push(data);
+        status.unshift(data);
         this.setGetAllData(status);
 
         return subject.next(true);
@@ -61,7 +61,7 @@ export class StatusService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
         let status: Status[] = this.getGetAllData().filter(e => e._id != state._id);
-        status.push(state);
+        status.unshift(state);
         this.setGetAllData(status);
 
         return subject.next(true);

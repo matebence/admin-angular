@@ -13,9 +13,11 @@ import {RouteBuilder} from '../../../../core/http/route-builder.http';
 @Injectable()
 export class TypeService extends BaseService {
 
+  private getData: Type = null;
   private createData: Type = null;
   private getAllData: Type[] = null;
 
+  public getDataObservable: EventEmitter<Type> = new EventEmitter<Type>();
   public createDataObservable: EventEmitter<Type> = new EventEmitter<Type>();
   public getAllDataObservable: EventEmitter<Type[]> = new EventEmitter<Type[]>();
 
@@ -39,7 +41,7 @@ export class TypeService extends BaseService {
 
         this.setCreateData(data);
         let types: Type[] = this.getGetAllData();
-        types.push(data);
+        types.unshift(data);
         this.setGetAllData(types);
 
         return subject.next(true);
@@ -61,7 +63,7 @@ export class TypeService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
         let types: Type[] = this.getGetAllData().filter(e => e._id != type._id);
-        types.push(type);
+        types.unshift(type);
         this.setGetAllData(types);
 
         return subject.next(true);
@@ -85,6 +87,26 @@ export class TypeService extends BaseService {
         let types: Type[] = this.getGetAllData().filter(e => e._id != id);
         this.setGetAllData(types);
 
+        return subject.next(true);
+      });
+    return subject.asObservable();
+  }
+
+  public get(id: string) {
+    const subject = new Subject<boolean>();
+    const url = this.routeBuilder
+      .service('vehicle-service')
+      .model('types')
+      .action('get')
+      .params([{id: id}])
+      .build();
+
+    this.requestHttp
+      .get(url)
+      .pipe(catchError(super.handleError.bind(this)))
+      .subscribe((data: Type) => {
+
+        this.setGetData(data);
         return subject.next(true);
       });
     return subject.asObservable();
@@ -118,6 +140,16 @@ export class TypeService extends BaseService {
 
   public getCreateData(): Type {
     return Object.assign({}, this.createData);
+  }
+
+  public setGetData(data: Type): void {
+    this.getData = data;
+    this.getDataObservable.emit(this.getGetData());
+    return;
+  }
+
+  public getGetData(): Type {
+    return Object.assign({}, this.getData);
   }
 
   public setGetAllData(data: Type[]): void {

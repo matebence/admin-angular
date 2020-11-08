@@ -39,7 +39,7 @@ export class RoleService extends BaseService {
 
         this.setCreateData(data);
         let roles: Role[] = this.getGetAllData();
-        roles.push(data);
+        roles.unshift(data);
         this.setGetAllData(roles);
 
         return subject.next(true);
@@ -61,7 +61,7 @@ export class RoleService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
         let roles: Role[] = this.getGetAllData().filter(e => e.roleId != role.roleId);
-        roles.push(role);
+        roles.unshift(role);
         this.setGetAllData(roles);
 
         return subject.next(true);

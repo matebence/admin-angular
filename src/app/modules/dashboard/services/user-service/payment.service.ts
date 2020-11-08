@@ -39,7 +39,7 @@ export class PaymentService extends BaseService {
 
         this.setCreateData(data);
         let payments: Payment[] = this.getGetAllData();
-        payments.push(data);
+        payments.unshift(data);
         this.setGetAllData(payments);
 
         return subject.next(true);
@@ -61,7 +61,7 @@ export class PaymentService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
         let payments: Payment[] = this.getGetAllData().filter(e => e.paymentId != payment.paymentId);
-        payments.push(payment);
+        payments.unshift(payment);
         this.setGetAllData(payments);
 
         return subject.next(true);

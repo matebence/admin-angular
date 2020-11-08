@@ -84,6 +84,9 @@ export class DistrictsFormComponent implements OnInit, OnDestroy, CanComponentDe
         if (this.district == null) return;
 
         this.formGroup.setValue({name: this.district.name, vehRegNum: this.district.vehRegNum, code: this.district.code, regionId: this.district.regionId, use: this.district.use});
+
+        this.regionSelect = this.district.regionId;
+
         this.formButton = 'Aktualizovať';
         this.formTitle = 'Aktualizovanie okresu';
         this.assistent = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte aktualizovať okres pre aplikáciu Blesk.';
