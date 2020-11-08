@@ -12,6 +12,9 @@ export default {
     vehRegNum: {
       title: 'EČV'
     },
+    code: {
+      title: 'Kód'
+    },
     region: {
       title: 'Kraj',
       filter: false,

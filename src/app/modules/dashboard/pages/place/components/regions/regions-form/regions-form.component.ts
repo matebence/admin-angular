@@ -52,14 +52,14 @@ export class RegionsFormComponent implements OnInit, OnDestroy, CanComponentDeac
   }
 
   public ngOnInit(): void {
-    if (this.activatedRoute == null) return;
-
     this.subscriptions.push(
       this.activatedRoute.params.subscribe((params: Params) => {
         this.region = this.regionService
           .getGetAllData()
           .filter(e => e.id == params.id)
           .pop();
+
+        if (this.region == null) return;
 
         this.formGroup.setValue({name: this.region.name, shortcut: this.region.shortcut, use: this.region.use});
         this.formButton = 'Aktualizovať';

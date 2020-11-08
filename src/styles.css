@@ -11640,6 +11640,17 @@ a:focus {
   content: '\f105';
 }
 
+.card.shadow.mb-4 {
+  max-height: 30rem;
+  overflow: auto;
+}
+
+@media (max-width: 768px) {
+  .card.shadow.mb-4 {
+    max-height: unset;
+  }
+}
+
 .chart-area {
   position: relative;
   height: 10rem;

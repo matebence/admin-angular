@@ -13,9 +13,11 @@ import {RouteBuilder} from '../../../../core/http/route-builder.http';
 @Injectable()
 export class RegionService extends BaseService {
 
+  private getData: Region = null;
   private createData: Region = null;
   private getAllData: Region[] = null;
 
+  public getDataObservable: EventEmitter<Region> = new EventEmitter<Region>();
   public createDataObservable: EventEmitter<Region> = new EventEmitter<Region>();
   public getAllDataObservable: EventEmitter<Region[]> = new EventEmitter<Region[]>();
 
@@ -39,7 +41,7 @@ export class RegionService extends BaseService {
 
         this.setCreateData(data);
         let regions: Region[] = this.getGetAllData();
-        regions.push(data);
+        regions.unshift(data);
         this.setGetAllData(regions);
 
         return subject.next(true);
@@ -61,7 +63,7 @@ export class RegionService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
         let regions: Region[] = this.getGetAllData().filter(e => e.id != region.id);
-        regions.push(region);
+        regions.unshift(region);
         this.setGetAllData(regions);
 
         return subject.next(true);
@@ -82,6 +84,26 @@ export class RegionService extends BaseService {
       .delete(url)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
+        return subject.next(true);
+      });
+    return subject.asObservable();
+  }
+
+  public get(id: number) {
+    const subject = new Subject<boolean>();
+    const url = this.routeBuilder
+      .service('place-service')
+      .model('regions')
+      .action('get')
+      .params([{id: id}])
+      .build();
+
+    this.requestHttp
+      .get(url)
+      .pipe(catchError(super.handleError.bind(this)))
+      .subscribe((data: Region) => {
+
+        this.setGetData(data);
         return subject.next(true);
       });
     return subject.asObservable();
@@ -115,6 +137,16 @@ export class RegionService extends BaseService {
 
   public getCreateData(): Region {
     return Object.assign({}, this.createData);
+  }
+
+  public setGetData(data: Region): void {
+    this.getData = data;
+    this.getDataObservable.emit(this.getGetData());
+    return;
+  }
+
+  public getGetData(): Region {
+    return Object.assign({}, this.getData);
   }
 
   public setGetAllData(data: Region[]): void {

@@ -1,8 +1,9 @@
 import {FormGroup} from '@angular/forms';
 import {Observable, Subject} from 'rxjs/index';
-import {catchError} from 'rxjs/internal/operators';
+import {catchError, switchMap} from 'rxjs/internal/operators';
 import {EventEmitter, Injectable} from '@angular/core';
 
+import {RegionService} from './region.service';
 import {BaseService} from '../../../../core/services/base.service';
 
 import {District} from '../../../../shared/models/services/place/district.model';
@@ -20,7 +21,8 @@ export class DistrictService extends BaseService {
   public getAllDataObservable: EventEmitter<District[]> = new EventEmitter<District[]>();
 
   public constructor(private requestHttp: RequestHTTP,
-                     private routeBuilder: RouteBuilder,) {
+                     private routeBuilder: RouteBuilder,
+                     private regionService: RegionService) {
     super();
   }
 
@@ -35,34 +37,41 @@ export class DistrictService extends BaseService {
     this.requestHttp
       .post(url, formGroup.value)
       .pipe(catchError(super.handleError.bind(this)))
-      .subscribe((data: District) => {
-
+      .pipe(switchMap((data: District) => {
         this.setCreateData(data);
-        let districtss: District[] = this.getGetAllData();
-        districtss.push(data);
-        this.setGetAllData(districtss);
+        return this.regionService.get(data.regionId)
+      }))
+      .subscribe((result: boolean) => {
+        if (!result) return;
+        let districts: District[] = this.getGetAllData();
+        districts.unshift({...this.getCreateData(), region: this.regionService.getGetData()});
+        this.setGetAllData(districts);
 
         return subject.next(true);
       });
     return subject.asObservable();
   }
 
-  public update(districts: District): Observable<boolean> {
+  public update(district: District): Observable<boolean> {
     const subject = new Subject<boolean>();
     const url = this.routeBuilder
       .service('place-service')
       .model('districts')
       .action('update')
-      .params([{id: districts.id}])
+      .params([{id: district.id}])
       .build();
 
     this.requestHttp
-      .put(url, districts)
+      .put(url, district)
       .pipe(catchError(super.handleError.bind(this)))
-      .subscribe(() => {
-        let districtss: District[] = this.getGetAllData().filter(e => e.id != districts.id);
-        districtss.push(districts);
-        this.setGetAllData(districtss);
+      .pipe(switchMap(() => {
+        return this.regionService.get(district.regionId)
+      }))
+      .subscribe((result: boolean) => {
+        if (!result) return;
+        let districts: District[] = this.getGetAllData().filter(e => e.id != district.id);
+        districts.unshift({...district, region: this.regionService.getGetData()});
+        this.setGetAllData(districts);
 
         return subject.next(true);
       });
