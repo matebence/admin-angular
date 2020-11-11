@@ -40,11 +40,13 @@ import {PreferenceService} from './services/account-service/preference.service';
 
 import {BarComponent} from './components/bar/bar.component';
 import {NavComponent} from './components/nav/nav.component';
+import {LinkComponent} from './components/link/link.component';
 import {TileComponent} from './components/tile/tile.component';
 import {TableComponent} from './components/table/table.component';
 import {HeaderComponent} from './components/header/header.component';
 import {FooterComponent} from './components/footer/footer.component';
 import {SearchComponent} from './components/search/search.component';
+import {SummaryComponent} from './components/summary/summary.component';
 import {NavItemComponent} from './components/nav-item/nav-item.component';
 import {UsersComponent} from './pages/user/components/users/users.component';
 import {AssistentComponent} from './components/assistent/assistent.component';
@@ -54,10 +56,12 @@ import {ProfitComponent} from './pages/company/components/profit/profit.componen
 import {GendersComponent} from './pages/user/components/genders/genders.component';
 import {PayoutsComponent} from './pages/user/components/payouts/payouts.component';
 import {RegionsComponent} from './pages/place/components/regions/regions.component';
+import {ExplanationComponent} from './components/explanation/explanation.component';
 import {StatusComponent} from './pages/shipment/components/status/status.component';
 import {RatingsComponent} from './pages/parcel/components/ratings/ratings.component';
 import {ParcelsComponent} from './pages/parcel/components/parcels/parcels.component';
 import {PaymentsComponent} from './pages/user/components/payments/payments.component';
+import {IllustrationComponent} from './components/illustration/illustration.component';
 import {VillagesComponent} from './pages/place/components/villages/villages.component';
 import {VehiclesComponent} from './pages/vehicle/components/vehicles/vehicles.component';
 import {AccountsComponent} from './pages/account/components/accounts/accounts.component';
@@ -103,8 +107,9 @@ import {DashboardRoutingModule} from './dashboard-routing.module';
   declarations: [
     BarComponent,
     NavComponent,
-    TableComponent,
     TileComponent,
+    LinkComponent,
+    TableComponent,
     RolesComponent,
     UsersComponent,
     TypesComponent,
@@ -113,6 +118,7 @@ import {DashboardRoutingModule} from './dashboard-routing.module';
     FooterComponent,
     ProfitComponent,
     StatusComponent,
+    SummaryComponent,
     NavItemComponent,
     RatingsComponent,
     ParcelsComponent,
@@ -137,6 +143,7 @@ import {DashboardRoutingModule} from './dashboard-routing.module';
     StatusFormComponent,
     CategoriesComponent,
     WarehousesComponent,
+    ExplanationComponent,
     ParcelGraphComponent,
     ParcelsFormComponent,
     RatingsFormComponent,
@@ -147,6 +154,7 @@ import {DashboardRoutingModule} from './dashboard-routing.module';
     AccountGraphComponent,
     AccountsFormComponent,
     VillagesFormComponent,
+    IllustrationComponent,
     InvoicesFormComponent,
     VehiclesFormComponent,
     PaymentsFormComponent,
@@ -157,7 +165,6 @@ import {DashboardRoutingModule} from './dashboard-routing.module';
     PrivilegesFormComponent,
     WarehousesFormComponent,
     CategoriesFormComponent,
-
     PreferencesFormComponent,
 
     HomePage,
