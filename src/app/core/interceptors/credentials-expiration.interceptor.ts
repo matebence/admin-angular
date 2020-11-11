@@ -37,7 +37,10 @@ export class CredentialsExpirationInterceptor implements HttpInterceptor {
               setTimeout(() => {
                 signIn = <SignIn> this.persistenceService.get(environment.LOCAL_STORAGE_ACCOUNT_DATA);
                 if (signIn.remain) {
-                  this.authorizationService.OAuth2RefreshToken(signIn.remain, signIn.refresh_token);
+                  this.authorizationService.OAuth2RefreshToken(signIn.remain, signIn.refresh_token)
+                    .subscribe((result: SignIn) => {
+                      this.persistenceService.set(environment.LOCAL_STORAGE_ACCOUNT_DATA, result);
+                  })
                 } else {
                   this.router.navigate(['/auth/sign-out']);
                 }

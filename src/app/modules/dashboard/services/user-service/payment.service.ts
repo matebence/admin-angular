@@ -24,8 +24,8 @@ export class PaymentService extends BaseService {
     super();
   }
 
-  public create(formGroup: FormGroup): Observable<boolean> {
-    const subject = new Subject<boolean>();
+  public create(formGroup: FormGroup): Observable<Payment> {
+    const subject = new Subject<Payment>();
     const url = this.routeBuilder
       .service('user-service')
       .model('payments')
@@ -37,12 +37,7 @@ export class PaymentService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: Payment) => {
 
-        this.setCreateData(data);
-        let payments: Payment[] = this.getGetAllData();
-        payments.unshift(data);
-        this.setGetAllData(payments);
-
-        return subject.next(true);
+        return subject.next(data);
       });
     return subject.asObservable();
   }
@@ -60,16 +55,13 @@ export class PaymentService extends BaseService {
       .put(url, payment)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
-        let payments: Payment[] = this.getGetAllData().filter(e => e.paymentId != payment.paymentId);
-        payments.unshift(payment);
-        this.setGetAllData(payments);
 
         return subject.next(true);
       });
     return subject.asObservable();
   }
 
-  public delete(id: number) {
+  public delete(id: number): Observable<boolean> {
     const subject = new Subject<boolean>();
     const url = this.routeBuilder
       .service('user-service')
@@ -82,16 +74,14 @@ export class PaymentService extends BaseService {
       .delete(url)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
-        let payments: Payment[] = this.getGetAllData().filter(e => e.paymentId != id);
-        this.setGetAllData(payments);
 
         return subject.next(true);
       });
     return subject.asObservable();
   }
 
-  public getAll(page: number, limit: number) {
-    const subject = new Subject<boolean>();
+  public getAll(page: number, limit: number): Observable<Payment[]> {
+    const subject = new Subject<Payment[]>();
     const url = this.routeBuilder
       .service('user-service')
       .model('payments')
@@ -104,8 +94,7 @@ export class PaymentService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: Payment[]) => {
 
-        this.setGetAllData(data);
-        return subject.next(true);
+        return subject.next(data);
       });
     return subject.asObservable();
   }

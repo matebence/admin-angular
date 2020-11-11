@@ -56,7 +56,14 @@ export class VehiclesComponent implements OnInit, OnDestroy {
         })
     );
 
-    this.vehicleService.getAll(1, 100);
+    this.subscriptions.push(
+      this.vehicleService.getAll(1, 100)
+        .subscribe((vehicles: Vehicle[]) => {
+          this.vehicleService.setGetAllData(vehicles);
+          this.source = new LocalDataSource(vehicles);
+        })
+    );
+
     return;
   }
 
@@ -92,6 +99,9 @@ export class VehiclesComponent implements OnInit, OnDestroy {
     setTimeout(() => this.vehicleService.delete(this.row.getData()._id)
       .subscribe(result => {
         if (!result) return;
+
+        let vehicles: Vehicle[] = this.vehicleService.getGetAllData().filter(e => e._id != this.row.getData()._id);
+        this.vehicleService.setGetAllData(vehicles);
 
         this.source.remove(this.row.getData());
         this.row = null;

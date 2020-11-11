@@ -26,8 +26,8 @@ export class InvoiceService extends BaseService {
     super();
   }
 
-  public create(formGroup: FormGroup): Observable<boolean> {
-    const subject = new Subject<boolean>();
+  public create(formGroup: FormGroup): Observable<Invoice> {
+    const subject = new Subject<Invoice>();
     const url = this.routeBuilder
       .service('shipment-service')
       .model('invoices')
@@ -39,12 +39,7 @@ export class InvoiceService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: Invoice) => {
 
-        this.setCreateData(data);
-        let invoices: Invoice[] = this.getGetAllData();
-        invoices.unshift(data);
-        this.setGetAllData(invoices);
-
-        return subject.next(true);
+        return subject.next(data);
       });
     return subject.asObservable();
   }
@@ -62,16 +57,13 @@ export class InvoiceService extends BaseService {
       .put(url, invoice)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
-        let invoices: Invoice[] = this.getGetAllData().filter(e => e._id != invoice._id);
-        invoices.unshift(invoice);
-        this.setGetAllData(invoices);
 
         return subject.next(true);
       });
     return subject.asObservable();
   }
 
-  public delete(id: string) {
+  public delete(id: string): Observable<boolean> {
     const subject = new Subject<boolean>();
     const url = this.routeBuilder
       .service('shipment-service')
@@ -84,16 +76,14 @@ export class InvoiceService extends BaseService {
       .delete(url)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
-        let invoices: Invoice[] = this.getGetAllData().filter(e => e._id != id);
-        this.setGetAllData(invoices);
 
         return subject.next(true);
       });
     return subject.asObservable();
   }
 
-  public get(id: string) {
-    const subject = new Subject<boolean>();
+  public get(id: string): Observable<Blob> {
+    const subject = new Subject<Blob>();
     const url = this.routeBuilder
       .service('shipment-service')
       .model('invoices')
@@ -106,14 +96,13 @@ export class InvoiceService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: Blob) => {
 
-        this.setGetData(data);
-        return subject.next(true);
+        return subject.next(data);
       });
     return subject.asObservable();
   }
 
-  public getAll(page: number, limit: number) {
-    const subject = new Subject<boolean>();
+  public getAll(page: number, limit: number): Observable<Invoice[]> {
+    const subject = new Subject<Invoice[]>();
     const url = this.routeBuilder
       .service('shipment-service')
       .model('invoices')
@@ -126,8 +115,7 @@ export class InvoiceService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: Invoice[]) => {
 
-        this.setGetAllData(data);
-        return subject.next(true);
+        return subject.next(data);
       });
     return subject.asObservable();
   }

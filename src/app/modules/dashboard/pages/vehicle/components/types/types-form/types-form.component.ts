@@ -1,8 +1,9 @@
 declare const $: any;
 
-import {Observable, Subject, Subscription} from 'rxjs';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {switchMap} from 'rxjs/internal/operators';
 import {Component, OnDestroy, OnInit} from '@angular/core';
+import {EMPTY, Observable, Subject, Subscription} from 'rxjs';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 import {CanComponentDeactivate} from '../../../../../../../core/guards/leave.guard';
@@ -48,18 +49,20 @@ export class TypesFormComponent implements OnInit, OnDestroy, CanComponentDeacti
 
   public ngOnInit(): void {
     this.subscriptions.push(
-      this.activatedRoute.params.subscribe((params: Params) => {
-        this.type = this.typeService
-          .getGetAllData()
-          .filter(e => e._id == params.id)
-          .pop();
+      this.activatedRoute.params
+        .pipe(switchMap((params: Params) => {
+          if (!params.hasOwnProperty('id')) return EMPTY;
+          return this.typeService.get(params.id);
+        }))
+        .subscribe((result: Type) => {
+          this.type = result;
 
-        if (this.type == null) return;
-        this.formGroup.setValue({name: this.type.name});
+          if (this.type == null) return;
+          this.formGroup.setValue({name: this.type.name});
 
-        this.formButton = 'Aktualizovať';
-        this.formTitle = 'Aktualizovanie typu dopravného prostriedka';
-        this.assistent = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte aktualizovať dopravný prostriedok pre aplikáciu Blesk.';
+          this.formButton = 'Aktualizovať';
+          this.formTitle = 'Aktualizovanie typu dopravného prostriedka';
+          this.assistent = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte aktualizovať dopravný prostriedok pre aplikáciu Blesk.';
       })
     );
 
@@ -72,25 +75,39 @@ export class TypesFormComponent implements OnInit, OnDestroy, CanComponentDeacti
   }
 
   public onSubmit(): void {
-    if (this.type == null) {
-      this.subscriptions.push(
-        this.typeService.create(this.formGroup)
-          .subscribe((result: boolean) => {
-            if (!result) return;
-            this.onSuccess();
-          })
-      );
-    } else {
-      this.subscriptions.push(
-        this.typeService.update({...this.type, ...this.formGroup.value})
-          .subscribe((result: boolean) => {
-            if (!result) return;
-            this.onSuccess();
-          })
-      );
-      this.type = null;
-    }
+    this.type == null ? this.onCreate() : this.onUpdate();
+    this.type = null;
     return;
+  }
+
+  private onCreate(): void {
+    let type: Type;
+    this.subscriptions.push(
+      this.typeService.create(this.formGroup)
+        .subscribe((result: Type) => {
+          type = result;
+          let types: Type[] = this.typeService.getGetAllData();
+          types.unshift(type);
+          this.typeService.setGetAllData(types);
+
+          this.onSuccess();
+        })
+    );
+  }
+
+  private onUpdate(): void {
+    let type: Type = {_id: this.type._id, ...this.formGroup.value};
+    this.subscriptions.push(
+      this.typeService.update(type)
+        .subscribe((result: boolean) => {
+          if (!result) return;
+          let types: Type[] = this.typeService.getGetAllData().filter(e => e._id != type._id);
+          types.unshift(type);
+          this.typeService.setGetAllData(types);
+
+          this.onSuccess();
+        })
+    );
   }
 
   public canDeactivate(event: boolean): Observable<boolean> | Promise<boolean> | boolean {

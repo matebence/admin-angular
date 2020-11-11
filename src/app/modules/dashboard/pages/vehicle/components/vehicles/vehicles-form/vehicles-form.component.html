@@ -25,10 +25,10 @@
           <div class="form-group">
             <label for="vehicleCourier">Vlastník dopravného prostriedka</label>
             <select
-              [(ngModel)]='courierSelect'
               formControlName="courier"
               id="vehicleCourier"
               class="form-control">
+              <option value="-1" disabled hidden>Zvoľte si kuriéra</option>
               <option
                 *ngFor="let courier of couriers; let i = index"
                 [ngValue]="courier.accountId">{{courier.userName}}
@@ -38,10 +38,10 @@
           <div class="form-group">
             <label for="vehicleType">Typ dopravného prostriedka</label>
             <select
-              [(ngModel)]='typeSelect'
               formControlName="type"
               id="vehicleType"
               class="form-control">
+              <option value="-1" disabled hidden>Zvoľte si typ dopravného prostriedka</option>
               <option
                 *ngFor="let type of types; let i = index"
                 [ngValue]="type._id">{{type.name}}

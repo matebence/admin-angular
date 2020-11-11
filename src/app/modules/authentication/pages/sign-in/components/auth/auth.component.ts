@@ -3,8 +3,13 @@ import {Subscription} from 'rxjs/index';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
+import {environment} from '../../../../../../../environments/environment';
+
 import {Error} from '../../../../../../shared/models/error/error.model';
+import {SignIn} from '../../../../../../shared/models/services/authorization/authorization.model';
+
 import {AuthorizationService} from '../../../../services/authorization-server/authorization.service';
+import {PersistenceService} from '../../../../../../core/services/persistence-service/persistence.service';
 
 @Component({
   selector: 'app-auth',
@@ -31,6 +36,7 @@ export class AuthComponent implements OnInit, OnDestroy {
   });
 
   public constructor(private router: Router,
+                     private persistenceService: PersistenceService,
                      private authorizationService: AuthorizationService) {
   }
 
@@ -58,9 +64,9 @@ export class AuthComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.authorizationService
         .OAuth2Password(userName, password, remain)
-        .subscribe((result: boolean) => {
+        .subscribe((result: SignIn) => {
           if (!result) return;
-
+          this.persistenceService.set(environment.LOCAL_STORAGE_ACCOUNT_DATA, result);
           this.formGroup.reset();
           this.router.navigate(['/dashboard/home']);
         })

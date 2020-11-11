@@ -35,14 +35,13 @@ export class PriceService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
 
-        this.setGetData(price);
         return subject.next(true);
       });
     return subject.asObservable();
   }
 
-  public get(id: string) {
-    const subject = new Subject<boolean>();
+  public get(id: string): Observable<Price> {
+    const subject = new Subject<Price>();
     const url = this.routeBuilder
       .service('shipment-service')
       .model('prices')
@@ -54,9 +53,8 @@ export class PriceService extends BaseService {
       .get(url)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: Price) => {
-        console.log(data);
-        this.setGetData(data);
-        return subject.next(true);
+
+        return subject.next(data);
       });
     return subject.asObservable();
   }

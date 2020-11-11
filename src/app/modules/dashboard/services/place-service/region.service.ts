@@ -26,8 +26,8 @@ export class RegionService extends BaseService {
     super();
   }
 
-  public create(formGroup: FormGroup): Observable<boolean> {
-    const subject = new Subject<boolean>();
+  public create(formGroup: FormGroup): Observable<Region> {
+    const subject = new Subject<Region>();
     const url = this.routeBuilder
       .service('place-service')
       .model('regions')
@@ -39,12 +39,7 @@ export class RegionService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: Region) => {
 
-        this.setCreateData(data);
-        let regions: Region[] = this.getGetAllData();
-        regions.unshift(data);
-        this.setGetAllData(regions);
-
-        return subject.next(true);
+        return subject.next(data);
       });
     return subject.asObservable();
   }
@@ -62,16 +57,13 @@ export class RegionService extends BaseService {
       .put(url, region)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
-        let regions: Region[] = this.getGetAllData().filter(e => e.id != region.id);
-        regions.unshift(region);
-        this.setGetAllData(regions);
 
         return subject.next(true);
       });
     return subject.asObservable();
   }
 
-  public delete(id: number) {
+  public delete(id: number): Observable<boolean> {
     const subject = new Subject<boolean>();
     const url = this.routeBuilder
       .service('place-service')
@@ -84,16 +76,14 @@ export class RegionService extends BaseService {
       .delete(url)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
-        let regions: Region[] = this.getGetAllData().filter(e => e.id != id);
-        this.setGetAllData(regions);
 
         return subject.next(true);
       });
     return subject.asObservable();
   }
 
-  public get(id: number) {
-    const subject = new Subject<boolean>();
+  public get(id: number): Observable<Region> {
+    const subject = new Subject<Region>();
     const url = this.routeBuilder
       .service('place-service')
       .model('regions')
@@ -106,14 +96,13 @@ export class RegionService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: Region) => {
 
-        this.setGetData(data);
-        return subject.next(true);
+        return subject.next(data);
       });
     return subject.asObservable();
   }
 
-  public getAll(page: number, limit: number) {
-    const subject = new Subject<boolean>();
+  public getAll(page: number, limit: number): Observable<Region[]> {
+    const subject = new Subject<Region[]>();
     const url = this.routeBuilder
       .service('place-service')
       .model('regions')
@@ -126,8 +115,7 @@ export class RegionService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: Region[]) => {
 
-        this.setGetAllData(data);
-        return subject.next(true);
+        return subject.next(data);
       });
     return subject.asObservable();
   }

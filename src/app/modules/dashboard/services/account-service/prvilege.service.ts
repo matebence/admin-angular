@@ -24,8 +24,8 @@ export class PrivilegeService extends BaseService {
     super();
   }
 
-  public create(formGroup: FormGroup): Observable<boolean> {
-    const subject = new Subject<boolean>();
+  public create(formGroup: FormGroup): Observable<Privilege> {
+    const subject = new Subject<Privilege>();
     const url = this.routeBuilder
       .service('account-service')
       .model('privileges')
@@ -37,12 +37,7 @@ export class PrivilegeService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: Privilege) => {
 
-        this.setCreateData(data);
-        let privileges: Privilege[] = this.getGetAllData();
-        privileges.unshift(data);
-        this.setGetAllData(privileges);
-
-        return subject.next(true);
+        return subject.next(data);
       });
     return subject.asObservable();
   }
@@ -60,16 +55,13 @@ export class PrivilegeService extends BaseService {
       .put(url, privilege)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
-        let privileges: Privilege[] = this.getGetAllData().filter(e => e.privilegeId != privilege.privilegeId);
-        privileges.unshift(privilege);
-        this.setGetAllData(privileges);
 
         return subject.next(true);
       });
     return subject.asObservable();
   }
 
-  public delete(id: number) {
+  public delete(id: number): Observable<boolean> {
     const subject = new Subject<boolean>();
     const url = this.routeBuilder
       .service('account-service')
@@ -82,16 +74,14 @@ export class PrivilegeService extends BaseService {
       .delete(url)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
-        let privileges: Privilege[] = this.getGetAllData().filter(e => e.privilegeId != id);
-        this.setGetAllData(privileges);
 
         return subject.next(true);
       });
     return subject.asObservable();
   }
 
-  public getAll(page: number, limit: number) {
-    const subject = new Subject<boolean>();
+  public getAll(page: number, limit: number): Observable<Privilege[]> {
+    const subject = new Subject<Privilege[]>();
     const url = this.routeBuilder
       .service('account-service')
       .model('privileges')
@@ -104,8 +94,7 @@ export class PrivilegeService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: Privilege[]) => {
 
-        this.setGetAllData(data);
-        return subject.next(true);
+        return subject.next(data);
       });
     return subject.asObservable();
   }

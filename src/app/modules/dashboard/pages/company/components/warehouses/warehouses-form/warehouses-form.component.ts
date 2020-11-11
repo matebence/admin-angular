@@ -1,7 +1,8 @@
 declare const $: any;
 
-import {Observable, Subject, Subscription} from 'rxjs';
+import {switchMap} from 'rxjs/internal/operators';
 import {Component, OnDestroy, OnInit} from '@angular/core';
+import {EMPTY, Observable, Subject, Subscription} from 'rxjs';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
@@ -29,7 +30,6 @@ export class WarehousesFormComponent implements OnInit, OnDestroy, CanComponentD
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť nový sklad pre aplikáciu Blesk.';
   public assistentOptions: any = [{title: 'Profit', link: '/dashboard/services/company/profit'}];
 
-  public regionSelect: number[] = [1];
   public formButton: string = 'Vytvoriť';
   public formTitle: string = 'Vytvorenie nového skladu';
 
@@ -65,29 +65,28 @@ export class WarehousesFormComponent implements OnInit, OnDestroy, CanComponentD
 
   public ngOnInit(): void {
     this.subscriptions.push(
-      this.regionService.getAllDataObservable
+      this.regionService.getAll(1, 100)
         .subscribe((regions: Region[]) => {
           this.regions = regions;
         })
     );
 
-    this.regionService.getAll(1, 100);
-
     this.subscriptions.push(
-      this.activatedRoute.params.subscribe((params: Params) => {
-        this.warehouse = this.warehouseService
-          .getGetAllData()
-          .filter(e => e._id == params.id)
-          .pop();
+      this.activatedRoute.params
+        .pipe(switchMap((params: Params) => {
+          if (!params.hasOwnProperty('id')) return EMPTY;
+          return this.warehouseService.get(params.id);
+        }))
+        .subscribe((result: Warehouse) => {
+          this.warehouse = result;
 
-        if (this.warehouse == null) return;
-        this.regionSelect = [];
-        this.warehouse.regions.forEach(e => this.regionSelect.push(e.id));
-        this.formGroup.setValue({regions: this.warehouse.regions, name: this.warehouse.name, country: this.warehouse.country, address: this.warehouse.address});
+          const regions: number[] = [];
+          this.warehouse.regions.forEach(e => regions.push(e.id));
+          this.formGroup.setValue({regions: regions, name: this.warehouse.name, country: this.warehouse.country, address: this.warehouse.address});
 
-        this.formButton = 'Aktualizovať';
-        this.formTitle = 'Aktualizovanie skladu';
-        this.assistent = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte aktualizovať sklad pre aplikáciu Blesk.';
+          this.formButton = 'Aktualizovať';
+          this.formTitle = 'Aktualizovanie skladu';
+          this.assistent = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte aktualizovať sklad pre aplikáciu Blesk.';
       })
     );
 
@@ -100,27 +99,48 @@ export class WarehousesFormComponent implements OnInit, OnDestroy, CanComponentD
   }
 
   public onSubmit(): void {
-    if (this.warehouse == null) {
-      this.subscriptions.push(
-        this.warehouseService.create(this.formGroup)
-          .subscribe((result: boolean) => {
-            if (!result) return;
-            this.onSuccess();
-          })
-      );
-    } else {
-      this.subscriptions.push(
-        this.warehouseService.update({...this.warehouse, ...this.formGroup.value})
-          .subscribe((result: boolean) => {
-            if (!result) return;
-            this.onSuccess();
-          })
-      );
-      this.warehouse = null;
-    }
+    this.warehouse == null ? this.onCreate() : this.onUpdate();
+    this.warehouse = null;
     return;
   }
 
+  private onCreate(): void {
+    let warehouse: Warehouse;
+    this.subscriptions.push(
+      this.warehouseService.create(this.formGroup)
+        .pipe(switchMap((result: Warehouse) => {
+          warehouse = result;
+          return this.regionService.getAll(1, 100);
+        }))
+        .subscribe((result: Region[]) => {
+          let warehouses: Warehouse[] = this.warehouseService.getGetAllData();
+          warehouse.regions = result.filter(e => warehouse.regions.includes(e.id));
+          warehouses.unshift(warehouse);
+
+          this.warehouseService.setGetAllData(warehouses);
+          this.onSuccess();
+        })
+    );
+  }
+
+  private onUpdate(): void {
+    let warehouse: Warehouse = {_id: this.warehouse._id, ...this.formGroup.value};
+    this.subscriptions.push(
+      this.warehouseService.update(warehouse)
+        .pipe(switchMap((result: boolean) => {
+          if (!result) return;
+          return this.regionService.getAll(1, 100);
+        }))
+        .subscribe((result: Region[]) => {
+          let warehouses: Warehouse[] = this.warehouseService.getGetAllData().filter(e => e._id != warehouse._id);
+          warehouse.regions = result.filter(e => warehouse.regions.includes(e.id));
+          warehouses.unshift(warehouse);
+
+          this.warehouseService.setGetAllData(warehouses);
+          this.onSuccess();
+        })
+    );
+  }
 
   public canDeactivate(event: boolean): Observable<boolean> | Promise<boolean> | boolean {
     if (!this.formGroup.dirty) return true;

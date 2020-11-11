@@ -1,8 +1,9 @@
 declare const $: any;
 
-import {ActivatedRoute, Params, Router} from '@angular/router';
-import {Observable, Subject, Subscription} from 'rxjs';
+import {switchMap} from 'rxjs/internal/operators';
 import {Component, OnDestroy, OnInit} from '@angular/core';
+import {EMPTY, Observable, Subject, Subscription} from 'rxjs';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 import {CanComponentDeactivate} from '../../../../../../../core/guards/leave.guard';
@@ -31,8 +32,6 @@ export class VillagesFormComponent implements OnInit, OnDestroy, CanComponentDea
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť nové mesto alebo obec pre aplikáciu Blesk.';
   public assistentOptions: any = [{title: 'Kraje', link: '/dashboard/services/places/regions'}, {title: 'Okresy', link: '/dashboard/services/places/districts'}];
 
-  public regionSelect: number = 1;
-  public districtSelect: number = 1;
   public formButton: string = 'Vytvoriť';
   public formTitle: string = 'Vytvorenie nového mesta alebo obce';
 
@@ -56,11 +55,11 @@ export class VillagesFormComponent implements OnInit, OnDestroy, CanComponentDea
       updateOn: 'change'
     }),
     use: new FormControl(1),
-    regionId: new FormControl(null, {
+    regionId: new FormControl(-1, {
       validators: [Validators.pattern('^(?!0*(\\.0+)?$)(\\d+|\\d*\\.\\d+)$'), Validators.required],
       updateOn: 'change'
     }),
-    districtId: new FormControl(null, {
+    districtId: new FormControl(-1, {
       validators: [Validators.pattern('^(?!0*(\\.0+)?$)(\\d+|\d*\\.\\d+)$'), Validators.required],
       updateOn: 'change'
     }),
@@ -75,38 +74,33 @@ export class VillagesFormComponent implements OnInit, OnDestroy, CanComponentDea
 
   public ngOnInit(): void {
     this.subscriptions.push(
-      this.regionService.getAllDataObservable
+      this.regionService.getAll(1, 100)
         .subscribe((regions: Region[]) => {
           this.regions = regions;
         })
     );
 
-    this.regionService.getAll(1, 100);
-
     this.subscriptions.push(
-      this.districtService.getAllDataObservable
+      this.districtService.getAll(1, 100)
         .subscribe((districts: District[]) => {
           this.districts = districts;
         })
     );
 
-    this.districtService.getAll(1, 100);
-
     this.subscriptions.push(
-      this.activatedRoute.params.subscribe((params: Params) => {
-        this.village = this.villageService
-          .getGetAllData()
-          .filter(e => e.id == params.id)
-          .pop();
+      this.activatedRoute.params
+        .pipe(switchMap((params: Params) => {
+          if (!params.hasOwnProperty('id')) return EMPTY;
+          return this.villageService.get(params.id);
+        }))
+        .subscribe((result: Village) => {
+          this.village = result;
 
-        if (this.village == null) return;
-        this.regionSelect = this.village.regionId;
-        this.districtSelect = this.village.districtId;
-        this.formGroup.setValue({fullName: this.village.fullName, shortName: this.village.shortName, zip: this.village.zip, use: this.village.use, regionId: this.village.regionId, districtId: this.village.districtId });
+          this.formGroup.setValue({fullName: this.village.fullName, shortName: this.village.shortName, zip: this.village.zip, use: this.village.use, regionId: this.village.regionId, districtId: this.village.districtId });
 
-        this.formButton = 'Aktualizovať';
-        this.formTitle = 'Aktualizovanie mesta/obce';
-        this.assistent = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte aktualizovať okres pre aplikáciu Blesk.';
+          this.formButton = 'Aktualizovať';
+          this.formTitle = 'Aktualizovanie mesta/obce';
+          this.assistent = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte aktualizovať okres pre aplikáciu Blesk.';
       })
     );
 
@@ -119,27 +113,58 @@ export class VillagesFormComponent implements OnInit, OnDestroy, CanComponentDea
   }
 
   public onSubmit(): void {
-    if (this.village == null) {
-      this.subscriptions.push(
-        this.villageService.create(this.formGroup)
-          .subscribe((result: boolean) => {
-            if (!result) return;
-            this.onSuccess();
-          })
-      );
-    } else {
-      this.subscriptions.push(
-        this.villageService.update({...this.village, ...this.formGroup.value})
-          .subscribe((result: boolean) => {
-            if (!result) return;
-            this.onSuccess();
-          })
-      );
-      this.village = null;
-    }
+    this.village == null ? this.onCreate() : this.onUpdate();
+    this.village = null;
     return;
   }
 
+  private onCreate(): void {
+    let village: Village;
+    this.subscriptions.push(
+      this.villageService.create(this.formGroup)
+        .pipe(switchMap((result: Village) => {
+          village = result;
+          return this.regionService.get(village.regionId)
+        }))
+        .pipe(switchMap((result: Region) => {
+          village.region = result;
+          return this.districtService.get(village.districtId)
+        }))
+        .subscribe((result: District) => {
+          village.district = result;
+
+          let villages: Village[] = this.villageService.getGetAllData();
+          villages.unshift(village);
+          this.villageService.setGetAllData(villages);
+
+          this.onSuccess();
+        })
+    );
+  }
+
+  private onUpdate(): void {
+    const village: Village = {id: this.village.id, ...this.formGroup.value};
+    this.subscriptions.push(
+      this.villageService.update(village)
+        .pipe(switchMap((result: boolean) => {
+          if (!result) return;
+          return this.regionService.get(village.regionId);
+        }))
+        .pipe(switchMap((result: Region) => {
+          village.region = result;
+          return this.districtService.get(village.districtId);
+        }))
+        .subscribe((result: District) => {
+          village.district = result;
+
+          let villages: Village[] = this.villageService.getGetAllData().filter(e => e.id != village.id);
+          villages.unshift(village);
+          this.districtService.setGetAllData(villages);
+
+          this.onSuccess();
+        })
+    );
+  }
 
   public canDeactivate(event: boolean): Observable<boolean> | Promise<boolean> | boolean {
     if (!this.formGroup.dirty) return true;

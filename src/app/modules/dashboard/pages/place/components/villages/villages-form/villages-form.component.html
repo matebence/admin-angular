@@ -49,10 +49,10 @@
           <div class="form-group">
             <label for="districtRegionId">Kraj mesta/obce</label>
             <select
-              [(ngModel)]='regionSelect'
               formControlName="regionId"
               id="districtRegionId"
               class="form-control">
+              <option value="-1" disabled hidden>Zvoľte si kraj</option>
               <option
                 *ngFor="let region of regions; let i = index"
                 [ngValue]="region.id">{{region.name}}
@@ -62,10 +62,10 @@
           <div class="form-group">
             <label for="villageDistrictId">Okres mesta/obce</label>
             <select
-              [(ngModel)]='districtSelect'
               formControlName="districtId"
               id="villageDistrictId"
               class="form-control">
+              <option value="-1" disabled hidden>Zvoľte si okres</option>
               <option
                 *ngFor="let district of districts; let i = index"
                 [ngValue]="district.id">{{district.name}}

@@ -49,10 +49,10 @@
           <div class="form-group">
             <label for="districtRegionId">Kraj okresu</label>
             <select
-              [(ngModel)]='regionSelect'
               formControlName="regionId"
               id="districtRegionId"
               class="form-control">
+              <option value="-1" disabled hidden>Zvoľte si kraj</option>
               <option
                 *ngFor="let region of regions; let i = index"
                 [ngValue]="region.id">{{region.name}}

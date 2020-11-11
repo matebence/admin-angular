@@ -56,7 +56,14 @@ export class WarehousesComponent implements OnInit, OnDestroy {
         })
     );
 
-    this.warehouseService.getAll(1, 100);
+    this.subscriptions.push(
+      this.warehouseService.getAll(1, 100)
+        .subscribe((warehouses: Warehouse[]) => {
+          this.warehouseService.setGetAllData(warehouses);
+          this.source = new LocalDataSource(warehouses);
+        })
+    );
+
     return;
   }
 
@@ -92,6 +99,9 @@ export class WarehousesComponent implements OnInit, OnDestroy {
     setTimeout(() => this.warehouseService.delete(this.row.getData()._id)
       .subscribe(result => {
         if (!result) return;
+
+        let warehouse: Warehouse[] = this.warehouseService.getGetAllData().filter(e => e._id != this.row.getData()._id);
+        this.warehouseService.setGetAllData(warehouse);
 
         this.source.remove(this.row.getData());
         this.row = null;

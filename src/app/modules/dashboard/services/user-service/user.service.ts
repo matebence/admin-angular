@@ -29,8 +29,8 @@ export class UserService extends BaseService {
     super();
   }
 
-  public create(formGroup: FormGroup): Observable<boolean> {
-    const subject = new Subject<boolean>();
+  public create(formGroup: FormGroup): Observable<User> {
+    const subject = new Subject<User>();
     const url = this.routeBuilder
       .service('user-service')
       .model('users')
@@ -42,12 +42,7 @@ export class UserService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: User) => {
 
-        this.setCreateData(data);
-        let users: User[] = this.getGetAllData();
-        users.unshift(data);
-        this.setGetAllData(users);
-
-        return subject.next(true);
+        return subject.next(data);
       });
     return subject.asObservable();
   }
@@ -65,16 +60,13 @@ export class UserService extends BaseService {
       .put(url, user)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
-        let users: User[] = this.getGetAllData().filter(e => e.userId != user.userId);
-        users.unshift(user);
-        this.setGetAllData(users);
 
         return subject.next(true);
       });
     return subject.asObservable();
   }
 
-  public delete(id: number) {
+  public delete(id: number): Observable<boolean> {
     const subject = new Subject<boolean>();
     const url = this.routeBuilder
       .service('user-service')
@@ -87,16 +79,14 @@ export class UserService extends BaseService {
       .delete(url)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
-        let users: User[] = this.getGetAllData().filter(e => e.userId != id);
-        this.setGetAllData(users);
 
         return subject.next(true);
       });
     return subject.asObservable();
   }
 
-  public get(id: number) {
-    const subject = new Subject<boolean>();
+  public get(id: number): Observable<User> {
+    const subject = new Subject<User>();
     const url = this.routeBuilder
       .service('user-service')
       .model('users')
@@ -109,14 +99,13 @@ export class UserService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: User) => {
 
-        this.setGetData(data);
-        return subject.next(true);
+        return subject.next(data);
       });
     return subject.asObservable();
   }
 
-  public getAll(page: number, limit: number) {
-    const subject = new Subject<boolean>();
+  public getAll(page: number, limit: number): Observable<User[]> {
+    const subject = new Subject<User[]>();
     const url = this.routeBuilder
       .service('user-service')
       .model('users')
@@ -129,14 +118,13 @@ export class UserService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: User[]) => {
 
-        this.setGetAllData(data);
-        return subject.next(true);
+        return subject.next(data);
       });
     return subject.asObservable();
   }
 
-  public search(search: Search): Observable<boolean> {
-    const subject = new Subject<boolean>();
+  public search(search: Search): Observable<User[]> {
+    const subject = new Subject<User[]>();
     const url = this.routeBuilder
       .service('user-service')
       .model('users')
@@ -148,8 +136,7 @@ export class UserService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: User[]) => {
 
-        this.setSearchData(data);
-        return subject.next(true);
+        return subject.next(data);
       });
     return subject.asObservable();
   }

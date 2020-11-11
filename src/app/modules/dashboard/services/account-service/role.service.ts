@@ -24,8 +24,8 @@ export class RoleService extends BaseService {
     super();
   }
 
-  public create(formGroup: FormGroup): Observable<boolean> {
-    const subject = new Subject<boolean>();
+  public create(formGroup: FormGroup): Observable<Role> {
+    const subject = new Subject<Role>();
     const url = this.routeBuilder
       .service('account-service')
       .model('roles')
@@ -37,12 +37,7 @@ export class RoleService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: Role) => {
 
-        this.setCreateData(data);
-        let roles: Role[] = this.getGetAllData();
-        roles.unshift(data);
-        this.setGetAllData(roles);
-
-        return subject.next(true);
+        return subject.next(data);
       });
     return subject.asObservable();
   }
@@ -60,16 +55,13 @@ export class RoleService extends BaseService {
       .put(url, role)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
-        let roles: Role[] = this.getGetAllData().filter(e => e.roleId != role.roleId);
-        roles.unshift(role);
-        this.setGetAllData(roles);
 
         return subject.next(true);
       });
     return subject.asObservable();
   }
 
-  public delete(id: number) {
+  public delete(id: number): Observable<boolean> {
     const subject = new Subject<boolean>();
     const url = this.routeBuilder
       .service('account-service')
@@ -82,16 +74,14 @@ export class RoleService extends BaseService {
       .delete(url)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
-        let roles: Role[] = this.getGetAllData().filter(e => e.roleId != id);
-        this.setGetAllData(roles);
 
         return subject.next(true);
       });
     return subject.asObservable();
   }
 
-  public getAll(page: number, limit: number) {
-    const subject = new Subject<boolean>();
+  public getAll(page: number, limit: number): Observable<Role[]> {
+    const subject = new Subject<Role[]>();
     const url = this.routeBuilder
       .service('account-service')
       .model('roles')
@@ -104,8 +94,7 @@ export class RoleService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: Role[]) => {
 
-        this.setGetAllData(data);
-        return subject.next(true);
+        return subject.next(data);
       });
     return subject.asObservable();
   }

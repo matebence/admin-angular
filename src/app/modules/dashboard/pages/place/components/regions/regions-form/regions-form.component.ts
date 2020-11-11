@@ -1,7 +1,8 @@
 declare const $: any;
 
-import {Observable, Subject, Subscription} from 'rxjs';
+import {switchMap} from 'rxjs/internal/operators';
 import {Component, OnDestroy, OnInit} from '@angular/core';
+import {EMPTY, Observable, Subject, Subscription} from 'rxjs';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
@@ -53,19 +54,19 @@ export class RegionsFormComponent implements OnInit, OnDestroy, CanComponentDeac
 
   public ngOnInit(): void {
     this.subscriptions.push(
-      this.activatedRoute.params.subscribe((params: Params) => {
-        this.region = this.regionService
-          .getGetAllData()
-          .filter(e => e.id == params.id)
-          .pop();
+      this.activatedRoute.params
+        .pipe(switchMap((params: Params) => {
+          if (!params.hasOwnProperty('id')) return EMPTY;
+          return this.regionService.get(params.id);
+        }))
+        .subscribe((result: Region) => {
+          this.region = result;
+          this.formGroup.setValue({name: this.region.name, shortcut: this.region.shortcut, use: this.region.use});
 
-        if (this.region == null) return;
-        this.formGroup.setValue({name: this.region.name, shortcut: this.region.shortcut, use: this.region.use});
-
-        this.formButton = 'Aktualizovať';
-        this.formTitle = 'Aktualizovanie kraja';
-        this.assistent = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte aktualizovať kraj pre aplikáciu Blesk.';
-      })
+          this.formButton = 'Aktualizovať';
+          this.formTitle = 'Aktualizovanie kraja';
+          this.assistent = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte aktualizovať kraj pre aplikáciu Blesk.';
+        })
     );
 
     return;
@@ -77,25 +78,39 @@ export class RegionsFormComponent implements OnInit, OnDestroy, CanComponentDeac
   }
 
   public onSubmit(): void {
-    if (this.region == null) {
-      this.subscriptions.push(
-        this.regionService.create(this.formGroup)
-          .subscribe((result: boolean) => {
-            if (!result) return;
-            this.onSuccess();
-          })
-      );
-    } else {
-      this.subscriptions.push(
-        this.regionService.update({...this.region, ...this.formGroup.value})
-          .subscribe((result: boolean) => {
-            if (!result) return;
-            this.onSuccess();
-          })
-      );
-      this.region = null;
-    }
+    this.region == null ? this.onCreate() : this.onUpdate();
+    this.region = null;
     return;
+  }
+
+  private onCreate(): void {
+    let region: Region;
+    this.subscriptions.push(
+      this.regionService.create(this.formGroup)
+        .subscribe((result: Region) => {
+          region = result;
+          let regions: Region[] = this.regionService.getGetAllData();
+          regions.unshift(region);
+          this.regionService.setGetAllData(regions);
+
+          this.onSuccess();
+        })
+    );
+  }
+
+  private onUpdate(): void {
+    let region: Region = {id: this.region.id, ...this.formGroup.value};
+    this.subscriptions.push(
+      this.regionService.update(region)
+        .subscribe((result: boolean) => {
+          if (!result) return;
+          let regions: Region[] = this.regionService.getGetAllData().filter(e => e.id != region.id);
+          regions.unshift(region);
+          this.regionService.setGetAllData(regions);
+
+          this.onSuccess();
+        })
+    );
   }
 
   public canDeactivate(event: boolean): Observable<boolean> | Promise<boolean> | boolean {

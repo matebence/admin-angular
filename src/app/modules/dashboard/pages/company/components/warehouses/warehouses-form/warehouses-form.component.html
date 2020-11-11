@@ -44,7 +44,6 @@
             <label for="warehouseRegions">Príslušné kraje skladu</label>
             <select
               multiple
-              [(ngModel)]='regionSelect'
               formControlName="regions"
               id="warehouseRegions"
               class="form-control"
@@ -54,7 +53,8 @@
                 [ngValue]="region.id">{{region.name}}
               </option>
             </select>
-            <small id="regionsHelp" class="form-text text-muted">Pre označenie viacero krajov použite tľačidlo ctrl</small>
+            <small id="regionsHelp" class="form-text text-muted">Pre označenie viacero krajov použite tľačidlo ctrl
+            </small>
           </div>
           <button
             [disabled]="!formGroup.get('name').valid || !formGroup.get('regions').valid || !formGroup.get('country').valid || !formGroup.get('address').valid"

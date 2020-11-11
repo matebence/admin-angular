@@ -24,8 +24,8 @@ export class ShipmentService extends BaseService {
     super();
   }
 
-  public create(formGroup: FormGroup): Observable<boolean> {
-    const subject = new Subject<boolean>();
+  public create(formGroup: FormGroup): Observable<Shipment> {
+    const subject = new Subject<Shipment>();
     const url = this.routeBuilder
       .service('shipment-service')
       .model('shipments')
@@ -37,12 +37,7 @@ export class ShipmentService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: Shipment) => {
 
-        this.setCreateData(data);
-        let shipments: Shipment[] = this.getGetAllData();
-        shipments.unshift(data);
-        this.setGetAllData(shipments);
-
-        return subject.next(true);
+        return subject.next(data);
       });
     return subject.asObservable();
   }
@@ -60,16 +55,13 @@ export class ShipmentService extends BaseService {
       .put(url, shipment)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
-        let shipments: Shipment[] = this.getGetAllData().filter(e => e._id != shipment._id);
-        shipments.unshift(shipment);
-        this.setGetAllData(shipments);
 
         return subject.next(true);
       });
     return subject.asObservable();
   }
 
-  public delete(id: string) {
+  public delete(id: string): Observable<boolean> {
     const subject = new Subject<boolean>();
     const url = this.routeBuilder
       .service('shipment-service')
@@ -82,16 +74,14 @@ export class ShipmentService extends BaseService {
       .delete(url)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
-        let shipments: Shipment[] = this.getGetAllData().filter(e => e._id != id);
-        this.setGetAllData(shipments);
 
         return subject.next(true);
       });
     return subject.asObservable();
   }
 
-  public getAll(page: number, limit: number) {
-    const subject = new Subject<boolean>();
+  public getAll(page: number, limit: number): Observable<Shipment[]> {
+    const subject = new Subject<Shipment[]>();
     const url = this.routeBuilder
       .service('shipment-service')
       .model('shipments')
@@ -104,8 +94,7 @@ export class ShipmentService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: Shipment[]) => {
 
-        this.setGetAllData(data);
-        return subject.next(true);
+        return subject.next(data);
       });
     return subject.asObservable();
   }

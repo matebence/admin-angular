@@ -5,14 +5,13 @@ import {catchError} from 'rxjs/internal/operators';
 import {EventEmitter, Injectable} from '@angular/core';
 
 import {BaseService} from '../../../../core/services/base.service';
-import {PersistenceService} from '../../../../core/services/persistence-service/persistence.service';
 
 import {environment} from '../../../../../environments/environment';
 
-import {ForgetPassword, Recover, SignIn, SignOut} from '../../../../shared/models/services/authorization/authorization.model';
-
 import {RequestHTTP} from '../../../../core/http/request.http';
 import {RouteBuilder} from '../../../../core/http/route-builder.http';
+
+import {ForgetPassword, Recover, SignIn, SignOut} from '../../../../shared/models/services/authorization/authorization.model';
 
 @Injectable()
 export class AuthorizationService extends BaseService {
@@ -28,12 +27,11 @@ export class AuthorizationService extends BaseService {
   public forgetPasswordDataObservable: EventEmitter<ForgetPassword> = new EventEmitter<ForgetPassword>();
 
   public constructor(private requestHttp: RequestHTTP,
-                     private routeBuilder: RouteBuilder,
-                     private persistenceService: PersistenceService) {
+                     private routeBuilder: RouteBuilder) {
     super();
   }
 
-  public OAuth2Password(userName: string, password: string, remain: boolean): Observable<Boolean> {
+  public OAuth2Password(userName: string, password: string, remain: boolean): Observable<SignIn> {
     const httpParams = new HttpParams({
       fromObject: {
         username: userName,
@@ -44,7 +42,7 @@ export class AuthorizationService extends BaseService {
     return this.signIn(httpParams, remain);
   }
 
-  public OAuth2RefreshToken(remain: boolean, refreshToken: string): Observable<Boolean> {
+  public OAuth2RefreshToken(remain: boolean, refreshToken: string): Observable<SignIn> {
     const httpParams = new HttpParams({
       fromObject: {
         refresh_token: refreshToken,
@@ -54,8 +52,8 @@ export class AuthorizationService extends BaseService {
     return this.signIn(httpParams, remain);
   }
 
-  private signIn(httpParams: HttpParams, remain: boolean): Observable<boolean> {
-    const subject = new Subject<boolean>();
+  private signIn(httpParams: HttpParams, remain: boolean): Observable<SignIn> {
+    const subject = new Subject<SignIn>();
     const url = this.routeBuilder
       .service('authorization-server')
       .model('signIn')
@@ -66,16 +64,14 @@ export class AuthorizationService extends BaseService {
       .post(url, httpParams)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: SignIn) => {
-        this.setSignInData({...data, remain: remain, expirationDate: new Date(new Date().getTime() + data.expires_in * 1000)});
-        this.persistenceService.set(environment.LOCAL_STORAGE_ACCOUNT_DATA, this.getSignInData());
 
-        return subject.next(true);
+        return subject.next({...data, remain: remain, expirationDate: new Date(new Date().getTime() + data.expires_in * 1000)});
       });
     return subject.asObservable();
   }
 
-  public signOut(): Observable<boolean> {
-    const subject = new Subject<boolean>();
+  public signOut(): Observable<SignOut> {
+    const subject = new Subject<SignOut>();
     const url = this.routeBuilder
       .service('authorization-server')
       .model('signOut')
@@ -86,16 +82,14 @@ export class AuthorizationService extends BaseService {
       .delete(url)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: SignOut) => {
-        this.setSignOutData(data);
-        this.persistenceService.clear();
 
-        return subject.next(true);
+        return subject.next(data);
       });
     return subject.asObservable();
   }
 
-  public forgetPassword(email: string): Observable<boolean> {
-    const subject = new Subject<boolean>();
+  public forgetPassword(email: string): Observable<ForgetPassword> {
+    const subject = new Subject<ForgetPassword>();
     const url = this.routeBuilder
       .service('authorization-server')
       .model('forgetPassword')
@@ -107,14 +101,13 @@ export class AuthorizationService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: ForgetPassword) => {
 
-        this.setForgetPasswordData(data);
-        return subject.next(true);
+        return subject.next(data);
       });
     return subject.asObservable();
   }
 
-  public recover(params: Params): Observable<boolean> {
-    const subject = new Subject<boolean>();
+  public recover(params: Params): Observable<Recover> {
+    const subject = new Subject<Recover>();
     const url = this.routeBuilder
       .service('authorization-server')
       .model('recover')
@@ -127,8 +120,7 @@ export class AuthorizationService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: Recover) => {
 
-        this.setRecoverData(data);
-        return subject.next(true);
+        return subject.next(data);
       });
     return subject.asObservable();
   }

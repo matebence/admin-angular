@@ -24,8 +24,8 @@ export class AccountService extends BaseService {
     super();
   }
 
-  public create(formGroup: FormGroup): Observable<boolean> {
-    const subject = new Subject<boolean>();
+  public create(formGroup: FormGroup): Observable<Account> {
+    const subject = new Subject<Account>();
     const url = this.routeBuilder
       .service('account-service')
       .model('accounts')
@@ -37,12 +37,7 @@ export class AccountService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: Account) => {
 
-        this.setCreateData(data);
-        let accounts: Account[] = this.getGetAllData();
-        accounts.unshift(data);
-        this.setGetAllData(accounts);
-
-        return subject.next(true);
+        return subject.next(data);
       });
     return subject.asObservable();
   }
@@ -60,16 +55,13 @@ export class AccountService extends BaseService {
       .put(url, account)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
-        let accounts: Account[] = this.getGetAllData().filter(e => e.accountId != account.accountId);
-        accounts.unshift(account);
-        this.setGetAllData(accounts);
 
         return subject.next(true);
       });
     return subject.asObservable();
   }
 
-  public delete(id: number) {
+  public delete(id: number): Observable<boolean> {
     const subject = new Subject<boolean>();
     const url = this.routeBuilder
       .service('account-service')
@@ -82,16 +74,14 @@ export class AccountService extends BaseService {
       .delete(url)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
-        let accounts: Account[] = this.getGetAllData().filter(e => e.accountId != id);
-        this.setGetAllData(accounts);
 
         return subject.next(true);
       });
     return subject.asObservable();
   }
 
-  public getAll(page: number, limit: number) {
-    const subject = new Subject<boolean>();
+  public getAll(page: number, limit: number): Observable<Account[]> {
+    const subject = new Subject<Account[]>();
     const url = this.routeBuilder
       .service('account-service')
       .model('accounts')
@@ -104,8 +94,7 @@ export class AccountService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: Account[]) => {
 
-        this.setGetAllData(data);
-        return subject.next(true);
+        return subject.next(data);
       });
     return subject.asObservable();
   }

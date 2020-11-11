@@ -28,13 +28,6 @@ export class ResetComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    this.subscriptions.push(
-      this.authorizationService.forgetPasswordDataObservable
-        .subscribe((forgetPassword: ForgetPassword) => {
-          this.authorizationService.setErrorData(null);
-          this.forgetPassword = forgetPassword;
-        })
-    );
     return;
   }
 
@@ -49,8 +42,12 @@ export class ResetComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.authorizationService
         .forgetPassword(email)
-        .subscribe((result: boolean) => this.formGroup.reset())
+        .subscribe((result: ForgetPassword) => {
+          this.authorizationService.setErrorData(null);
+          this.forgetPassword = result;
+        })
     );
+
     return;
   }
 }

@@ -22,17 +22,12 @@ export class SignOutPage implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.subscriptions.push(
-      this.authorizationService.signOutDataObservable
-        .subscribe((signOut: SignOut) => {
-          this.persistenceService.clear();
-          this.signOut = signOut;
-        })
-    );
-
-    this.subscriptions.push(
       this.authorizationService
         .signOut()
-        .subscribe((result: boolean) => console.log(result))
+        .subscribe((result: SignOut) => {
+          this.persistenceService.clear();
+          this.signOut = result;
+        })
     );
     return;
   }

@@ -56,7 +56,14 @@ export class VillagesComponent implements OnInit, OnDestroy {
         })
     );
 
-    this.villageService.getAll(1, 100);
+    this.subscriptions.push(
+      this.villageService.getAll(1, 100)
+        .subscribe((villages: Village[]) => {
+          this.villageService.setGetAllData(villages);
+          this.source = new LocalDataSource(villages);
+        })
+    );
+
     return;
   }
 
@@ -92,6 +99,9 @@ export class VillagesComponent implements OnInit, OnDestroy {
     setTimeout(() => this.villageService.delete(this.row.getData().id)
       .subscribe(result => {
         if (!result) return;
+
+        let villages: Village[] = this.villageService.getGetAllData().filter(e => e.id != this.row.getData().id);
+        this.villageService.setGetAllData(villages);
 
         this.source.remove(this.row.getData());
         this.row = null;

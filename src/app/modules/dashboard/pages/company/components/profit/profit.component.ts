@@ -56,7 +56,13 @@ export class ProfitComponent implements OnInit, OnDestroy {
         })
     );
 
-    this.priceService.get(environment.COMPANY_PROFIT_ID);
+    this.subscriptions.push(
+    this.priceService.get(environment.COMPANY_PROFIT_ID)
+      .subscribe((price: Price) => {
+        this.source = new LocalDataSource([price]);
+      })
+    );
+
     return;
   }
 

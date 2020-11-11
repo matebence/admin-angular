@@ -1,7 +1,8 @@
 declare const $: any;
 
-import {Observable, Subject, Subscription} from 'rxjs';
+import {switchMap} from 'rxjs/internal/operators';
 import {Component, OnDestroy, OnInit} from '@angular/core';
+import {EMPTY, Observable, Subject, Subscription} from 'rxjs';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
@@ -33,8 +34,6 @@ export class VehiclesFormComponent implements OnInit, OnDestroy, CanComponentDea
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť nový doprvaný prostriedok pre aplikáciu Blesk.';
   public assistentOptions: any = [{title: 'Typy', link: '/dashboard/services/vehicles/types'}];
 
-  public courierSelect: number = 4;
-  public typeSelect: string = '5ede132ad2316a1df0dd95f0';
   public formButton: string = 'Vytvoriť';
   public formTitle: string = 'Vytvorenie nového dopravného prostriedka';
 
@@ -49,11 +48,11 @@ export class VehiclesFormComponent implements OnInit, OnDestroy, CanComponentDea
       validators: [Validators.pattern('^[\\D ]+$'), Validators.required],
       updateOn: 'change'
     }),
-    courier: new FormControl(null, {
+    courier: new FormControl(-1, {
       validators: [Validators.pattern('^(?!0*(\\.0+)?$)(\\d+|\\d*\\.\\d+)$'), Validators.required],
       updateOn: 'change'
     }),
-    type: new FormControl(null, {
+    type: new FormControl(-1, {
       validators: [Validators.pattern('^[0-9a-fA-F]{24}$'), Validators.required],
       updateOn: 'change'
     }),
@@ -68,39 +67,33 @@ export class VehiclesFormComponent implements OnInit, OnDestroy, CanComponentDea
 
   public ngOnInit(): void {
     this.subscriptions.push(
-      this.typeService.getAllDataObservable
-        .subscribe((types: Type[]) => {
-          this.types = types;
-        })
+      this.typeService.getAll(1, 100)
+      .subscribe((types: Type[]) => {
+        this.types = types;
+      })
     );
 
-    this.typeService.getAll(1, 100);
-
     this.subscriptions.push(
-      this.userService.searchDataObservable
+      this.userService.search({pagination: {pageNumber: 0, pageSize: 100}, search: {roles: environment.APP_ROLE_COURIER}})
         .subscribe((users: User[]) => {
           this.couriers = users;
-        })
+      })
     );
 
-    this.userService.search({pagination: {pageNumber: 0, pageSize: 100}, search: {roles: environment.APP_ROLE_COURIER}});
-
     this.subscriptions.push(
-      this.activatedRoute.params.subscribe((params: Params) => {
-        this.vehicle = this.vehicleService
-          .getGetAllData()
-          .filter(e => e._id == params.id)
-          .pop();
+      this.activatedRoute.params
+        .pipe(switchMap((params: Params) => {
+          if (!params.hasOwnProperty('id')) return EMPTY;
+          return this.vehicleService.get(params.id);
+        }))
+        .subscribe((result: Vehicle) => {
+          this.vehicle = result;
 
-        if (this.vehicle == null) return;
-        this.typeSelect = this.vehicle.type._id;
-        this.courierSelect = this.vehicle.courier.courierId;
-        this.formGroup.setValue({name: this.vehicle.name, courier: this.vehicle.courier, type: this.vehicle.type});
+          this.formGroup.setValue({name: this.vehicle.name, courier: this.vehicle.courier.courierId, type: this.vehicle.type._id});
 
-
-        this.formButton = 'Aktualizovať';
-        this.formTitle = 'Aktualizovanie dopravného prostriedka';
-        this.assistent = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte aktualizovať dopravný prostriedok pre aplikáciu Blesk.';
+          this.formButton = 'Aktualizovať';
+          this.formTitle = 'Aktualizovanie dopravného prostriedka';
+          this.assistent = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte aktualizovať dopravný prostriedok pre aplikáciu Blesk.';
       })
     );
 
@@ -113,25 +106,57 @@ export class VehiclesFormComponent implements OnInit, OnDestroy, CanComponentDea
   }
 
   public onSubmit(): void {
-    if (this.vehicle == null) {
-      this.subscriptions.push(
-        this.vehicleService.create(this.formGroup)
-          .subscribe((result: boolean) => {
-            if (!result) return;
-            this.onSuccess();
-          })
-      );
-    } else {
-      this.subscriptions.push(
-        this.vehicleService.update({...this.vehicle, ...this.formGroup.value})
-          .subscribe((result: boolean) => {
-            if (!result) return;
-            this.onSuccess();
-          })
-      );
-      this.vehicle = null;
-    }
+    this.vehicle == null ? this.onCreate() : this.onUpdate();
+    this.vehicle = null;
     return;
+  }
+
+  private onCreate(): void {
+    let vehicle: Vehicle;
+    this.subscriptions.push(
+      this.vehicleService.create(this.formGroup)
+        .pipe(switchMap((result: Vehicle) => {
+          vehicle = result;
+          return this.typeService.get(result.type)
+        }))
+        .pipe(switchMap((result: Type) => {
+          vehicle.type = result;
+          return this.userService.get(vehicle.courier)
+        }))
+        .subscribe((result: User) => {
+          vehicle.courier = result;
+
+          let vehicles: Vehicle[] = this.vehicleService.getGetAllData();
+          vehicles.unshift(vehicle);
+          this.vehicleService.setGetAllData(vehicles);
+
+          this.onSuccess();
+        })
+    );
+  }
+
+  private onUpdate(): void {
+    const vehicle: Vehicle = {_id: this.vehicle._id, type: this.vehicle.type._id, ...this.formGroup.value};
+    this.subscriptions.push(
+      this.vehicleService.update(vehicle)
+        .pipe(switchMap((result: boolean) => {
+          if (!result) return;
+          return this.typeService.get(vehicle.type)
+        }))
+        .pipe(switchMap((result: Type) => {
+          vehicle.type = result;
+          return this.userService.get(vehicle.courier)
+        }))
+        .subscribe((result: User) => {
+          vehicle.courier = result;
+
+          let vehicles: Vehicle[] = this.vehicleService.getGetAllData().filter(e => e._id != vehicle._id);
+          vehicles.unshift(vehicle);
+          this.vehicleService.setGetAllData(vehicles);
+
+          this.onSuccess();
+        })
+    );
   }
 
   public canDeactivate(event: boolean): Observable<boolean> | Promise<boolean> | boolean {

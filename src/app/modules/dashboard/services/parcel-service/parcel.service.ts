@@ -24,8 +24,8 @@ export class ParcelService extends BaseService {
     super();
   }
 
-  public create(formGroup: FormGroup): Observable<boolean> {
-    const subject = new Subject<boolean>();
+  public create(formGroup: FormGroup): Observable<Parcel> {
+    const subject = new Subject<Parcel>();
     const url = this.routeBuilder
       .service('parcel-service')
       .model('parcels')
@@ -37,12 +37,7 @@ export class ParcelService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: Parcel) => {
 
-        this.setCreateData(data);
-        let parcels: Parcel[] = this.getGetAllData();
-        parcels.unshift(data);
-        this.setGetAllData(parcels);
-
-        return subject.next(true);
+        return subject.next(data);
       });
     return subject.asObservable();
   }
@@ -60,16 +55,13 @@ export class ParcelService extends BaseService {
       .put(url, parcel)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
-        let parcels: Parcel[] = this.getGetAllData().filter(e => e.id != parcel.id);
-        parcels.unshift(parcel);
-        this.setGetAllData(parcels);
 
         return subject.next(true);
       });
     return subject.asObservable();
   }
 
-  public delete(id: number) {
+  public delete(id: number): Observable<boolean> {
     const subject = new Subject<boolean>();
     const url = this.routeBuilder
       .service('parcel-service')
@@ -82,16 +74,14 @@ export class ParcelService extends BaseService {
       .delete(url)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
-        let parcels: Parcel[] = this.getGetAllData().filter(e => e.id != id);
-        this.setGetAllData(parcels);
 
         return subject.next(true);
       });
     return subject.asObservable();
   }
 
-  public getAll(page: number, limit: number) {
-    const subject = new Subject<boolean>();
+  public getAll(page: number, limit: number): Observable<Parcel[]> {
+    const subject = new Subject<Parcel[]>();
     const url = this.routeBuilder
       .service('parcel-service')
       .model('parcels')
@@ -104,8 +94,7 @@ export class ParcelService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: Parcel[]) => {
 
-        this.setGetAllData(data);
-        return subject.next(true);
+        return subject.next(data);
       });
     return subject.asObservable();
   }

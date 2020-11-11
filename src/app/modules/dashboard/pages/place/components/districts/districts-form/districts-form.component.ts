@@ -1,7 +1,8 @@
 declare const $: any;
 
-import {Observable, Subject, Subscription} from 'rxjs';
+import {switchMap} from 'rxjs/internal/operators';
 import {Component, OnDestroy, OnInit} from '@angular/core';
+import {EMPTY, Observable, Subject, Subscription} from 'rxjs';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
@@ -29,7 +30,6 @@ export class DistrictsFormComponent implements OnInit, OnDestroy, CanComponentDe
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť nový okres pre aplikáciu Blesk.';
   public assistentOptions: any = [{title: 'Kraje', link: '/dashboard/services/places/regions'}, {title: 'Mestá a obce', link: '/dashboard/services/places/villages'}];
 
-  public regionSelect: number = 1;
   public formButton: string = 'Vytvoriť';
   public formTitle: string = 'Vytvorenie nového okresu';
 
@@ -52,7 +52,7 @@ export class DistrictsFormComponent implements OnInit, OnDestroy, CanComponentDe
       updateOn: 'change'
     }),
     use: new FormControl(1),
-    regionId: new FormControl(null, {
+    regionId: new FormControl(-1, {
       validators: [Validators.pattern('^(?!0*(\\.0+)?$)(\\d+|\d*\\.\\d+)$'), Validators.required],
       updateOn: 'change'
     }),
@@ -66,28 +66,26 @@ export class DistrictsFormComponent implements OnInit, OnDestroy, CanComponentDe
 
   public ngOnInit(): void {
     this.subscriptions.push(
-      this.regionService.getAllDataObservable
+      this.regionService.getAll(1, 100)
         .subscribe((regions: Region[]) => {
           this.regions = regions;
         })
     );
 
-    this.regionService.getAll(1, 100);
-
     this.subscriptions.push(
-      this.activatedRoute.params.subscribe((params: Params) => {
-        this.district = this.districtService
-          .getGetAllData()
-          .filter(e => e.id == params.id)
-          .pop();
+      this.activatedRoute.params
+        .pipe(switchMap((params: Params) => {
+          if (!params.hasOwnProperty('id')) return EMPTY;
+          return this.districtService.get(params.id);
+        }))
+        .subscribe((result: District) => {
+          this.district = result;
 
-        if (this.district == null) return;
-        this.regionSelect = this.district.regionId;
-        this.formGroup.setValue({name: this.district.name, vehRegNum: this.district.vehRegNum, code: this.district.code, regionId: this.district.regionId, use: this.district.use});
+          this.formGroup.setValue({name: this.district.name, vehRegNum: this.district.vehRegNum, code: this.district.code, regionId: this.district.regionId, use: this.district.use});
 
-        this.formButton = 'Aktualizovať';
-        this.formTitle = 'Aktualizovanie okresu';
-        this.assistent = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte aktualizovať okres pre aplikáciu Blesk.';
+          this.formButton = 'Aktualizovať';
+          this.formTitle = 'Aktualizovanie okresu';
+          this.assistent = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte aktualizovať okres pre aplikáciu Blesk.';
       })
     );
 
@@ -100,25 +98,48 @@ export class DistrictsFormComponent implements OnInit, OnDestroy, CanComponentDe
   }
 
   public onSubmit(): void {
-    if (this.district == null) {
-      this.subscriptions.push(
-        this.districtService.create(this.formGroup)
-          .subscribe((result: boolean) => {
-            if (!result) return;
-            this.onSuccess();
-          })
-      );
-    } else {
-      this.subscriptions.push(
-        this.districtService.update({...this.district, ...this.formGroup.value})
-          .subscribe((result: boolean) => {
-            if (!result) return;
-            this.onSuccess();
-          })
-      );
-      this.district = null;
-    }
+    this.district == null ? this.onCreate() : this.onUpdate();
+    this.district = null;
     return;
+  }
+
+  private onCreate(): void {
+    let district: District;
+    this.subscriptions.push(
+      this.districtService.create(this.formGroup)
+        .pipe(switchMap((result: District) => {
+          district = result;
+          return this.regionService.get(result.regionId)
+        }))
+        .subscribe((result: Region) => {
+          district.region = result;
+
+          let districts: District[] = this.districtService.getGetAllData();
+          districts.unshift(district);
+          this.districtService.setGetAllData(districts);
+
+          this.onSuccess();
+        })
+    );
+  }
+
+  private onUpdate(): void {
+    const district: District = {id: this.district.id, ...this.formGroup.value};
+    this.subscriptions.push(
+      this.districtService.update(district)
+        .pipe(switchMap((result: boolean) => {
+          if (!result) return;
+          return this.regionService.get(district.regionId)
+        }))
+        .subscribe((result: Region) => {
+          let districts: District[] = this.districtService.getGetAllData().filter(e => e.id != district.id);
+          district.region = result;
+          districts.unshift(district);
+          this.districtService.setGetAllData(districts);
+
+          this.onSuccess();
+        })
+    );
   }
 
   public canDeactivate(event: boolean): Observable<boolean> | Promise<boolean> | boolean {

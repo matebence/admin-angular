@@ -24,8 +24,8 @@ export class GenderService extends BaseService {
     super();
   }
 
-  public create(formGroup: FormGroup): Observable<boolean> {
-    const subject = new Subject<boolean>();
+  public create(formGroup: FormGroup): Observable<Gender> {
+    const subject = new Subject<Gender>();
     const url = this.routeBuilder
       .service('user-service')
       .model('genders')
@@ -37,12 +37,7 @@ export class GenderService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: Gender) => {
 
-        this.setCreateData(data);
-        let genders: Gender[] = this.getGetAllData();
-        genders.unshift(data);
-        this.setGetAllData(genders);
-
-        return subject.next(true);
+        return subject.next(data);
       });
     return subject.asObservable();
   }
@@ -60,16 +55,13 @@ export class GenderService extends BaseService {
       .put(url, gender)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
-        let genders: Gender[] = this.getGetAllData().filter(e => e.genderId != gender.genderId);
-        genders.unshift(gender);
-        this.setGetAllData(genders);
 
         return subject.next(true);
       });
     return subject.asObservable();
   }
 
-  public delete(id: number) {
+  public delete(id: number): Observable<boolean> {
     const subject = new Subject<boolean>();
     const url = this.routeBuilder
       .service('user-service')
@@ -82,16 +74,14 @@ export class GenderService extends BaseService {
       .delete(url)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
-        let genders: Gender[] = this.getGetAllData().filter(e => e.genderId != id);
-        this.setGetAllData(genders);
 
         return subject.next(true);
       });
     return subject.asObservable();
   }
 
-  public getAll(page: number, limit: number) {
-    const subject = new Subject<boolean>();
+  public getAll(page: number, limit: number): Observable<Gender[]> {
+    const subject = new Subject<Gender[]>();
     const url = this.routeBuilder
       .service('user-service')
       .model('genders')
@@ -104,8 +94,7 @@ export class GenderService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: Gender[]) => {
 
-        this.setGetAllData(data);
-        return subject.next(true);
+        return subject.next(data);
       });
     return subject.asObservable();
   }

@@ -56,7 +56,14 @@ export class TypesComponent implements OnInit, OnDestroy {
         })
     );
 
-    this.typeService.getAll(1, 100);
+    this.subscriptions.push(
+      this.typeService.getAll(1, 100)
+        .subscribe((types: Type[]) => {
+          this.typeService.setGetAllData(types);
+          this.source = new LocalDataSource(types);
+        })
+    );
+
     return;
   }
 
@@ -92,6 +99,9 @@ export class TypesComponent implements OnInit, OnDestroy {
     setTimeout(() => this.typeService.delete(this.row.getData()._id)
       .subscribe(result => {
         if (!result) return;
+
+        let types: Type[] = this.typeService.getGetAllData().filter(e => e._id != this.row.getData()._id);
+        this.typeService.setGetAllData(types);
 
         this.source.remove(this.row.getData());
         this.row = null;

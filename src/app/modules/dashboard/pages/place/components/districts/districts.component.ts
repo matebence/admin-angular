@@ -56,7 +56,14 @@ export class DistrictsComponent implements OnInit, OnDestroy {
         })
     );
 
-    this.districtService.getAll(1, 100);
+    this.subscriptions.push(
+      this.districtService.getAll(1, 100)
+        .subscribe((districts: District[]) => {
+          this.districtService.setGetAllData(districts);
+          this.source = new LocalDataSource(districts);
+        })
+    );
+
     return;
   }
 
@@ -92,6 +99,9 @@ export class DistrictsComponent implements OnInit, OnDestroy {
     setTimeout(() => this.districtService.delete(this.row.getData().id)
       .subscribe(result => {
         if (!result) return;
+
+        let districts: District[] = this.districtService.getGetAllData().filter(e => e.id != this.row.getData().id);
+        this.districtService.setGetAllData(districts);
 
         this.source.remove(this.row.getData());
         this.row = null;

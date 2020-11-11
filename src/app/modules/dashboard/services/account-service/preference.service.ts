@@ -24,8 +24,8 @@ export class PreferenceService extends BaseService {
     super();
   }
 
-  public create(formGroup: FormGroup): Observable<boolean> {
-    const subject = new Subject<boolean>();
+  public create(formGroup: FormGroup): Observable<Preference> {
+    const subject = new Subject<Preference>();
     const url = this.routeBuilder
       .service('parcel-service')
       .model('categories')
@@ -37,12 +37,7 @@ export class PreferenceService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: Preference) => {
 
-        this.setCreateData(data);
-        let preferences: Preference[] = this.getGetAllData();
-        preferences.unshift(data);
-        this.setGetAllData(preferences);
-
-        return subject.next(true);
+        return subject.next(data);
       });
     return subject.asObservable();
   }
@@ -60,16 +55,13 @@ export class PreferenceService extends BaseService {
       .put(url, preference)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
-        let preferences: Preference[] = this.getGetAllData().filter(e => e.preferenceId != preference.preferenceId);
-        preferences.unshift(preference);
-        this.setGetAllData(preferences);
 
         return subject.next(true);
       });
     return subject.asObservable();
   }
 
-  public delete(id: number) {
+  public delete(id: number): Observable<boolean> {
     const subject = new Subject<boolean>();
     const url = this.routeBuilder
       .service('parcel-service')
@@ -82,16 +74,14 @@ export class PreferenceService extends BaseService {
       .delete(url)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
-        let preferences: Preference[] = this.getGetAllData().filter(e => e.preferenceId != id);
-        this.setGetAllData(preferences);
 
         return subject.next(true);
       });
     return subject.asObservable();
   }
 
-  public getAll(page: number, limit: number) {
-    const subject = new Subject<boolean>();
+  public getAll(page: number, limit: number): Observable<Preference[]> {
+    const subject = new Subject<Preference[]>();
     const url = this.routeBuilder
       .service('account-service')
       .model('preferences')
@@ -104,8 +94,7 @@ export class PreferenceService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: Preference[]) => {
 
-        this.setGetAllData(data);
-        return subject.next(true);
+        return subject.next(data);
       });
     return subject.asObservable();
   }

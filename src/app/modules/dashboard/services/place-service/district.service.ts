@@ -1,9 +1,8 @@
 import {FormGroup} from '@angular/forms';
 import {Observable, Subject} from 'rxjs/index';
-import {catchError, switchMap} from 'rxjs/internal/operators';
+import {catchError} from 'rxjs/internal/operators';
 import {EventEmitter, Injectable} from '@angular/core';
 
-import {RegionService} from './region.service';
 import {BaseService} from '../../../../core/services/base.service';
 
 import {District} from '../../../../shared/models/services/place/district.model';
@@ -23,13 +22,12 @@ export class DistrictService extends BaseService {
   public getAllDataObservable: EventEmitter<District[]> = new EventEmitter<District[]>();
 
   public constructor(private requestHttp: RequestHTTP,
-                     private routeBuilder: RouteBuilder,
-                     private regionService: RegionService) {
+                     private routeBuilder: RouteBuilder) {
     super();
   }
 
-  public create(formGroup: FormGroup): Observable<boolean> {
-    const subject = new Subject<boolean>();
+  public create(formGroup: FormGroup): Observable<District> {
+    const subject = new Subject<District>();
     const url = this.routeBuilder
       .service('place-service')
       .model('districts')
@@ -39,18 +37,9 @@ export class DistrictService extends BaseService {
     this.requestHttp
       .post(url, formGroup.value)
       .pipe(catchError(super.handleError.bind(this)))
-      .pipe(switchMap((data: District) => {
-        this.setCreateData(data);
-        return this.regionService.get(formGroup.value.regionId)
-      }))
-      .subscribe((result: boolean) => {
-        if (!result) return;
+      .subscribe((data: District) => {
 
-        let districts: District[] = this.getGetAllData();
-        districts.unshift({...this.getCreateData(), region: this.regionService.getGetData()});
-        this.setGetAllData(districts);
-
-        return subject.next(true);
+        return subject.next(data);
       });
     return subject.asObservable();
   }
@@ -67,22 +56,14 @@ export class DistrictService extends BaseService {
     this.requestHttp
       .put(url, district)
       .pipe(catchError(super.handleError.bind(this)))
-      .pipe(switchMap(() => {
-        return this.regionService.get(district.regionId)
-      }))
-      .subscribe((result: boolean) => {
-        if (!result) return;
-
-        let districts: District[] = this.getGetAllData().filter(e => e.id != district.id);
-        districts.unshift({...district, region: this.regionService.getGetData()});
-        this.setGetAllData(districts);
+      .subscribe(() => {
 
         return subject.next(true);
       });
     return subject.asObservable();
   }
 
-  public delete(id: number) {
+  public delete(id: number): Observable<boolean> {
     const subject = new Subject<boolean>();
     const url = this.routeBuilder
       .service('place-service')
@@ -95,16 +76,14 @@ export class DistrictService extends BaseService {
       .delete(url)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
-        let districts: District[] = this.getGetAllData().filter(e => e.id != id);
-        this.setGetAllData(districts);
 
         return subject.next(true);
       });
     return subject.asObservable();
   }
 
-  public get(id: number) {
-    const subject = new Subject<boolean>();
+  public get(id: number): Observable<District> {
+    const subject = new Subject<District>();
     const url = this.routeBuilder
       .service('place-service')
       .model('districts')
@@ -117,14 +96,13 @@ export class DistrictService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: District) => {
 
-        this.setGetData(data);
-        return subject.next(true);
+        return subject.next(data);
       });
     return subject.asObservable();
   }
 
-  public getAll(page: number, limit: number) {
-    const subject = new Subject<boolean>();
+  public getAll(page: number, limit: number): Observable<District[]> {
+    const subject = new Subject<District[]>();
     const url = this.routeBuilder
       .service('place-service')
       .model('districts')
@@ -137,8 +115,7 @@ export class DistrictService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: District[]) => {
 
-        this.setGetAllData(data);
-        return subject.next(true);
+        return subject.next(data);
       });
     return subject.asObservable();
   }

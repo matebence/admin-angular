@@ -24,8 +24,8 @@ export class PayoutService extends BaseService {
     super();
   }
 
-  public create(formGroup: FormGroup): Observable<boolean> {
-    const subject = new Subject<boolean>();
+  public create(formGroup: FormGroup): Observable<Payout> {
+    const subject = new Subject<Payout>();
     const url = this.routeBuilder
       .service('user-service')
       .model('payouts')
@@ -37,12 +37,7 @@ export class PayoutService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: Payout) => {
 
-        this.setCreateData(data);
-        let payouts: Payout[] = this.getGetAllData();
-        payouts.unshift(data);
-        this.setGetAllData(payouts);
-
-        return subject.next(true);
+        return subject.next(data);
       });
     return subject.asObservable();
   }
@@ -60,16 +55,13 @@ export class PayoutService extends BaseService {
       .put(url, payout)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
-        let payouts: Payout[] = this.getGetAllData().filter(e => e.payoutId != payout.payoutId);
-        payouts.unshift(payout);
-        this.setGetAllData(payouts);
 
         return subject.next(true);
       });
     return subject.asObservable();
   }
 
-  public delete(id: number) {
+  public delete(id: number): Observable<boolean> {
     const subject = new Subject<boolean>();
     const url = this.routeBuilder
       .service('user-service')
@@ -82,16 +74,14 @@ export class PayoutService extends BaseService {
       .delete(url)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
-        let payouts: Payout[] = this.getGetAllData().filter(e => e.payoutId != id);
-        this.setGetAllData(payouts);
 
         return subject.next(true);
       });
     return subject.asObservable();
   }
 
-  public getAll(page: number, limit: number) {
-    const subject = new Subject<boolean>();
+  public getAll(page: number, limit: number): Observable<Payout[]> {
+    const subject = new Subject<Payout[]>();
     const url = this.routeBuilder
       .service('user-service')
       .model('payouts')
@@ -104,8 +94,7 @@ export class PayoutService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: Payout[]) => {
 
-        this.setGetAllData(data);
-        return subject.next(true);
+        return subject.next(data);
       });
     return subject.asObservable();
   }

@@ -12,13 +12,32 @@
         <h6 class="m-0 font-weight-bold text-primary">{{formTitle}}</h6>
       </div>
       <div class="card-body with-padding">
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="profit">
+          <div class="form-group">
+            <label for="profitPrice">Profit firmy</label>
+            <input
+              formControlName="price"
+              type="text"
+              class="form-control"
+              id="profitPrice"
+              placeholder="Nastavte profit firmy">
+          </div>
+          <button
+            [disabled]="!formGroup.get('price').valid"
+            appButtonHover
+            type="submit"
+            class="btn btn-primary">{{formButton}}
+          </button>
+          <a routerLink="/dashboard/services/company/profit" class="btn btn-secondary"
+             [state]="{ignoreLoadingBar: true}">Zrušiť a späť</a>
+        </form>
       </div>
     </div>
   </div>
 </div>
 <app-modal
   (modalResult)="canDeactivate($event)"
-  [modalId]="'regionFormModal'"
+  [modalId]="'profitFormModal'"
   [modalTitle]="title"
   [modalText]="text"
   [modalNegativeButton]="negativeButton"

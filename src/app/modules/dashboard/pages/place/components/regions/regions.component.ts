@@ -56,7 +56,14 @@ export class RegionsComponent implements OnInit, OnDestroy {
         })
     );
 
-    this.regionService.getAll(1, 100);
+    this.subscriptions.push(
+      this.regionService.getAll(1, 100)
+        .subscribe((regions: Region[]) => {
+          this.regionService.setGetAllData(regions);
+          this.source = new LocalDataSource(regions);
+      })
+    );
+
     return;
   }
 
@@ -92,6 +99,9 @@ export class RegionsComponent implements OnInit, OnDestroy {
     setTimeout(() => this.regionService.delete(this.row.getData().id)
       .subscribe(result => {
         if (!result) return;
+
+        let regions: Region[] = this.regionService.getGetAllData().filter(e => e.id != this.row.getData().id);
+        this.regionService.setGetAllData(regions);
 
         this.source.remove(this.row.getData());
         this.row = null;

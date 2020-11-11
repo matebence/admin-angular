@@ -24,8 +24,8 @@ export class CategoryService extends BaseService {
     super();
   }
 
-  public create(formGroup: FormGroup): Observable<boolean> {
-    const subject = new Subject<boolean>();
+  public create(formGroup: FormGroup): Observable<Category> {
+    const subject = new Subject<Category>();
     const url = this.routeBuilder
       .service('parcel-service')
       .model('categories')
@@ -37,12 +37,7 @@ export class CategoryService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: Category) => {
 
-        this.setCreateData(data);
-        let categories: Category[] = this.getGetAllData();
-        categories.unshift(data);
-        this.setGetAllData(categories);
-
-        return subject.next(true);
+        return subject.next(data);
       });
     return subject.asObservable();
   }
@@ -60,16 +55,13 @@ export class CategoryService extends BaseService {
       .put(url, category)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
-        let categories: Category[] = this.getGetAllData().filter(e => e.id != category.id);
-        categories.unshift(category);
-        this.setGetAllData(categories);
 
         return subject.next(true);
       });
     return subject.asObservable();
   }
 
-  public delete(id: number) {
+  public delete(id: number): Observable<boolean> {
     const subject = new Subject<boolean>();
     const url = this.routeBuilder
       .service('parcel-service')
@@ -82,16 +74,14 @@ export class CategoryService extends BaseService {
       .delete(url)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe(() => {
-        let categories: Category[] = this.getGetAllData().filter(e => e.id != id);
-        this.setGetAllData(categories);
 
         return subject.next(true);
       });
     return subject.asObservable();
   }
 
-  public getAll(page: number, limit: number) {
-    const subject = new Subject<boolean>();
+  public getAll(page: number, limit: number): Observable<Category[]> {
+    const subject = new Subject<Category[]>();
     const url = this.routeBuilder
       .service('parcel-service')
       .model('categories')
@@ -104,8 +94,7 @@ export class CategoryService extends BaseService {
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: Category[]) => {
 
-        this.setGetAllData(data);
-        return subject.next(true);
+        return subject.next(data);
       });
     return subject.asObservable();
   }
