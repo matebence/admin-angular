@@ -27,7 +27,7 @@ export class DistrictsFormComponent implements OnInit, OnDestroy, CanComponentDe
 
   public illustration: string = 'assets/img/place_assistant.svg';
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť nový okres pre aplikáciu Blesk.';
-  public assistentOptions: any = [{title: 'Kraje', link: '/dashboard/services/places/table/regions'}, {title: 'Mestá a obce', link: '/dashboard/services/places/table/villages'}];
+  public assistentOptions: any = [{title: 'Kraje', link: '/dashboard/services/places/regions'}, {title: 'Mestá a obce', link: '/dashboard/services/places/villages'}];
 
   public regionSelect: number = 1;
   public formButton: string = 'Vytvoriť';
@@ -136,7 +136,7 @@ export class DistrictsFormComponent implements OnInit, OnDestroy, CanComponentDe
 
   private onSuccess(): void {
     this.formGroup.reset();
-    this.router.navigate(['/dashboard/services/places/table/districts']);
+    this.router.navigate(['/dashboard/services/places/districts']);
     return;
   }
 }

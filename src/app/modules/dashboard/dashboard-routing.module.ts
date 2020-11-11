@@ -95,7 +95,7 @@ const routes: Routes = [
             data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
             children: [
               {
-                path: 'table',
+                path: 'main',
                 component: UsersComponent,
                 data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
                 children: [
@@ -114,7 +114,7 @@ const routes: Routes = [
                 ]
               },
               {
-                path: 'table/payouts',
+                path: 'payouts',
                 component: PayoutsComponent,
                 data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
                 children: [
@@ -133,7 +133,7 @@ const routes: Routes = [
                 ]
               },
               {
-                path: 'table/payments',
+                path: 'payments',
                 component: PaymentsComponent,
                 data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
                 children: [
@@ -152,7 +152,7 @@ const routes: Routes = [
                 ]
               },
               {
-                path: 'table/genders',
+                path: 'genders',
                 component: GendersComponent,
                 data: {roles: [environment.APP_ROLE_ADMIN]},
                 children: [
@@ -178,7 +178,7 @@ const routes: Routes = [
             data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
             children: [
               {
-                path: 'table',
+                path: 'main',
                 component: AccountsComponent,
                 data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
                 children: [
@@ -197,7 +197,7 @@ const routes: Routes = [
                 ]
               },
               {
-                path: 'table/preferences',
+                path: 'preferences',
                 component: PreferencesComponent,
                 data: {roles: [environment.APP_ROLE_ADMIN]},
                 children: [
@@ -216,7 +216,7 @@ const routes: Routes = [
                 ]
               },
               {
-                path: 'table/privileges',
+                path: 'privileges',
                 component: PrivilegesComponent,
                 data: {roles: [environment.APP_ROLE_ADMIN]},
                 children: [
@@ -235,7 +235,7 @@ const routes: Routes = [
                 ]
               },
               {
-                path: 'table/roles',
+                path: 'roles',
                 component: RolesComponent,
                 data: {roles: [environment.APP_ROLE_ADMIN]},
                 children: [
@@ -261,7 +261,7 @@ const routes: Routes = [
             data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
             children: [
               {
-                path: 'table',
+                path: 'main',
                 component: ShipmentsComponent,
                 data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
                 children: [
@@ -280,7 +280,7 @@ const routes: Routes = [
                 ]
               },
               {
-                path: 'table/invoices',
+                path: 'invoices',
                 component: InvoicesComponent,
                 data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
                 children: [
@@ -303,7 +303,7 @@ const routes: Routes = [
                 ]
               },
               {
-                path: 'table/status',
+                path: 'status',
                 component: StatusComponent,
                 data: {roles: [environment.APP_ROLE_ADMIN]},
                 children: [
@@ -329,7 +329,7 @@ const routes: Routes = [
             data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
             children: [
               {
-                path: 'table',
+                path: 'main',
                 component: ParcelsComponent,
                 data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
                 children: [
@@ -348,7 +348,7 @@ const routes: Routes = [
                 ]
               },
               {
-                path: 'table/ratings',
+                path: 'ratings',
                 component: RatingsComponent,
                 data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
                 children: [
@@ -367,7 +367,7 @@ const routes: Routes = [
                 ]
               },
               {
-                path: 'table/categories',
+                path: 'categories',
                 component: CategoriesComponent,
                 data: {roles: [environment.APP_ROLE_ADMIN]},
                 children: [
@@ -393,7 +393,7 @@ const routes: Routes = [
             data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
             children: [
               {
-                path: 'table/regions',
+                path: 'regions',
                 component: RegionsComponent,
                 data: {roles: [environment.APP_ROLE_ADMIN]},
                 children: [
@@ -412,7 +412,7 @@ const routes: Routes = [
                 ]
               },
               {
-                path: 'table/districts',
+                path: 'districts',
                 component: DistrictsComponent,
                 data: {roles: [environment.APP_ROLE_ADMIN]},
                 children: [
@@ -431,7 +431,7 @@ const routes: Routes = [
                 ]
               },
               {
-                path: 'table/villages',
+                path: 'villages',
                 component: VillagesComponent,
                 data: {roles: [environment.APP_ROLE_ADMIN]},
                 children: [
@@ -457,7 +457,7 @@ const routes: Routes = [
             data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
             children: [
               {
-                path: 'table',
+                path: 'main',
                 component: VehiclesComponent,
                 data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]},
                 children: [
@@ -476,7 +476,7 @@ const routes: Routes = [
                 ]
               },
               {
-                path: 'table/types',
+                path: 'types',
                 component: TypesComponent,
                 data: {roles: [environment.APP_ROLE_ADMIN]},
                 children: [

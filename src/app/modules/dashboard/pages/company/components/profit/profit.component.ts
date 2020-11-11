@@ -2,6 +2,7 @@ declare const $: any;
 
 import {Subscription} from 'rxjs/index';
 import {LocalDataSource} from 'ng2-smart-table';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Row} from 'ng2-smart-table/lib/lib/data-set/row';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 
@@ -35,25 +36,19 @@ export class ProfitComponent implements OnInit, OnDestroy {
     delete: {
       confirmDelete: false,
       deleteButtonContent: ''
+    },
+    add: {
+      confirmCreatwe: false,
+      addButtonContent: '',
     }
   };
 
-  public constructor(private priceService: PriceService) {
+  public constructor(private router: Router,
+                     private priceService: PriceService,
+                     private activatedRoute: ActivatedRoute) {
   }
 
   public ngOnInit(): void {
-    this.subscriptions.push(
-      this.priceService.errorDataObservable
-        .subscribe((error: Error) => {
-          $('#priceModal').modal('show');
-          this.title = 'Chyba';
-          this.text = error.message;
-          this.negativeButton = 'Zrušiť';
-          this.pozitiveButton = 'Zatvoriť';
-          this.row = null;
-        })
-    );
-
     this.subscriptions.push(
       this.priceService.getDataObservable
         .subscribe((price: Price) => {
@@ -71,15 +66,13 @@ export class ProfitComponent implements OnInit, OnDestroy {
   }
 
   public onTableCreateData(row: boolean): void {
+    if (row) this.router.navigate(['new'], {relativeTo: this.activatedRoute});
     return;
   }
 
   public onTableEditData(row: Row): void {
+    this.router.navigate(['edit', row.getData()._id], {relativeTo: this.activatedRoute});
     this.row = row;
-    return;
-  }
-
-  public onModalResult(event: boolean): void {
     return;
   }
 }

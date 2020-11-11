@@ -58,7 +58,7 @@
                 "ROLE_MANAGER"
               ],
               "route": {
-                "main": "/dashboard/services/users/table"
+                "main": "/dashboard/services/users/main"
               }
             },
             {
@@ -68,7 +68,7 @@
                 "ROLE_MANAGER"
               ],
               "route": {
-                "main": "/dashboard/services/users/table/payouts"
+                "main": "/dashboard/services/users/payouts"
               }
             },
             {
@@ -78,7 +78,7 @@
                 "ROLE_MANAGER"
               ],
               "route": {
-                "main": "/dashboard/services/users/table/payments"
+                "main": "/dashboard/services/users/payments"
               }
             },
             {
@@ -87,7 +87,7 @@
                 "ROLE_ADMIN"
               ],
               "route": {
-                "main": "/dashboard/services/users/table/genders"
+                "main": "/dashboard/services/users/genders"
               }
             }
           ]
@@ -106,7 +106,7 @@
                 "ROLE_MANAGER"
               ],
               "route": {
-                "main": "/dashboard/services/accounts/table"
+                "main": "/dashboard/services/accounts/main"
               }
             },
             {
@@ -115,7 +115,7 @@
                 "ROLE_ADMIN"
               ],
               "route": {
-                "main": "/dashboard/services/accounts/table/preferences"
+                "main": "/dashboard/services/accounts/preferences"
               }
             },
             {
@@ -124,7 +124,7 @@
                 "ROLE_ADMIN"
               ],
               "route": {
-                "main": "/dashboard/services/accounts/table/privileges"
+                "main": "/dashboard/services/accounts/privileges"
               }
             },
             {
@@ -133,7 +133,7 @@
                 "ROLE_ADMIN"
               ],
               "route": {
-                "main": "/dashboard/services/accounts/table/roles"
+                "main": "/dashboard/services/accounts/roles"
               }
             }
           ]
@@ -152,7 +152,7 @@
                 "ROLE_MANAGER"
               ],
               "route": {
-                "main": "/dashboard/services/shipments/table"
+                "main": "/dashboard/services/shipments/main"
               }
             },
             {
@@ -162,7 +162,7 @@
                 "ROLE_MANAGER"
               ],
               "route": {
-                "main": "/dashboard/services/shipments/table/invoices"
+                "main": "/dashboard/services/shipments/invoices"
               }
             },
             {
@@ -171,7 +171,7 @@
                 "ROLE_ADMIN"
               ],
               "route": {
-                "main": "/dashboard/services/shipments/table/status"
+                "main": "/dashboard/services/shipments/status"
               }
             }
           ]
@@ -190,7 +190,7 @@
                 "ROLE_MANAGER"
               ],
               "route": {
-                "main": "/dashboard/services/parcels/table"
+                "main": "/dashboard/services/parcels/main"
               }
             },
             {
@@ -199,7 +199,7 @@
                 "ROLE_ADMIN"
               ],
               "route": {
-                "main": "/dashboard/services/parcels/table/categories"
+                "main": "/dashboard/services/parcels/categories"
               }
             },
             {
@@ -209,7 +209,7 @@
                 "ROLE_MANAGER"
               ],
               "route": {
-                "main": "/dashboard/services/parcels/table/ratings"
+                "main": "/dashboard/services/parcels/ratings"
               }
             }
           ]
@@ -227,7 +227,7 @@
                 "ROLE_ADMIN"
               ],
               "route": {
-                "main": "/dashboard/services/places/table/regions"
+                "main": "/dashboard/services/places/regions"
               }
             },
             {
@@ -236,7 +236,7 @@
                 "ROLE_ADMIN"
               ],
               "route": {
-                "main": "/dashboard/services/places/table/districts"
+                "main": "/dashboard/services/places/districts"
               }
             },
             {
@@ -245,7 +245,7 @@
                 "ROLE_ADMIN"
               ],
               "route": {
-                "main": "/dashboard/services/places/table/villages"
+                "main": "/dashboard/services/places/villages"
               }
             }
           ]
@@ -264,7 +264,7 @@
                 "ROLE_MANAGER"
               ],
               "route": {
-                "main": "/dashboard/services/vehicles/table"
+                "main": "/dashboard/services/vehicles/main"
               }
             },
             {
@@ -273,7 +273,7 @@
                 "ROLE_ADMIN"
               ],
               "route": {
-                "main": "/dashboard/services/vehicles/table/types"
+                "main": "/dashboard/services/vehicles/types"
               }
             }
           ]

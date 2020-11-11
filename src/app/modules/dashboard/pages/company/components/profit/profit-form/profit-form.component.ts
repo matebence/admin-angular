@@ -15,12 +15,12 @@ export class ProfitFormComponent implements OnInit, OnDestroy, CanComponentDeact
   public negativeButton: string;
   public pozitiveButton: string;
 
-  public illustration: string = 'assets/img/place_assistant.svg';
-  public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť nový kraj pre aplikáciu Blesk.';
-  public assistentOptions: any = [{title: 'Okresy', link: '/dashboard/services/places/table/districts'}, {title: 'Mestá a obce', link: '/dashboard/services/places/table/villages'}];
+  public illustration: string = 'assets/img/profit_assistant.svg';
+  public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte nastaviť profit firmy (+ cena za každý balík)';
+  public assistentOptions: any = [{title: 'Sklady', link: '/dashboard/services/company/warehouses'}];
 
-  public formButton: string = 'Vytvoriť';
-  public formTitle: string = 'Vytvorenie nového kraja';
+  public formButton: string = 'Nastaviť';
+  public formTitle: string = 'Nastavenie profitu firmy';
 
   private subscriptions: Subscription[] = [];
 

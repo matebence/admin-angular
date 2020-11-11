@@ -14,7 +14,7 @@ export default {
       type: 'html',
       filter: false,
       valuePrepareFunction: (cell, row) => {
-        return `<a href='dashboard/services/shipments/table/invoices/${row._id}'>Stiahnúť faktúru</a>`;
+        return `<a href='dashboard/services/shipments/invoices/${row._id}'>Stiahnúť faktúru</a>`;
       }
     }
   }

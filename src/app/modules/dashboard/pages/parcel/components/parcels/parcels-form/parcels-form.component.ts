@@ -17,7 +17,7 @@ export class ParcelsFormComponent implements OnInit, OnDestroy, CanComponentDeac
 
   public illustration: string = 'assets/img/place_assistant.svg';
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť nový kraj pre aplikáciu Blesk.';
-  public assistentOptions: any = [{title: 'Okresy', link: '/dashboard/services/places/table/districts'}, {title: 'Mestá a obce', link: '/dashboard/services/places/table/villages'}];
+  public assistentOptions: any = [{title: 'Okresy', link: '/dashboard/services/places/districts'}, {title: 'Mestá a obce', link: '/dashboard/services/places/villages'}];
 
   public formButton: string = 'Vytvoriť';
   public formTitle: string = 'Vytvorenie nového kraja';
