@@ -6702,7 +6702,7 @@ button.bg-success:focus {
 }
 
 .bg-info {
-  background-color: #36b9cc !important;
+  background-color: #1796dc !important;
 }
 
 a.bg-info:hover, a.bg-info:focus,
@@ -10863,7 +10863,7 @@ a:focus {
 }
 
 .border-left-primary {
-  border-left: 0.25rem solid #176c9d !important;
+  border-left: 0.25rem solid #1796dc !important;
 }
 
 .border-bottom-primary {

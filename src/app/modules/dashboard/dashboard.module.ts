@@ -40,8 +40,8 @@ import {PreferenceService} from './services/account-service/preference.service';
 
 import {BarComponent} from './components/bar/bar.component';
 import {NavComponent} from './components/nav/nav.component';
+import {TileComponent} from './components/tile/tile.component';
 import {TableComponent} from './components/table/table.component';
-import {TilesComponent} from './components/tiles/tiles.component';
 import {HeaderComponent} from './components/header/header.component';
 import {FooterComponent} from './components/footer/footer.component';
 import {SearchComponent} from './components/search/search.component';
@@ -104,7 +104,7 @@ import {DashboardRoutingModule} from './dashboard-routing.module';
     BarComponent,
     NavComponent,
     TableComponent,
-    TilesComponent,
+    TileComponent,
     RolesComponent,
     UsersComponent,
     TypesComponent,

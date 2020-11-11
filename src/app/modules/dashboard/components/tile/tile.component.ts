@@ -1,11 +1,14 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-tiles',
-  templateUrl: './tiles.component.html',
-  styleUrls: ['./tiles.component.css']
+  selector: 'app-tile',
+  templateUrl: './tile.component.html',
+  styleUrls: ['./tile.component.css']
 })
-export class TilesComponent implements OnInit {
+export class TileComponent implements OnInit {
+
+  @Input('tileText') public text: string;
+  @Input('tileTitle') public title: string;
 
   public constructor() {
   }
