@@ -27,7 +27,7 @@ export class WarehousesFormComponent implements OnInit, OnDestroy, CanComponentD
   public pozitiveButton: string;
 
   public illustration: string = 'assets/img/warehouse_assistant.svg';
-  public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť nový sklad pre aplikáciu Blesk.';
+  public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť nový sklad v aplikácií Blesk.';
   public assistentOptions: any = [{title: 'Profit', link: '/dashboard/services/company/profit'}];
 
   public formButton: string = 'Vytvoriť';
@@ -86,7 +86,7 @@ export class WarehousesFormComponent implements OnInit, OnDestroy, CanComponentD
 
           this.formButton = 'Aktualizovať';
           this.formTitle = 'Aktualizovanie skladu';
-          this.assistent = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte aktualizovať sklad pre aplikáciu Blesk.';
+          this.assistent = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte aktualizovať sklad v aplikácií Blesk.';
       })
     );
 

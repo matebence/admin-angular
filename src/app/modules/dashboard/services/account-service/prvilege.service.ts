@@ -13,9 +13,11 @@ import {RouteBuilder} from '../../../../core/http/route-builder.http';
 @Injectable()
 export class PrivilegeService extends BaseService {
 
+  private getData: Privilege = null;
   private createData: Privilege = null;
   private getAllData: Privilege[] = null;
 
+  public getDataObservable: EventEmitter<Privilege> = new EventEmitter<Privilege>();
   public createDataObservable: EventEmitter<Privilege> = new EventEmitter<Privilege>();
   public getAllDataObservable: EventEmitter<Privilege[]> = new EventEmitter<Privilege[]>();
 
@@ -80,6 +82,25 @@ export class PrivilegeService extends BaseService {
     return subject.asObservable();
   }
 
+  public get(id: number): Observable<Privilege> {
+    const subject = new Subject<Privilege>();
+    const url = this.routeBuilder
+      .service('account-service')
+      .model('privileges')
+      .action('get')
+      .params([{id: id}])
+      .build();
+
+    this.requestHttp
+      .get(url)
+      .pipe(catchError(super.handleError.bind(this)))
+      .subscribe((data: Privilege) => {
+
+        return subject.next(data);
+      });
+    return subject.asObservable();
+  }
+
   public getAll(page: number, limit: number): Observable<Privilege[]> {
     const subject = new Subject<Privilege[]>();
     const url = this.routeBuilder
@@ -107,6 +128,16 @@ export class PrivilegeService extends BaseService {
 
   public getCreateData(): Privilege {
     return Object.assign({}, this.createData);
+  }
+
+  public setGetData(data: Privilege): void {
+    this.getData = data;
+    this.getDataObservable.emit(this.getGetData());
+    return;
+  }
+
+  public getGetData(): Privilege {
+    return Object.assign({}, this.getData);
   }
 
   public setGetAllData(data: Privilege[]): void {

@@ -25,7 +25,7 @@ export class RegionsFormComponent implements OnInit, OnDestroy, CanComponentDeac
   public pozitiveButton: string;
 
   public illustration: string = 'assets/img/place_assistant.svg';
-  public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť nový kraj pre aplikáciu Blesk.';
+  public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť nový kraj v aplikácií Blesk.';
   public assistentOptions: any = [{title: 'Okresy', link: '/dashboard/services/places/districts'}, {title: 'Mestá a obce', link: '/dashboard/services/places/villages'}];
 
   public formButton: string = 'Vytvoriť';
@@ -65,7 +65,7 @@ export class RegionsFormComponent implements OnInit, OnDestroy, CanComponentDeac
 
           this.formButton = 'Aktualizovať';
           this.formTitle = 'Aktualizovanie kraja';
-          this.assistent = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte aktualizovať kraj pre aplikáciu Blesk.';
+          this.assistent = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte aktualizovať kraj v aplikácií Blesk.';
         })
     );
 
@@ -104,6 +104,7 @@ export class RegionsFormComponent implements OnInit, OnDestroy, CanComponentDeac
       this.regionService.update(region)
         .subscribe((result: boolean) => {
           if (!result) return;
+          
           let regions: Region[] = this.regionService.getGetAllData().filter(e => e.id != region.id);
           regions.unshift(region);
           this.regionService.setGetAllData(regions);

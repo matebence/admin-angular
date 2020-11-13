@@ -2,6 +2,7 @@ declare const $: any;
 
 import {Subscription} from 'rxjs/index';
 import {LocalDataSource} from 'ng2-smart-table';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Row} from 'ng2-smart-table/lib/lib/data-set/row';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 
@@ -30,7 +31,9 @@ export class GendersComponent implements OnInit, OnDestroy {
 
   public settings: any = genderTableConfig;
 
-  public constructor(private genderService: GenderService) {
+  public constructor(private router: Router,
+                     private genderService: GenderService,
+                     private activatedRoute: ActivatedRoute) {
   }
 
   public ngOnInit(): void {
@@ -53,7 +56,14 @@ export class GendersComponent implements OnInit, OnDestroy {
         })
     );
 
-    this.genderService.getAll(0, 100);
+    this.subscriptions.push(
+      this.genderService.getAll(0, 100)
+        .subscribe((genders: Gender[]) => {
+          this.genderService.setGetAllData(genders);
+          this.source = new LocalDataSource(genders);
+        })
+    );
+
     return;
   }
 
@@ -63,6 +73,7 @@ export class GendersComponent implements OnInit, OnDestroy {
   }
 
   public onTableCreateData(row: boolean): void {
+    if (row) this.router.navigate(['new'], {relativeTo: this.activatedRoute});
     return;
   }
 
@@ -78,6 +89,7 @@ export class GendersComponent implements OnInit, OnDestroy {
   }
 
   public onTableEditData(row: Row): void {
+    this.router.navigate(['edit', row.getData().genderId], {relativeTo: this.activatedRoute});
     this.row = row;
     return;
   }
@@ -87,6 +99,9 @@ export class GendersComponent implements OnInit, OnDestroy {
     setTimeout(() => this.genderService.delete(this.row.getData().genderId)
       .subscribe(result => {
         if (!result) return;
+
+        let genders: Gender[] = this.genderService.getGetAllData().filter(e => e.genderId != this.row.getData().genderId);
+        this.genderService.setGetAllData(genders);
 
         this.source.remove(this.row.getData());
         this.row = null;

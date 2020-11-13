@@ -2,6 +2,7 @@ declare const $: any;
 
 import {Subscription} from 'rxjs/index';
 import {LocalDataSource} from 'ng2-smart-table';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Row} from 'ng2-smart-table/lib/lib/data-set/row';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 
@@ -30,7 +31,9 @@ export class PreferencesComponent implements OnInit, OnDestroy {
 
   public settings: any = preferenceTableConfig;
 
-  public constructor(private preferenceService: PreferenceService) {
+  public constructor(private router: Router,
+                     private activatedRoute: ActivatedRoute,
+                     private preferenceService: PreferenceService) {
   }
 
   public ngOnInit(): void {
@@ -53,7 +56,14 @@ export class PreferencesComponent implements OnInit, OnDestroy {
         })
     );
 
-    this.preferenceService.getAll(0, 100);
+    this.subscriptions.push(
+      this.preferenceService.getAll(0, 100)
+        .subscribe((preferences: Preference[]) => {
+          this.preferenceService.setGetAllData(preferences);
+          this.source = new LocalDataSource(preferences);
+        })
+    );
+
     return;
   }
 
@@ -63,6 +73,7 @@ export class PreferencesComponent implements OnInit, OnDestroy {
   }
 
   public onTableCreateData(row: boolean): void {
+    if (row) this.router.navigate(['new'], {relativeTo: this.activatedRoute});
     return;
   }
 
@@ -78,6 +89,7 @@ export class PreferencesComponent implements OnInit, OnDestroy {
   }
 
   public onTableEditData(row: Row): void {
+    this.router.navigate(['edit', row.getData().preferenceId], {relativeTo: this.activatedRoute});
     this.row = row;
     return;
   }
@@ -87,6 +99,9 @@ export class PreferencesComponent implements OnInit, OnDestroy {
     setTimeout(() => this.preferenceService.delete(this.row.getData().preferenceId)
       .subscribe(result => {
         if (!result) return;
+
+        let preferences: Preference[] = this.preferenceService.getGetAllData().filter(e => e.preferenceId != this.row.getData().preferenceId);
+        this.preferenceService.setGetAllData(preferences);
 
         this.source.remove(this.row.getData());
         this.row = null;

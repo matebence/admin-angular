@@ -2,6 +2,7 @@ declare const $: any;
 
 import {Subscription} from 'rxjs/index';
 import {LocalDataSource} from 'ng2-smart-table';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Row} from 'ng2-smart-table/lib/lib/data-set/row';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 
@@ -30,7 +31,9 @@ export class RolesComponent implements OnInit, OnDestroy {
 
   public settings: any = roleTableConfig;
 
-  public constructor(private roleService: RoleService) {
+  public constructor(private router: Router,
+                     private roleService: RoleService,
+                     private activatedRoute: ActivatedRoute) {
   }
 
   public ngOnInit(): void {
@@ -53,7 +56,14 @@ export class RolesComponent implements OnInit, OnDestroy {
         })
     );
 
-    this.roleService.getAll(0, 100);
+    this.subscriptions.push(
+      this.roleService.getAll(0, 100)
+        .subscribe((roles: Role[]) => {
+          this.roleService.setGetAllData(roles);
+          this.source = new LocalDataSource(roles);
+        })
+    );
+
     return;
   }
 
@@ -63,6 +73,7 @@ export class RolesComponent implements OnInit, OnDestroy {
   }
 
   public onTableCreateData(row: boolean): void {
+    if (row) this.router.navigate(['new'], {relativeTo: this.activatedRoute});
     return;
   }
 
@@ -78,6 +89,7 @@ export class RolesComponent implements OnInit, OnDestroy {
   }
 
   public onTableEditData(row: Row): void {
+    this.router.navigate(['edit', row.getData().roleId], {relativeTo: this.activatedRoute});
     this.row = row;
     return;
   }
@@ -87,6 +99,9 @@ export class RolesComponent implements OnInit, OnDestroy {
     setTimeout(() => this.roleService.delete(this.row.getData().roleId)
       .subscribe(result => {
         if (!result) return;
+
+        let roles: Role[] = this.roleService.getGetAllData().filter(e => e.roleId != this.row.getData().roleId);
+        this.roleService.setGetAllData(roles);
 
         this.source.remove(this.row.getData());
         this.row = null;

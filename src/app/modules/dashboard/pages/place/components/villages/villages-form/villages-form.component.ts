@@ -29,7 +29,7 @@ export class VillagesFormComponent implements OnInit, OnDestroy, CanComponentDea
   public pozitiveButton: string;
 
   public illustration: string = 'assets/img/place_assistant.svg';
-  public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť nové mesto alebo obec pre aplikáciu Blesk.';
+  public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť nové mesto alebo obec v aplikácií Blesk.';
   public assistentOptions: any = [{title: 'Kraje', link: '/dashboard/services/places/regions'}, {title: 'Okresy', link: '/dashboard/services/places/districts'}];
 
   public formButton: string = 'Vytvoriť';
@@ -100,7 +100,7 @@ export class VillagesFormComponent implements OnInit, OnDestroy, CanComponentDea
 
           this.formButton = 'Aktualizovať';
           this.formTitle = 'Aktualizovanie mesta/obce';
-          this.assistent = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte aktualizovať okres pre aplikáciu Blesk.';
+          this.assistent = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte aktualizovať okres v aplikácií Blesk.';
       })
     );
 

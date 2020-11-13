@@ -24,13 +24,12 @@ export class BarComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.subscriptions.push(
-      this.userService.getDataObservable
+      this.userService.get(this.securityService.getAccountId())
         .subscribe((user: User) => {
           this.user = user;
         })
     );
 
-    this.userService.get(this.securityService.getAccountId());
     return;
   }
 

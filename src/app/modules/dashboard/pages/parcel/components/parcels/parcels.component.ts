@@ -2,6 +2,7 @@ declare const $: any;
 
 import {Subscription} from 'rxjs/index';
 import {LocalDataSource} from 'ng2-smart-table';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Row} from 'ng2-smart-table/lib/lib/data-set/row';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 
@@ -30,7 +31,9 @@ export class ParcelsComponent implements OnInit, OnDestroy {
 
   public settings: any = parcelTableConfig;
 
-  public constructor(private parcelService: ParcelService) {
+  public constructor(private router: Router,
+                     private parcelService: ParcelService,
+                     private activatedRoute: ActivatedRoute) {
   }
 
   public ngOnInit(): void {
@@ -53,7 +56,14 @@ export class ParcelsComponent implements OnInit, OnDestroy {
         })
     );
 
-    this.parcelService.getAll(1, 100);
+    this.subscriptions.push(
+      this.parcelService.getAll(1, 100)
+        .subscribe((parcels: Parcel[]) => {
+          this.parcelService.setGetAllData(parcels);
+          this.source = new LocalDataSource(parcels);
+        })
+    );
+
     return;
   }
 
@@ -63,6 +73,7 @@ export class ParcelsComponent implements OnInit, OnDestroy {
   }
 
   public onTableCreateData(row: boolean): void {
+    if (row) this.router.navigate(['new'], {relativeTo: this.activatedRoute});
     return;
   }
 
@@ -78,6 +89,7 @@ export class ParcelsComponent implements OnInit, OnDestroy {
   }
 
   public onTableEditData(row: Row): void {
+    this.router.navigate(['edit', row.getData().id], {relativeTo: this.activatedRoute});
     this.row = row;
     return;
   }
@@ -87,6 +99,9 @@ export class ParcelsComponent implements OnInit, OnDestroy {
     setTimeout(() => this.parcelService.delete(this.row.getData().id)
       .subscribe(result => {
         if (!result) return;
+
+        let parcels: Parcel[] = this.parcelService.getGetAllData().filter(e => e.id != this.row.getData().id);
+        this.parcelService.setGetAllData(parcels);
 
         this.source.remove(this.row.getData());
         this.row = null;

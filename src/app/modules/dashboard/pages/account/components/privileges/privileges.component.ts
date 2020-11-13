@@ -2,6 +2,7 @@ declare const $: any;
 
 import {Subscription} from 'rxjs/index';
 import {LocalDataSource} from 'ng2-smart-table';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Row} from 'ng2-smart-table/lib/lib/data-set/row';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 
@@ -30,7 +31,9 @@ export class PrivilegesComponent implements OnInit, OnDestroy {
 
   public settings: any = privilegeTableConfig;
 
-  public constructor(private privilegeService: PrivilegeService) {
+  public constructor(private router: Router,
+                     private activatedRoute: ActivatedRoute,
+                     private privilegeService: PrivilegeService) {
   }
 
   public ngOnInit(): void {
@@ -53,7 +56,14 @@ export class PrivilegesComponent implements OnInit, OnDestroy {
         })
     );
 
-    this.privilegeService.getAll(0, 100);
+    this.subscriptions.push(
+      this.privilegeService.getAll(0, 100)
+        .subscribe((privileges: Privilege[]) => {
+          this.privilegeService.setGetAllData(privileges);
+          this.source = new LocalDataSource(privileges);
+        })
+    );
+
     return;
   }
 
@@ -63,6 +73,7 @@ export class PrivilegesComponent implements OnInit, OnDestroy {
   }
 
   public onTableCreateData(row: boolean): void {
+    if (row) this.router.navigate(['new'], {relativeTo: this.activatedRoute});
     return;
   }
 
@@ -78,6 +89,7 @@ export class PrivilegesComponent implements OnInit, OnDestroy {
   }
 
   public onTableEditData(row: Row): void {
+    this.router.navigate(['edit', row.getData().privilegeId], {relativeTo: this.activatedRoute});
     this.row = row;
     return;
   }
@@ -87,6 +99,9 @@ export class PrivilegesComponent implements OnInit, OnDestroy {
     setTimeout(() => this.privilegeService.delete(this.row.getData().privilegeId)
       .subscribe(result => {
         if (!result) return;
+
+        let privileges: Privilege[] = this.privilegeService.getGetAllData().filter(e => e.privilegeId != this.row.getData().privilegeId);
+        this.privilegeService.setGetAllData(privileges);
 
         this.source.remove(this.row.getData());
         this.row = null;

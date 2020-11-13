@@ -1,10 +1,10 @@
-import {ActivatedRoute, Params} from '@angular/router';
 declare const $: any;
 
 import {Subscription} from 'rxjs/index';
 import {LocalDataSource} from 'ng2-smart-table';
 import {Row} from 'ng2-smart-table/lib/lib/data-set/row';
 import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 
 import invoiceTableConfig from '../../../../../../configs/js/shipment/table.invoice.config.js';
 
@@ -31,7 +31,8 @@ export class InvoicesComponent implements OnInit, OnDestroy {
 
   public settings: any = invoiceTableConfig;
 
-  public constructor(private activatedRoute: ActivatedRoute,
+  public constructor(private router: Router,
+                     private activatedRoute: ActivatedRoute,
                      private invoiceService: InvoiceService) {
   }
 
@@ -56,6 +57,14 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     );
 
     this.subscriptions.push(
+      this.invoiceService.getAll(1, 100)
+        .subscribe((invoices: Invoice[]) => {
+          this.invoiceService.setGetAllData(invoices);
+          this.source = new LocalDataSource(invoices);
+        })
+    );
+
+    this.subscriptions.push(
       this.invoiceService.getDataObservable
         .subscribe((pdf: Blob) => {
           const blob: Blob = new Blob([pdf], {type: 'application/pdf'});
@@ -68,7 +77,6 @@ export class InvoicesComponent implements OnInit, OnDestroy {
           setTimeout(() => {window.URL.revokeObjectURL(objectUrl); link.remove();}, 100);})
     );
 
-    this.invoiceService.getAll(1, 100);
     if (this.activatedRoute.firstChild == null) return;
 
     this.subscriptions.push(
@@ -86,6 +94,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
   }
 
   public onTableCreateData(row: boolean): void {
+    if (row) this.router.navigate(['new'], {relativeTo: this.activatedRoute});
     return;
   }
 
@@ -101,6 +110,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
   }
 
   public onTableEditData(row: Row): void {
+    this.router.navigate(['edit', row.getData()._id], {relativeTo: this.activatedRoute});
     this.row = row;
     return;
   }
@@ -110,6 +120,9 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     setTimeout(() => this.invoiceService.delete(this.row.getData()._id)
       .subscribe(result => {
         if (!result) return;
+
+        let invoices: Invoice[] = this.invoiceService.getGetAllData().filter(e => e._id != this.row.getData()._id);
+        this.invoiceService.setGetAllData(invoices);
 
         this.source.remove(this.row.getData());
         this.row = null;

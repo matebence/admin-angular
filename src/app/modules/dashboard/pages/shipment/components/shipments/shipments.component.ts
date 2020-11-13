@@ -2,6 +2,7 @@ declare const $: any;
 
 import {Subscription} from 'rxjs/index';
 import {LocalDataSource} from 'ng2-smart-table';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Row} from 'ng2-smart-table/lib/lib/data-set/row';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 
@@ -30,7 +31,9 @@ export class ShipmentsComponent implements OnInit, OnDestroy {
 
   public settings: any = shipmentTableConfig;
 
-  public constructor(private shipmentService: ShipmentService) {
+  public constructor(private router: Router,
+                     private activatedRoute: ActivatedRoute,
+                     private shipmentService: ShipmentService) {
   }
 
   public ngOnInit(): void {
@@ -53,7 +56,14 @@ export class ShipmentsComponent implements OnInit, OnDestroy {
         })
     );
 
-    this.shipmentService.getAll(1, 100);
+    this.subscriptions.push(
+      this.shipmentService.getAll(1, 100)
+        .subscribe((shipments: Shipment[]) => {
+          this.shipmentService.setGetAllData(shipments);
+          this.source = new LocalDataSource(shipments);
+        })
+    );
+
     return;
   }
 
@@ -63,6 +73,7 @@ export class ShipmentsComponent implements OnInit, OnDestroy {
   }
 
   public onTableCreateData(row: boolean): void {
+    if (row) this.router.navigate(['new'], {relativeTo: this.activatedRoute});
     return;
   }
 
@@ -78,6 +89,7 @@ export class ShipmentsComponent implements OnInit, OnDestroy {
   }
 
   public onTableEditData(row: Row): void {
+    this.router.navigate(['edit', row.getData()._id], {relativeTo: this.activatedRoute});
     this.row = row;
     return;
   }
@@ -87,6 +99,9 @@ export class ShipmentsComponent implements OnInit, OnDestroy {
     setTimeout(() => this.shipmentService.delete(this.row.getData()._id)
       .subscribe(result => {
         if (!result) return;
+
+        let shipments: Shipment[] = this.shipmentService.getGetAllData().filter(e => e._id != this.row.getData()._id);
+        this.shipmentService.setGetAllData(shipments);
 
         this.source.remove(this.row.getData());
         this.row = null;

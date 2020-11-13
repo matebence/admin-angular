@@ -13,9 +13,11 @@ import {RouteBuilder} from '../../../../core/http/route-builder.http';
 @Injectable()
 export class StatusService extends BaseService {
 
+  private getData: Status = null;
   private createData: Status = null;
   private getAllData: Status[] = null;
 
+  public getDataObservable: EventEmitter<Status> = new EventEmitter<Status>();
   public createDataObservable: EventEmitter<Status> = new EventEmitter<Status>();
   public getAllDataObservable: EventEmitter<Status[]> = new EventEmitter<Status[]>();
 
@@ -80,6 +82,25 @@ export class StatusService extends BaseService {
     return subject.asObservable();
   }
 
+  public get(id: number): Observable<Status> {
+    const subject = new Subject<Status>();
+    const url = this.routeBuilder
+      .service('shipment-service')
+      .model('status')
+      .action('get')
+      .params([{id: id}])
+      .build();
+
+    this.requestHttp
+      .get(url)
+      .pipe(catchError(super.handleError.bind(this)))
+      .subscribe((data: Status) => {
+
+        return subject.next(data);
+      });
+    return subject.asObservable();
+  }
+
   public getAll(page: number, limit: number): Observable<Status[]> {
     const subject = new Subject<Status[]>();
     const url = this.routeBuilder
@@ -107,6 +128,16 @@ export class StatusService extends BaseService {
 
   public getCreateData(): Status {
     return Object.assign({}, this.createData);
+  }
+
+  public setGetData(data: Status): void {
+    this.getData = data;
+    this.getDataObservable.emit(this.getGetData());
+    return;
+  }
+
+  public getGetData(): Status {
+    return Object.assign({}, this.getData);
   }
 
   public setGetAllData(data: Status[]): void {

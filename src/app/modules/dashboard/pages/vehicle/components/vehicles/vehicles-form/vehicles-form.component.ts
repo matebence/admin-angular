@@ -31,7 +31,7 @@ export class VehiclesFormComponent implements OnInit, OnDestroy, CanComponentDea
   public pozitiveButton: string;
 
   public illustration: string = 'assets/img/vehicle_assistant.svg';
-  public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť nový doprvaný prostriedok pre aplikáciu Blesk.';
+  public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť nový doprvaný prostriedok v aplikácií Blesk.';
   public assistentOptions: any = [{title: 'Typy', link: '/dashboard/services/vehicles/types'}];
 
   public formButton: string = 'Vytvoriť';
@@ -93,7 +93,7 @@ export class VehiclesFormComponent implements OnInit, OnDestroy, CanComponentDea
 
           this.formButton = 'Aktualizovať';
           this.formTitle = 'Aktualizovanie dopravného prostriedka';
-          this.assistent = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte aktualizovať dopravný prostriedok pre aplikáciu Blesk.';
+          this.assistent = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte aktualizovať dopravný prostriedok v aplikácií Blesk.';
       })
     );
 

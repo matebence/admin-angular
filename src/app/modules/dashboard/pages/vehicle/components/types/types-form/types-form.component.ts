@@ -25,7 +25,7 @@ export class TypesFormComponent implements OnInit, OnDestroy, CanComponentDeacti
   public pozitiveButton: string;
 
   public illustration: string = 'assets/img/vehicle_assistant.svg';
-  public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť nový dopravný prostriedok pre aplikáciu Blesk.';
+  public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť nový dopravný prostriedok v aplikácií Blesk.';
   public assistentOptions: any = [{title: 'Vozidlá', link: '/dashboard/services/vehicles/main'}];
 
   public formButton: string = 'Vytvoriť';
@@ -62,7 +62,7 @@ export class TypesFormComponent implements OnInit, OnDestroy, CanComponentDeacti
 
           this.formButton = 'Aktualizovať';
           this.formTitle = 'Aktualizovanie typu dopravného prostriedka';
-          this.assistent = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte aktualizovať dopravný prostriedok pre aplikáciu Blesk.';
+          this.assistent = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte aktualizovať dopravný prostriedok v aplikácií Blesk.';
       })
     );
 
@@ -101,6 +101,7 @@ export class TypesFormComponent implements OnInit, OnDestroy, CanComponentDeacti
       this.typeService.update(type)
         .subscribe((result: boolean) => {
           if (!result) return;
+          
           let types: Type[] = this.typeService.getGetAllData().filter(e => e._id != type._id);
           types.unshift(type);
           this.typeService.setGetAllData(types);

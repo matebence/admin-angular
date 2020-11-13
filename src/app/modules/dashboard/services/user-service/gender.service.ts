@@ -13,9 +13,11 @@ import {RouteBuilder} from '../../../../core/http/route-builder.http';
 @Injectable()
 export class GenderService extends BaseService {
 
+  private getData: Gender = null;
   private createData: Gender = null;
   private getAllData: Gender[] = null;
 
+  public getDataObservable: EventEmitter<Gender> = new EventEmitter<Gender>();
   public createDataObservable: EventEmitter<Gender> = new EventEmitter<Gender>();
   public getAllDataObservable: EventEmitter<Gender[]> = new EventEmitter<Gender[]>();
 
@@ -80,6 +82,25 @@ export class GenderService extends BaseService {
     return subject.asObservable();
   }
 
+  public get(id: number): Observable<Gender> {
+    const subject = new Subject<Gender>();
+    const url = this.routeBuilder
+      .service('user-service')
+      .model('genders')
+      .action('get')
+      .params([{id: id}])
+      .build();
+
+    this.requestHttp
+      .get(url)
+      .pipe(catchError(super.handleError.bind(this)))
+      .subscribe((data: Gender) => {
+
+        return subject.next(data);
+      });
+    return subject.asObservable();
+  }
+
   public getAll(page: number, limit: number): Observable<Gender[]> {
     const subject = new Subject<Gender[]>();
     const url = this.routeBuilder
@@ -107,6 +128,16 @@ export class GenderService extends BaseService {
 
   public getCreateData(): Gender {
     return Object.assign({}, this.createData);
+  }
+
+  public setGetData(data: Gender): void {
+    this.getData = data;
+    this.getDataObservable.emit(this.getGetData());
+    return;
+  }
+
+  public getGetData(): Gender {
+    return Object.assign({}, this.getData);
   }
 
   public setGetAllData(data: Gender[]): void {

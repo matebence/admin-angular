@@ -2,6 +2,7 @@ declare const $: any;
 
 import {Subscription} from 'rxjs/index';
 import {LocalDataSource} from 'ng2-smart-table';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Row} from 'ng2-smart-table/lib/lib/data-set/row';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 
@@ -30,7 +31,9 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   public settings: any = userTableConfig;
 
-  public constructor(private userService: UserService) {
+  public constructor(private router: Router,
+                     private userService: UserService,
+                     private activatedRoute: ActivatedRoute) {
   }
 
   public ngOnInit(): void {
@@ -53,7 +56,14 @@ export class UsersComponent implements OnInit, OnDestroy {
         })
     );
 
-    this.userService.getAll(0, 100);
+    this.subscriptions.push(
+      this.userService.getAll(0, 100)
+        .subscribe((users: User[]) => {
+          this.userService.setGetAllData(users);
+          this.source = new LocalDataSource(users);
+        })
+    );
+
     return;
   }
 
@@ -63,6 +73,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   public onTableCreateData(row: boolean): void {
+    if (row) this.router.navigate(['new'], {relativeTo: this.activatedRoute});
     return;
   }
 
@@ -78,6 +89,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   public onTableEditData(row: Row): void {
+    this.router.navigate(['edit', row.getData().userId], {relativeTo: this.activatedRoute});
     this.row = row;
     return;
   }
@@ -87,6 +99,9 @@ export class UsersComponent implements OnInit, OnDestroy {
     setTimeout(() => this.userService.delete(this.row.getData().accountId)
       .subscribe(result => {
         if (!result) return;
+
+        let users: User[] = this.userService.getGetAllData().filter(e => e.accountId != this.row.getData().accountId);
+        this.userService.setGetAllData(users);
 
         this.source.remove(this.row.getData());
         this.row = null;

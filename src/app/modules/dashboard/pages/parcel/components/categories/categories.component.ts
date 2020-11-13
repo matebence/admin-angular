@@ -2,6 +2,7 @@ declare const $: any;
 
 import {Subscription} from 'rxjs/index';
 import {LocalDataSource} from 'ng2-smart-table';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Row} from 'ng2-smart-table/lib/lib/data-set/row';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 
@@ -30,7 +31,9 @@ export class CategoriesComponent implements OnInit, OnDestroy {
 
   public settings: any = categoryTableConfig;
 
-  public constructor(private categoryService: CategoryService) {
+  public constructor(private router: Router,
+                     private activatedRoute: ActivatedRoute,
+                     private categoryService: CategoryService) {
   }
 
   public ngOnInit(): void {
@@ -48,12 +51,19 @@ export class CategoriesComponent implements OnInit, OnDestroy {
 
     this.subscriptions.push(
       this.categoryService.getAllDataObservable
-        .subscribe((categorys: Category[]) => {
-          this.source = new LocalDataSource(categorys);
+        .subscribe((categories: Category[]) => {
+          this.source = new LocalDataSource(categories);
         })
     );
 
-    this.categoryService.getAll(1, 100);
+    this.subscriptions.push(
+      this.categoryService.getAll(1, 100)
+        .subscribe((categories: Category[]) => {
+          this.categoryService.setGetAllData(categories);
+          this.source = new LocalDataSource(categories);
+        })
+    );
+
     return;
   }
 
@@ -63,6 +73,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
   }
 
   public onTableCreateData(row: boolean): void {
+    if (row) this.router.navigate(['new'], {relativeTo: this.activatedRoute});
     return;
   }
 
@@ -78,6 +89,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
   }
 
   public onTableEditData(row: Row): void {
+    this.router.navigate(['edit', row.getData().id], {relativeTo: this.activatedRoute});
     this.row = row;
     return;
   }
@@ -87,6 +99,9 @@ export class CategoriesComponent implements OnInit, OnDestroy {
     setTimeout(() => this.categoryService.delete(this.row.getData().id)
       .subscribe(result => {
         if (!result) return;
+
+        let categories: Category[] = this.categoryService.getGetAllData().filter(e => e.id != this.row.getData().id);
+        this.categoryService.setGetAllData(categories);
 
         this.source.remove(this.row.getData());
         this.row = null;
