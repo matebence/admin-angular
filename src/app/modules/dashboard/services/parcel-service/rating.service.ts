@@ -13,9 +13,11 @@ import {RouteBuilder} from '../../../../core/http/route-builder.http';
 @Injectable()
 export class RatingService extends BaseService {
 
+  private getData: Rating = null;
   private createData: Rating = null;
   private getAllData: Rating[] = null;
 
+  public getDataObservable: EventEmitter<Rating> = new EventEmitter<Rating>();
   public createDataObservable: EventEmitter<Rating> = new EventEmitter<Rating>();
   public getAllDataObservable: EventEmitter<Rating[]> = new EventEmitter<Rating[]>();
 
@@ -80,6 +82,25 @@ export class RatingService extends BaseService {
     return subject.asObservable();
   }
 
+  public get(id: number): Observable<Rating> {
+    const subject = new Subject<Rating>();
+    const url = this.routeBuilder
+      .service('parcel-service')
+      .model('ratings')
+      .action('get')
+      .params([{id: id}])
+      .build();
+
+    this.requestHttp
+      .get(url)
+      .pipe(catchError(super.handleError.bind(this)))
+      .subscribe((data: Rating) => {
+
+        return subject.next(data);
+      });
+    return subject.asObservable();
+  }
+
   public getAll(page: number, limit: number): Observable<Rating[]> {
     const subject = new Subject<Rating[]>();
     const url = this.routeBuilder
@@ -103,6 +124,16 @@ export class RatingService extends BaseService {
     this.createData = data;
     this.createDataObservable.emit(this.getCreateData());
     return;
+  }
+
+  public setGetData(data: Rating): void {
+    this.getData = data;
+    this.getDataObservable.emit(this.getGetData());
+    return;
+  }
+
+  public getGetData(): Rating {
+    return Object.assign({}, this.getData);
   }
 
   public getCreateData(): Rating {

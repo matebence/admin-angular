@@ -4,7 +4,7 @@ import {Subscription} from 'rxjs/index';
 import {LocalDataSource} from 'ng2-smart-table';
 import {Row} from 'ng2-smart-table/lib/lib/data-set/row';
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivatedRoute, Params} from '@angular/router';
 
 import invoiceTableConfig from '../../../../../../configs/js/shipment/table.invoice.config.js';
 
@@ -29,10 +29,19 @@ export class InvoicesComponent implements OnInit, OnDestroy {
   public header: string = 'Faktúry';
   private subscriptions: Subscription[] = [];
 
-  public settings: any = invoiceTableConfig;
+  public settings: any = {
+    ...invoiceTableConfig,
+    edit: {
+      confirmSave: false,
+      editButtonContent: ''
+    },
+    add: {
+      confirmCreatwe: false,
+      addButtonContent: '',
+    }
+  };
 
-  public constructor(private router: Router,
-                     private activatedRoute: ActivatedRoute,
+  public constructor(private activatedRoute: ActivatedRoute,
                      private invoiceService: InvoiceService) {
   }
 
@@ -64,24 +73,22 @@ export class InvoicesComponent implements OnInit, OnDestroy {
         })
     );
 
-    this.subscriptions.push(
-      this.invoiceService.getDataObservable
-        .subscribe((pdf: Blob) => {
-          const blob: Blob = new Blob([pdf], {type: 'application/pdf'});
-          const objectUrl: string = window.URL.createObjectURL(blob);
-          const link: HTMLAnchorElement = document.createElement('a');
-
-          link.href = objectUrl;
-          link.download = Date.now().toString();
-          link.dispatchEvent(new MouseEvent('click', {bubbles: true, cancelable: true, view: window}));
-          setTimeout(() => {window.URL.revokeObjectURL(objectUrl); link.remove();}, 100);})
-    );
-
     if (this.activatedRoute.firstChild == null) return;
-
     this.subscriptions.push(
       this.activatedRoute.firstChild.params.subscribe((params: Params) => {
-        this.invoiceService.get(params.id);
+        this.invoiceService.get(params.id)
+          .subscribe((pdf: Blob) => {
+            const blob: Blob = new Blob([pdf], {type: 'application/pdf'});
+            const objectUrl: string = window.URL.createObjectURL(blob);
+            const link: HTMLAnchorElement = document.createElement('a');
+
+            link.href = objectUrl;
+            link.download = Date.now().toString();
+            link.dispatchEvent(new MouseEvent('click', {bubbles: true, cancelable: true}));
+            window.open(objectUrl);
+            link.remove();
+            window.history.back();
+        })
       })
     );
 
@@ -93,11 +100,6 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     return;
   }
 
-  public onTableCreateData(row: boolean): void {
-    if (row) this.router.navigate(['new'], {relativeTo: this.activatedRoute});
-    return;
-  }
-
   public onTableDeleteData(row: Row): void {
     $('#invoiceModal').modal('show');
     this.text = 'Naozaj chcete odstrániť položku?';
@@ -105,12 +107,6 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     this.negativeButton = 'Zrušiť';
     this.pozitiveButton = 'Áno, odstrániť';
 
-    this.row = row;
-    return;
-  }
-
-  public onTableEditData(row: Row): void {
-    this.router.navigate(['edit', row.getData()._id], {relativeTo: this.activatedRoute});
     this.row = row;
     return;
   }

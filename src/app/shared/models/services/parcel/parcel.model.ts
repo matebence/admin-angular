@@ -3,8 +3,8 @@ import {Place} from '../user/place.model';
 
 export interface Parcel {
   id: number,
-  sender: Sender,
-  receiver: Reciver,
+  sender: any,
+  receiver: any,
   length: number,
   width: number,
   height: number,

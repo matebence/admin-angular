@@ -55,7 +55,7 @@ export class DistrictsFormComponent implements OnInit, OnDestroy, CanComponentDe
     regionId: new FormControl(-1, {
       validators: [Validators.pattern('^(?!0*(\\.0+)?$)(\\d+|\d*\\.\\d+)$'), Validators.required],
       updateOn: 'change'
-    }),
+    })
   });
 
   public constructor(private router: Router,
@@ -109,7 +109,7 @@ export class DistrictsFormComponent implements OnInit, OnDestroy, CanComponentDe
       this.districtService.create(this.formGroup)
         .pipe(switchMap((result: District) => {
           district = result;
-          return this.regionService.get(result.regionId)
+          return this.regionService.get(result.regionId);
         }))
         .subscribe((result: Region) => {
           district.region = result;

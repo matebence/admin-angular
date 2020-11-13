@@ -48,7 +48,6 @@ import {PaymentsFormComponent} from './pages/user/components/payments/payments-f
 import {VillagesFormComponent} from './pages/place/components/villages/villages-form/villages-form.component';
 import {VehiclesFormComponent} from './pages/vehicle/components/vehicles/vehicles-form/vehicles-form.component';
 import {AccountsFormComponent} from './pages/account/components/accounts/accounts-form/accounts-form.component';
-import {InvoicesFormComponent} from './pages/shipment/components/invoices/invoices-form/invoices-form.component';
 import {DistrictsFormComponent} from './pages/place/components/districts/districts-form/districts-form.component';
 import {ShipmentsFormComponent} from './pages/shipment/components/shipments/shipments-form/shipments-form.component';
 import {CategoriesFormComponent} from './pages/parcel/components/categories/categories-form/categories-form.component';
@@ -286,18 +285,6 @@ const routes: Routes = [
                 children: [
                   {
                     path: ':id',
-                    data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]}
-                  },
-                  {
-                    path: 'new',
-                    component: InvoicesFormComponent,
-                    canDeactivate: [LeaveGuard],
-                    data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]}
-                  },
-                  {
-                    path: 'edit/:id',
-                    component: InvoicesFormComponent,
-                    canDeactivate: [LeaveGuard],
                     data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]}
                   }
                 ]

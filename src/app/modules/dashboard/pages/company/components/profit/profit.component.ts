@@ -71,11 +71,6 @@ export class ProfitComponent implements OnInit, OnDestroy {
     return;
   }
 
-  public onTableCreateData(row: boolean): void {
-    if (row) this.router.navigate(['new'], {relativeTo: this.activatedRoute});
-    return;
-  }
-
   public onTableEditData(row: Row): void {
     this.router.navigate(['edit', row.getData()._id], {relativeTo: this.activatedRoute});
     this.row = row;

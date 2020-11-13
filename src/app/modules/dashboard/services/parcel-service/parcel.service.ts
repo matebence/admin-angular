@@ -13,9 +13,11 @@ import {RouteBuilder} from '../../../../core/http/route-builder.http';
 @Injectable()
 export class ParcelService extends BaseService {
 
+  private getData: Parcel = null;
   private createData: Parcel = null;
   private getAllData: Parcel[] = null;
 
+  public getDataObservable: EventEmitter<Parcel> = new EventEmitter<Parcel>();
   public createDataObservable: EventEmitter<Parcel> = new EventEmitter<Parcel>();
   public getAllDataObservable: EventEmitter<Parcel[]> = new EventEmitter<Parcel[]>();
 
@@ -80,6 +82,25 @@ export class ParcelService extends BaseService {
     return subject.asObservable();
   }
 
+  public get(id: number): Observable<Parcel> {
+    const subject = new Subject<Parcel>();
+    const url = this.routeBuilder
+      .service('parcel-service')
+      .model('parcels')
+      .action('get')
+      .params([{id: id}])
+      .build();
+
+    this.requestHttp
+      .get(url)
+      .pipe(catchError(super.handleError.bind(this)))
+      .subscribe((data: Parcel) => {
+
+        return subject.next(data);
+      });
+    return subject.asObservable();
+  }
+
   public getAll(page: number, limit: number): Observable<Parcel[]> {
     const subject = new Subject<Parcel[]>();
     const url = this.routeBuilder
@@ -107,6 +128,16 @@ export class ParcelService extends BaseService {
 
   public getCreateData(): Parcel {
     return Object.assign({}, this.createData);
+  }
+
+  public setGetData(data: Parcel): void {
+    this.getData = data;
+    this.getDataObservable.emit(this.getGetData());
+    return;
+  }
+
+  public getGetData(): Parcel {
+    return Object.assign({}, this.getData);
   }
 
   public setGetAllData(data: Parcel[]): void {

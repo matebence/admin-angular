@@ -12,13 +12,118 @@
         <h6 class="m-0 font-weight-bold text-primary">{{formTitle}}</h6>
       </div>
       <div class="card-body with-padding">
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="parcel">
+          <div class="form-group">
+            <label for="parcelSender">Odosielateľ balíka</label>
+            <select
+              formControlName="sender"
+              id="parcelSender"
+              class="form-control">
+              <option value="-1" disabled hidden>Zvoľte si odosielateľa</option>
+              <option
+                *ngFor="let user of users; let i = index"
+                [ngValue]="user.accountId">{{user.firstName}} {{user.lastName}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="parcelReceiver">Prijímateľ balíka</label>
+            <select
+              formControlName="receiver"
+              id="parcelReceiver"
+              class="form-control">
+              <option value="-1" disabled hidden>Zvoľte si prijímateľa</option>
+              <option
+                *ngFor="let user of users; let i = index"
+                [ngValue]="user.accountId">{{user.firstName}} {{user.lastName}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="parcelCategoryId">Kategória balíka</label>
+            <select
+              formControlName="categoryId"
+              id="parcelCategoryId"
+              class="form-control">
+              <option value="-1" disabled hidden>Zvoľte si kategóriu balíka</option>
+              <option
+                *ngFor="let category of categories; let i = index"
+                [ngValue]="category.id">{{category.name}} {{user}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="parcelLength">Dľžka balíka</label>
+            <input
+              formControlName="length"
+              type="number"
+              class="form-control"
+              id="parcelLength"
+              placeholder="Zadajte dľžku balíka">
+          </div>
+          <div class="form-group">
+            <label for="parcelWidth">Šírka balíka</label>
+            <input
+              formControlName="width"
+              type="number"
+              class="form-control"
+              id="parcelWidth"
+              placeholder="Zadajte šírku balíka">
+          </div>
+          <div class="form-group">
+            <label for="parcelHeight">Výška balíka</label>
+            <input
+              formControlName="height"
+              type="number"
+              class="form-control"
+              id="parcelHeight"
+              placeholder="Zadajte výšku balíka">
+          </div>
+          <div class="form-group">
+            <label for="parcelWeight">Váha balíka</label>
+            <input
+              formControlName="weight"
+              type="number"
+              class="form-control"
+              id="parcelWeight"
+              placeholder="Zadajte váhu balíka">
+          </div>
+          <div class="form-group">
+            <label for="parcelNote">Poznámka</label>
+            <textarea
+              formControlName="note"
+              class="form-control"
+              id="parcelNote"
+              placeholder="Pridajte poznámku" rows="3"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="parcelCanceled">Stav zrušená</label>
+            <select
+              formControlName="canceled"
+              id="parcelCanceled"
+              class="form-control">
+              <option value="-1" disabled hidden>Zvoľte si stav zrušenia</option>
+              <option value="true">Áno</option>
+              <option value="false">Nie</option>
+            </select>
+          </div>
+          <button
+            [disabled]="!formGroup.get('sender').valid || !formGroup.get('receiver').valid || !formGroup.get('categoryId').valid || !formGroup.get('length').valid || !formGroup.get('width').valid || !formGroup.get('height').valid || !formGroup.get('weight').valid || !formGroup.get('note').valid"
+            appButtonHover
+            type="submit"
+            class="btn btn-primary">{{formButton}}
+          </button>
+          <a routerLink="/dashboard/services/parcels/main" class="btn btn-secondary"
+             [state]="{ignoreLoadingBar: true}">Zrušiť a späť</a>
+        </form>
+        <br>
       </div>
     </div>
   </div>
 </div>
 <app-modal
   (modalResult)="canDeactivate($event)"
-  [modalId]="'regionFormModal'"
+  [modalId]="'parcelFormModal'"
   [modalTitle]="title"
   [modalText]="text"
   [modalNegativeButton]="negativeButton"

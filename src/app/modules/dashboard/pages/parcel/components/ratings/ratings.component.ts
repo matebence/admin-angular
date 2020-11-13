@@ -26,7 +26,7 @@ export class RatingsComponent implements OnInit, OnDestroy {
 
   private row: Row;
   public source: LocalDataSource;
-  public header: string = 'Ohodnotenia';
+  public header: string = 'Recenzie';
   private subscriptions: Subscription[] = [];
 
   public settings: any = ratingTableConfig;

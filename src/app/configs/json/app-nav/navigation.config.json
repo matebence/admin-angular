@@ -203,7 +203,7 @@
               }
             },
             {
-              "title": "Ohodnotenia",
+              "title": "Recenzie",
               "authorities": [
                 "ROLE_ADMIN",
                 "ROLE_MANAGER"

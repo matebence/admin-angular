@@ -18,6 +18,13 @@ export default {
     note: {
       title: 'Poznámka'
     },
+    canceled: {
+      title: 'Zrušené',
+      filter: false,
+      valuePrepareFunction: (accapted) => {
+        return accapted ? 'Áno' : 'Nie';
+      }
+    },
     sender: {
       title: 'Odosielateľ',
       filter: false,

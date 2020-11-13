@@ -1,8 +1,6 @@
 <router-outlet></router-outlet>
 <app-table
-  (tableCreateData)="onTableCreateData($event)"
   (tableDeleteData)="onTableDeleteData($event)"
-  (tableEditData)="onTableEditData($event)"
   [tableHeader]="header"
   [tableSettings]="settings"
   [tableSource]="source"></app-table>

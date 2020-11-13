@@ -1,14 +1,12 @@
-import {Status} from './status.model';
 import {Invoice} from './invoice.model';
-import {Courier} from '../../common/common.model';
 
 export interface Shipment {
   _id: string,
-  courier: Courier,
+  courier: any,
   parcelId: number,
   from: string,
   to: string,
-  status: Status,
+  status: any,
   price: number,
   express: boolean,
   invoice: Invoice,
