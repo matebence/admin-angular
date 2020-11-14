@@ -89,7 +89,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   public onTableEditData(row: Row): void {
-    this.router.navigate(['edit', row.getData().userId], {relativeTo: this.activatedRoute});
+    this.router.navigate(['edit', row.getData().accountId], {relativeTo: this.activatedRoute});
     this.row = row;
     return;
   }

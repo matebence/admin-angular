@@ -14,7 +14,7 @@
       <div class="card-body with-padding">
         <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="shipment">
           <div formArrayName="shipments">
-            <div [formGroupName]="0">
+            <div formGroupName="0">
               <div class="form-group">
                 <label for="shipmentCourier">Kuriér zásielky</label>
                 <select
@@ -84,6 +84,7 @@
                   placeholder="Zadajte cenu zásielky">
               </div>
               <button
+                [disabled]="!formGroup.get('shipments.0.courier').valid || !formGroup.get('shipments.0.parcelId').valid || !formGroup.get('shipments.0.from').valid || !formGroup.get('shipments.0.to').valid || !formGroup.get('shipments.0.status').valid || !formGroup.get('shipments.0.price').valid"
                 appButtonHover
                 type="submit"
                 class="btn btn-primary">{{formButton}}

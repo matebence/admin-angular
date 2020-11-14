@@ -12,13 +12,128 @@
         <h6 class="m-0 font-weight-bold text-primary">{{formTitle}}</h6>
       </div>
       <div class="card-body with-padding">
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="payment">
+          <div formGroupName="users">
+            <div class="form-group">
+              <label for="paymentFirstName">Meno používateľa</label>
+              <input
+                formControlName="firstName"
+                type="text"
+                disabled
+                class="form-control"
+                id="paymentFirstName"
+                placeholder="Zadajte meno používateľa">
+            </div>
+            <div class="form-group">
+              <label for="paymentLastName">Priezvisko používateľa</label>
+              <input
+                formControlName="lastName"
+                type="text"
+                disabled
+                class="form-control"
+                id="paymentLastName"
+                placeholder="Zadajte priezvisko používateľa">
+            </div>
+            <div formGroupName="places">
+              <div class="form-group">
+                <label for="paymentContry">Štát</label>
+                <input
+                  formControlName="country"
+                  type="text"
+                  disabled
+                  class="form-control"
+                  id="paymentContry"
+                  placeholder="Zadajte názov štátu">
+              </div>
+              <div class="form-group">
+                <label for="paymentPlace">Bydlisko</label>
+                <input
+                  formControlName="place"
+                  type="text"
+                  disabled
+                  class="form-control"
+                  id="paymentPlace"
+                  placeholder="Zadajte názov bydliska">
+              </div>
+              <div class="form-group">
+                <label for="paymentStreet">Ulica</label>
+                <input
+                  formControlName="street"
+                  type="text"
+                  disabled
+                  class="form-control"
+                  id="paymentStreet"
+                  placeholder="Zadajte názov ulice">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="paymentCreditCard">Kreditná karta(kód)</label>
+            <input
+              formControlName="creditCard"
+              type="text"
+              disabled
+              class="form-control"
+              id="paymentCreditCard"
+              placeholder="Zadajte kód kreditnej karty">
+          </div>
+          <div class="form-group">
+            <label for="paymentCharge">Poplatok(kód)</label>
+            <input
+              formControlName="charge"
+              type="text"
+              disabled
+              class="form-control"
+              id="paymentCharge"
+              placeholder="Zadajte kód poplatku">
+          </div>
+          <div class="form-group">
+            <label for="paymentAmount">Čiastka</label>
+            <input
+              formControlName="amount"
+              type="number"
+              disabled
+              class="form-control"
+              id="paymentAmount"
+              placeholder="Zadajte čiastku">
+          </div>
+          <div class="form-group">
+            <label for="paymentCurrency">Mena</label>
+            <input
+              formControlName="currency"
+              type="text"
+              disabled
+              class="form-control"
+              id="paymentCurrency"
+              placeholder="Zadajte menu">
+          </div>
+          <div class="form-group">
+            <label for="paymentRefunded">Stav vrátenia</label>
+            <select
+              formControlName="refunded"
+              id="paymentRefunded"
+              class="form-control">
+              <option value="-1" disabled hidden>Zvoľte si stav vrátenia</option>
+              <option value="true">Áno</option>
+              <option value="false">Nie</option>
+            </select>
+          </div>
+          <button
+            appButtonHover
+            type="submit"
+            class="btn btn-primary">{{formButton}}
+          </button>
+          <a routerLink="/dashboard/services/users/payments" class="btn btn-secondary"
+             [state]="{ignoreLoadingBar: true}">Zrušiť a späť</a>
+        </form>
+        <br>
       </div>
     </div>
   </div>
 </div>
 <app-modal
   (modalResult)="canDeactivate($event)"
-  [modalId]="'regionFormModal'"
+  [modalId]="'paymentFormModal'"
   [modalTitle]="title"
   [modalText]="text"
   [modalNegativeButton]="negativeButton"

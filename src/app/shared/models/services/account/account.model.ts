@@ -7,6 +7,7 @@ export interface Account {
   userName: string,
   email: string,
   password: string,
+  confirmPassword?: string,
   activated: boolean,
   createdAt: Date,
   updatedAt: Date,

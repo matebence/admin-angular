@@ -55,19 +55,19 @@ export class ParcelsFormComponent implements OnInit, OnDestroy, CanComponentDeac
       updateOn: 'change'
     }),
     length: new FormControl(null, {
-      validators: [Validators.pattern('[0-9.]+'), Validators.required],
+      validators: [Validators.pattern('^[0-9.]+$'), Validators.required],
       updateOn: 'change'
     }),
     width: new FormControl(null, {
-      validators: [Validators.pattern('[0-9.]+'), Validators.required],
+      validators: [Validators.pattern('^[0-9.]+$'), Validators.required],
       updateOn: 'change'
     }),
     height: new FormControl(null, {
-      validators: [Validators.pattern('[0-9.]+'), Validators.required],
+      validators: [Validators.pattern('^[0-9.]+$'), Validators.required],
       updateOn: 'change'
     }),
     weight: new FormControl(null, {
-      validators: [Validators.pattern('[0-9.]+'), Validators.required],
+      validators: [Validators.pattern('^[0-9.]+$'), Validators.required],
       updateOn: 'change'
     }),
     note: new FormControl(null, {

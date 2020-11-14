@@ -29,7 +29,17 @@ export class PayoutsComponent implements OnInit, OnDestroy {
   public header: string = 'Výplaty';
   private subscriptions: Subscription[] = [];
 
-  public settings: any = payoutTableConfig;
+  public settings: any = {
+    ...payoutTableConfig,
+    delete: {
+      confirmDelete: false,
+      deleteButtonContent: ''
+    },
+    add: {
+      confirmCreatwe: false,
+      addButtonContent: '',
+    }
+  };
 
   public constructor(private router: Router,
                      private payoutService: PayoutService,
@@ -72,22 +82,6 @@ export class PayoutsComponent implements OnInit, OnDestroy {
     return;
   }
 
-  public onTableCreateData(row: boolean): void {
-    if (row) this.router.navigate(['new'], {relativeTo: this.activatedRoute});
-    return;
-  }
-
-  public onTableDeleteData(row: Row): void {
-    $('#payoutModal').modal('show');
-    this.text = 'Naozaj chcete odstrániť položku?';
-    this.title = 'Odstránenie';
-    this.negativeButton = 'Zrušiť';
-    this.pozitiveButton = 'Áno, odstrániť';
-
-    this.row = row;
-    return;
-  }
-
   public onTableEditData(row: Row): void {
     this.router.navigate(['edit', row.getData().payoutId], {relativeTo: this.activatedRoute});
     this.row = row;
@@ -95,17 +89,6 @@ export class PayoutsComponent implements OnInit, OnDestroy {
   }
 
   public onModalResult(event: boolean): void {
-    if (!event || this.row == null) return;
-    setTimeout(() => this.payoutService.delete(this.row.getData().payoutId)
-      .subscribe(result => {
-        if (!result) return;
-
-        let payouts: Payout[] = this.payoutService.getGetAllData().filter(e => e.payoutId != this.row.getData().payoutId);
-        this.payoutService.setGetAllData(payouts);
-
-        this.source.remove(this.row.getData());
-        this.row = null;
-      }), 1000);
     return;
   }
 }

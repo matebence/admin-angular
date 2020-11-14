@@ -37,7 +37,7 @@ export class ProfitFormComponent implements OnInit, OnDestroy, CanComponentDeact
 
   public formGroup: FormGroup = new FormGroup({
     price: new FormControl(null, {
-      validators: [Validators.pattern('[0-9.]+'), Validators.required],
+      validators: [Validators.pattern('^[0-9.]+$'), Validators.required],
       updateOn: 'change'
     }),
   });

@@ -53,7 +53,7 @@ export class UserService extends BaseService {
       .service('user-service')
       .model('users')
       .action('update')
-      .params([{id: user.userId}])
+      .params([{id: user.accountId}])
       .build();
 
     this.requestHttp

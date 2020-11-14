@@ -1,4 +1,4 @@
-export interface Payment {
+export interface Refund {
   paymentId: number,
   users: any,
   creditCard: string,

@@ -41,7 +41,7 @@ export class RegionsFormComponent implements OnInit, OnDestroy, CanComponentDeac
       updateOn: 'change'
     }),
     shortcut: new FormControl(null, {
-      validators: [Validators.maxLength(2), Validators.pattern('[A-Z]+'), Validators.required],
+      validators: [Validators.maxLength(2), Validators.pattern('^[A-Z]+$'), Validators.required],
       updateOn: 'change'
     }),
     use: new FormControl(1)
@@ -104,7 +104,7 @@ export class RegionsFormComponent implements OnInit, OnDestroy, CanComponentDeac
       this.regionService.update(region)
         .subscribe((result: boolean) => {
           if (!result) return;
-          
+
           let regions: Region[] = this.regionService.getGetAllData().filter(e => e.id != region.id);
           regions.unshift(region);
           this.regionService.setGetAllData(regions);

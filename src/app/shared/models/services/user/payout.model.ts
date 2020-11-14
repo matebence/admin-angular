@@ -1,8 +1,6 @@
-import {User} from './user.model';
-
 export interface Payout {
   payoutId: number,
-  users: number | User,
+  users: any,
   iban: string,
   amount: number,
   accapted: boolean,

@@ -1,0 +1,61 @@
+a.btn.btn-secondary {
+  float: right;
+}
+
+button.btn.btn-primary {
+  margin-right: 0.5rem;
+}
+
+form.role input[type="text"].ng-invalid.ng-touched,
+form.role select.ng-invalid.ng-touched {
+  border: 0.1rem solid #ff0600;
+}
+
+form.role input[type="text"].ng-valid.ng-touched,
+form.role select.ng-valid.ng-touched {
+  border: 0.1rem solid #018000;
+}
+
+form.role div.form-group div.privilege-control {
+  display: inline;
+}
+
+form.role select.form-wrapper-width {
+  width: 100%;
+  display: block;
+}
+
+form.role select {
+  width: calc(100% - 6rem);
+  display: inline;
+}
+
+form.role div.form-group button {
+  background: transparent;
+  border: none;
+  font-size: 1.5em;
+  width: 2rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+form.role div.form-group button.privilege-add {
+  color: #008000;
+}
+
+form.role div.form-group button.privilege-remove {
+  color: #ff0000;
+}
+
+@media (max-width: 400px) {
+  a.btn.btn-secondary {
+    float: none;
+  }
+}
+
+@media (max-width: 388px) {
+  a.btn.btn-secondary,
+  button.btn.btn-primary {
+    margin-top: 1rem;
+  }
+}

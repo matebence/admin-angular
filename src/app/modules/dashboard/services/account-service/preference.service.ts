@@ -13,9 +13,11 @@ import {RouteBuilder} from '../../../../core/http/route-builder.http';
 @Injectable()
 export class PreferenceService extends BaseService {
 
+  private getData: Preference = null;
   private createData: Preference = null;
   private getAllData: Preference[] = null;
 
+  public getDataObservable: EventEmitter<Preference> = new EventEmitter<Preference>();
   public createDataObservable: EventEmitter<Preference> = new EventEmitter<Preference>();
   public getAllDataObservable: EventEmitter<Preference[]> = new EventEmitter<Preference[]>();
 
@@ -80,6 +82,25 @@ export class PreferenceService extends BaseService {
     return subject.asObservable();
   }
 
+  public get(id: number): Observable<Preference> {
+    const subject = new Subject<Preference>();
+    const url = this.routeBuilder
+      .service('account-service')
+      .model('preferences')
+      .action('get')
+      .params([{id: id}])
+      .build();
+
+    this.requestHttp
+      .get(url)
+      .pipe(catchError(super.handleError.bind(this)))
+      .subscribe((data: Preference) => {
+
+        return subject.next(data);
+      });
+    return subject.asObservable();
+  }
+
   public getAll(page: number, limit: number): Observable<Preference[]> {
     const subject = new Subject<Preference[]>();
     const url = this.routeBuilder
@@ -107,6 +128,16 @@ export class PreferenceService extends BaseService {
 
   public getCreateData(): Preference {
     return Object.assign({}, this.createData);
+  }
+
+  public setGetData(data: Preference): void {
+    this.getData = data;
+    this.getDataObservable.emit(this.getGetData());
+    return;
+  }
+
+  public getGetData(): Preference {
+    return Object.assign({}, this.getData);
   }
 
   public setGetAllData(data: Preference[]): void {

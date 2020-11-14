@@ -44,7 +44,7 @@ export class RatingsFormComponent implements OnInit, OnDestroy, CanComponentDeac
       updateOn: 'change'
     }),
     rating: new FormControl([], {
-      validators: [Validators.pattern('[0-5]'), Validators.required],
+      validators: [Validators.pattern('^[0-5]$'), Validators.required],
       updateOn: 'change'
     }),
     image: new FormControl(null, {
@@ -96,13 +96,6 @@ export class RatingsFormComponent implements OnInit, OnDestroy, CanComponentDeac
     return;
   }
 
-  public onBase64Convert(files: FileList): void {
-    let fileReader = new FileReader();
-    fileReader.readAsDataURL(files[0]);
-    fileReader.onload = () => {this.formGroup.patchValue({image: fileReader.result});};
-    fileReader.onerror = (error) => {this.ratingService.setErrorData({timestamp: new Date().toISOString(), message: 'Pri nahrávani obrázka nastala chyba', error: true});};
-  }
-
   public onSubmit(): void {
     this.review == null ? this.onCreate() : this.onUpdate();
     this.review = null;
@@ -146,6 +139,14 @@ export class RatingsFormComponent implements OnInit, OnDestroy, CanComponentDeac
           this.onSuccess();
         })
     );
+  }
+
+  public onBase64Convert(files: FileList): void {
+    let fileReader = new FileReader();
+    fileReader.readAsDataURL(files[0]);
+    fileReader.onload = () => {this.formGroup.patchValue({image: fileReader.result});};
+    fileReader.onerror = (error) => {this.ratingService.setErrorData({timestamp: new Date().toISOString(), message: 'Pri nahrávani obrázka nastala chyba', error: true});};
+    return;
   }
 
   public canDeactivate(event: boolean): Observable<boolean> | Promise<boolean> | boolean {

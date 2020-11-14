@@ -12,13 +12,108 @@
         <h6 class="m-0 font-weight-bold text-primary">{{formTitle}}</h6>
       </div>
       <div class="card-body with-padding">
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="payout">
+          <div formGroupName="users">
+            <div class="form-group">
+              <label for="payoutFirstName">Meno používateľa</label>
+              <input
+                formControlName="firstName"
+                type="text"
+                disabled
+                class="form-control"
+                id="payoutFirstName"
+                placeholder="Zadajte meno používateľa">
+            </div>
+            <div class="form-group">
+              <label for="payoutLastName">Priezvisko používateľa</label>
+              <input
+                formControlName="lastName"
+                type="text"
+                disabled
+                class="form-control"
+                id="payoutLastName"
+                placeholder="Zadajte priezvisko používateľa">
+            </div>
+            <div formGroupName="places">
+              <div class="form-group">
+                <label for="payoutContry">Štát</label>
+                <input
+                  formControlName="country"
+                  type="text"
+                  disabled
+                  class="form-control"
+                  id="payoutContry"
+                  placeholder="Zadajte názov štátu">
+              </div>
+              <div class="form-group">
+                <label for="payoutPlace">Bydlisko</label>
+                <input
+                  formControlName="place"
+                  type="text"
+                  disabled
+                  class="form-control"
+                  id="payoutPlace"
+                  placeholder="Zadajte názov bydliska">
+              </div>
+              <div class="form-group">
+                <label for="payoutStreet">Ulica</label>
+                <input
+                  formControlName="street"
+                  type="text"
+                  disabled
+                  class="form-control"
+                  id="payoutStreet"
+                  placeholder="Zadajte názov ulice">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="payoutIban">Číslo účtu(IBAN)</label>
+            <input
+              formControlName="iban"
+              type="text"
+              disabled
+              class="form-control"
+              id="payoutIban"
+              placeholder="Zadajte číslo účtu">
+          </div>
+          <div class="form-group">
+            <label for="payoutAmount">Čiastka</label>
+            <input
+              formControlName="amount"
+              type="number"
+              disabled
+              class="form-control"
+              id="payoutAmount"
+              placeholder="Zadajte čiastku">
+          </div>
+          <div class="form-group">
+            <label for="payoutAccapted">Stav schválenia</label>
+            <select
+              formControlName="accapted"
+              id="payoutAccapted"
+              class="form-control">
+              <option value="-1" disabled hidden>Zvoľte si stav schválenia</option>
+              <option value="true">Áno</option>
+              <option value="false">Nie</option>
+            </select>
+          </div>
+          <button
+            appButtonHover
+            type="submit"
+            class="btn btn-primary">{{formButton}}
+          </button>
+          <a routerLink="/dashboard/services/users/payouts" class="btn btn-secondary"
+             [state]="{ignoreLoadingBar: true}">Zrušiť a späť</a>
+        </form>
+        <br>
       </div>
     </div>
   </div>
 </div>
 <app-modal
   (modalResult)="canDeactivate($event)"
-  [modalId]="'regionFormModal'"
+  [modalId]="'payoutFormModal'"
   [modalTitle]="title"
   [modalText]="text"
   [modalNegativeButton]="negativeButton"

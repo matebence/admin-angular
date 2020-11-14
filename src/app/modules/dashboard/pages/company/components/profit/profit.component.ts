@@ -50,6 +50,18 @@ export class ProfitComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.subscriptions.push(
+      this.priceService.errorDataObservable
+        .subscribe((error: Error) => {
+          $('#profitModal').modal('show');
+          this.title = 'Chyba';
+          this.text = error.message;
+          this.negativeButton = 'Zrušiť';
+          this.pozitiveButton = 'Zatvoriť';
+          this.row = null;
+        })
+    );
+
+    this.subscriptions.push(
       this.priceService.getDataObservable
         .subscribe((price: Price) => {
           this.source = new LocalDataSource([price]);
@@ -74,6 +86,10 @@ export class ProfitComponent implements OnInit, OnDestroy {
   public onTableEditData(row: Row): void {
     this.router.navigate(['edit', row.getData()._id], {relativeTo: this.activatedRoute});
     this.row = row;
+    return;
+  }
+
+  public onModalResult(event: boolean): void {
     return;
   }
 }

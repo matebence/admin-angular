@@ -51,7 +51,7 @@ export class VillagesFormComponent implements OnInit, OnDestroy, CanComponentDea
       updateOn: 'change'
     }),
     zip: new FormControl(null, {
-      validators: [Validators.pattern('[0-9 ]+'), Validators.required],
+      validators: [Validators.pattern('^[0-9 ]+$'), Validators.required],
       updateOn: 'change'
     }),
     use: new FormControl(1),

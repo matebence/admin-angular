@@ -13,9 +13,11 @@ import {RouteBuilder} from '../../../../core/http/route-builder.http';
 @Injectable()
 export class AccountService extends BaseService {
 
+  private getData: Account = null;
   private createData: Account = null;
   private getAllData: Account[] = null;
 
+  public getDataObservable: EventEmitter<Account> = new EventEmitter<Account>();
   public createDataObservable: EventEmitter<Account> = new EventEmitter<Account>();
   public getAllDataObservable: EventEmitter<Account[]> = new EventEmitter<Account[]>();
 
@@ -80,6 +82,25 @@ export class AccountService extends BaseService {
     return subject.asObservable();
   }
 
+  public get(id: number): Observable<Account> {
+    const subject = new Subject<Account>();
+    const url = this.routeBuilder
+      .service('account-service')
+      .model('accounts')
+      .action('get')
+      .params([{id: id}])
+      .build();
+
+    this.requestHttp
+      .get(url)
+      .pipe(catchError(super.handleError.bind(this)))
+      .subscribe((data: Account) => {
+
+        return subject.next(data);
+      });
+    return subject.asObservable();
+  }
+
   public getAll(page: number, limit: number): Observable<Account[]> {
     const subject = new Subject<Account[]>();
     const url = this.routeBuilder
@@ -107,6 +128,16 @@ export class AccountService extends BaseService {
 
   public getCreateData(): Account {
     return Object.assign({}, this.createData);
+  }
+
+  public setGetData(data: Account): void {
+    this.getData = data;
+    this.getDataObservable.emit(this.getGetData());
+    return;
+  }
+
+  public getGetData(): Account {
+    return Object.assign({}, this.getData);
   }
 
   public setGetAllData(data: Account[]): void {

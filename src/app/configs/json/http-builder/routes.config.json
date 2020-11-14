@@ -510,6 +510,11 @@
               "value": "payouts/join/{column}"
             }
           },
+          "refunds": {
+            "create": {
+              "value": "refunds"
+            }
+          },
           "users": {
             "create": {
               "value": "users"

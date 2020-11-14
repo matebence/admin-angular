@@ -69,7 +69,7 @@ export class ShipmentsFormComponent implements OnInit, OnDestroy, CanComponentDe
         updateOn: 'change'
       }),
       price: new FormControl(null, {
-        validators: [Validators.pattern('[0-9.]+'), Validators.required],
+        validators: [Validators.pattern('^[0-9.]+$'), Validators.required],
         updateOn: 'change'
       }),
       express: new FormControl(false, {

@@ -29,7 +29,17 @@ export class PaymentsComponent implements OnInit, OnDestroy {
   public header: string = 'Platby';
   private subscriptions: Subscription[] = [];
 
-  public settings: any = paymentTableConfig;
+  public settings: any = {
+    ...paymentTableConfig,
+    delete: {
+      confirmDelete: false,
+      deleteButtonContent: ''
+    },
+    add: {
+      confirmCreatwe: false,
+      addButtonContent: '',
+    }
+  };
 
   public constructor(private router: Router,
                      private activatedRoute: ActivatedRoute,
@@ -72,22 +82,6 @@ export class PaymentsComponent implements OnInit, OnDestroy {
     return;
   }
 
-  public onTableCreateData(row: boolean): void {
-    if (row) this.router.navigate(['new'], {relativeTo: this.activatedRoute});
-    return;
-  }
-
-  public onTableDeleteData(row: Row): void {
-    $('#paymentModal').modal('show');
-    this.text = 'Naozaj chcete odstrániť položku?';
-    this.title = 'Odstránenie';
-    this.negativeButton = 'Zrušiť';
-    this.pozitiveButton = 'Áno, odstrániť';
-
-    this.row = row;
-    return;
-  }
-
   public onTableEditData(row: Row): void {
     this.router.navigate(['edit', row.getData().paymentId], {relativeTo: this.activatedRoute});
     this.row = row;
@@ -95,17 +89,6 @@ export class PaymentsComponent implements OnInit, OnDestroy {
   }
 
   public onModalResult(event: boolean): void {
-    if (!event || this.row == null) return;
-    setTimeout(() => this.paymentService.delete(this.row.getData().paymentId)
-      .subscribe(result => {
-        if (!result) return;
-
-        let payments: Payment[] = this.paymentService.getGetAllData().filter(e => e.paymentId != this.row.getData().paymentId);
-        this.paymentService.setGetAllData(payments);
-
-        this.source.remove(this.row.getData());
-        this.row = null;
-      }), 1000);
     return;
   }
 }

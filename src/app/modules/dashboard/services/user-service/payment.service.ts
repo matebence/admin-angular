@@ -13,9 +13,11 @@ import {RouteBuilder} from '../../../../core/http/route-builder.http';
 @Injectable()
 export class PaymentService extends BaseService {
 
+  private getData: Payment = null;
   private createData: Payment = null;
   private getAllData: Payment[] = null;
 
+  public getDataObservable: EventEmitter<Payment> = new EventEmitter<Payment>();
   public createDataObservable: EventEmitter<Payment> = new EventEmitter<Payment>();
   public getAllDataObservable: EventEmitter<Payment[]> = new EventEmitter<Payment[]>();
 
@@ -80,6 +82,25 @@ export class PaymentService extends BaseService {
     return subject.asObservable();
   }
 
+  public get(id: number): Observable<Payment> {
+    const subject = new Subject<Payment>();
+    const url = this.routeBuilder
+      .service('user-service')
+      .model('payments')
+      .action('get')
+      .params([{id: id}])
+      .build();
+
+    this.requestHttp
+      .get(url)
+      .pipe(catchError(super.handleError.bind(this)))
+      .subscribe((data: Payment) => {
+
+        return subject.next(data);
+      });
+    return subject.asObservable();
+  }
+
   public getAll(page: number, limit: number): Observable<Payment[]> {
     const subject = new Subject<Payment[]>();
     const url = this.routeBuilder
@@ -107,6 +128,16 @@ export class PaymentService extends BaseService {
 
   public getCreateData(): Payment {
     return Object.assign({}, this.createData);
+  }
+
+  public setGetData(data: Payment): void {
+    this.getData = data;
+    this.getDataObservable.emit(this.getGetData());
+    return;
+  }
+
+  public getGetData(): Payment {
+    return Object.assign({}, this.getData);
   }
 
   public setGetAllData(data: Payment[]): void {

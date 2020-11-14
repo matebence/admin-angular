@@ -13,9 +13,11 @@ import {RouteBuilder} from '../../../../core/http/route-builder.http';
 @Injectable()
 export class RoleService extends BaseService {
 
+  private getData: Role = null;
   private createData: Role = null;
   private getAllData: Role[] = null;
 
+  public getDataObservable: EventEmitter<Role> = new EventEmitter<Role>();
   public createDataObservable: EventEmitter<Role> = new EventEmitter<Role>();
   public getAllDataObservable: EventEmitter<Role[]> = new EventEmitter<Role[]>();
 
@@ -80,6 +82,25 @@ export class RoleService extends BaseService {
     return subject.asObservable();
   }
 
+  public get(id: number): Observable<Role> {
+    const subject = new Subject<Role>();
+    const url = this.routeBuilder
+      .service('account-service')
+      .model('roles')
+      .action('get')
+      .params([{id: id}])
+      .build();
+
+    this.requestHttp
+      .get(url)
+      .pipe(catchError(super.handleError.bind(this)))
+      .subscribe((data: Role) => {
+
+        return subject.next(data);
+      });
+    return subject.asObservable();
+  }
+
   public getAll(page: number, limit: number): Observable<Role[]> {
     const subject = new Subject<Role[]>();
     const url = this.routeBuilder
@@ -107,6 +128,16 @@ export class RoleService extends BaseService {
 
   public getCreateData(): Role {
     return Object.assign({}, this.createData);
+  }
+
+  public setGetData(data: Role): void {
+    this.getData = data;
+    this.getDataObservable.emit(this.getGetData());
+    return;
+  }
+
+  public getGetData(): Role {
+    return Object.assign({}, this.getData);
   }
 
   public setGetAllData(data: Role[]): void {

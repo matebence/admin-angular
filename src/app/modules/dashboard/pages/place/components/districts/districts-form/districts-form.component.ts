@@ -44,7 +44,7 @@ export class DistrictsFormComponent implements OnInit, OnDestroy, CanComponentDe
       updateOn: 'change'
     }),
     vehRegNum: new FormControl(null, {
-      validators: [Validators.maxLength(2), Validators.pattern('[A-Z]+'), Validators.required],
+      validators: [Validators.maxLength(2), Validators.pattern('^[A-Z]+$'), Validators.required],
       updateOn: 'change'
     }),
     code: new FormControl(null, {
