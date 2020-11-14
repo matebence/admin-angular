@@ -8,11 +8,11 @@
            [src]="illustration"
            alt="">
     </div>
-    <p>{{assistent}}</p>
+    <p>{{text}}</p>
     <p>Ďalšie možnosti v tejto sekcií</p>
     <ul class="list">
       <li
-        *ngFor="let option of assistentOptions; let i = index"
+        *ngFor="let option of options; let i = index"
         class="item">
         <a [routerLink]="option.link">
           {{option.title}} &rarr;

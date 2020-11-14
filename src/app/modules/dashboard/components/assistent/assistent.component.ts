@@ -7,9 +7,9 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class AssistentComponent implements OnInit {
 
-  @Input('formAssistent') public assistent: string;
-  @Input('formIllustration') public illustration: string;
-  @Input('formAssistentOptions') public assistentOptions: any;
+  @Input('assistantText') public text: string;
+  @Input('assistantOptions') public options: any;
+  @Input('assistantIllustration') public illustration: string;
 
   public constructor() {
   }

@@ -6,43 +6,40 @@
   <div class="row">
     <div class="col-xl-3 col-md-6 mb-4">
       <app-tile
-        [tileTitle]="'Earnings (Monthly)'"
-        [tileText]="'$40,000'">
+        [tileTitle]="'Počet používateľov'"
+        [tileText]="userCount">
         <div class="col-auto">
-          <i class="fas fa-calendar fa-2x text-gray-300"></i>
+          <i class="fas fa-user-friends fa-2x text-gray-300"></i>
         </div>
       </app-tile>
     </div>
 
     <div class="col-xl-3 col-md-6 mb-4">
       <app-tile
-        [tileTitle]="'Earnings (Annual)'"
-        [tileText]="'$215,000'">
+        [tileTitle]="'Počet balíkov'"
+        [tileText]="parcelCount">
         <div class="col-auto">
-          <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+          <i class="fas fa-box-open fa-2x text-gray-300"></i>
         </div>
       </app-tile>
     </div>
 
     <div class="col-xl-3 col-md-6 mb-4">
       <app-tile
-        [tileTitle]="'Tasks'"
-        [tileText]="'50%'">
-        <div class="col">
-          <div class="progress progress-sm mr-2">
-            <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50"
-                 aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
+        [tileTitle]="'Počet kuriérov'"
+        [tileText]="courierCount">
+        <div class="col-auto">
+          <i class="fas fa-shipping-fast fa-2x text-gray-300"></i>
         </div>
       </app-tile>
     </div>
 
     <div class="col-xl-3 col-md-6 mb-4">
       <app-tile
-        [tileTitle]="'Pending Requests'"
-        [tileText]="'18'">
+        [tileTitle]="'Aktualný profit za jeden balík'"
+        [tileText]="companyProfit">
         <div class="col-auto">
-          <i class="fas fa-comments fa-2x text-gray-300"></i>
+          <i class="fas fa-euro-sign fa-2x text-gray-300"></i>
         </div>
       </app-tile>
     </div>
@@ -50,21 +47,45 @@
 
   <div class="row">
     <div class="col-lg-6 mb-4">
-      <app-illustration></app-illustration>
+      <app-illustration
+        [illustrationText]="'Som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Nájdete ma po celej aplikácie.'"
+        [illustrationLinks]="[{title: 'Vytvoriť nového používateľa', link: '/dashboard/services/users/main/new'}, {title: 'Vytvoriť nové vozidlo', link: '/dashboard/services/vehicles/main/new'}]"
+        [illustrationTitle]="'Váš osobný asistent'"
+        [illustrationImage]="'assets/img/home_assistant.svg'"></app-illustration>
     </div>
     <div class="col-lg-6 mb-4">
-      <app-explanation></app-explanation>
+      <app-explanation
+        [explanationTitle]="'Vítame Vás'"
+        [explanationText]="'Toto je manažovacia web stránka pre aplikáciu Blesk. Nájdete tu všetky služby aplikácie ako interné aj externé. Web stránka poskytuje navigáciu pomocou vyhľadávania, grafy z dát aplikácie a mnoho ďalšie.'"></app-explanation>
       <div class="row">
         <div class="col-lg-6 mb-4">
           <app-link
-            [linkText]="'#4e73df'"
-            [linkTitle]="'Primary'">
+            [linkHref]="'/dashboard/services/users/main'"
+            [linkText]="'Otvoriť'"
+            [linkTitle]="'Zoznam používateľov'">
           </app-link>
         </div>
         <div class="col-lg-6 mb-4">
           <app-link
-            [linkText]="'#1cc88a'"
-            [linkTitle]="'Success'">
+            [linkHref]="'/dashboard/services/parcels/main'"
+            [linkText]="'Otvoriť'"
+            [linkTitle]="'Zoznam balíkov'">
+          </app-link>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6 mb-4">
+          <app-link
+            [linkHref]="'/dashboard/services/company/profit/edit/' + profitId"
+            [linkText]="'Otvoriť'"
+            [linkTitle]="'Nastaviť profit'">
+          </app-link>
+        </div>
+        <div class="col-lg-6 mb-4">
+          <app-link
+            [linkHref]="'/dashboard/services/company/warehouses'"
+            [linkText]="'Otvoriť'"
+            [linkTitle]="'Manežovanie skladov'">
           </app-link>
         </div>
       </div>
@@ -72,7 +93,9 @@
   </div>
   <div class="row">
     <div class="col-lg-12">
-      <app-summary></app-summary>
+      <app-summary
+        [summaryData]="summary"
+        [summaryTitle]="'Aktuálna preťaženosť'"></app-summary>
     </div>
   </div>
 </app-dashboard>
