@@ -94,8 +94,8 @@
               id="payoutAccapted"
               class="form-control">
               <option value="-1" disabled hidden>Zvoľte si stav schválenia</option>
-              <option value="true">Áno</option>
-              <option value="false">Nie</option>
+              <option [ngValue]="true">Áno</option>
+              <option [ngValue]="false">Nie</option>
             </select>
           </div>
           <button

@@ -1,5 +1,5 @@
 export interface Refund {
-  paymentId: number,
+  paymentId?: number,
   users: any,
   creditCard: string,
   expMonth: number,
@@ -8,10 +8,10 @@ export interface Refund {
   charge: string,
   amount: number,
   currency: string,
-  refunded: boolean,
-  refund: string,
-  createdAt: Date,
-  updatedAt: Date,
-  deletedAt: Date,
-  deleted: boolean
+  refunded?: boolean,
+  refund?: string,
+  createdAt?: Date,
+  updatedAt?: Date,
+  deletedAt?: Date,
+  deleted?: boolean
 }

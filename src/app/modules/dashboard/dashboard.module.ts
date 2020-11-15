@@ -19,6 +19,7 @@ import {ShipmentPage} from './pages/shipment/shipment.page';
 import {UserService} from './services/user-service/user.service';
 import {RoleService} from './services/account-service/role.service';
 import {TypeService} from './services/vehicle-service/type.service';
+import {RefundService} from './services/user-service/refund.service';
 import {PayoutService} from './services/user-service/payout.service';
 import {GenderService} from './services/user-service/gender.service';
 import {RegionService} from './services/place-service/region.service';
@@ -196,6 +197,7 @@ import {DashboardRoutingModule} from './dashboard-routing.module';
     RatingService,
     GenderService,
     StatusService,
+    RefundService,
     AccountService,
     VehicleService,
     PaymentService,

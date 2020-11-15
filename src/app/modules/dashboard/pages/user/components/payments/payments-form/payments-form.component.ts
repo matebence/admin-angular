@@ -1,3 +1,4 @@
+import {Refund} from "../../../../../../../shared/models/services/user/refund.model";
 declare const $: any;
 
 import {switchMap} from 'rxjs/internal/operators';
@@ -8,6 +9,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 import {CanComponentDeactivate} from '../../../../../../../core/guards/leave.guard';
 
+import {RefundService} from '../../../../../services/user-service/refund.service';
 import {PaymentService} from '../../../../../services/user-service/payment.service';
 
 import {Payment} from '../../../../../../../shared/models/services/user/payment.model';
@@ -83,6 +85,7 @@ export class PaymentsFormComponent implements OnInit, OnDestroy, CanComponentDea
   });
 
   public constructor(private router: Router,
+                     private refundService: RefundService,
                      private paymentService: PaymentService,
                      private activatedRoute: ActivatedRoute) {
   }
@@ -109,9 +112,25 @@ export class PaymentsFormComponent implements OnInit, OnDestroy, CanComponentDea
   }
 
   public onSubmit(): void {
+    const payment: Payment = {paymentId: this.payment.paymentId, ...this.formGroup.value};
+    this.subscriptions.push(
+      this.paymentService.update(payment)
+        .pipe(switchMap((result: boolean) => {
+          if (!result || !payment.refunded) return EMPTY;
+
+          const refund: Refund = {users: {accountId: payment.users.accountId}, creditCard: payment.creditCard, expMonth: payment.expMonth, expYear: payment.expYear, cvc: payment.cvc, amount: payment.amount, charge: payment.charge, currency: payment.currency};
+          return this.refundService.create(refund)
+        }))
+        .subscribe((result: Refund) => {
+          let payments: Payment[] = this.paymentService.getGetAllData().filter(e => e.paymentId != payment.paymentId);
+          payments.unshift(payment);
+          this.paymentService.setGetAllData(payments);
+
+          this.formGroup.reset();
+          this.router.navigate(['/dashboard/services/users/payments']);
+        })
+    );
     this.payment = null;
-    this.formGroup.reset();
-    this.router.navigate(['/dashboard/services/users/payouts']);
     return;
   }
 

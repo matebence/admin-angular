@@ -1,6 +1,10 @@
 <div class="row">
   <div class="col-lg-6 mb-4">
-    v
+    <app-assistent
+      [assistantText]="assistent"
+      [assistantOptions]="assistentOptions"
+      [assistantIllustration]="illustration">
+    </app-assistent>
   </div>
   <div class="col-lg-6 mb-4">
     <div class="card shadow mb-4">
@@ -106,12 +110,13 @@
           <div class="form-group">
             <label for="paymentRefunded">Stav vrátenia</label>
             <select
+              [attr.disabled]="formGroup.get('refunded').value ? '' : null"
               formControlName="refunded"
               id="paymentRefunded"
               class="form-control">
               <option value="-1" disabled hidden>Zvoľte si stav vrátenia</option>
-              <option value="true">Áno</option>
-              <option value="false">Nie</option>
+              <option [ngValue]="true">Áno</option>
+              <option [ngValue]="false">Nie</option>
             </select>
           </div>
           <button

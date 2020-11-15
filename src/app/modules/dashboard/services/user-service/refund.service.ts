@@ -1,4 +1,3 @@
-import {FormGroup} from '@angular/forms';
 import {Observable, Subject} from 'rxjs/index';
 import {catchError} from 'rxjs/internal/operators';
 import {EventEmitter, Injectable} from '@angular/core';
@@ -22,7 +21,7 @@ export class RefundService extends BaseService {
     super();
   }
 
-  public create(formGroup: FormGroup): Observable<Refund> {
+  public create(refund: Refund): Observable<Refund> {
     const subject = new Subject<Refund>();
     const url = this.routeBuilder
       .service('user-service')
@@ -31,7 +30,7 @@ export class RefundService extends BaseService {
       .build();
 
     this.requestHttp
-      .post(url, formGroup.value)
+      .post(url, refund)
       .pipe(catchError(super.handleError.bind(this)))
       .subscribe((data: Refund) => {
 

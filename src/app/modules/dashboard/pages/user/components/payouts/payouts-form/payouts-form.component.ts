@@ -101,9 +101,21 @@ export class PayoutsFormComponent implements OnInit, OnDestroy, CanComponentDeac
   }
 
   public onSubmit(): void {
+    const payout: Payout = {payoutId: this.payout.payoutId, ...this.formGroup.value};
+    this.subscriptions.push(
+      this.payoutService.update(payout)
+        .subscribe((result: boolean) => {
+          if (!result) return;
+
+          let payouts: Payout[] = this.payoutService.getGetAllData().filter(e => e.payoutId != payout.payoutId);
+          payouts.unshift(payout);
+          this.payoutService.setGetAllData(payouts);
+
+          this.formGroup.reset();
+          this.router.navigate(['/dashboard/services/users/payouts']);
+        })
+    );
     this.payout = null;
-    this.formGroup.reset();
-    this.router.navigate(['/dashboard/services/users/payouts']);
     return;
   }
 
