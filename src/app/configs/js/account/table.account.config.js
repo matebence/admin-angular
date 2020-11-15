@@ -18,7 +18,7 @@ export default {
       title: 'Posledné prihlásenie',
       filter: false,
       valuePrepareFunction: (login) => {
-        return `${new Date(login.lastLogin)}`;
+        return login === null ? ` ` : `${new Date(login.lastLogin)}`;
       }
     },
     accountRoles: {

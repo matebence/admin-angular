@@ -56,6 +56,7 @@ export class StatusFormComponent implements OnInit, OnDestroy, CanComponentDeact
         }))
         .subscribe((result: Status) => {
           this.status = result;
+
           this.formGroup.setValue({name: this.status.name});
 
           this.formButton = 'Aktualizovať';

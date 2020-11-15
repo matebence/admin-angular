@@ -20,37 +20,6 @@ form.account select.ng-valid.ng-touched {
   border: 0.1rem solid #018000;
 }
 
-form.account div.form-group div.role-control {
-  display: inline;
-}
-
-form.account select.form-wrapper-width {
-  width: 100%;
-  display: block;
-}
-
-form.account select {
-  width: calc(100% - 6rem);
-  display: inline;
-}
-
-form.account div.form-group button {
-  background: transparent;
-  border: none;
-  font-size: 1.5em;
-  width: 2rem;
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-}
-
-form.account div.form-group button.role-add {
-  color: #008000;
-}
-
-form.account div.form-group button.role-remove {
-  color: #ff0000;
-}
-
 @media (max-width: 400px) {
   a.btn.btn-secondary {
     float: none;

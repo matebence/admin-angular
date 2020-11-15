@@ -1,0 +1,163 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="user">
+  <p [attr.data-letters]="getInitials()" class="img-profile"></p>
+  <ul class="list-group">
+    <li class="list-group-item">
+      <h4>Účet</h4>
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="form-group">
+            <label for="profileEmail">Emailová adresa</label>
+            <input
+              disabled
+              formControlName="email"
+              type="email"
+              class="form-control"
+              id="profileEmail"
+              placeholder="Zadajte emailovú adresu">
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="form-group">
+            <label for="userUsername">Používateľské meno</label>
+            <input
+              disabled
+              formControlName="userName"
+              type="text"
+              class="form-control"
+              id="userUsername"
+              placeholder="Zadajte používateľské meno">
+          </div>
+        </div>
+      </div>
+    </li>
+    <li class="list-group-item">
+      <h4>Osobné údaje</h4>
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="form-group">
+            <label for="profileFirstName">Meno</label>
+            <input
+              formControlName="firstName"
+              type="text"
+              class="form-control"
+              id="profileFirstName"
+              placeholder="Zadajte meno">
+          </div>
+          <div class="form-group">
+            <label for="profileLastName">Priezvisko</label>
+            <input
+              formControlName="lastName"
+              type="text"
+              class="form-control"
+              id="profileLastName"
+              placeholder="Zadajte priezvisko">
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="form-group">
+            <label for="profileTel">Telefonné číslo</label>
+            <input
+              formControlName="tel"
+              type="text"
+              class="form-control"
+              id="profileTel"
+              placeholder="Zadajte telefonné číslo">
+          </div>
+          <div class="form-group">
+            <label for="profileGender">Pohlavie</label>
+            <select
+              formControlName="gender"
+              id="profileGender"
+              class="form-control">
+              <option value="-1" disabled hidden>Zvoľte si pohlavie</option>
+              <option
+                *ngFor="let gender of genders; let i = index"
+                [ngValue]="gender.name">{{gender.name}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li class="list-group-item">
+      <h4>Poloha</h4>
+      <div
+        formGroupName="places"
+        class="row">
+        <div class="col-lg-6">
+          <div class="form-group">
+            <input
+              formControlName="code"
+              type="hidden"
+              class="form-control"
+              id="profileCode">
+          </div>
+          <div class="form-group">
+            <label for="profileCountry">Štát</label>
+            <input
+              formControlName="country"
+              type="text"
+              class="form-control"
+              id="profileCountry"
+              placeholder="Zadajte názov štátu">
+          </div>
+          <div class="form-group">
+            <label for="profileDistrict">Okres</label>
+            <input
+              formControlName="district"
+              type="text"
+              class="form-control"
+              id="profileDistrict"
+              placeholder="Zadajte názov okresu">
+          </div>
+          <div class="form-group">
+            <label for="profileStreet">Ulica</label>
+            <input
+              formControlName="street"
+              type="text"
+              class="form-control"
+              id="profileStreet"
+              placeholder="Zadajte názov ulice">
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="form-group">
+            <label for="profileRegion">Kraj</label>
+            <input
+              formControlName="region"
+              type="text"
+              class="form-control"
+              id="profileRegion"
+              placeholder="Zadajte názov kraja">
+          </div>
+          <div class="form-group">
+            <label for="profilePlace">Bydlisko</label>
+            <input
+              formControlName="place"
+              type="text"
+              class="form-control"
+              id="profilePlace"
+              placeholder="Zadajte názov bydliska">
+          </div>
+          <div class="form-group">
+            <label for="profileZip">PSČ</label>
+            <input
+              formControlName="zip"
+              type="text"
+              class="form-control"
+              id="profileZip"
+              placeholder="Zadajte PSČ">
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <button
+    appButtonHover
+    type="submit"
+    class="btn btn-primary">
+    Aktualizovať
+  </button>
+  <a routerLink="/dashboard/home" class="btn btn-secondary"
+     [state]="{ignoreLoadingBar: true}">Zrušiť a späť</a>
+</form>

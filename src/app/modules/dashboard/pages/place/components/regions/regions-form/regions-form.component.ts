@@ -61,6 +61,7 @@ export class RegionsFormComponent implements OnInit, OnDestroy, CanComponentDeac
         }))
         .subscribe((result: Region) => {
           this.region = result;
+
           this.formGroup.setValue({name: this.region.name, shortcut: this.region.shortcut, use: this.region.use});
 
           this.formButton = 'Aktualizovať';

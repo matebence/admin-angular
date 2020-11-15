@@ -78,6 +78,7 @@ import {UsersFormComponent} from './pages/user/components/users/users-form/users
 import {ParcelGraphComponent} from './pages/graph/components/parcel-graph/parcel-graph.component';
 import {PreferencesComponent} from './pages/account/components/preferences/preferences.component';
 import {RolesFormComponent} from './pages/account/components/roles/roles-form/roles-form.component';
+import {ProfileFormComponent} from './pages/profile/components/profile-form/profile-form.component';
 import {TypesFormComponent} from './pages/vehicle/components/types/types-form/types-form.component';
 import {VehicleGraphComponent} from './pages/graph/components/vehicle-graph/vehicle-graph.component';
 import {AccountGraphComponent} from './pages/graph/components/account-graph/account-graph.component';
@@ -151,6 +152,7 @@ import {DashboardRoutingModule} from './dashboard-routing.module';
     GendersFormComponent,
     RegionsFormComponent,
     PreferencesComponent,
+    ProfileFormComponent,
     AccountGraphComponent,
     AccountsFormComponent,
     VillagesFormComponent,

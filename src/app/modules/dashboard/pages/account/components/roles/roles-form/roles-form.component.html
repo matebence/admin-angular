@@ -22,12 +22,12 @@
               id="roleName"
               placeholder="Zadajte názov roli">
           </div>
+          <label for="rolePrivilegeId">Privilégia roli</label>
           <div formArrayName="rolePrivileges">
             <div *ngFor="let control of formGroup.get('rolePrivileges')['controls']; let i = index">
               <div [formGroupName]="i">
                 <div formGroupName="privileges">
                   <div class="form-group">
-                    <label for="rolePrivilegeId">Privilégia roli</label>
                     <div class="form-wrapper">
                       <select
                         [ngClass]="{'form-wrapper-width': !(formGroup.get('rolePrivileges')['controls'].length - 1 == i)}"
@@ -62,6 +62,7 @@
             </div>
           </div>
           <button
+            [disabled]="!formGroup.get('name').valid"
             appButtonHover
             type="submit"
             class="btn btn-primary">{{formButton}}

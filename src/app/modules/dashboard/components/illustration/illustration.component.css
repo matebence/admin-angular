@@ -2,3 +2,8 @@ ul.list {
   list-style: none;
   padding: 0;
 }
+
+ul.list li a:hover {
+  color: #1796dc;
+  text-decoration: none;
+}

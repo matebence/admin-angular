@@ -43,8 +43,8 @@ export class ParcelsComponent implements OnInit, OnDestroy {
           $('#parcelModal').modal('show');
           this.title = 'Chyba';
           this.text = error.message;
-          this.negativeButton = 'Zrušiť';
-          this.pozitiveButton = 'Zatvoriť';
+          this.negativeButton = 'Zatvoriť';
+          this.pozitiveButton = '';
           this.row = null;
         })
     );

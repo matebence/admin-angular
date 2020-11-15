@@ -56,6 +56,7 @@ export class CategoriesFormComponent implements OnInit, OnDestroy, CanComponentD
         }))
         .subscribe((result: Category) => {
           this.category = result;
+
           this.formGroup.setValue({name: this.category.name});
 
           this.formButton = 'Aktualizovať';

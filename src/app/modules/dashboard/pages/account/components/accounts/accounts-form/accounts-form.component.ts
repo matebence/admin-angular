@@ -40,7 +40,7 @@ export class AccountsFormComponent implements OnInit, OnDestroy, CanComponentDea
 
   public formGroup: FormGroup = new FormGroup({
     userName: new FormControl(null, {
-      validators: [Validators.pattern('^[A-Z_.]+$'), Validators.required],
+      validators: [Validators.pattern('^[A-Za-z_.]+$'), Validators.required],
       updateOn: 'change'
     }),
     email: new FormControl(null, {
@@ -48,19 +48,17 @@ export class AccountsFormComponent implements OnInit, OnDestroy, CanComponentDea
       updateOn: 'change'
     }),
     password: new FormControl(null, {
-      validators: [Validators.pattern('(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)(?:.{8}|.{30})'), Validators.required],
+      validators: [Validators.pattern('^(?=.*[a-z])(?=.*\\W)(?=.*[A-Z])(?=.*\\d).+$'), Validators.minLength(8), Validators.maxLength(30), Validators.required],
       updateOn: 'change'
     }),
     confirmPassword: new FormControl(null, {
-      validators: [Validators.pattern('(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)(?:.{8}|.{30})'), Validators.required],
+      validators: [Validators.pattern('^(?=.*[a-z])(?=.*\\W)(?=.*[A-Z])(?=.*\\d).+$'), Validators.minLength(8), Validators.maxLength(30), Validators.required],
       updateOn: 'change'
     }),
     accountRoles: new FormArray([new FormGroup({
-      roles: new FormGroup({
-        roleId: new FormControl(-1, {
-          validators: [Validators.pattern('^(?!0*(\\.0+)?$)(\\d+|\d*\\.\\d+)$'), Validators.required],
-          updateOn: 'change'
-        })
+      roles: new FormControl(-1, {
+        validators: [Validators.required],
+        updateOn: 'change'
       })
     })])
   });
@@ -88,7 +86,7 @@ export class AccountsFormComponent implements OnInit, OnDestroy, CanComponentDea
         .subscribe((result: Account) => {
           this.account = result;
 
-          this.formGroup.setValue({userName: this.account.userName, email: this.account.email, accountRoles: this.account.accountRoles});
+          this.formGroup.setValue({userName: this.account.userName, email: this.account.email, password: null, confirmPassword: null, accountRoles: [{roles: -1}]});
 
           this.formButton = 'Aktualizovať';
           this.formTitle = 'Aktualizovanie konta';
@@ -111,28 +109,34 @@ export class AccountsFormComponent implements OnInit, OnDestroy, CanComponentDea
   }
 
   private onCreate(): void {
+    this.subscriptions.push(
+      this.accountService.create(this.formGroup)
+        .pipe(switchMap((result: Account) => {
+          return this.accountService.getAll(0, 100);
+        }))
+        .subscribe((result: Account[]) => {
+          this.accountService.setGetAllData(result);
+
+          this.onSuccess();
+        })
+    );
   }
 
   private onUpdate(): void {
-  }
+    const account: Account = {accountId: this.account.accountId, ...this.formGroup.value};
+    this.subscriptions.push(
+      this.accountService.update(account)
+        .pipe(switchMap((result: boolean) => {
+          if (!result) return;
 
-  public onAddRole(): void {
-    let formArray = this.formGroup.controls['accountRoles'] as FormArray;
-    formArray.push(new FormGroup({
-      roles: new FormGroup({
-        roleId: new FormControl(-1, {
-          validators: [Validators.pattern('^(?!0*(\\.0+)?$)(\\d+|\d*\\.\\d+)$'), Validators.required],
-          updateOn: 'change'
+          return this.accountService.getAll(0, 100);
+        }))
+        .subscribe((result: Account[]) => {
+          this.accountService.setGetAllData(result);
+
+          this.onSuccess();
         })
-      })
-    }));
-    return;
-  }
-
-  public onRemoveRole(): void {
-    let formArray = this.formGroup.controls['accountRoles'] as FormArray;
-    formArray.removeAt(formArray.length -1);
-    return;
+    );
   }
 
   public canDeactivate(event: boolean): Observable<boolean> | Promise<boolean> | boolean {

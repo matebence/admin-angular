@@ -53,8 +53,8 @@ export class PayoutsComponent implements OnInit, OnDestroy {
           $('#payoutModal').modal('show');
           this.title = 'Chyba';
           this.text = error.message;
-          this.negativeButton = 'Zrušiť';
-          this.pozitiveButton = 'Zatvoriť';
+          this.negativeButton = 'Zatvoriť';
+          this.pozitiveButton = '';
           this.row = null;
         })
     );

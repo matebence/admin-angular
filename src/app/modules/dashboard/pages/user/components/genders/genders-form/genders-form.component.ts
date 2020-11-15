@@ -56,6 +56,7 @@ export class GendersFormComponent implements OnInit, OnDestroy, CanComponentDeac
         }))
         .subscribe((result: Gender) => {
           this.gender = result;
+
           this.formGroup.setValue({name: this.gender.name});
 
           this.formButton = 'Aktualizovať';

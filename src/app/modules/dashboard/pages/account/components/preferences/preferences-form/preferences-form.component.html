@@ -22,12 +22,12 @@
               id="preferenceName"
               placeholder="Zadajte názov preferencie">
           </div>
+          <label for="preferenceAccountId">Dostupnosť preferencie pre používateľa</label>
           <div formArrayName="accountPreferences">
             <div *ngFor="let control of formGroup.get('accountPreferences')['controls']; let i = index">
               <div [formGroupName]="i">
                 <div formGroupName="accounts">
                   <div class="form-group">
-                    <label for="preferenceAccountId">Dostupnosť preferencie pre používateľa</label>
                     <div class="form-wrapper">
                       <select
                         [ngClass]="{'form-wrapper-width': !(formGroup.get('accountPreferences')['controls'].length - 1 == i)}"
@@ -73,7 +73,7 @@
                     formControlName="isSet"
                     id="preferenceIsSet"
                     class="form-control">
-                    <option value="-1" disabled hidden>Zvoľte si logickú hodnotu preferencie</option>
+                    <option value="null" disabled hidden>Zvoľte si logickú hodnotu preferencie</option>
                     <option [ngValue]="true">Áno</option>
                     <option [ngValue]="false">Nie</option>
                   </select>
@@ -91,6 +91,7 @@
             </div>
           </div>
           <button
+            [disabled]="!formGroup.get('name').valid"
             appButtonHover
             type="submit"
             class="btn btn-primary">{{formButton}}

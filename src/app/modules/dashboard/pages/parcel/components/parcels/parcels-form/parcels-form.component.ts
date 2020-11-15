@@ -134,27 +134,13 @@ export class ParcelsFormComponent implements OnInit, OnDestroy, CanComponentDeac
   }
 
   private onCreate(): void {
-    let parcel: Parcel;
     this.subscriptions.push(
       this.parcelService.create(this.formGroup)
         .pipe(switchMap((result: Parcel) => {
-          parcel = result;
-          return this.userService.get(parcel.sender);
+          return this.parcelService.getAll(1, 100);
         }))
-        .pipe(switchMap((result: User) => {
-          parcel.sender = {senderId: result.accountId, name: `${result.firstName} ${result.lastName}`, tel: result.tel, balance: result.balance, places: result.places, userName: result.userName, email: result.email};
-          return this.userService.get(parcel.receiver);
-        }))
-        .pipe(switchMap((result: User) => {
-          parcel.receiver = {receiverId: result.accountId, name: `${result.firstName} ${result.lastName}`, tel: result.tel, balance: result.balance, places: result.places, userName: result.userName, email: result.email};
-          return this.categoryService.get(parcel.categoryId);
-        }))
-        .subscribe((result: Category) => {
-          parcel.category = result;
-
-          let parcels: Parcel[] = this.parcelService.getGetAllData();
-          parcels.unshift(parcel);
-          this.parcelService.setGetAllData(parcels);
+        .subscribe((result: Parcel[]) => {
+          this.parcelService.setGetAllData(result);
 
           this.onSuccess();
         })
@@ -167,21 +153,11 @@ export class ParcelsFormComponent implements OnInit, OnDestroy, CanComponentDeac
       this.parcelService.update(parcel)
         .pipe(switchMap((result: boolean) => {
           if (!result) return;
-          return this.userService.get(parcel.sender);
+
+          return this.parcelService.getAll(1, 100);
         }))
-        .pipe(switchMap((result: User) => {
-          parcel.sender = {senderId: result.accountId, name: `${result.firstName} ${result.lastName}`, tel: result.tel, balance: result.balance, places: result.places, userName: result.userName, email: result.email};
-          return this.userService.get(parcel.receiver);
-        }))
-        .pipe(switchMap((result: User) => {
-          parcel.receiver = {receiverId: result.accountId, name: `${result.firstName} ${result.lastName}`, tel: result.tel, balance: result.balance, places: result.places, userName: result.userName, email: result.email};
-          return this.categoryService.get(parcel.categoryId);
-        }))
-        .subscribe((result: Category) => {
-          let parcels: Parcel[] = this.parcelService.getGetAllData().filter(e => e.id != parcel.id);
-          parcel.category = result;
-          parcels.unshift(parcel);
-          this.parcelService.setGetAllData(parcels);
+        .subscribe((result: Parcel[]) => {
+          this.parcelService.setGetAllData(result);
 
           this.onSuccess();
         })

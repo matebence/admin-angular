@@ -88,6 +88,7 @@ export class PayoutsFormComponent implements OnInit, OnDestroy, CanComponentDeac
         }))
         .subscribe((result: Payout) => {
           this.payout = result;
+
           this.formGroup.setValue({users: {firstName: this.payout.users.firstName, lastName: this.payout.users.lastName, places: {country: this.payout.users.places.country, place: this.payout.users.places.place, street: this.payout.users.places.street}}, iban: this.payout.iban, amount: this.payout.amount, accapted: this.payout.accapted});
       })
     );

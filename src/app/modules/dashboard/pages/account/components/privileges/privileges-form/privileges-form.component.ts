@@ -56,6 +56,7 @@ export class PrivilegesFormComponent implements OnInit, OnDestroy, CanComponentD
         }))
         .subscribe((result: Privilege) => {
           this.privilege = result;
+
           this.formGroup.setValue({name: this.privilege.name});
 
           this.formButton = 'Aktualizovať';

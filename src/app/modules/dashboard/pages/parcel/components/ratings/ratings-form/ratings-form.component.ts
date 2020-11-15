@@ -104,18 +104,13 @@ export class RatingsFormComponent implements OnInit, OnDestroy, CanComponentDeac
 
   private onCreate(): void {
     this.formGroup.patchValue({rating: Number(this.formGroup.value.rating.pop())});
-    let rating: Rating;
     this.subscriptions.push(
       this.ratingService.create(this.formGroup)
         .pipe(switchMap((result: Rating) => {
-          rating = result;
-          return this.parcelService.get(result.parcelId)
+          return this.ratingService.getAll(1, 100)
         }))
-        .subscribe((result: Parcel) => {
-          rating.parcel = result;
-          let ratings: Rating[] = this.ratingService.getGetAllData();
-          ratings.unshift(rating);
-          this.ratingService.setGetAllData(ratings);
+        .subscribe((result: Rating[]) => {
+          this.ratingService.setGetAllData(result);
 
           this.onSuccess();
         })
@@ -128,13 +123,11 @@ export class RatingsFormComponent implements OnInit, OnDestroy, CanComponentDeac
       this.ratingService.update(rating)
         .pipe(switchMap((result: boolean) => {
           if (!result) return;
-          return this.parcelService.get(rating.parcelId)
+
+          return this.ratingService.getAll(1, 100)
         }))
-        .subscribe((result: Parcel) => {
-          let ratings: Rating[] = this.ratingService.getGetAllData().filter(e => e.id != rating.id);
-          rating.parcel = result;
-          ratings.unshift(rating);
-          this.ratingService.setGetAllData(ratings);
+        .subscribe((result: Rating[]) => {
+          this.ratingService.setGetAllData(result);
 
           this.onSuccess();
         })

@@ -1,9 +1,7 @@
-import {Role} from './role.model';
-
 export interface Account {
   accountId: number,
   login: Login,
-  accountRoles: Role[],
+  accountRoles: any[],
   userName: string,
   email: string,
   password: string,

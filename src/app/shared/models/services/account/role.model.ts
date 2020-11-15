@@ -1,8 +1,6 @@
-import {Privilege} from './privilege.model';
-
 export interface Role {
   roleId: number,
-  rolePrivileges: Privilege[],
+  rolePrivileges: any[],
   name: string,
   createdAt: Date,
   updatedAt: Date,

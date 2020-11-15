@@ -104,19 +104,13 @@ export class DistrictsFormComponent implements OnInit, OnDestroy, CanComponentDe
   }
 
   private onCreate(): void {
-    let district: District;
     this.subscriptions.push(
       this.districtService.create(this.formGroup)
         .pipe(switchMap((result: District) => {
-          district = result;
-          return this.regionService.get(result.regionId);
+          return this.districtService.getAll(1, 100);
         }))
-        .subscribe((result: Region) => {
-          district.region = result;
-
-          let districts: District[] = this.districtService.getGetAllData();
-          districts.unshift(district);
-          this.districtService.setGetAllData(districts);
+        .subscribe((result: District[]) => {
+          this.districtService.setGetAllData(result);
 
           this.onSuccess();
         })
@@ -129,13 +123,11 @@ export class DistrictsFormComponent implements OnInit, OnDestroy, CanComponentDe
       this.districtService.update(district)
         .pipe(switchMap((result: boolean) => {
           if (!result) return;
-          return this.regionService.get(district.regionId)
+
+          return this.districtService.getAll(1, 100);
         }))
-        .subscribe((result: Region) => {
-          let districts: District[] = this.districtService.getGetAllData().filter(e => e.id != district.id);
-          district.region = result;
-          districts.unshift(district);
-          this.districtService.setGetAllData(districts);
+        .subscribe((result: District[]) => {
+          this.districtService.setGetAllData(result);
 
           this.onSuccess();
         })

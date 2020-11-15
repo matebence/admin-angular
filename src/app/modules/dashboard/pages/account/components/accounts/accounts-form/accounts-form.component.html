@@ -49,46 +49,29 @@
               id="accountConfirmPassword"
               placeholder="Zadajte heslo ešte raz">
           </div>
+          <label for="accountRoleId">Role používateľa</label>
           <div formArrayName="accountRoles">
             <div *ngFor="let control of formGroup.get('accountRoles')['controls']; let i = index">
               <div [formGroupName]="i">
-                <div formGroupName="roles">
-                  <div class="form-group">
-                    <label for="accountRoleId">Roli používateľa</label>
-                    <div class="form-wrapper">
-                      <select
-                        [ngClass]="{'form-wrapper-width': !(formGroup.get('accountRoles')['controls'].length - 1 == i)}"
-                        formControlName="roleId"
-                        id="accountRoleId"
-                        class="form-control">
-                        <option value="-1" disabled hidden>Zvoľte si rolu</option>
-                        <option
-                          *ngFor="let role of roles; let i = index"
-                          [ngValue]="role.roleId">{{role.name}}
-                        </option>
-                      </select>
-                      <div
-                        class="role-control"
-                        *ngIf="formGroup.get('accountRoles')['controls'].length - 1 == i">
-                        <button
-                          class="role-add"
-                          (click)="onAddRole()">
-                          <i class="fas fa-plus-circle"></i>
-                        </button>
-                        <button
-                          class="role-remove"
-                          *ngIf="formGroup.get('accountRoles')['controls'].length > 1"
-                          (click)="onRemoveRole()">
-                          <i class="fas fa-minus-circle"></i>
-                        </button>
-                      </div>
-                    </div>
+                <div class="form-group">
+                  <div class="form-wrapper">
+                    <select
+                      formControlName="roles"
+                      id="accountRoleId"
+                      class="form-control">
+                      <option value="-1" disabled hidden>Zvoľte si rolu</option>
+                      <option
+                        *ngFor="let role of roles; let i = index"
+                        [ngValue]="{roleId: role.roleId, name: role.name}">{{role.name}}
+                      </option>
+                    </select>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <button
+            [disabled]="!formGroup.get('userName').valid || !formGroup.get('email').valid || !formGroup.get('password').valid || !formGroup.get('confirmPassword').valid"
             appButtonHover
             type="submit"
             class="btn btn-primary">{{formButton}}

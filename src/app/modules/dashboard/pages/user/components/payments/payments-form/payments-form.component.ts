@@ -99,6 +99,7 @@ export class PaymentsFormComponent implements OnInit, OnDestroy, CanComponentDea
         }))
         .subscribe((result: Payment) => {
           this.payment = result;
+
           this.formGroup.setValue({users: {firstName: this.payment.users.firstName, lastName: this.payment.users.lastName, places: {country: this.payment.users.places.country, place: this.payment.users.places.place, street: this.payment.users.places.street}}, creditCard: this.payment.creditCard, charge: this.payment.charge, amount: this.payment.amount, currency: this.payment.currency, refunded: this.payment.refunded});
         })
     );

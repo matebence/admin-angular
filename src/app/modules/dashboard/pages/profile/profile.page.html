@@ -6,149 +6,18 @@
           <h6 class="m-0 font-weight-bold text-primary">Používateľské konto</h6>
         </div>
         <div class="card-body with-padding">
-          <p [attr.data-letters]="'A'" class="img-profile"></p>
-          <form>
-            <ul class="list-group">
-              <li class="list-group-item">
-                <h4>Účet</h4>
-                <div class="row">
-                  <div class="col-lg-6">
-                    <div class="form-group">
-                      <label for="profileEmail">Emailová adresa</label>
-                      <input
-                        disabled
-                        type="email"
-                        class="form-control"
-                        id="profileEmail"
-                        placeholder="Zadajte emailovú adresu">
-                    </div>
-                  </div>
-                  <div class="col-lg-6">
-                    <div class="form-group">
-                      <label for="userUsername">Používateľské meno</label>
-                      <input
-                        disabled
-                        type="text"
-                        class="form-control"
-                        id="userUsername"
-                        placeholder="Zadajte používateľské meno">
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li class="list-group-item">
-                <h4>Osobné údaje</h4>
-                <div class="row">
-                  <div class="col-lg-6">
-                    <div class="form-group">
-                      <label for="profileFirstName">Meno</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="profileFirstName"
-                        placeholder="Zadajte meno">
-                    </div>
-                    <div class="form-group">
-                      <label for="profileLastName">Priezvisko</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="profileLastName"
-                        placeholder="Zadajte priezvisko">
-                    </div>
-                  </div>
-                  <div class="col-lg-6">
-                    <div class="form-group">
-                      <label for="profileTel">Telefonné číslo</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="profileTel"
-                        placeholder="Zadajte telefonné číslo">
-                    </div>
-                    <div class="form-group">
-                      <label for="profileGender">Pohlavie</label>
-                      <select
-                        id="profileGender"
-                        class="form-control">
-                        <option value="-1" disabled hidden>Zvoľte si pohlavie</option>
-                        <option value="1">Muž</option>
-                        <option value="2">Žena</option>
-                        <option value="3">Iné</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li class="list-group-item">
-                <h4>Poloha</h4>
-                <div class="row">
-                  <div class="col-lg-6">
-                    <div class="form-group">
-                      <label for="profileCountry">Štát</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="profileCountry"
-                        placeholder="Zadajte názov štátu">
-                    </div>
-                    <div class="form-group">
-                      <label for="profileDistrict">Okres</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="profileDistrict"
-                        placeholder="Zadajte názov okresu">
-                    </div>
-                    <div class="form-group">
-                      <label for="profileStreet">Ulica</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="profileStreet"
-                        placeholder="Zadajte názov ulice">
-                    </div>
-                  </div>
-                  <div class="col-lg-6">
-                    <div class="form-group">
-                      <label for="profileRegion">Kraj</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="profileRegion"
-                        placeholder="Zadajte názov kraja">
-                    </div>
-                    <div class="form-group">
-                      <label for="profilePlace">Bydlisko</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="profilePlace"
-                        placeholder="Zadajte názov bydliska">
-                    </div>
-                    <div class="form-group">
-                      <label for="profileZip">PSČ</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="profileZip"
-                        placeholder="Zadajte PSČ">
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul>
-            <button
-              appButtonHover
-              type="submit"
-              class="btn btn-primary">
-              Aktualizovať
-            </button>
-            <a routerLink="/dashboard/services/users/main" class="btn btn-secondary"
-               [state]="{ignoreLoadingBar: true}">Zrušiť a späť</a>
-          </form>
+          <app-profile-form
+            (profileResult)="onFormResult($event)"
+            [profileForm]="formGroup"></app-profile-form>
         </div>
       </div>
     </div>
   </div>
 </app-dashboard>
+<app-modal
+  (modalResult)="canDeactivate($event)"
+  [modalId]="'profileModal'"
+  [modalTitle]="title"
+  [modalText]="text"
+  [modalNegativeButton]="negativeButton"
+  [modalPozitiveButton]="pozitiveButton"></app-modal>

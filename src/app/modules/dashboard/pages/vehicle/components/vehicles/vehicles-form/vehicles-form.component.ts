@@ -112,23 +112,13 @@ export class VehiclesFormComponent implements OnInit, OnDestroy, CanComponentDea
   }
 
   private onCreate(): void {
-    let vehicle: Vehicle;
     this.subscriptions.push(
       this.vehicleService.create(this.formGroup)
         .pipe(switchMap((result: Vehicle) => {
-          vehicle = result;
-          return this.typeService.get(result.type)
+          return this.vehicleService.getAll(1, 100)
         }))
-        .pipe(switchMap((result: Type) => {
-          vehicle.type = result;
-          return this.userService.get(vehicle.courier)
-        }))
-        .subscribe((result: User) => {
-          vehicle.courier = result;
-
-          let vehicles: Vehicle[] = this.vehicleService.getGetAllData();
-          vehicles.unshift(vehicle);
-          this.vehicleService.setGetAllData(vehicles);
+        .subscribe((result: Vehicle[]) => {
+          this.vehicleService.setGetAllData(result);
 
           this.onSuccess();
         })
@@ -141,18 +131,11 @@ export class VehiclesFormComponent implements OnInit, OnDestroy, CanComponentDea
       this.vehicleService.update(vehicle)
         .pipe(switchMap((result: boolean) => {
           if (!result) return;
-          return this.typeService.get(vehicle.type)
-        }))
-        .pipe(switchMap((result: Type) => {
-          vehicle.type = result;
-          return this.userService.get(vehicle.courier)
-        }))
-        .subscribe((result: User) => {
-          vehicle.courier = result;
 
-          let vehicles: Vehicle[] = this.vehicleService.getGetAllData().filter(e => e._id != vehicle._id);
-          vehicles.unshift(vehicle);
-          this.vehicleService.setGetAllData(vehicles);
+          return this.vehicleService.getAll(1, 100)
+        }))
+        .subscribe((result: Vehicle[]) => {
+          this.vehicleService.setGetAllData(result);
 
           this.onSuccess();
         })

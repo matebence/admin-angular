@@ -43,8 +43,8 @@ export class VehiclesComponent implements OnInit, OnDestroy {
           $('#vehicleModal').modal('show');
           this.title = 'Chyba';
           this.text = error.message;
-          this.negativeButton = 'Zrušiť';
-          this.pozitiveButton = 'Zatvoriť';
+          this.negativeButton = 'Zatvoriť';
+          this.pozitiveButton = '';
           this.row = null;
         })
     );

@@ -58,6 +58,7 @@ export class TypesFormComponent implements OnInit, OnDestroy, CanComponentDeacti
           this.type = result;
 
           if (this.type == null) return;
+
           this.formGroup.setValue({name: this.type.name});
 
           this.formButton = 'Aktualizovať';
@@ -101,7 +102,7 @@ export class TypesFormComponent implements OnInit, OnDestroy, CanComponentDeacti
       this.typeService.update(type)
         .subscribe((result: boolean) => {
           if (!result) return;
-          
+
           let types: Type[] = this.typeService.getGetAllData().filter(e => e._id != type._id);
           types.unshift(type);
           this.typeService.setGetAllData(types);

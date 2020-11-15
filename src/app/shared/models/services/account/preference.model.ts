@@ -1,7 +1,7 @@
 export interface Preference {
-  "preferenceId": number,
-  "accountPreferences": AccountPreference[],
-  "name": string,
+  preferenceId: number,
+  accountPreferences: AccountPreference[],
+  name: string,
   createdAt: Date,
   updatedAt: Date,
   deletedAt: Date,
@@ -9,8 +9,8 @@ export interface Preference {
 }
 
 export interface AccountPreference {
-  "preferences": number,
-  "isSet": boolean,
-  "content": string,
-  "value": number
+  preferences: number,
+  isSet: boolean,
+  content: string,
+  value: number
 }

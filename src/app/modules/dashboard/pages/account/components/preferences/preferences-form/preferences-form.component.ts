@@ -40,7 +40,7 @@ export class PreferencesFormComponent implements OnInit, OnDestroy, CanComponent
 
   public formGroup: FormGroup = new FormGroup({
     name: new FormControl(null, {
-      validators: [Validators.pattern('^[\\D ]+$'), Validators.required],
+      validators: [Validators.pattern('^[\\D\\d]+$'), Validators.required],
       updateOn: 'change'
     }),
     accountPreferences: new FormArray([new FormGroup({
@@ -50,7 +50,7 @@ export class PreferencesFormComponent implements OnInit, OnDestroy, CanComponent
           updateOn: 'change'
         })
       }),
-      isSet: new FormControl(-1, {
+      isSet: new FormControl(null, {
         validators: [Validators.pattern('^true$|^false$')],
         updateOn: 'change'
       }),
@@ -72,7 +72,6 @@ export class PreferencesFormComponent implements OnInit, OnDestroy, CanComponent
   }
 
   public ngOnInit(): void {
-    console.log(this.formGroup);
     this.subscriptions.push(
       this.accountService.getAll(0, 100)
         .subscribe((accounts: Account[]) => {
@@ -88,8 +87,20 @@ export class PreferencesFormComponent implements OnInit, OnDestroy, CanComponent
         }))
         .subscribe((result: Preference) => {
           this.preference = result;
+          let accountPreferences = [];
 
-          this.formGroup.setValue({name: this.preference.name, accountPreferences: this.preference.accountPreferences});
+          (this.formGroup.controls['accountPreferences'] as FormArray).clear();
+          this.preference.accountPreferences.forEach(e => {
+            this.onAddPreference();
+            accountPreferences.push({
+              accounts: {accountId: 1},
+              isSet: e.isSet,
+              content: e.content,
+              value: e.value
+            });
+          });
+
+          this.formGroup.setValue({name: this.preference.name, accountPreferences: accountPreferences});
 
           this.formButton = 'Aktualizovať';
           this.formTitle = 'Aktualizovanie preferencie';
@@ -112,9 +123,34 @@ export class PreferencesFormComponent implements OnInit, OnDestroy, CanComponent
   }
 
   private onCreate(): void {
+    this.subscriptions.push(
+      this.preferenceService.create(this.formGroup)
+        .pipe(switchMap((result: Preference) => {
+          return this.preferenceService.getAll(0, 100);
+        }))
+        .subscribe((result: Preference[]) => {
+          this.preferenceService.setGetAllData(result);
+
+          this.onSuccess();
+        })
+    );
   }
 
   private onUpdate(): void {
+    const preference: Preference = {preferenceId: this.preference.preferenceId, ...this.formGroup.value};
+    this.subscriptions.push(
+      this.preferenceService.update(preference)
+        .pipe(switchMap((result: boolean) => {
+          if (!result) return;
+
+          return this.preferenceService.getAll(0, 100);
+        }))
+        .subscribe((result: Preference[]) => {
+          this.preferenceService.setGetAllData(result);
+
+          this.onSuccess();
+        })
+    );
   }
 
   public onAddPreference(): void {
@@ -126,7 +162,7 @@ export class PreferencesFormComponent implements OnInit, OnDestroy, CanComponent
           updateOn: 'change'
         })
       }),
-      isSet: new FormControl(-1, {
+      isSet: new FormControl(null, {
         validators: [Validators.pattern('^true$|^false$')],
         updateOn: 'change'
       }),

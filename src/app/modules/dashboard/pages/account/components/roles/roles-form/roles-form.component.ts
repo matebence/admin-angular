@@ -75,8 +75,12 @@ export class RolesFormComponent implements OnInit, OnDestroy, CanComponentDeacti
         }))
         .subscribe((result: Role) => {
           this.role = result;
+          let rolePrivileges = [];
 
-          this.formGroup.setValue({name: this.role.name, rolePrivileges: this.role.rolePrivileges});
+          (this.formGroup.controls['rolePrivileges'] as FormArray).clear();
+          this.role.rolePrivileges.forEach(e => {this.onAddPrivilege(); rolePrivileges.push({privileges: {privilegeId: e.privileges.privilegeId}});});
+
+          this.formGroup.setValue({name: this.role.name, rolePrivileges: rolePrivileges});
 
           this.formButton = 'Aktualizovať';
           this.formTitle = 'Aktualizovanie roli';
@@ -99,9 +103,34 @@ export class RolesFormComponent implements OnInit, OnDestroy, CanComponentDeacti
   }
 
   private onCreate(): void {
+    this.subscriptions.push(
+      this.roleService.create(this.formGroup)
+        .pipe(switchMap((result: Role) => {
+          return this.roleService.getAll(0, 100);
+        }))
+        .subscribe((result: Role[]) => {
+          this.roleService.setGetAllData(result);
+
+          this.onSuccess();
+        })
+    );
   }
 
   private onUpdate(): void {
+    const role: Role = {roleId: this.role.roleId, ...this.formGroup.value};
+    this.subscriptions.push(
+      this.roleService.update(role)
+        .pipe(switchMap((result: boolean) => {
+          if (!result) return;
+
+          return this.roleService.getAll(0, 100);
+        }))
+        .subscribe((result: Role[]) => {
+          this.roleService.setGetAllData(result);
+
+          this.onSuccess();
+        })
+    );
   }
 
   public onAddPrivilege(): void {

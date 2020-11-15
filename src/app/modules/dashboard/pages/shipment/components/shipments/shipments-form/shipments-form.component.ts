@@ -152,23 +152,13 @@ export class ShipmentsFormComponent implements OnInit, OnDestroy, CanComponentDe
   }
 
   private onCreate(): void {
-    let shipment: Shipment;
     this.subscriptions.push(
       this.shipmentService.create(this.formGroup)
         .pipe(switchMap((result: Shipment[]) => {
-          shipment = result.pop();
-          return this.userService.get(shipment.courier);
+          return this.shipmentService.getAll(1, 100);
         }))
-        .pipe(switchMap((result: User) => {
-          shipment.courier = result;
-          return this.statusService.get(shipment.status);
-        }))
-        .subscribe((result: Status) => {
-          shipment.status = result;
-
-          let shipments: Shipment[] = this.shipmentService.getGetAllData();
-          shipments.unshift(shipment);
-          this.shipmentService.setGetAllData(shipments);
+        .subscribe((result: Shipment[]) => {
+          this.shipmentService.setGetAllData(result);
 
           this.onSuccess();
         })
@@ -181,17 +171,11 @@ export class ShipmentsFormComponent implements OnInit, OnDestroy, CanComponentDe
       this.shipmentService.update(shipment)
         .pipe(switchMap((result: boolean) => {
           if (!result) return;
-          return this.userService.get(shipment.courier);
+
+          return this.shipmentService.getAll(1, 100);
         }))
-        .pipe(switchMap((result: User) => {
-          shipment.courier = result;
-          return this.statusService.get(shipment.status);
-        }))
-        .subscribe((result: Status) => {
-          let shipments: Shipment[] = this.shipmentService.getGetAllData().filter(e => e._id != shipment._id);
-          shipment.status = result;
-          shipments.unshift(shipment);
-          this.shipmentService.setGetAllData(shipments);
+        .subscribe((result: Shipment[]) => {
+          this.shipmentService.setGetAllData(result);
 
           this.onSuccess();
         })

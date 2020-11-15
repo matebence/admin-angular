@@ -81,6 +81,7 @@ const routes: Routes = [
       {
         path: 'profile',
         component: ProfilePage,
+        canDeactivate: [LeaveGuard],
         data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]}
       },
       {

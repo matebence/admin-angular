@@ -119,23 +119,13 @@ export class VillagesFormComponent implements OnInit, OnDestroy, CanComponentDea
   }
 
   private onCreate(): void {
-    let village: Village;
     this.subscriptions.push(
       this.villageService.create(this.formGroup)
         .pipe(switchMap((result: Village) => {
-          village = result;
-          return this.regionService.get(village.regionId)
+          return this.villageService.getAll(1, 100);
         }))
-        .pipe(switchMap((result: Region) => {
-          village.region = result;
-          return this.districtService.get(village.districtId)
-        }))
-        .subscribe((result: District) => {
-          village.district = result;
-
-          let villages: Village[] = this.villageService.getGetAllData();
-          villages.unshift(village);
-          this.villageService.setGetAllData(villages);
+        .subscribe((result: Village[]) => {
+          this.villageService.setGetAllData(result);
 
           this.onSuccess();
         })
@@ -148,18 +138,11 @@ export class VillagesFormComponent implements OnInit, OnDestroy, CanComponentDea
       this.villageService.update(village)
         .pipe(switchMap((result: boolean) => {
           if (!result) return;
-          return this.regionService.get(village.regionId);
-        }))
-        .pipe(switchMap((result: Region) => {
-          village.region = result;
-          return this.districtService.get(village.districtId);
-        }))
-        .subscribe((result: District) => {
-          village.district = result;
 
-          let villages: Village[] = this.villageService.getGetAllData().filter(e => e.id != village.id);
-          villages.unshift(village);
-          this.districtService.setGetAllData(villages);
+          return this.villageService.getAll(1, 100);
+        }))
+        .subscribe((result: Village[]) => {
+          this.villageService.setGetAllData(result);
 
           this.onSuccess();
         })

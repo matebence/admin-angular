@@ -152,17 +152,13 @@ export class UsersFormComponent implements OnInit, OnDestroy, CanComponentDeacti
   }
 
   private onCreate(): void {
-    let user: User;
     this.subscriptions.push(
       this.userService.create(this.formGroup)
         .pipe(switchMap((result: User) => {
-          user = result;
-          return this.userService.get(user.accountId);
+          return this.userService.getAll(0, 100);
         }))
-        .subscribe((result: User) => {
-          let users: User[] = this.userService.getGetAllData();
-          users.unshift(result);
-          this.userService.setGetAllData(users);
+        .subscribe((result: User[]) => {
+          this.userService.setGetAllData(result);
 
           this.onSuccess();
         })
@@ -175,12 +171,11 @@ export class UsersFormComponent implements OnInit, OnDestroy, CanComponentDeacti
       this.userService.update(user)
         .pipe(switchMap((result: boolean) => {
           if (!result) return;
-          return this.userService.get(user.accountId);
+
+          return this.userService.getAll(0, 100);
         }))
-        .subscribe((result: User) => {
-          let users: User[] = this.userService.getGetAllData().filter(e => e.accountId != user.accountId);
-          users.unshift(result);
-          this.userService.setGetAllData(users);
+        .subscribe((result: User[]) => {
+          this.userService.setGetAllData(result);
 
           this.onSuccess();
         })

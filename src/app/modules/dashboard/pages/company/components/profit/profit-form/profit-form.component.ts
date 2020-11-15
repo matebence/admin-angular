@@ -56,6 +56,7 @@ export class ProfitFormComponent implements OnInit, OnDestroy, CanComponentDeact
         }))
         .subscribe((result: Price) => {
           this.profit = result;
+
           this.formGroup.setValue({price: this.profit.price});
         })
     );
@@ -74,6 +75,7 @@ export class ProfitFormComponent implements OnInit, OnDestroy, CanComponentDeact
       this.priceService.update(profit)
         .subscribe((result: boolean) => {
           if (!result) return;
+
           this.priceService.setGetData(profit);
 
           this.onSuccess();

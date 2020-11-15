@@ -29,8 +29,8 @@ export class PreferenceService extends BaseService {
   public create(formGroup: FormGroup): Observable<Preference> {
     const subject = new Subject<Preference>();
     const url = this.routeBuilder
-      .service('parcel-service')
-      .model('categories')
+      .service('account-service')
+      .model('preferences')
       .action('create')
       .build();
 
@@ -47,8 +47,8 @@ export class PreferenceService extends BaseService {
   public update(preference: Preference): Observable<boolean> {
     const subject = new Subject<boolean>();
     const url = this.routeBuilder
-      .service('parcel-service')
-      .model('categories')
+      .service('account-service')
+      .model('preferences')
       .action('update')
       .params([{id: preference.preferenceId}])
       .build();
@@ -66,8 +66,8 @@ export class PreferenceService extends BaseService {
   public delete(id: number): Observable<boolean> {
     const subject = new Subject<boolean>();
     const url = this.routeBuilder
-      .service('parcel-service')
-      .model('categories')
+      .service('account-service')
+      .model('preferences')
       .action('delete')
       .params([{id: id}])
       .build();
