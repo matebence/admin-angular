@@ -90,15 +90,7 @@ export class PreferencesFormComponent implements OnInit, OnDestroy, CanComponent
           let accountPreferences = [];
 
           (this.formGroup.controls['accountPreferences'] as FormArray).clear();
-          this.preference.accountPreferences.forEach(e => {
-            this.onAddPreference();
-            accountPreferences.push({
-              accounts: {accountId: 1},
-              isSet: e.isSet,
-              content: e.content,
-              value: e.value
-            });
-          });
+          this.preference.accountPreferences.forEach(e => {this.onAddPreference(); accountPreferences.push({accounts: {accountId: e.accounts.accountId}, isSet: e.isSet, content: e.content, value: e.value});});
 
           this.formGroup.setValue({name: this.preference.name, accountPreferences: accountPreferences});
 

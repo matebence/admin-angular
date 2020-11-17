@@ -9,6 +9,7 @@ export interface Preference {
 }
 
 export interface AccountPreference {
+  accounts: any,
   preferences: number,
   isSet: boolean,
   content: string,
