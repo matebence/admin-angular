@@ -1,1 +1,64 @@
-<p>user-graph works!</p>
+<div class="row">
+  <div class="col-lg-6 mb-4">
+    <app-assistent
+      [assistantText]="assistent"
+      [assistantOptions]="assistentOptions"
+      [assistantIllustration]="illustration">
+    </app-assistent>
+  </div>
+  <div class="col-lg-6">
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Používateľské konto</h6>
+      </div>
+      <div class="card-body with-padding">
+        <div>
+          <div>
+            <div class="chart">
+              <canvas baseChart
+                      [data]="pieChartData"
+                      [labels]="pieChartLabels"
+                      [chartType]="pieChartType"
+                      [options]="pieChartOptions"
+                      [colors]="pieChartColors"
+                      [legend]="pieChartLegend">
+              </canvas>
+            </div>
+          </div>
+        </div>
+        <div>
+          <button mat-button mat-raised-button color="primary" (click)="pieChartLegend=!pieChartLegend">Toggle Legend</button>
+          <button mat-button mat-raised-button color="primary" (click)="changeLabels()">Change Labels</button>
+          <button mat-button mat-raised-button color="primary" (click)="addSlice()">Add Slice</button>
+          <button mat-button mat-raised-button color="primary" (click)="removeSlice()">Remove Slice</button>
+          <button mat-button mat-raised-button color="primary" (click)="changeLegendPosition()">Change Legend Position</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-11" style="margin: 0 auto">
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Používateľské konto</h6>
+      </div>
+      <div class="card-body with-padding">
+        <div>
+          <div>
+            <div style="display: block">
+              <canvas baseChart
+                      [datasets]="barChartData"
+                      [labels]="barChartLabels"
+                      [options]="barChartOptions"
+                      [legend]="barChartLegend"
+                      [chartType]="barChartType">
+              </canvas>
+            </div>
+            <button mat-button mat-raised-button color="primary" (click)="randomize()">Update</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

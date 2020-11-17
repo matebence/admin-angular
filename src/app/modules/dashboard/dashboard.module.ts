@@ -1,7 +1,8 @@
 import {NgModule} from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {ChartsModule} from 'ng2-charts';
 import {CommonModule} from '@angular/common';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
 
 import {DashboardPage} from './dashboard.page';
@@ -182,6 +183,7 @@ import {DashboardRoutingModule} from './dashboard-routing.module';
   ],
   imports: [
     FormsModule,
+    ChartsModule,
     SharedModule,
     CommonModule,
     ReactiveFormsModule,
