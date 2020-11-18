@@ -1,0 +1,108 @@
+<div class="row">
+  <div class="col-lg-6 mb-4">
+    <app-assistent
+      [assistantText]="assistent"
+      [assistantOptions]="assistentOptions"
+      [assistantIllustration]="illustration">
+    </app-assistent>
+  </div>
+  <div class="col-lg-6 mb-4">
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">{{formTitle}}</h6>
+      </div>
+      <div class="card-body with-padding">
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="shipment">
+          <div formArrayName="shipments">
+            <div formGroupName="0">
+              <div class="form-group">
+                <label for="shipmentCourier">Kuriér zásielky</label>
+                <select
+                  formControlName="courier"
+                  id="shipmentCourier"
+                  class="form-control">
+                  <option value="-1" disabled hidden>Zvoľte si kuriéra</option>
+                  <option
+                    *ngFor="let user of users; let i = index"
+                    [ngValue]="user.accountId">{{user.userName}}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="shipmentParcelId">Balík zásielky</label>
+                <select
+                  formControlName="parcelId"
+                  id="shipmentParcelId"
+                  class="form-control">
+                  <option value="-1" disabled hidden>Zvoľte si balík</option>
+                  <option
+                    *ngFor="let parcel of parcels; let i = index"
+                    [ngValue]="parcel.id">{{parcel.id}}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="shipmentFrom">Miesto vyzdvihnutia</label>
+                <input
+                  (focus)="onCountryPrefix('from')"
+                  formControlName="from"
+                  type="text"
+                  class="form-control"
+                  id="shipmentFrom"
+                  placeholder="Zadajte miesto vyzdvihnutia">
+              </div>
+              <div class="form-group">
+                <label for="shipmentTo">Miesto odovzdania</label>
+                <input
+                  (focus)="onCountryPrefix('to')"
+                  formControlName="to"
+                  type="text"
+                  class="form-control"
+                  id="shipmentTo"
+                  placeholder="Zadajte miesto odovzdania">
+              </div>
+              <div class="form-group">
+                <label for="shipmentStatus">Aktualný status zásielky</label>
+                <select
+                  formControlName="status"
+                  id="shipmentStatus"
+                  class="form-control">
+                  <option value="-1" disabled hidden>Zvoľte si status</option>
+                  <option
+                    *ngFor="let status of statuses; let i = index"
+                    [ngValue]="status._id">{{status.name}}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="shipmentPrice">Cena zásielky</label>
+                <input
+                  formControlName="price"
+                  type="number"
+                  class="form-control"
+                  id="shipmentPrice"
+                  placeholder="Zadajte cenu zásielky">
+              </div>
+              <button
+                [disabled]="!formGroup.get('shipments.0.courier').valid || !formGroup.get('shipments.0.parcelId').valid || !formGroup.get('shipments.0.from').valid || !formGroup.get('shipments.0.to').valid || !formGroup.get('shipments.0.status').valid || !formGroup.get('shipments.0.price').valid"
+                appButtonHover
+                type="submit"
+                class="btn btn-primary">{{formButton}}
+              </button>
+              <a routerLink="/dashboard/services/shipments/main" class="btn btn-secondary"
+                 [state]="{ignoreLoadingBar: true}">Zrušiť a späť</a>
+            </div>
+          </div>
+        </form>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>
+<app-modal
+  (modalResult)="canDeactivate($event)"
+  [modalId]="'shipmentFormModal'"
+  [modalTitle]="title"
+  [modalText]="text"
+  [modalNegativeButton]="negativeButton"
+  [modalPozitiveButton]="pozitiveButton"></app-modal>

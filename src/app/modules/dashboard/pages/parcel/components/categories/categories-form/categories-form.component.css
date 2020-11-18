@@ -1,0 +1,24 @@
+a.btn.btn-secondary {
+  float: right;
+}
+
+form.category input[type="text"].ng-invalid.ng-touched {
+  border: 0.1rem solid #ff0600;
+}
+
+form.category input[type="text"].ng-valid.ng-touched {
+  border: 0.1rem solid #018000;
+}
+
+@media (max-width: 400px) {
+  a.btn.btn-secondary {
+    float: none;
+  }
+}
+
+@media (max-width: 388px) {
+  a.btn.btn-secondary,
+  button.btn.btn-primary {
+    margin-top: 1rem;
+  }
+}

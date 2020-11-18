@@ -1,0 +1,23 @@
+<app-dashboard>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Používateľské konto</h6>
+        </div>
+        <div class="card-body with-padding">
+          <app-profile-form
+            (profileResult)="onFormResult($event)"
+            [profileForm]="formGroup"></app-profile-form>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-dashboard>
+<app-modal
+  (modalResult)="canDeactivate($event)"
+  [modalId]="'profileModal'"
+  [modalTitle]="title"
+  [modalText]="text"
+  [modalNegativeButton]="negativeButton"
+  [modalPozitiveButton]="pozitiveButton"></app-modal>

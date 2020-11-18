@@ -1,0 +1,29 @@
+<div id="page-top">
+  <div id="wrapper">
+    <app-nav
+      [navToogle]="toggle">
+    </app-nav>
+    <div id="content-wrapper" class="d-flex flex-column">
+      <div id="content">
+        <app-header
+          (navEvent)="onNavEvent($event)"
+          [navToogle]="toggle">
+        </app-header>
+        <div class="container-fluid">
+          <div id="container-wrapper">
+            <router-outlet></router-outlet>
+            <ng-content></ng-content>
+          </div>
+        </div>
+      </div>
+      <app-footer></app-footer>
+    </div>
+  </div>
+  <app-modal
+    (modalResult)="onModalResult($event)"
+    [modalId]="'logoutModal'"
+    [modalTitle]="title"
+    [modalText]="text"
+    [modalNegativeButton]="negativeButton"
+    [modalPozitiveButton]="pozitiveButton"></app-modal>
+</div>

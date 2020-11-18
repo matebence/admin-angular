@@ -1,0 +1,456 @@
+[
+  {
+    "group": "Domov",
+    "details": [
+      {
+        "title": "Ovládací panel",
+        "icon": "fas fa-tachometer-alt",
+        "route": {
+          "main": "#",
+          "sub": [
+            {
+              "title": "Zobraziť",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
+              "route": {
+                "main": "/dashboard/home"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "title": "Používateľské konto",
+        "icon": "fas fa-user-circle",
+        "route": {
+          "main": "#",
+          "sub": [
+            {
+              "title": "Zobraziť",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
+              "route": {
+                "main": "/dashboard/profile"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "group": "Služby",
+    "details": [
+      {
+        "title": "Používatelia",
+        "icon": "fas fa-users",
+        "route": {
+          "main": "#",
+          "sub": [
+            {
+              "title": "Zoznam",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
+              "route": {
+                "main": "/dashboard/services/users/main"
+              }
+            },
+            {
+              "title": "Výplaty",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
+              "route": {
+                "main": "/dashboard/services/users/payouts"
+              }
+            },
+            {
+              "title": "Platby",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
+              "route": {
+                "main": "/dashboard/services/users/payments"
+              }
+            },
+            {
+              "title": "Pohlavia",
+              "authorities": [
+                "ROLE_ADMIN"
+              ],
+              "route": {
+                "main": "/dashboard/services/users/genders"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "title": "Kontá",
+        "icon": "fas fa-id-card",
+        "route": {
+          "main": "#",
+          "sub": [
+            {
+              "title": "Zoznam",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
+              "route": {
+                "main": "/dashboard/services/accounts/main"
+              }
+            },
+            {
+              "title": "Preferencie",
+              "authorities": [
+                "ROLE_ADMIN"
+              ],
+              "route": {
+                "main": "/dashboard/services/accounts/preferences"
+              }
+            },
+            {
+              "title": "Privilégia",
+              "authorities": [
+                "ROLE_ADMIN"
+              ],
+              "route": {
+                "main": "/dashboard/services/accounts/privileges"
+              }
+            },
+            {
+              "title": "Role",
+              "authorities": [
+                "ROLE_ADMIN"
+              ],
+              "route": {
+                "main": "/dashboard/services/accounts/roles"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "title": "Zásielky",
+        "icon": "fas fa-shipping-fast",
+        "route": {
+          "main": "#",
+          "sub": [
+            {
+              "title": "Zoznam",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
+              "route": {
+                "main": "/dashboard/services/shipments/main"
+              }
+            },
+            {
+              "title": "Faktúry",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
+              "route": {
+                "main": "/dashboard/services/shipments/invoices"
+              }
+            },
+            {
+              "title": "Statusy",
+              "authorities": [
+                "ROLE_ADMIN"
+              ],
+              "route": {
+                "main": "/dashboard/services/shipments/status"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "title": "Balíky",
+        "icon": "fas fa-boxes",
+        "route": {
+          "main": "#",
+          "sub": [
+            {
+              "title": "Zoznam",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
+              "route": {
+                "main": "/dashboard/services/parcels/main"
+              }
+            },
+            {
+              "title": "Kategórie",
+              "authorities": [
+                "ROLE_ADMIN"
+              ],
+              "route": {
+                "main": "/dashboard/services/parcels/categories"
+              }
+            },
+            {
+              "title": "Recenzie",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
+              "route": {
+                "main": "/dashboard/services/parcels/ratings"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "title": "Krajiny",
+        "icon": "fas fa-globe",
+        "route": {
+          "main": "#",
+          "sub": [
+            {
+              "title": "Kraje",
+              "authorities": [
+                "ROLE_ADMIN"
+              ],
+              "route": {
+                "main": "/dashboard/services/places/regions"
+              }
+            },
+            {
+              "title": "Okresy",
+              "authorities": [
+                "ROLE_ADMIN"
+              ],
+              "route": {
+                "main": "/dashboard/services/places/districts"
+              }
+            },
+            {
+              "title": "Mestá a obce",
+              "authorities": [
+                "ROLE_ADMIN"
+              ],
+              "route": {
+                "main": "/dashboard/services/places/villages"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "title": "Vozidlá",
+        "icon": "fas fa-car",
+        "route": {
+          "main": "#",
+          "sub": [
+            {
+              "title": "Zoznam",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
+              "route": {
+                "main": "/dashboard/services/vehicles/main"
+              }
+            },
+            {
+              "title": "Typy",
+              "authorities": [
+                "ROLE_ADMIN"
+              ],
+              "route": {
+                "main": "/dashboard/services/vehicles/types"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "group": "Firma",
+    "details": [
+      {
+        "title": "Profit",
+        "icon": "fas fa-money-bill-alt",
+        "route": {
+          "main": "#",
+          "sub": [
+            {
+              "title": "Nastaviť",
+              "authorities": [
+                "ROLE_ADMIN"
+              ],
+              "route": {
+                "main": "/dashboard/services/company/profit"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "title": "Sklady",
+        "icon": "fas fa-warehouse",
+        "route": {
+          "main": "#",
+          "sub": [
+            {
+              "title": "Nastaviť",
+              "authorities": [
+                "ROLE_ADMIN"
+              ],
+              "route": {
+                "main": "/dashboard/services/company/warehouses"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "group": "Analýza",
+    "details": [
+      {
+        "title": "Grafy",
+        "icon": "fas fa-chart-pie",
+        "route": {
+          "main": "#",
+          "sub": [
+            {
+              "title": "Použivatelia",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
+              "route": {
+                "main": "/dashboard/services/graph/users"
+              }
+            },
+            {
+              "title": "Zásielky",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
+              "route": {
+                "main": "/dashboard/services/graph/shipments"
+              }
+            },
+            {
+              "title": "Balíky",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
+              "route": {
+                "main": "/dashboard/services/graph/parcels"
+              }
+            },
+            {
+              "title": "Vozidlá",
+              "authorities": [
+                "ROLE_ADMIN",
+                "ROLE_MANAGER"
+              ],
+              "route": {
+                "main": "/dashboard/services/graph/vehicles"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "group": "Aplikácia",
+    "details": [
+      {
+        "title": "Zipkin",
+        "icon": "fas fa-chart-bar",
+        "route": {
+          "main": "#",
+          "sub": [
+            {
+              "title": "Otvoriť",
+              "authorities": [
+                "ROLE_ADMIN"
+              ],
+              "route": {
+                "main": "/dashboard/services/internal/zipkin"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "title": "Eureka",
+        "icon": "fas fa-server",
+        "route": {
+          "main": "#",
+          "sub": [
+            {
+              "title": "Otvoriť",
+              "authorities": [
+                "ROLE_ADMIN"
+              ],
+              "route": {
+                "main": "/dashboard/services/internal/eureka"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "title": "Stripe",
+        "icon": "fab fa-stripe-s",
+        "route": {
+          "main": "#",
+          "sub": [
+            {
+              "title": "Otvoriť",
+              "authorities": [
+                "ROLE_ADMIN"
+              ],
+              "route": {
+                "main": "/dashboard/services/external/stripe"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "title": "Firebase",
+        "icon": "fas fa-fire",
+        "route": {
+          "main": "#",
+          "sub": [
+            {
+              "title": "Otvoriť",
+              "authorities": [
+                "ROLE_ADMIN"
+              ],
+              "route": {
+                "main": "/dashboard/services/external/firebase"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

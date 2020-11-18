@@ -1,0 +1,19 @@
+ul.navbar-nav.bg-gradient-primary.sidebar.sidebar-dark.accordion#accordionSidebar a div img.logo-primary {
+  width: 7rem;
+}
+
+ul.navbar-nav.bg-gradient-primary.sidebar.sidebar-dark.accordion.toggled#accordionSidebar a div img.logo-primary {
+  width: 4rem;
+}
+
+@media (max-width: 767.98px) {
+  ul.navbar-nav.bg-gradient-primary.sidebar.sidebar-dark.accordion#accordionSidebar a div img.logo-primary {
+    width: 4rem;
+  }
+}
+
+@media (max-width: 767px) {
+  ul.navbar-nav.bg-gradient-primary.sidebar.sidebar-dark.accordion#accordionSidebar {
+    height: 100%;
+  }
+}

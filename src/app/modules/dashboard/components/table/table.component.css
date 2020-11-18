@@ -1,0 +1,27 @@
+div.card.mb-4 a:hover {
+  text-decoration: none;
+}
+
+div.card.mb-4 a.ng2-smart-action i.fas {
+  font-size: 1.5em;
+}
+
+div.card.mb-4 nav.ng2-smart-pagination-nav {
+  margin: 0 auto;
+  margin-top: 1rem;
+}
+
+div.card.mb-4 a.ng2-smart-action i.fas.fa-plus-square,
+div.card.mb-4 a.ng2-smart-action i.fas.fa-check-square {
+  color: #008000;
+}
+
+div.card.mb-4 a.ng2-smart-action i.fas.fa-minus-square,
+div.card.mb-4 a.ng2-smart-action i.fas.fa-window-close {
+  color: #ff0000;
+}
+
+div.card.mb-4 nav.ng2-smart-pagination-nav li.ng2-smart-page-item.page-item {
+  height: 2rem;
+  display: inherit;
+}

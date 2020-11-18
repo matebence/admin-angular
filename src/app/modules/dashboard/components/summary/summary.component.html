@@ -1,0 +1,27 @@
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">{{title}}</h6>
+  </div>
+  <div class="card-body with-padding">
+    <div
+      *ngFor="let item of data; let i = index">
+      <h4
+        class="small font-weight-bold">
+        {{item.title}}
+        <span
+          class="float-right">
+          {{((item.current/item.max)*100) > 100 ? 100 : ((item.current/item.max)*100).toFixed(2)}}%
+        </span>
+      </h4>
+      <div class="progress mb-4">
+        <div
+          class="progress-bar bg-danger" role="progressbar"
+          [style.width]="((item.current/item.max)*100)+'%'"
+          [aria-valuenow]="((item.current/item.max)*100)"
+          [aria-valuemin]="item.min"
+          [aria-valuemax]="item.max">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

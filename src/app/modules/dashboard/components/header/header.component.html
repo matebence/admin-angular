@@ -1,0 +1,9 @@
+<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+  <button appLinkHover id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3" (click)="onNavToggle()">
+    <i class="fa fa-bars"></i>
+  </button>
+  <app-search></app-search>
+  <app-bar
+    [navToogle]="toggle">
+  </app-bar>
+</nav>

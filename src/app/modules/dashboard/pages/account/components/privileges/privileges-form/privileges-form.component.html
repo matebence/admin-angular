@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-lg-6 mb-4">
+    <app-assistent
+      [assistantText]="assistent"
+      [assistantOptions]="assistentOptions"
+      [assistantIllustration]="illustration">
+    </app-assistent>
+  </div>
+  <div class="col-lg-6 mb-4">
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">{{formTitle}}</h6>
+      </div>
+      <div class="card-body with-padding">
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="privilege">
+          <div class="form-group">
+            <label for="privilegeName">Názov privilégia</label>
+            <input
+              formControlName="name"
+              type="text"
+              class="form-control"
+              id="privilegeName"
+              placeholder="Zadajte názov privilégia">
+          </div>
+          <button
+            [disabled]="!formGroup.get('name').valid"
+            appButtonHover
+            type="submit"
+            class="btn btn-primary">{{formButton}}
+          </button>
+          <a routerLink="/dashboard/services/accounts/privileges" class="btn btn-secondary"
+             [state]="{ignoreLoadingBar: true}">Zrušiť a späť</a>
+        </form>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>
+<app-modal
+  (modalResult)="canDeactivate($event)"
+  [modalId]="'privilegeFormModal'"
+  [modalTitle]="title"
+  [modalText]="text"
+  [modalNegativeButton]="negativeButton"
+  [modalPozitiveButton]="pozitiveButton"></app-modal>

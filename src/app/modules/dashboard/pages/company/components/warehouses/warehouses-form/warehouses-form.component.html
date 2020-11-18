@@ -1,0 +1,79 @@
+<div class="row">
+  <div class="col-lg-6 mb-4">
+    <app-assistent
+      [assistantText]="assistent"
+      [assistantOptions]="assistentOptions"
+      [assistantIllustration]="illustration">
+    </app-assistent>
+  </div>
+  <div class="col-lg-6 mb-4">
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">{{formTitle}}</h6>
+      </div>
+      <div class="card-body with-padding">
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="warehouse">
+          <div class="form-group">
+            <label for="warehouseName">Názov skladu</label>
+            <input
+              formControlName="name"
+              type="text"
+              class="form-control"
+              id="warehouseName"
+              placeholder="Zadajte názov skladu">
+          </div>
+          <div class="form-group">
+            <label for="warehouseCountry">Štát skladu</label>
+            <input
+              formControlName="country"
+              type="text"
+              class="form-control"
+              id="warehouseCountry"
+              placeholder="Zadajte štát skladu">
+          </div>
+          <div class="form-group">
+            <label for="warehouseAddress">Adresa skladu</label>
+            <input
+              formControlName="address"
+              type="text"
+              class="form-control"
+              id="warehouseAddress"
+              placeholder="Zadajte adresu skladu">
+          </div>
+          <div class="form-group">
+            <label for="warehouseRegions">Príslušné kraje skladu</label>
+            <select
+              multiple
+              formControlName="regions"
+              id="warehouseRegions"
+              class="form-control"
+              aria-describedby="regionsHelp">
+              <option
+                *ngFor="let region of regions; let i = index"
+                [ngValue]="region.id">{{region.name}}
+              </option>
+            </select>
+            <small id="regionsHelp" class="form-text text-muted">Pre označenie viacero krajov použite tľačidlo ctrl
+            </small>
+          </div>
+          <button
+            [disabled]="!formGroup.get('name').valid || !formGroup.get('regions').valid || !formGroup.get('country').valid || !formGroup.get('address').valid"
+            appButtonHover
+            type="submit"
+            class="btn btn-primary">{{formButton}}
+          </button>
+          <a routerLink="/dashboard/services/company/warehouses" class="btn btn-secondary"
+             [state]="{ignoreLoadingBar: true}">Zrušiť a späť</a>
+        </form>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>
+<app-modal
+  (modalResult)="canDeactivate($event)"
+  [modalId]="'warehouseFormModal'"
+  [modalTitle]="title"
+  [modalText]="text"
+  [modalNegativeButton]="negativeButton"
+  [modalPozitiveButton]="pozitiveButton"></app-modal>

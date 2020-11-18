@@ -1,0 +1,40 @@
+<form class="d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+  <div class="input-group">
+    <input
+      #searchInputEl
+      type="text"
+      [(ngModel)]="keyWord"
+      [ngModelOptions]="{standalone: true}"
+      (keyup)="onKeyNavigation($event)"
+      (input)="onAutoComplete()"
+      class="form-control bg-light border-0 small"
+      placeholder="Hľadať (sekcia : príkaz) ..."
+      aria-label="Search"
+      aria-describedby="basic-addon2">
+    <div class="input-group-append">
+      <ul
+        #searchResultEl
+        class="autocomplete">
+        <li
+          *ngFor="let resultItem of searchResult; let i = index"
+          class="form-control autocomplete-item bg-light">
+          <ng-template #disabledLink>
+            <a
+              (click)="onSelectedResult(resultItem)">
+              {{resultItem.result}}
+            </a>
+          </ng-template>
+          <a
+            *ngIf="resultItem.route !== ''; else disabledLink"
+            (click)="onSelectedResult(resultItem.result)"
+            [routerLink]="resultItem.route">{{resultItem.result}}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="input-group-append">
+      <button appButtonHover class="btn btn-primary" type="button">
+        <i class="fas fa-search fa-sm"></i>
+      </button>
+    </div>
+  </div>
+</form>

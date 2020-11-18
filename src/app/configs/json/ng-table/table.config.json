@@ -1,0 +1,27 @@
+{
+  "mode": "external",
+  "noDataMessage": "Nenašli sa žiadné dáta",
+  "pager": {
+    "perPage": 20,
+    "display": true
+  },
+  "actions": {
+    "columnTitle": "Možnosti"
+  },
+  "add": {
+    "confirmCreate": true,
+    "addButtonContent": "<i class='fas fa-plus-square'></i>",
+    "cancelButtonContent": "<i class='fas fa-window-close'></i>",
+    "createButtonContent": "<i class='fas fa-check-square'></i>"
+  },
+  "edit": {
+    "confirmSave": true,
+    "editButtonContent": "<i class='fas fa-edit'></i>",
+    "saveButtonContent": "<i class='fas fa-check-square'></i>",
+    "cancelButtonContent": "<i class='fas fa-window-close'></i>"
+  },
+  "delete": {
+    "confirmDelete": true,
+    "deleteButtonContent": "<i class='fas fa-minus-square'></i>"
+  }
+}

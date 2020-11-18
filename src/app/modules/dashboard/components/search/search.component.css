@@ -1,0 +1,44 @@
+form div.input-group input {
+  position: relative;
+  outline: 0.01rem solid #ced4da;
+}
+
+form div.input-group input:focus {
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+form div.input-group-append ul.autocomplete {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 2.5rem;
+  list-style: none;
+  padding: 0;
+  z-index: 999;
+}
+
+form div.input-group-append ul.autocomplete li.autocomplete-item {
+  width: calc(100% - 40px);
+  height: 2.4rem;
+  border: none;
+  border-left: 0.01rem solid #ced4da;
+  border-right: 0.01rem solid #ced4da;
+  border-bottom: 0.01rem solid #ced4da;
+  border-radius: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 0.9em;
+}
+
+form div.input-group-append ul.autocomplete li.autocomplete-item a {
+  text-decoration: none;
+  color: #6e707e;
+}
+
+form div.input-group-append ul.autocomplete li.autocomplete-item:hover,
+form div.input-group-append ul.autocomplete li.autocomplete-item.keyNavigation {
+  cursor: pointer;
+  background: #e7e8eb !important;
+}

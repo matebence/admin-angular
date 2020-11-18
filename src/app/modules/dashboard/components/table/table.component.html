@@ -1,0 +1,19 @@
+<div class="card mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">{{header}}</h6>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <ng2-smart-table
+        class="table table-bordered"
+        width="100%"
+        cellspacing="0"
+        (create)="onCreate()"
+        (delete)="onDelete($event)"
+        (edit)="onEdit($event)"
+        [settings]="settings"
+        [source]="source">
+      </ng2-smart-table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,113 @@
+<div class="row">
+  <div class="col-lg-6 mb-4">
+    <app-assistent
+      [assistantText]="assistent"
+      [assistantOptions]="assistentOptions"
+      [assistantIllustration]="illustration">
+    </app-assistent>
+  </div>
+  <div class="col-lg-6 mb-4">
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">{{formTitle}}</h6>
+      </div>
+      <div class="card-body with-padding">
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="preference">
+          <div class="form-group">
+            <label for="preferenceName">Názov preferencie</label>
+            <input
+              formControlName="name"
+              type="text"
+              class="form-control"
+              id="preferenceName"
+              placeholder="Zadajte názov preferencie">
+          </div>
+          <label for="preferenceAccountId">Dostupnosť preferencie pre používateľa</label>
+          <div formArrayName="accountPreferences">
+            <div *ngFor="let control of formGroup.get('accountPreferences')['controls']; let i = index">
+              <div [formGroupName]="i">
+                <div formGroupName="accounts">
+                  <div class="form-group">
+                    <div class="form-wrapper">
+                      <select
+                        [ngClass]="{'form-wrapper-width': !(formGroup.get('accountPreferences')['controls'].length - 1 == i)}"
+                        formControlName="accountId"
+                        id="preferenceAccountId"
+                        class="form-control">
+                        <option value="-1" disabled hidden>Zvoľte si používateľa</option>
+                        <option
+                          *ngFor="let account of accounts; let i = index"
+                          [ngValue]="account.accountId">{{account.userName}}
+                        </option>
+                      </select>
+                      <div
+                        class="preference-control"
+                        *ngIf="formGroup.get('accountPreferences')['controls'].length - 1 == i">
+                        <button
+                          class="preference-add"
+                          (click)="onAddPreference()">
+                          <i class="fas fa-plus-circle"></i>
+                        </button>
+                        <button
+                          class="preference-remove"
+                          *ngIf="formGroup.get('accountPreferences')['controls'].length > 1"
+                          (click)="onRemovePreference()">
+                          <i class="fas fa-minus-circle"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="preferenceValue">Numerická hodnota preferencie</label>
+                  <input
+                    formControlName="value"
+                    type="number"
+                    class="form-control"
+                    id="preferenceValue"
+                    placeholder="Zadajte numerickú hodnotu preferencie">
+                </div>
+                <div class="form-group">
+                  <label for="preferenceIsSet">Logicá hodnota preferencie</label>
+                  <select
+                    formControlName="isSet"
+                    id="preferenceIsSet"
+                    class="form-control">
+                    <option value="null" disabled hidden>Zvoľte si logickú hodnotu preferencie</option>
+                    <option [ngValue]="true">Áno</option>
+                    <option [ngValue]="false">Nie</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="preferenceContent">Slovná hodnota preferencie</label>
+                  <input
+                    formControlName="content"
+                    type="text"
+                    class="form-control"
+                    id="preferenceContent"
+                    placeholder="Zadajte slovnú hodnotu preferencie">
+                </div>
+              </div>
+            </div>
+          </div>
+          <button
+            [disabled]="!formGroup.get('name').valid"
+            appButtonHover
+            type="submit"
+            class="btn btn-primary">{{formButton}}
+          </button>
+          <a routerLink="/dashboard/services/accounts/preferences" class="btn btn-secondary"
+             [state]="{ignoreLoadingBar: true}">Zrušiť a späť</a>
+        </form>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>
+<app-modal
+  (modalResult)="canDeactivate($event)"
+  [modalId]="'preferenceFormModal'"
+  [modalTitle]="title"
+  [modalText]="text"
+  [modalNegativeButton]="negativeButton"
+  [modalPozitiveButton]="pozitiveButton"></app-modal>

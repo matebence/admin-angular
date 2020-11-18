@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col-xl-12">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <button
+        appButtonHover
+        (click)="onSynchronize()"
+        class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        <i class="fas fa-sync fa-sm text-white-50"></i> Aktualizovať grafy
+      </button>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xl-6 col-lg-12 mb-4">
+    <app-assistent
+      [assistantText]="assistent"
+      [assistantOptions]="assistentOptions"
+      [assistantIllustration]="illustration">
+    </app-assistent>
+  </div>
+  <div class="col-xl-6 col-lg-12 mb-4">
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Počet používatelov podľa krajov</h6>
+      </div>
+      <div class="card-body with-padding">
+        <div class="chart">
+          <canvas
+            baseChart
+            [legend]="true"
+            [chartType]="'pie'"
+            [data]="pieChartData"
+            [labels]="pieChartLabels"
+            [colors]="[{backgroundColor: ['rgb(23, 108, 157)', 'rgb(33, 157, 228)', 'rgb(23, 132, 191)']}]"
+            [options]="{responsive: true, legend: {position: 'top'}}">
+          </canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xl-11 col-lg-12 centered">
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Aktualný zostatok používateľov</h6>
+      </div>
+      <div class="card-body with-padding">
+        <div style="display: block">
+          <canvas
+            baseChart
+            [legend]="true"
+            [chartType]="'bar'"
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="{responsive: true, scales: {xAxes: [{}], yAxes: [{}]}, plugins: {datalabels: {anchor: 'end', align: 'end'}}}">
+          </canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

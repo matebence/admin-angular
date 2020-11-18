@@ -1,0 +1,37 @@
+<div class="sidebar-heading">
+  {{group}}
+</div>
+<li
+  *ngFor="let detail of details; let j = index"
+  routerLinkActive="active"
+  [routerLinkActiveOptions]="{exact: true}"
+  class="nav-item">
+  <a
+    class="nav-link collapsed"
+    [href]="detail.route.main"
+    data-toggle="collapse"
+    [attr.data-target]="'#' + detail.title.replace(' ', '')"
+    aria-expanded="true"
+    [attr.aria-controls]="detail.title.replace(' ', '')">
+    <i [class]="detail.icon"></i>
+    <span>{{detail.title}}</span>
+  </a>
+  <div
+    *ngIf="detail.route.sub.length !== 0"
+    [id]="detail.title.replace(' ', '')"
+    class="collapse"
+    [attr.aria-labelledby]="detail.title.replace(' ', '')"
+    data-parent="#accordionSidebar">
+    <div class="bg-white py-2 collapse-inner rounded">
+      <h6 class="collapse-header">Možnosti:</h6>
+      <span
+        *ngFor="let nav of detail.route.sub; let k = index">
+        <a
+          *ngIf="onShowNavigationOption(nav)"
+          class="collapse-item"
+          [routerLink]="nav.route.main">{{nav.title}}</a>
+      </span>
+    </div>
+  </div>
+</li>
+<hr class="sidebar-divider">

@@ -1,0 +1,19 @@
+ul.navbar-nav li a p[data-letters]:before {
+  content: attr(data-letters);
+  display: inline-block;
+  font-size: 1em;
+  width: 2.5rem;
+  height: 2.5rem;
+  line-height: 2.5rem;
+  text-align: center;
+  border-radius: 50%;
+  background: #176c9d;
+  vertical-align: middle;
+  margin-left: 0.5rem;
+  margin-top: 0.2rem;
+  color: white;
+}
+
+ul.navbar-nav li a p {
+  margin-right: 1rem;
+}

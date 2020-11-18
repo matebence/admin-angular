@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-lg-6 mb-4">
+    <app-assistent
+      [assistantText]="assistent"
+      [assistantOptions]="assistentOptions"
+      [assistantIllustration]="illustration">
+    </app-assistent>
+  </div>
+  <div class="col-lg-6 mb-4">
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">{{formTitle}}</h6>
+      </div>
+      <div class="card-body with-padding">
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="profit">
+          <div class="form-group">
+            <label for="profitPrice">Profit firmy</label>
+            <input
+              formControlName="price"
+              type="text"
+              class="form-control"
+              id="profitPrice"
+              placeholder="Nastavte profit firmy">
+          </div>
+          <button
+            [disabled]="!formGroup.get('price').valid"
+            appButtonHover
+            type="submit"
+            class="btn btn-primary">{{formButton}}
+          </button>
+          <a routerLink="/dashboard/services/company/profit" class="btn btn-secondary"
+             [state]="{ignoreLoadingBar: true}">Zrušiť a späť</a>
+        </form>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>
+<app-modal
+  (modalResult)="canDeactivate($event)"
+  [modalId]="'profitFormModal'"
+  [modalTitle]="title"
+  [modalText]="text"
+  [modalNegativeButton]="negativeButton"
+  [modalPozitiveButton]="pozitiveButton"></app-modal>

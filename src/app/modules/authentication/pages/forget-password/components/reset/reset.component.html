@@ -1,0 +1,23 @@
+<div *ngIf="forgetPassword && forgetPassword.message" class="alert alert-success" role="alert">
+  {{forgetPassword.message}}
+</div>
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="reset">
+  <div formGroupName="user">
+    <div class="form-group">
+      <input
+        autocomplete="off"
+        formControlName="email"
+        type="email"
+        class="form-control form-control-email"
+        id="forget-password"
+        aria-describedby="forget-password-help"
+        placeholder="Emailová adresa">
+    </div>
+  </div>
+  <button
+    [disabled]="!formGroup.get('user.email').valid"
+    appButtonHover
+    class="btn btn-primary btn-send btn-block">
+    Odoslať
+  </button>
+</form>

@@ -1,0 +1,22 @@
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">{{title}}</h6>
+  </div>
+  <div class="card-body with-padding">
+    <div class="text-center">
+      <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 18rem;"
+           [src]="image"
+           alt="">
+    </div>
+    <p>{{text}}</p>
+    <ul class="list">
+      <li
+        *ngFor="let link of links; let i = index"
+        class="item">
+        <a [routerLink]="link.link">
+          {{link.title}} &rarr;
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

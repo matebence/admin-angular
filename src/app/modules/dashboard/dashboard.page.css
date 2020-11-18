@@ -1,0 +1,11 @@
+div#page-top div#wrapper div#content-wrapper div#content div#container-wrapper {
+  height: calc(100vh - 10rem);
+  overflow: auto;
+}
+
+@media (max-width: 767px) {
+  div#page-top div#wrapper div#content-wrapper div#content div#container-wrapper {
+    overflow: visible;
+    height: unset;
+  }
+}

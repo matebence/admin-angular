@@ -1,0 +1,163 @@
+<div class="row">
+  <div class="col-lg-6 mb-4">
+    <app-assistent
+      [assistantText]="assistent"
+      [assistantOptions]="assistentOptions"
+      [assistantIllustration]="illustration">
+    </app-assistent>
+  </div>
+  <div class="col-lg-6 mb-4">
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">{{formTitle}}</h6>
+      </div>
+      <div class="card-body with-padding">
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="user">
+          <div class="form-group">
+            <label for="userAccountId">Konto používateľa</label>
+            <select
+              formControlName="accountId"
+              id="userAccountId"
+              class="form-control">
+              <option value="-1" disabled hidden>Zvoľte si konto</option>
+              <option
+                *ngFor="let account of accounts; let i = index"
+                [ngValue]="account.accountId">{{account.userName}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="userFirstName">Meno používateľa</label>
+            <input
+              formControlName="firstName"
+              type="text"
+              class="form-control"
+              id="userFirstName"
+              placeholder="Zadajte meno používateľa">
+          </div>
+          <div class="form-group">
+            <label for="userLastName">Priezvisko používateľa</label>
+            <input
+              formControlName="lastName"
+              type="text"
+              class="form-control"
+              id="userLastName"
+              placeholder="Zadajte priezvisko používateľa">
+          </div>
+          <div class="form-group">
+            <label for="userGender">Pohlavie</label>
+            <select
+              formControlName="gender"
+              id="userGender"
+              class="form-control">
+              <option value="-1" disabled hidden>Zvoľte si pohlavie</option>
+              <option
+                *ngFor="let gender of genders; let i = index"
+                [ngValue]="gender.name">{{gender.name}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="userBalance">Zostatok na účte</label>
+            <input
+              formControlName="balance"
+              type="number"
+              class="form-control"
+              id="userBalance"
+              placeholder="Nastavte zostatok na účte">
+          </div>
+          <div class="form-group">
+            <label for="userTel">Telefonné číslo</label>
+            <input
+              formControlName="tel"
+              type="text"
+              class="form-control"
+              id="userTel"
+              placeholder="Zadajte telefonné číslo">
+          </div>
+          <div formGroupName="places">
+            <div class="form-group">
+              <label for="userCountry">Štát</label>
+              <input
+                formControlName="country"
+                type="text"
+                class="form-control"
+                id="userCountry"
+                placeholder="Zadajte názov štátu">
+            </div>
+            <div class="form-group">
+              <label for="userCountryCode">Kód štátu</label>
+              <input
+                formControlName="code"
+                type="text"
+                class="form-control"
+                id="userCountryCode"
+                placeholder="Zadajte kód štátu">
+            </div>
+            <div class="form-group">
+              <label for="userRegion">Kraj</label>
+              <input
+                formControlName="region"
+                type="text"
+                class="form-control"
+                id="userRegion"
+                placeholder="Zadajte názov kraja">
+            </div>
+            <div class="form-group">
+              <label for="userDistrict">Okres</label>
+              <input
+                formControlName="district"
+                type="text"
+                class="form-control"
+                id="userDistrict"
+                placeholder="Zadajte názov okresu">
+            </div>
+            <div class="form-group">
+              <label for="userPlace">Bydlisko</label>
+              <input
+                formControlName="place"
+                type="text"
+                class="form-control"
+                id="userPlace"
+                placeholder="Zadajte názov bydliska">
+            </div>
+            <div class="form-group">
+              <label for="userStreet">Ulica</label>
+              <input
+                formControlName="street"
+                type="text"
+                class="form-control"
+                id="userStreet"
+                placeholder="Zadajte názov ulice">
+            </div>
+            <div class="form-group">
+              <label for="userZip">PSČ</label>
+              <input
+                formControlName="zip"
+                type="number"
+                class="form-control"
+                id="userZip"
+                placeholder="Zadajte PSČ">
+            </div>
+          </div>
+          <button
+            [disabled]="!formGroup.get('accountId').valid || !formGroup.get('firstName').valid || !formGroup.get('lastName').valid || !formGroup.get('gender').valid || !formGroup.get('balance').valid || !formGroup.get('tel').valid || !formGroup.get('places.code').valid || !formGroup.get('places.country').valid || !formGroup.get('places.region').valid || !formGroup.get('places.district').valid || !formGroup.get('places.place').valid || !formGroup.get('places.street').valid || !formGroup.get('places.zip').valid"
+            appButtonHover
+            type="submit"
+            class="btn btn-primary">{{formButton}}
+          </button>
+          <a routerLink="/dashboard/services/users/main" class="btn btn-secondary"
+             [state]="{ignoreLoadingBar: true}">Zrušiť a späť</a>
+        </form>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>
+<app-modal
+  (modalResult)="canDeactivate($event)"
+  [modalId]="'userFormModal'"
+  [modalTitle]="title"
+  [modalText]="text"
+  [modalNegativeButton]="negativeButton"
+  [modalPozitiveButton]="pozitiveButton"></app-modal>

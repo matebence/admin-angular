@@ -1,0 +1,63 @@
+a.btn.btn-secondary {
+  float: right;
+}
+
+button.btn.btn-primary {
+  margin-right: 0.5rem;
+}
+
+form.preference input[type="text"].ng-invalid.ng-touched,
+form.preference input[type="number"].ng-invalid.ng-touched,
+form.preference select.ng-invalid.ng-touched {
+  border: 0.1rem solid #ff0600;
+}
+
+form.preference input[type="text"].ng-valid.ng-touched,
+form.preference input[type="number"].ng-valid.ng-touched,
+form.preference select.ng-valid.ng-touched {
+  border: 0.1rem solid #018000;
+}
+
+form.preference div.form-group div.preference-control {
+  display: inline;
+}
+
+form.preference div.form-wrapper select.form-wrapper-width {
+  width: 100%;
+  display: block;
+}
+
+form.preference div.form-wrapper select {
+  width: calc(100% - 6rem);
+  display: inline;
+}
+
+form.preference div.form-group button {
+  background: transparent;
+  border: none;
+  font-size: 1.5em;
+  width: 2rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+form.preference div.form-group button.preference-add {
+  color: #008000;
+}
+
+form.preference div.form-group button.preference-remove {
+  color: #ff0000;
+}
+
+@media (max-width: 400px) {
+  a.btn.btn-secondary {
+    float: none;
+  }
+}
+
+@media (max-width: 388px) {
+  a.btn.btn-secondary,
+  button.btn.btn-primary {
+    margin-top: 1rem;
+  }
+}

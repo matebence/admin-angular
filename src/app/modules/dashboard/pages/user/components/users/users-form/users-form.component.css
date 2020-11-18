@@ -1,0 +1,32 @@
+a.btn.btn-secondary {
+  float: right;
+}
+
+button.btn.btn-primary {
+  margin-right: 0.5rem;
+}
+
+form.user input[type="text"].ng-invalid.ng-touched,
+form.user input[type="number"].ng-invalid.ng-touched,
+form.user select.ng-invalid.ng-touched {
+  border: 0.1rem solid #ff0600;
+}
+
+form.user input[type="text"].ng-valid.ng-touched,
+form.user input[type="number"].ng-valid.ng-touched,
+form.user select.ng-valid.ng-touched {
+  border: 0.1rem solid #018000;
+}
+
+@media (max-width: 400px) {
+  a.btn.btn-secondary {
+    float: none;
+  }
+}
+
+@media (max-width: 388px) {
+  a.btn.btn-secondary,
+  button.btn.btn-primary {
+    margin-top: 1rem;
+  }
+}

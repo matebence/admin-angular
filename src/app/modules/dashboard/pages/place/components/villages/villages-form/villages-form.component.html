@@ -1,0 +1,95 @@
+<div class="row">
+  <div class="col-lg-6 mb-4">
+    <app-assistent
+      [assistantText]="assistent"
+      [assistantOptions]="assistentOptions"
+      [assistantIllustration]="illustration">
+    </app-assistent>
+  </div>
+  <div class="col-lg-6 mb-4">
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">{{formTitle}}</h6>
+      </div>
+      <div class="card-body with-padding">
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="village">
+          <div class="form-group">
+            <label for="villageFullName">Názov mesta/obce</label>
+            <input
+              formControlName="fullName"
+              type="text"
+              class="form-control"
+              id="villageFullName"
+              placeholder="Zadajte názov mesta/obce">
+          </div>
+          <div class="form-group">
+            <label for="villageShortName">Kratký názov mesta/obce</label>
+            <input
+              formControlName="shortName"
+              type="text"
+              class="form-control"
+              id="villageShortName"
+              placeholder="Zadajte kratký názov mesta/obce">
+          </div>
+          <div class="form-group">
+            <label for="villageZip">PSČ</label>
+            <input
+              formControlName="zip"
+              type="text"
+              class="form-control"
+              id="villageZip"
+              placeholder="Zadajte PSČ">
+          </div>
+          <div class="form-group">
+            <input
+              formControlName="use"
+              type="hidden"
+              class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="districtRegionId">Kraj mesta/obce</label>
+            <select
+              formControlName="regionId"
+              id="districtRegionId"
+              class="form-control">
+              <option value="-1" disabled hidden>Zvoľte si kraj</option>
+              <option
+                *ngFor="let region of regions; let i = index"
+                [ngValue]="region.id">{{region.name}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="villageDistrictId">Okres mesta/obce</label>
+            <select
+              formControlName="districtId"
+              id="villageDistrictId"
+              class="form-control">
+              <option value="-1" disabled hidden>Zvoľte si okres</option>
+              <option
+                *ngFor="let district of districts; let i = index"
+                [ngValue]="district.id">{{district.name}}
+              </option>
+            </select>
+          </div>
+          <button
+            [disabled]="!formGroup.get('fullName').valid || !formGroup.get('shortName').valid || !formGroup.get('zip').valid || !formGroup.get('regionId').valid || !formGroup.get('districtId').valid"
+            appButtonHover
+            type="submit"
+            class="btn btn-primary">{{formButton}}
+          </button>
+          <a routerLink="/dashboard/services/places/villages" class="btn btn-secondary"
+             [state]="{ignoreLoadingBar: true}">Zrušiť a späť</a>
+        </form>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>
+<app-modal
+  (modalResult)="canDeactivate($event)"
+  [modalId]="'villageFormModal'"
+  [modalTitle]="title"
+  [modalText]="text"
+  [modalNegativeButton]="negativeButton"
+  [modalPozitiveButton]="pozitiveButton"></app-modal>

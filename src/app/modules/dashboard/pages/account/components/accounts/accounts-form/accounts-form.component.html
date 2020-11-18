@@ -1,0 +1,93 @@
+<div class="row">
+  <div class="col-lg-6 mb-4">
+    <app-assistent
+      [assistantText]="assistent"
+      [assistantOptions]="assistentOptions"
+      [assistantIllustration]="illustration">
+    </app-assistent>
+  </div>
+  <div class="col-lg-6 mb-4">
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">{{formTitle}}</h6>
+      </div>
+      <div class="card-body with-padding">
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="account">
+          <div class="form-group">
+            <label for="accountUsername">Používaľské meno</label>
+            <input
+              formControlName="userName"
+              type="text"
+              class="form-control"
+              id="accountUsername"
+              placeholder="Zadajte používaľské meno">
+          </div>
+          <div class="form-group">
+            <label for="accountEmail">Emailová adresa</label>
+            <input
+              formControlName="email"
+              type="email"
+              class="form-control"
+              id="accountEmail"
+              placeholder="Zadajte emailová adresu">
+          </div>
+          <div class="form-group">
+            <label for="accountPassword">Heslo používateľského konta</label>
+            <input
+              formControlName="password"
+              type="password"
+              class="form-control"
+              id="accountPassword"
+              placeholder="Zadajte heslo">
+          </div>
+          <div class="form-group">
+            <label for="accountConfirmPassword">Potvrdte heslo používateľského konta</label>
+            <input
+              formControlName="confirmPassword"
+              type="password"
+              class="form-control"
+              id="accountConfirmPassword"
+              placeholder="Zadajte heslo ešte raz">
+          </div>
+          <label for="accountRoleId">Role používateľa</label>
+          <div formArrayName="accountRoles">
+            <div *ngFor="let control of formGroup.get('accountRoles')['controls']; let i = index">
+              <div [formGroupName]="i">
+                <div class="form-group">
+                  <div class="form-wrapper">
+                    <select
+                      formControlName="roles"
+                      id="accountRoleId"
+                      class="form-control">
+                      <option value="-1" disabled hidden>Zvoľte si rolu</option>
+                      <option
+                        *ngFor="let role of roles; let i = index"
+                        [ngValue]="{roleId: role.roleId, name: role.name}">{{role.name}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button
+            [disabled]="!formGroup.get('userName').valid || !formGroup.get('email').valid || !formGroup.get('password').valid || !formGroup.get('confirmPassword').valid"
+            appButtonHover
+            type="submit"
+            class="btn btn-primary">{{formButton}}
+          </button>
+          <a routerLink="/dashboard/services/accounts/main" class="btn btn-secondary"
+             [state]="{ignoreLoadingBar: true}">Zrušiť a späť</a>
+        </form>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>
+<app-modal
+  (modalResult)="canDeactivate($event)"
+  [modalId]="'accountFormModal'"
+  [modalTitle]="title"
+  [modalText]="text"
+  [modalNegativeButton]="negativeButton"
+  [modalPozitiveButton]="pozitiveButton"></app-modal>

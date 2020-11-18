@@ -1,0 +1,13 @@
+<router-outlet></router-outlet>
+<app-table
+  (tableEditData)="onTableEditData($event)"
+  [tableHeader]="header"
+  [tableSettings]="settings"
+  [tableSource]="source"></app-table>
+<app-modal
+  (modalResult)="onModalResult($event)"
+  [modalId]="'payoutModal'"
+  [modalTitle]="title"
+  [modalText]="text"
+  [modalNegativeButton]="negativeButton"
+  [modalPozitiveButton]="pozitiveButton"></app-modal>
