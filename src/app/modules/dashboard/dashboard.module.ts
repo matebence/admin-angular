@@ -74,7 +74,6 @@ import {ShipmentsComponent} from './pages/shipment/components/shipments/shipment
 import {CategoriesComponent} from './pages/parcel/components/categories/categories.component';
 import {WarehousesComponent} from './pages/company/components/warehouses/warehouses.component';
 import {PrivilegesComponent} from './pages/account/components/privileges/privileges.component';
-import {PlaceGraphComponent} from './pages/graph/components/place-graph/place-graph.component';
 import {UsersFormComponent} from './pages/user/components/users/users-form/users-form.component';
 import {ParcelGraphComponent} from './pages/graph/components/parcel-graph/parcel-graph.component';
 import {PreferencesComponent} from './pages/account/components/preferences/preferences.component';
@@ -82,7 +81,6 @@ import {RolesFormComponent} from './pages/account/components/roles/roles-form/ro
 import {ProfileFormComponent} from './pages/profile/components/profile-form/profile-form.component';
 import {TypesFormComponent} from './pages/vehicle/components/types/types-form/types-form.component';
 import {VehicleGraphComponent} from './pages/graph/components/vehicle-graph/vehicle-graph.component';
-import {AccountGraphComponent} from './pages/graph/components/account-graph/account-graph.component';
 import {ShipmentGraphComponent} from './pages/graph/components/shipment-graph/shipment-graph.component';
 import {ProfitFormComponent} from './pages/company/components/profit/profit-form/profit-form.component';
 import {StatusFormComponent} from './pages/shipment/components/status/status-form/status-form.component';
@@ -139,7 +137,6 @@ import {DashboardRoutingModule} from './dashboard-routing.module';
     TypesFormComponent,
     RolesFormComponent,
     UserGraphComponent,
-    PlaceGraphComponent,
     PrivilegesComponent,
     ProfitFormComponent,
     StatusFormComponent,
@@ -154,7 +151,6 @@ import {DashboardRoutingModule} from './dashboard-routing.module';
     RegionsFormComponent,
     PreferencesComponent,
     ProfileFormComponent,
-    AccountGraphComponent,
     AccountsFormComponent,
     VillagesFormComponent,
     IllustrationComponent,

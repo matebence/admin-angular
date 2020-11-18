@@ -27,7 +27,6 @@ import {UserGraphComponent} from './pages/graph/components/user-graph/user-graph
 import {ShipmentsComponent} from './pages/shipment/components/shipments/shipments.component';
 import {CategoriesComponent} from './pages/parcel/components/categories/categories.component';
 import {PrivilegesComponent} from './pages/account/components/privileges/privileges.component';
-import {PlaceGraphComponent} from './pages/graph/components/place-graph/place-graph.component';
 import {WarehousesComponent} from './pages/company/components/warehouses/warehouses.component';
 import {UsersFormComponent} from './pages/user/components/users/users-form/users-form.component';
 import {ParcelGraphComponent} from './pages/graph/components/parcel-graph/parcel-graph.component';
@@ -35,7 +34,6 @@ import {PreferencesComponent} from './pages/account/components/preferences/prefe
 import {RolesFormComponent} from './pages/account/components/roles/roles-form/roles-form.component';
 import {TypesFormComponent} from './pages/vehicle/components/types/types-form/types-form.component';
 import {VehicleGraphComponent} from './pages/graph/components/vehicle-graph/vehicle-graph.component';
-import {AccountGraphComponent} from './pages/graph/components/account-graph/account-graph.component';
 import {ShipmentGraphComponent} from './pages/graph/components/shipment-graph/shipment-graph.component';
 import {ProfitFormComponent} from './pages/company/components/profit/profit-form/profit-form.component';
 import {GendersFormComponent} from './pages/user/components/genders/genders-form/genders-form.component';
@@ -540,11 +538,6 @@ const routes: Routes = [
                 data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]}
               },
               {
-                path: 'accounts',
-                component: AccountGraphComponent,
-                data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]}
-              },
-              {
                 path: 'shipments',
                 component: ShipmentGraphComponent,
                 data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]}
@@ -552,11 +545,6 @@ const routes: Routes = [
               {
                 path: 'parcels',
                 component: ParcelGraphComponent,
-                data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]}
-              },
-              {
-                path: 'places',
-                component: PlaceGraphComponent,
                 data: {roles: [environment.APP_ROLE_ADMIN, environment.APP_ROLE_MANAGER]}
               },
               {

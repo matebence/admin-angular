@@ -342,16 +342,6 @@
               }
             },
             {
-              "title": "Kontá",
-              "authorities": [
-                "ROLE_ADMIN",
-                "ROLE_MANAGER"
-              ],
-              "route": {
-                "main": "/dashboard/services/graph/accounts"
-              }
-            },
-            {
               "title": "Zásielky",
               "authorities": [
                 "ROLE_ADMIN",
@@ -369,16 +359,6 @@
               ],
               "route": {
                 "main": "/dashboard/services/graph/parcels"
-              }
-            },
-            {
-              "title": "Krajiny",
-              "authorities": [
-                "ROLE_ADMIN",
-                "ROLE_MANAGER"
-              ],
-              "route": {
-                "main": "/dashboard/services/graph/places"
               }
             },
             {

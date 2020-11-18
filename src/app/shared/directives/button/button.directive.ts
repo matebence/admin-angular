@@ -4,9 +4,13 @@ import {Directive, Renderer2, ElementRef, HostListener, HostBinding, OnInit, Inp
   selector: '[appButtonHover]'
 })
 export class ButtonDirective implements OnInit {
+
+  @Input() public colorInput: string = '#ffffff';
+
   @Input() public backgroundInput: string = '#176c9d';
   @Input() public backgroundHoverInput: string = '#1796dc';
 
+  @HostBinding('style.color') public color: string = this.colorInput;
   @HostBinding('style.backgroundColor') public backgroundColor: string = this.backgroundInput;
 
   public constructor(private elRef: ElementRef,

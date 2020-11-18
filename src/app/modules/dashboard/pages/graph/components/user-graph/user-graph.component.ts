@@ -1,115 +1,70 @@
-import { Component, OnInit } from '@angular/core';
-import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
-import { Label } from 'ng2-charts';
+import {Label} from 'ng2-charts';
+import groupBy from 'lodash/groupBy';
+import {ChartDataSets} from 'chart.js';
+import {Subscription} from 'rxjs/index';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+
+import {UserService} from '../../../../services/user-service/user.service';
+
+import {User} from '../../../../../../shared/models/services/user/user.model';
 
 @Component({
   selector: 'app-user-graph',
   templateUrl: './user-graph.component.html',
   styleUrls: ['./user-graph.component.css']
 })
-export class UserGraphComponent implements OnInit {
+export class UserGraphComponent implements OnInit, OnDestroy {
 
-  public illustration: string = 'assets/img/user_assistant.svg';
-  public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť nového používateľa v aplikácií Blesk.';
-  public assistentOptions: any = [{title: 'Výplaty', link: '/dashboard/services/users/payouts'}, {title: 'Pohlavia', link: '/dashboard/services/users/genders'}, {title: 'Platby', link: '/dashboard/services/users/payments'}];
+  public illustration: string = 'assets/img/graph_assistant.svg';
+  public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Máte otvorenú analytickú časť aplikácie, kďe možete vidieť zostatok použivateľov a ich aktuálny počet podľa krajov.';
+  public assistentOptions: any = [{title: 'Zásielky', link: '/dashboard/services/graph/shipments'}, {title: 'Balíky', link: '/dashboard/services/graph/parcels'}, {title: 'Krajiny', link: '/dashboard/services/graph/places'}];
 
+  public barChartLabels: Label[] = [];
+  public barChartData: ChartDataSets[] = [];
 
-  public barChartOptions: ChartOptions = {
-    responsive: true,
-    // We use these empty structures as placeholders for dynamic theming.
-    scales: { xAxes: [{}], yAxes: [{}] },
-    plugins: {
-      datalabels: {
-        anchor: 'end',
-        align: 'end',
-      }
-    }
-  };
-  public barChartLabels: Label[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-  public barChartType: ChartType = 'bar';
-  public barChartLegend = true;
+  public pieChartData: number[] = [];
+  public pieChartLabels: Label[] = [];
 
-  public barChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
-  ];
+  private subscriptions: Subscription[] = [];
 
-  constructor() { }
-
-  ngOnInit(): void {
+  public constructor(private userService: UserService) {
   }
 
-  // events
-  public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    console.log(event, active);
+  public ngOnInit(): void {
+    this.subscriptions.push(
+      this.userService.getAllDataObservable
+        .subscribe((users: User[]) => {
+          let data: any = groupBy(users, n => n.places.region);
+          this.pieChartLabels = Object.keys(data);
+          this.pieChartData = Object.keys(data).map(e => data[e].length);
+
+          data = groupBy(users, n => n.userName);
+          this.barChartData = Object.keys(data).map(e => {return {data: [data[e][0].balance], label: data[e][0].userName}});
+          this.barChartLabels = ['Používateľ'];
+        })
+    );
+
+    this.subscriptions.push(
+      this.userService.getAll(0, 100)
+        .subscribe((users: User[]) => {
+          this.userService.setGetAllData(users);
+        })
+    );
+    return;
   }
 
-  public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    console.log(event, active);
+  public ngOnDestroy(): void {
+    this.subscriptions.forEach(e => e.unsubscribe());
+    return;
   }
 
-  public randomize(): void {
-    // Only Change 3 values
-    this.barChartData[0].data = [
-      Math.round(Math.random() * 100),
-      59,
-      80,
-      (Math.random() * 100),
-      56,
-      (Math.random() * 100),
-      40 ];
-  }
-
-
-  public pieChartOptions: ChartOptions = {
-    responsive: true,
-    legend: {
-      position: 'top',
-    },
-    plugins: {
-      datalabels: {
-        formatter: (value, ctx) => {
-          const label = ctx.chart.data.labels[ctx.dataIndex];
-          return label;
-        },
-      },
-    }
-  };
-  public pieChartLabels: Label[] = [['Download', 'Sales'], ['In', 'Store', 'Sales'], 'Mail Sales'];
-  public pieChartData: number[] = [300, 500, 100];
-  public pieChartType: ChartType = 'pie';
-  public pieChartLegend = true;
-  public pieChartColors = [
-    {
-      backgroundColor: ['rgba(255,0,0,0.3)', 'rgba(0,255,0,0.3)', 'rgba(0,0,255,0.3)'],
-    },
-  ];
-
-
-
-  changeLabels(): void {
-    const words = ['hen', 'variable', 'embryo', 'instal', 'pleasant', 'physical', 'bomber', 'army', 'add', 'film',
-      'conductor', 'comfortable', 'flourish', 'establish', 'circumstance', 'chimney', 'crack', 'hall', 'energy',
-      'treat', 'window', 'shareholder', 'division', 'disk', 'temptation', 'chord', 'left', 'hospital', 'beef',
-      'patrol', 'satisfied', 'academy', 'acceptance', 'ivory', 'aquarium', 'building', 'store', 'replace', 'language',
-      'redeem', 'honest', 'intention', 'silk', 'opera', 'sleep', 'innocent', 'ignore', 'suite', 'applaud', 'funny'];
-    const randomWord = () => words[Math.trunc(Math.random() * words.length)];
-    this.pieChartLabels = Array.apply(null, { length: 3 }).map(_ => randomWord());
-  }
-
-  addSlice(): void {
-    this.pieChartLabels.push(['Line 1', 'Line 2', 'Line 3']);
-    this.pieChartData.push(400);
-    this.pieChartColors[0].backgroundColor.push('rgba(196,79,244,0.3)');
-  }
-
-  removeSlice(): void {
-    this.pieChartLabels.pop();
-    this.pieChartData.pop();
-    this.pieChartColors[0].backgroundColor.pop();
-  }
-
-  changeLegendPosition(): void {
-    this.pieChartOptions.legend.position = this.pieChartOptions.legend.position === 'left' ? 'top' : 'left';
+  public onSynchronize(): void {
+    this.subscriptions.push(
+      this.userService.getAll(0, 100)
+        .subscribe((users: User[]) => {
+          this.userService.setGetAllData(users);
+        })
+    );
+    return;
   }
 }
