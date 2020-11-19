@@ -26,7 +26,7 @@ export class WarehousesFormComponent implements OnInit, OnDestroy, CanComponentD
   public negativeButton: string;
   public pozitiveButton: string;
 
-  public illustration: string = '../../../../../../../../assets/img/warehouse_assistant.svg';
+  public illustration: string = 'assets/img/warehouse_assistant.svg';
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť nový sklad v aplikácií Blesk.';
   public assistentOptions: any = [{title: 'Profit', link: '/dashboard/services/company/profit'}];
 

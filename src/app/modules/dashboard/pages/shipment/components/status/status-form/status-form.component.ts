@@ -24,7 +24,7 @@ export class StatusFormComponent implements OnInit, OnDestroy, CanComponentDeact
   public negativeButton: string;
   public pozitiveButton: string;
 
-  public illustration: string = '../../../../../../../../assets/img/shipment_assistant.svg';
+  public illustration: string = 'assets/img/shipment_assistant.svg';
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť nový status v aplikácií Blesk.';
   public assistentOptions: any = [{title: 'Zásielky', link: '/dashboard/services/shipments/main'}, {title: 'Faktúry', link: '/dashboard/services/shipments/invoices'}];
 
