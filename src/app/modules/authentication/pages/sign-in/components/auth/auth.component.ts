@@ -68,7 +68,7 @@ export class AuthComponent implements OnInit, OnDestroy {
 
           this.persistenceService.set(environment.LOCAL_STORAGE_ACCOUNT_DATA, result);
           this.formGroup.reset();
-          this.router.navigate(['/dashboard/home']);
+          this.router.navigate(['/manage/dashboard/home']);
         })
     );
     return;

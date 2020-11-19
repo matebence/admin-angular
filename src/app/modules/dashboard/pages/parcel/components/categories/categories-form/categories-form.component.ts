@@ -26,7 +26,7 @@ export class CategoriesFormComponent implements OnInit, OnDestroy, CanComponentD
 
   public illustration: string = 'assets/img/parcel_assistant.svg';
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť novú kategóriu v aplikácií Blesk.';
-  public assistentOptions: any = [{title: 'Balíky', link: '/dashboard/services/parcels/main'}, {title: 'Recenzie', link: '/dashboard/services/parcels/ratings'}];
+  public assistentOptions: any = [{title: 'Balíky', link: '/manage/dashboard/services/parcels/main'}, {title: 'Recenzie', link: '/manage/dashboard/services/parcels/ratings'}];
 
   public formButton: string = 'Vytvoriť';
   public formTitle: string = 'Vytvorenie novej kategórie';
@@ -125,7 +125,7 @@ export class CategoriesFormComponent implements OnInit, OnDestroy, CanComponentD
 
   private onSuccess(): void {
     this.formGroup.reset();
-    this.router.navigate(['/dashboard/services/parcels/categories']);
+    this.router.navigate(['/manage/dashboard/services/parcels/categories']);
     return;
   }
 }

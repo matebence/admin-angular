@@ -28,7 +28,7 @@ export class WarehousesFormComponent implements OnInit, OnDestroy, CanComponentD
 
   public illustration: string = 'assets/img/warehouse_assistant.svg';
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť nový sklad v aplikácií Blesk.';
-  public assistentOptions: any = [{title: 'Profit', link: '/dashboard/services/company/profit'}];
+  public assistentOptions: any = [{title: 'Profit', link: '/manage/dashboard/services/company/profit'}];
 
   public formButton: string = 'Vytvoriť';
   public formTitle: string = 'Vytvorenie nového skladu';
@@ -151,7 +151,7 @@ export class WarehousesFormComponent implements OnInit, OnDestroy, CanComponentD
 
   private onSuccess(): void {
     this.formGroup.reset();
-    this.router.navigate(['/dashboard/services/company/warehouses']);
+    this.router.navigate(['/manage/dashboard/services/company/warehouses']);
     return;
   }
 }

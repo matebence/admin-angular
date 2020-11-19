@@ -42,7 +42,7 @@ export class CredentialsExpirationInterceptor implements HttpInterceptor {
                       this.persistenceService.set(environment.LOCAL_STORAGE_ACCOUNT_DATA, result);
                   })
                 } else {
-                  this.router.navigate(['/auth/sign-out']);
+                  this.router.navigate(['/manage/auth/sign-out']);
                 }
               }, timer);
             }

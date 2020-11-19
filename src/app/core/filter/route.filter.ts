@@ -1,13 +1,5 @@
 import {Injectable} from '@angular/core';
-import {
-  NavigationCancel,
-  NavigationEnd,
-  NavigationError,
-  NavigationStart,
-  Router,
-  RouterEvent,
-  RoutesRecognized
-} from '@angular/router';
+import {NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterEvent, RoutesRecognized} from '@angular/router';
 
 import {environment} from '../../../environments/environment';
 
@@ -45,7 +37,7 @@ export class RouteFilter {
     if (!this.segments.includes('sign-out') && !this.segments.includes('dashboard')) {
       const signIn = <SignIn> this.persistenceService.get(environment.LOCAL_STORAGE_ACCOUNT_DATA);
       if (signIn == null || new Date() >= signIn.expirationDate) return;
-      this.router.navigate(['/dashboard/home']);
+      this.router.navigate(['/manage/dashboard/home']);
     }
     return;
   }
