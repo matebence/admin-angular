@@ -9,6 +9,11 @@ const routes: Routes = [
     redirectTo: '/manage/auth/sign-in',
     pathMatch: 'full'
   },
+  {
+    path: 'manage',
+    redirectTo: '/manage/auth/sign-in',
+    pathMatch: 'full'
+  },
 
   {
     path: 'manage',
