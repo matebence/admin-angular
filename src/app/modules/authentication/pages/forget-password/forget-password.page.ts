@@ -39,7 +39,7 @@ export class ForgetPasswordPage implements OnInit, OnDestroy {
       this.activatedRoute.firstChild.params
         .pipe(switchMap((params: Params) => {
           if (!params) {
-            this.router.navigate(['/forget-password'])
+            this.router.navigate(['/manage/auth/forget-password'])
           } else {
             return this.authorizationService.recover(params)
           }

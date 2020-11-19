@@ -26,7 +26,7 @@ export class StatusFormComponent implements OnInit, OnDestroy, CanComponentDeact
 
   public illustration: string = 'assets/img/shipment_assistant.svg';
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť nový status v aplikácií Blesk.';
-  public assistentOptions: any = [{title: 'Zásielky', link: '/dashboard/services/shipments/main'}, {title: 'Faktúry', link: '/dashboard/services/shipments/invoices'}];
+  public assistentOptions: any = [{title: 'Zásielky', link: '/manage/dashboard/services/shipments/main'}, {title: 'Faktúry', link: '/manage/dashboard/services/shipments/invoices'}];
 
   public formButton: string = 'Vytvoriť';
   public formTitle: string = 'Vytvorenie nového statusu';
@@ -125,7 +125,7 @@ export class StatusFormComponent implements OnInit, OnDestroy, CanComponentDeact
 
   private onSuccess(): void {
     this.formGroup.reset();
-    this.router.navigate(['/dashboard/services/shipments/status']);
+    this.router.navigate(['/manage/dashboard/services/shipments/status']);
     return;
   }
 }

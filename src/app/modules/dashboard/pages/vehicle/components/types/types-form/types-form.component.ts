@@ -26,7 +26,7 @@ export class TypesFormComponent implements OnInit, OnDestroy, CanComponentDeacti
 
   public illustration: string = 'assets/img/vehicle_assistant.svg';
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť nový dopravný prostriedok v aplikácií Blesk.';
-  public assistentOptions: any = [{title: 'Vozidlá', link: '/dashboard/services/vehicles/main'}];
+  public assistentOptions: any = [{title: 'Vozidlá', link: '/manage/dashboard/services/vehicles/main'}];
 
   public formButton: string = 'Vytvoriť';
   public formTitle: string = 'Vytvorenie nového typu dopravného prostriedka';
@@ -127,7 +127,7 @@ export class TypesFormComponent implements OnInit, OnDestroy, CanComponentDeacti
 
   private onSuccess(): void {
     this.formGroup.reset();
-    this.router.navigate(['/dashboard/services/vehicles/types']);
+    this.router.navigate(['/manage/dashboard/services/vehicles/types']);
     return;
   }
 }

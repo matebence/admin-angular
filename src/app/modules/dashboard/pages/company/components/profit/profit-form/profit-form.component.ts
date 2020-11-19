@@ -26,7 +26,7 @@ export class ProfitFormComponent implements OnInit, OnDestroy, CanComponentDeact
 
   public illustration: string = 'assets/img/profit_assistant.svg';
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte nastaviť profit firmy (+ cena za každý balík)';
-  public assistentOptions: any = [{title: 'Sklady', link: '/dashboard/services/company/warehouses'}];
+  public assistentOptions: any = [{title: 'Sklady', link: '/manage/dashboard/services/company/warehouses'}];
 
   public formButton: string = 'Nastaviť';
   public formTitle: string = 'Nastavenie profitu firmy';
@@ -98,7 +98,7 @@ export class ProfitFormComponent implements OnInit, OnDestroy, CanComponentDeact
 
   private onSuccess(): void {
     this.formGroup.reset();
-    this.router.navigate(['/dashboard/services/company/profit']);
+    this.router.navigate(['/manage/dashboard/services/company/profit']);
     return;
   }
 }

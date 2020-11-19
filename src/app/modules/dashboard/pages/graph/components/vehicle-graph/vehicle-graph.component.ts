@@ -17,7 +17,7 @@ export class VehicleGraphComponent implements OnInit, OnDestroy {
 
   public illustration: string = 'assets/img/graph_assistant.svg';
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Máte otvorenú analytickú časť aplikácie, kďe možete vidieť počet dopravných prostriedkov pre daného kuriéra a typy dopravných prostriedkov.';
-  public assistentOptions: any = [{title: 'Používatelia', link: '/dashboard/services/graph/users'}, {title: 'Zásielky', link: '/dashboard/services/graph/shipments'}, {title: 'Balíky', link: '/dashboard/services/graph/parcels'}];
+  public assistentOptions: any = [{title: 'Používatelia', link: '/manage/dashboard/services/graph/users'}, {title: 'Zásielky', link: '/manage/dashboard/services/graph/shipments'}, {title: 'Balíky', link: '/manage/dashboard/services/graph/parcels'}];
 
   public barChartLabels: Label[] = [];
   public barChartData: ChartDataSets[] = [];

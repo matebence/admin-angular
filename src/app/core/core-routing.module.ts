@@ -6,34 +6,43 @@ import {ErrorPage} from './error/error.page';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/auth/sign-in',
+    redirectTo: '/manage/auth/sign-in',
     pathMatch: 'full'
   },
+
   {
     path: 'manage',
-    redirectTo: '/auth/sign-in',
-    pathMatch: 'full'
-  },
-
-  {
-    path: 'auth/sign-in',
-    redirectTo: '/auth/sign-in',
-    pathMatch: 'full'
-  },
-  {
-    path: 'auth/sign-out',
-    redirectTo: '/auth/sign-out',
-    pathMatch: 'full'
-  },
-  {
-    path: 'auth/forget-password',
-    redirectTo: '/auth/forget-password',
-    pathMatch: 'full'
-  },
-
-  {
-    path: 'dashboard',
-    loadChildren: () => import('../modules/dashboard/dashboard.module').then(m => m.DashboardModule)
+    children: [
+      {
+        path: 'auth',
+        children: [
+          {
+            path: 'sign-in',
+            redirectTo: '/manage/auth/sign-in',
+            pathMatch: 'full'
+          },
+          {
+            path: 'sign-out',
+            redirectTo: '/manage/auth/sign-out',
+            pathMatch: 'full'
+          },
+          {
+            path: 'forget-password',
+            redirectTo: '/manage/auth/forget-password',
+            pathMatch: 'full'
+          },
+          {
+            path: 'forget-password/account/:account/token/:token',
+            redirectTo: '/manage/auth/forget-password/account/:account/token/:token',
+            pathMatch: 'full'
+          }
+        ]
+      },
+      {
+        path: 'dashboard',
+        loadChildren: () => import('../modules/dashboard/dashboard.module').then(m => m.DashboardModule)
+      },
+    ]
   },
 
   {

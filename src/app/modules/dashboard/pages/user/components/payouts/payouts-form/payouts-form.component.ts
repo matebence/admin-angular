@@ -26,7 +26,7 @@ export class PayoutsFormComponent implements OnInit, OnDestroy, CanComponentDeac
 
   public illustration: string = 'assets/img/user_assistant.svg';
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte aktualizovať výplatu v aplikácií Blesk.';
-  public assistentOptions: any = [{title: 'Platby', link: '/dashboard/services/users/payments'}, {title: 'Pohlavia', link: '/dashboard/services/users/genders'}, {title: 'Používatelia', link: '/dashboard/services/users/main'}];
+  public assistentOptions: any = [{title: 'Platby', link: '/manage/dashboard/services/users/payments'}, {title: 'Pohlavia', link: '/manage/dashboard/services/users/genders'}, {title: 'Používatelia', link: '/manage/dashboard/services/users/main'}];
 
   public formButton: string = 'Aktualizovať';
   public formTitle: string = 'Aktualizovanie výplaty';
@@ -113,7 +113,7 @@ export class PayoutsFormComponent implements OnInit, OnDestroy, CanComponentDeac
           this.payoutService.setGetAllData(payouts);
 
           this.formGroup.reset();
-          this.router.navigate(['/dashboard/services/users/payouts']);
+          this.router.navigate(['/manage/dashboard/services/users/payouts']);
         })
     );
     this.payout = null;

@@ -20,7 +20,7 @@ export default {
       title: 'Hodnoty (logické)',
       filter: false,
       valuePrepareFunction: (cell, row) => {
-        return `${row.accountPreferences.filter(f => f.isSet !== null).map(e => e.isSet).join(', ')}`
+        return `${row.accountPreferences.filter(f => f.isSet !== null).map(e => e.isSet ? 'Áno' : 'Nie').join(', ')}`
       }
     },
     content: {

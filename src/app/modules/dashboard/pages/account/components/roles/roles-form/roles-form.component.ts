@@ -28,7 +28,7 @@ export class RolesFormComponent implements OnInit, OnDestroy, CanComponentDeacti
 
   public illustration: string = 'assets/img/account_assistant.svg';
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť novú rolu v aplikácií Blesk.';
-  public assistentOptions: any = [{title: 'Kontá', link: '/dashboard/services/accounts/main'}, {title: 'Preferencie', link: '/dashboard/services/accounts/preferences'}, {title: 'Privilégia', link: '/dashboard/services/accounts/privileges'}];
+  public assistentOptions: any = [{title: 'Kontá', link: '/manage/dashboard/services/accounts/main'}, {title: 'Preferencie', link: '/manage/dashboard/services/accounts/preferences'}, {title: 'Privilégia', link: '/manage/dashboard/services/accounts/privileges'}];
 
   public formButton: string = 'Vytvoriť';
   public formTitle: string = 'Vytvorenie novej roli';
@@ -167,7 +167,7 @@ export class RolesFormComponent implements OnInit, OnDestroy, CanComponentDeacti
 
   private onSuccess(): void {
     this.formGroup.reset();
-    this.router.navigate(['/dashboard/services/accounts/roles']);
+    this.router.navigate(['/manage/dashboard/services/accounts/roles']);
     return;
   }
 }
