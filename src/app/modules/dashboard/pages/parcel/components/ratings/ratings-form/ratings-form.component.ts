@@ -28,7 +28,7 @@ export class RatingsFormComponent implements OnInit, OnDestroy, CanComponentDeac
 
   public illustration: string = '../../../../../../../../assets/img/parcel_assistant.svg';
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť novú recenziu v aplikácií Blesk.';
-  public assistentOptions: any = [{title: 'Balíky', link: '/manage/dashboard/services/parcels/main'}, {title: 'Kategórie', link: '/manage/dashboard/services/parcels/categories'}];
+  public assistentOptions: any = [{title: 'Balíky', link: '/dashboard/services/parcels/main'}, {title: 'Kategórie', link: '/dashboard/services/parcels/categories'}];
 
   public formButton: string = 'Vytvoriť';
   public formTitle: string = 'Vytvorenie novej recenzie';
@@ -157,7 +157,7 @@ export class RatingsFormComponent implements OnInit, OnDestroy, CanComponentDeac
 
   private onSuccess(): void {
     this.formGroup.reset();
-    this.router.navigate(['/manage/dashboard/services/parcels/ratings']);
+    this.router.navigate(['/dashboard/services/parcels/ratings']);
     return;
   }
 }

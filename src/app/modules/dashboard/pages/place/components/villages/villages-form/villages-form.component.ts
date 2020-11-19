@@ -30,7 +30,7 @@ export class VillagesFormComponent implements OnInit, OnDestroy, CanComponentDea
 
   public illustration: string = '../../../../../../../../assets/img/place_assistant.svg';
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť nové mesto alebo obec v aplikácií Blesk.';
-  public assistentOptions: any = [{title: 'Kraje', link: '/manage/dashboard/services/places/regions'}, {title: 'Okresy', link: '/manage/dashboard/services/places/districts'}];
+  public assistentOptions: any = [{title: 'Kraje', link: '/dashboard/services/places/regions'}, {title: 'Okresy', link: '/dashboard/services/places/districts'}];
 
   public formButton: string = 'Vytvoriť';
   public formTitle: string = 'Vytvorenie nového mesta alebo obce';
@@ -164,7 +164,7 @@ export class VillagesFormComponent implements OnInit, OnDestroy, CanComponentDea
 
   private onSuccess(): void {
     this.formGroup.reset();
-    this.router.navigate(['/manage/dashboard/services/places/villages']);
+    this.router.navigate(['/dashboard/services/places/villages']);
     return;
   }
 }

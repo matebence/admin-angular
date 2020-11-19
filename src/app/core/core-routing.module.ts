@@ -10,24 +10,42 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'auth/sign-in',
+    path: 'auth',
     redirectTo: '/auth/sign-in',
     pathMatch: 'full'
   },
+
   {
-    path: 'auth/sign-out',
-    redirectTo: '/auth/sign-out',
-    pathMatch: 'full'
+    path: 'auth',
+    children: [
+      {
+        path: 'sign-in',
+        redirectTo: '/auth/sign-in',
+        pathMatch: 'full'
+      },
+      {
+        path: 'sign-out',
+        redirectTo: '/auth/sign-out',
+        pathMatch: 'full'
+      },
+      {
+        path: 'forget-password',
+        redirectTo: '/auth/forget-password',
+        pathMatch: 'full'
+      },
+      {
+        path: 'forget-password/account/:account/token/:token',
+        redirectTo: '/auth/forget-password/account/:account/token/:token',
+        pathMatch: 'full'
+      }
+    ]
   },
-  {
-    path: 'auth/forget-password',
-    redirectTo: '/auth/forget-password',
-    pathMatch: 'full'
-  },
+
   {
     path: 'dashboard',
     loadChildren: () => import('../modules/dashboard/dashboard.module').then(m => m.DashboardModule)
   },
+
   {
     path: 'error',
     component: ErrorPage

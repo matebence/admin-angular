@@ -19,9 +19,9 @@ export class RoleGuard implements CanActivate, CanActivateChild {
       return true;
     } else {
       if (this.securityService.isInRole([environment.APP_ROLE_MANAGER, environment.APP_ROLE_ADMIN])) {
-        this.router.navigate(['/manage/dashboard/home']);
+        this.router.navigate(['/dashboard/home']);
       } else {
-        this.router.navigate(['/manage/auth/sign-out']);
+        this.router.navigate(['/auth/sign-out']);
       }
       return false;
     }

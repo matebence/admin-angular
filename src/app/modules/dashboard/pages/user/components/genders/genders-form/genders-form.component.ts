@@ -26,7 +26,7 @@ export class GendersFormComponent implements OnInit, OnDestroy, CanComponentDeac
 
   public illustration: string = '../../../../../../../../assets/img/user_assistant.svg';
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť nový názov pohlavia v aplikácií Blesk.';
-  public assistentOptions: any = [{title: 'Platby', link: '/manage/dashboard/services/users/payments'}, {title: 'Výplaty', link: '/manage/dashboard/services/users/payouts'}, {title: 'Používatelia', link: '/manage/dashboard/services/users/main'}];
+  public assistentOptions: any = [{title: 'Platby', link: '/dashboard/services/users/payments'}, {title: 'Výplaty', link: '/dashboard/services/users/payouts'}, {title: 'Používatelia', link: '/dashboard/services/users/main'}];
 
   public formButton: string = 'Vytvoriť';
   public formTitle: string = 'Vytvorenie nového názvu pohlavia';
@@ -125,7 +125,7 @@ export class GendersFormComponent implements OnInit, OnDestroy, CanComponentDeac
 
   private onSuccess(): void {
     this.formGroup.reset();
-    this.router.navigate(['/manage/dashboard/services/users/genders']);
+    this.router.navigate(['/dashboard/services/users/genders']);
     return;
   }
 }
