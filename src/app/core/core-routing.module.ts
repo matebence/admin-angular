@@ -10,12 +10,6 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'manage',
-    redirectTo: '/auth/sign-in',
-    pathMatch: 'full'
-  },
-
-  {
     path: 'auth/sign-in',
     redirectTo: '/auth/sign-in',
     pathMatch: 'full'
@@ -30,12 +24,10 @@ const routes: Routes = [
     redirectTo: '/auth/forget-password',
     pathMatch: 'full'
   },
-
   {
     path: 'dashboard',
     loadChildren: () => import('../modules/dashboard/dashboard.module').then(m => m.DashboardModule)
   },
-
   {
     path: 'error',
     component: ErrorPage
