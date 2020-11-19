@@ -24,7 +24,7 @@ export class ProfitFormComponent implements OnInit, OnDestroy, CanComponentDeact
   public negativeButton: string;
   public pozitiveButton: string;
 
-  public illustration: string = 'assets/img/profit_assistant.svg';
+  public illustration: string = '../../../../../../../../assets/img/profit_assistant.svg';
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte nastaviť profit firmy (+ cena za každý balík)';
   public assistentOptions: any = [{title: 'Sklady', link: '/manage/dashboard/services/company/warehouses'}];
 

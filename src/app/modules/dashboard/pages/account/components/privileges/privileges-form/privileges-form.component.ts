@@ -24,7 +24,7 @@ export class PrivilegesFormComponent implements OnInit, OnDestroy, CanComponentD
   public negativeButton: string;
   public pozitiveButton: string;
 
-  public illustration: string = 'assets/img/account_assistant.svg';
+  public illustration: string = '../../../../../../../../assets/img/account_assistant.svg';
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť novú privilégiu v aplikácií Blesk.';
   public assistentOptions: any = [{title: 'Preferencie', link: '/manage/dashboard/services/accounts/preferences'}, {title: 'Role', link: '/manage/dashboard/services/accounts/roles'}, {title: 'Kontá', link: '/manage/dashboard/services/accounts/main'}];
 

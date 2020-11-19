@@ -28,7 +28,7 @@ export class ParcelsFormComponent implements OnInit, OnDestroy, CanComponentDeac
   public negativeButton: string;
   public pozitiveButton: string;
 
-  public illustration: string = 'assets/img/parcel_assistant.svg';
+  public illustration: string = '../../../../../../../../assets/img/parcel_assistant.svg';
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť nový balík v aplikácií Blesk.';
   public assistentOptions: any = [{title: 'Recenzie', link: '/manage/dashboard/services/parcels/ratings'}, {title: 'Kategórie', link: '/manage/dashboard/services/parcels/categories'}];
 

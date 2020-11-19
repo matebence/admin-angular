@@ -15,7 +15,7 @@ import {Shipment} from '../../../../../../shared/models/services/shipment/shipme
 })
 export class ShipmentGraphComponent implements OnInit, OnDestroy {
 
-  public illustration: string = 'assets/img/graph_assistant.svg';
+  public illustration: string = '../../../../../../../../assets/img/graph_assistant.svg';
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Máte otvorenú analytickú časť aplikácie, kďe možete vidieť počet doručených balíkov pre daného kuriéra a zásielky podľa ich statusu.';
   public assistentOptions: any = [{title: 'Používatelia', link: '/dashboard/services/graph/users'}, {title: 'Balíky', link: '/dashboard/services/graph/parcels'}, {title: 'Krajiny', link: '/dashboard/services/graph/places'}];
 

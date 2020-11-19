@@ -26,7 +26,7 @@ export class PreferencesFormComponent implements OnInit, OnDestroy, CanComponent
   public negativeButton: string;
   public pozitiveButton: string;
 
-  public illustration: string = 'assets/img/account_assistant.svg';
+  public illustration: string = '../../../../../../../../assets/img/account_assistant.svg';
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť novú preferenciu v aplikácií Blesk.';
   public assistentOptions: any = [{title: 'Kontá', link: '/manage/dashboard/services/accounts/main'}, {title: 'Role', link: '/manage/dashboard/services/accounts/roles'}, {title: 'Privilégia', link: '/manage/dashboard/services/accounts/privileges'}];
 

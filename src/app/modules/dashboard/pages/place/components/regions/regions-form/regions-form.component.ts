@@ -24,7 +24,7 @@ export class RegionsFormComponent implements OnInit, OnDestroy, CanComponentDeac
   public negativeButton: string;
   public pozitiveButton: string;
 
-  public illustration: string = 'assets/img/place_assistant.svg';
+  public illustration: string = '../../../../../../../../assets/img/place_assistant.svg';
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť nový kraj v aplikácií Blesk.';
   public assistentOptions: any = [{title: 'Okresy', link: '/manage/dashboard/services/places/districts'}, {title: 'Mestá a obce', link: '/manage/dashboard/services/places/villages'}];
 

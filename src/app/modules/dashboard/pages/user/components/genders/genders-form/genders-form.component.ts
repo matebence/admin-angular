@@ -24,7 +24,7 @@ export class GendersFormComponent implements OnInit, OnDestroy, CanComponentDeac
   public negativeButton: string;
   public pozitiveButton: string;
 
-  public illustration: string = 'assets/img/user_assistant.svg';
+  public illustration: string = '../../../../../../../../assets/img/user_assistant.svg';
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť nový názov pohlavia v aplikácií Blesk.';
   public assistentOptions: any = [{title: 'Platby', link: '/manage/dashboard/services/users/payments'}, {title: 'Výplaty', link: '/manage/dashboard/services/users/payouts'}, {title: 'Používatelia', link: '/manage/dashboard/services/users/main'}];
 

@@ -28,7 +28,7 @@ export class VillagesFormComponent implements OnInit, OnDestroy, CanComponentDea
   public negativeButton: string;
   public pozitiveButton: string;
 
-  public illustration: string = 'assets/img/place_assistant.svg';
+  public illustration: string = '../../../../../../../../assets/img/place_assistant.svg';
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť nové mesto alebo obec v aplikácií Blesk.';
   public assistentOptions: any = [{title: 'Kraje', link: '/manage/dashboard/services/places/regions'}, {title: 'Okresy', link: '/manage/dashboard/services/places/districts'}];
 
