@@ -15,7 +15,7 @@ import {Parcel} from '../../../../../../shared/models/services/parcel/parcel.mod
 })
 export class ParcelGraphComponent implements OnInit, OnDestroy {
 
-  public illustration: string = 'assets/img/graph_assistant.svg';
+  public illustration: string = '../../../../../../../../assets/img/graph_assistant.svg';
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Máte otvorenú analytickú časť aplikácie, kďe možete vidieť počet odoslaných balíkov podľa používateľov a baliky podľa ich kategórie.';
   public assistentOptions: any = [{title: 'Krajiny', link: '/dashboard/services/graph/places'}, {title: 'Vozidlá', link: '/dashboard/services/graph/vehicles'}, {title: 'Používatelia', link: '/dashboard/services/graph/users'}];
 

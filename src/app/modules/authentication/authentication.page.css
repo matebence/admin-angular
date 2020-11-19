@@ -1,5 +1,5 @@
 div.bg-gradient-primary {
-  background: url("/assets/img/auth-background.jpg");
+  background: url("../../../assets/img/auth-background.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

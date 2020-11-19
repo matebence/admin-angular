@@ -26,7 +26,7 @@ export class DistrictsFormComponent implements OnInit, OnDestroy, CanComponentDe
   public negativeButton: string;
   public pozitiveButton: string;
 
-  public illustration: string = 'assets/img/place_assistant.svg';
+  public illustration: string = '../../../../../../../../assets/img/place_assistant.svg';
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť nový okres v aplikácií Blesk.';
   public assistentOptions: any = [{title: 'Kraje', link: '/dashboard/services/places/regions'}, {title: 'Mestá a obce', link: '/dashboard/services/places/villages'}];
 

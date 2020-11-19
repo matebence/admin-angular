@@ -26,7 +26,7 @@ export class PaymentsFormComponent implements OnInit, OnDestroy, CanComponentDea
   public negativeButton: string;
   public pozitiveButton: string;
 
-  public illustration: string = 'assets/img/user_assistant.svg';
+  public illustration: string = '../../../../../../../../assets/img/user_assistant.svg';
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte aktualizovať platbu v aplikácií Blesk.';
   public assistentOptions: any = [{title: 'Výplaty', link: '/dashboard/services/users/payouts'}, {title: 'Pohlavia', link: '/dashboard/services/users/genders'}, {title: 'Používatelia', link: '/dashboard/services/users/main'}];
 

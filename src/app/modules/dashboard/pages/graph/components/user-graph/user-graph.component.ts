@@ -15,7 +15,7 @@ import {User} from '../../../../../../shared/models/services/user/user.model';
 })
 export class UserGraphComponent implements OnInit, OnDestroy {
 
-  public illustration: string = 'assets/img/graph_assistant.svg';
+  public illustration: string = '../../../../../../../../assets/img/graph_assistant.svg';
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Máte otvorenú analytickú časť aplikácie, kďe možete vidieť zostatok použivateľov a ich aktuálny počet podľa krajov.';
   public assistentOptions: any = [{title: 'Zásielky', link: '/dashboard/services/graph/shipments'}, {title: 'Balíky', link: '/dashboard/services/graph/parcels'}, {title: 'Krajiny', link: '/dashboard/services/graph/places'}];
 

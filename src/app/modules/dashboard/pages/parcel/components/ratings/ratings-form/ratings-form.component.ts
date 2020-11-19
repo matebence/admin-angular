@@ -26,7 +26,7 @@ export class RatingsFormComponent implements OnInit, OnDestroy, CanComponentDeac
   public negativeButton: string;
   public pozitiveButton: string;
 
-  public illustration: string = 'assets/img/parcel_assistant.svg';
+  public illustration: string = '../../../../../../../../assets/img/parcel_assistant.svg';
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť novú recenziu v aplikácií Blesk.';
   public assistentOptions: any = [{title: 'Balíky', link: '/dashboard/services/parcels/main'}, {title: 'Kategórie', link: '/dashboard/services/parcels/categories'}];
 

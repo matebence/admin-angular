@@ -26,7 +26,7 @@ export class AccountsFormComponent implements OnInit, OnDestroy, CanComponentDea
   public negativeButton: string;
   public pozitiveButton: string;
 
-  public illustration: string = 'assets/img/account_assistant.svg';
+  public illustration: string = '../../../../../../../../assets/img/account_assistant.svg';
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť nový konto v aplikácií Blesk.';
   public assistentOptions: any = [{title: 'Role', link: '/dashboard/services/accounts/roles'}, {title: 'Preferencie', link: '/dashboard/services/accounts/preferences'}, {title: 'Privilégia', link: '/dashboard/services/accounts/privileges'}];
 
