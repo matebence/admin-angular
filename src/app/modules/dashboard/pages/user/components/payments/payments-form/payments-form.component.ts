@@ -26,9 +26,9 @@ export class PaymentsFormComponent implements OnInit, OnDestroy, CanComponentDea
   public negativeButton: string;
   public pozitiveButton: string;
 
-  public illustration: string = 'assets/img/user_assistant.svg';
+  public illustration: string = '../../../../../../../../assets/img/user_assistant.svg';
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte aktualizovať platbu v aplikácií Blesk.';
-  public assistentOptions: any = [{title: 'Výplaty', link: '/manage/dashboard/services/users/payouts'}, {title: 'Pohlavia', link: '/manage/dashboard/services/users/genders'}, {title: 'Používatelia', link: '/manage/dashboard/services/users/main'}];
+  public assistentOptions: any = [{title: 'Výplaty', link: '/dashboard/services/users/payouts'}, {title: 'Pohlavia', link: '/dashboard/services/users/genders'}, {title: 'Používatelia', link: '/dashboard/services/users/main'}];
 
   public formButton: string = 'Aktualizovať';
   public formTitle: string = 'Aktualizovanie platby';
@@ -128,7 +128,7 @@ export class PaymentsFormComponent implements OnInit, OnDestroy, CanComponentDea
           this.paymentService.setGetAllData(payments);
 
           this.formGroup.reset();
-          this.router.navigate(['/manage/dashboard/services/users/payments']);
+          this.router.navigate(['/dashboard/services/users/payments']);
         })
     );
     this.payment = null;

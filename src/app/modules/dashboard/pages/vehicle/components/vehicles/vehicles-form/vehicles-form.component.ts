@@ -30,9 +30,9 @@ export class VehiclesFormComponent implements OnInit, OnDestroy, CanComponentDea
   public negativeButton: string;
   public pozitiveButton: string;
 
-  public illustration: string = 'assets/img/vehicle_assistant.svg';
+  public illustration: string = '../../../../../../../../assets/img/vehicle_assistant.svg';
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť nový doprvaný prostriedok v aplikácií Blesk.';
-  public assistentOptions: any = [{title: 'Typy', link: '/manage/dashboard/services/vehicles/types'}];
+  public assistentOptions: any = [{title: 'Typy', link: '/dashboard/services/vehicles/types'}];
 
   public formButton: string = 'Vytvoriť';
   public formTitle: string = 'Vytvorenie nového dopravného prostriedka';
@@ -157,7 +157,7 @@ export class VehiclesFormComponent implements OnInit, OnDestroy, CanComponentDea
 
   private onSuccess(): void {
     this.formGroup.reset();
-    this.router.navigate(['/manage/dashboard/services/vehicles/main']);
+    this.router.navigate(['/dashboard/services/vehicles/main']);
     return;
   }
 }

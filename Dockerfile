@@ -1,4 +1,4 @@
 FROM nginx:latest
-RUN mkdir /app
-COPY /dist /app
+RUN mkdir -p /app/manage
+COPY /dist/admin-angular /app/manage
 COPY nginx.conf /etc/nginx/nginx.conf

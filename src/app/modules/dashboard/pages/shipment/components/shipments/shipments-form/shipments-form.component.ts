@@ -32,9 +32,9 @@ export class ShipmentsFormComponent implements OnInit, OnDestroy, CanComponentDe
   public negativeButton: string;
   public pozitiveButton: string;
 
-  public illustration: string = 'assets/img/shipment_assistant.svg';
+  public illustration: string = '../../../../../../../../assets/img/shipment_assistant.svg';
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť novú zásielku v aplikácií Blesk.';
-  public assistentOptions: any = [{title: 'Statusy', link: '/manage/dashboard/services/shipments/status'}, {title: 'Faktúry', link: '/manage/dashboard/services/shipments/invoices'}];
+  public assistentOptions: any = [{title: 'Statusy', link: '/dashboard/services/shipments/status'}, {title: 'Faktúry', link: '/dashboard/services/shipments/invoices'}];
 
   public formButton: string = 'Vytvoriť';
   public formTitle: string = 'Vytvorenie novej zásielky';
@@ -197,7 +197,7 @@ export class ShipmentsFormComponent implements OnInit, OnDestroy, CanComponentDe
 
   private onSuccess(): void {
     this.formGroup.reset();
-    this.router.navigate(['/manage/dashboard/services/shipments/main']);
+    this.router.navigate(['/dashboard/services/shipments/main']);
     return;
   }
 }

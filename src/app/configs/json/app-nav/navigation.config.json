@@ -15,7 +15,7 @@
                 "ROLE_MANAGER"
               ],
               "route": {
-                "main": "/manage/dashboard/home"
+                "main": "/dashboard/home"
               }
             }
           ]
@@ -34,7 +34,7 @@
                 "ROLE_MANAGER"
               ],
               "route": {
-                "main": "/manage/dashboard/profile"
+                "main": "/dashboard/profile"
               }
             }
           ]
@@ -58,7 +58,7 @@
                 "ROLE_MANAGER"
               ],
               "route": {
-                "main": "/manage/dashboard/services/users/main"
+                "main": "/dashboard/services/users/main"
               }
             },
             {
@@ -68,7 +68,7 @@
                 "ROLE_MANAGER"
               ],
               "route": {
-                "main": "/manage/dashboard/services/users/payouts"
+                "main": "/dashboard/services/users/payouts"
               }
             },
             {
@@ -78,7 +78,7 @@
                 "ROLE_MANAGER"
               ],
               "route": {
-                "main": "/manage/dashboard/services/users/payments"
+                "main": "/dashboard/services/users/payments"
               }
             },
             {
@@ -87,7 +87,7 @@
                 "ROLE_ADMIN"
               ],
               "route": {
-                "main": "/manage/dashboard/services/users/genders"
+                "main": "/dashboard/services/users/genders"
               }
             }
           ]
@@ -106,7 +106,7 @@
                 "ROLE_MANAGER"
               ],
               "route": {
-                "main": "/manage/dashboard/services/accounts/main"
+                "main": "/dashboard/services/accounts/main"
               }
             },
             {
@@ -115,7 +115,7 @@
                 "ROLE_ADMIN"
               ],
               "route": {
-                "main": "/manage/dashboard/services/accounts/preferences"
+                "main": "/dashboard/services/accounts/preferences"
               }
             },
             {
@@ -124,7 +124,7 @@
                 "ROLE_ADMIN"
               ],
               "route": {
-                "main": "/manage/dashboard/services/accounts/privileges"
+                "main": "/dashboard/services/accounts/privileges"
               }
             },
             {
@@ -133,7 +133,7 @@
                 "ROLE_ADMIN"
               ],
               "route": {
-                "main": "/manage/dashboard/services/accounts/roles"
+                "main": "/dashboard/services/accounts/roles"
               }
             }
           ]
@@ -152,7 +152,7 @@
                 "ROLE_MANAGER"
               ],
               "route": {
-                "main": "/manage/dashboard/services/shipments/main"
+                "main": "/dashboard/services/shipments/main"
               }
             },
             {
@@ -162,7 +162,7 @@
                 "ROLE_MANAGER"
               ],
               "route": {
-                "main": "/manage/dashboard/services/shipments/invoices"
+                "main": "/dashboard/services/shipments/invoices"
               }
             },
             {
@@ -171,7 +171,7 @@
                 "ROLE_ADMIN"
               ],
               "route": {
-                "main": "/manage/dashboard/services/shipments/status"
+                "main": "/dashboard/services/shipments/status"
               }
             }
           ]
@@ -190,7 +190,7 @@
                 "ROLE_MANAGER"
               ],
               "route": {
-                "main": "/manage/dashboard/services/parcels/main"
+                "main": "/dashboard/services/parcels/main"
               }
             },
             {
@@ -199,7 +199,7 @@
                 "ROLE_ADMIN"
               ],
               "route": {
-                "main": "/manage/dashboard/services/parcels/categories"
+                "main": "/dashboard/services/parcels/categories"
               }
             },
             {
@@ -209,7 +209,7 @@
                 "ROLE_MANAGER"
               ],
               "route": {
-                "main": "/manage/dashboard/services/parcels/ratings"
+                "main": "/dashboard/services/parcels/ratings"
               }
             }
           ]
@@ -227,7 +227,7 @@
                 "ROLE_ADMIN"
               ],
               "route": {
-                "main": "/manage/dashboard/services/places/regions"
+                "main": "/dashboard/services/places/regions"
               }
             },
             {
@@ -236,7 +236,7 @@
                 "ROLE_ADMIN"
               ],
               "route": {
-                "main": "/manage/dashboard/services/places/districts"
+                "main": "/dashboard/services/places/districts"
               }
             },
             {
@@ -245,7 +245,7 @@
                 "ROLE_ADMIN"
               ],
               "route": {
-                "main": "/manage/dashboard/services/places/villages"
+                "main": "/dashboard/services/places/villages"
               }
             }
           ]
@@ -264,7 +264,7 @@
                 "ROLE_MANAGER"
               ],
               "route": {
-                "main": "/manage/dashboard/services/vehicles/main"
+                "main": "/dashboard/services/vehicles/main"
               }
             },
             {
@@ -273,7 +273,7 @@
                 "ROLE_ADMIN"
               ],
               "route": {
-                "main": "/manage/dashboard/services/vehicles/types"
+                "main": "/dashboard/services/vehicles/types"
               }
             }
           ]
@@ -296,7 +296,7 @@
                 "ROLE_ADMIN"
               ],
               "route": {
-                "main": "/manage/dashboard/services/company/profit"
+                "main": "/dashboard/services/company/profit"
               }
             }
           ]
@@ -314,7 +314,7 @@
                 "ROLE_ADMIN"
               ],
               "route": {
-                "main": "/manage/dashboard/services/company/warehouses"
+                "main": "/dashboard/services/company/warehouses"
               }
             }
           ]
@@ -338,7 +338,7 @@
                 "ROLE_MANAGER"
               ],
               "route": {
-                "main": "/manage/dashboard/services/graph/users"
+                "main": "/dashboard/services/graph/users"
               }
             },
             {
@@ -348,7 +348,7 @@
                 "ROLE_MANAGER"
               ],
               "route": {
-                "main": "/manage/dashboard/services/graph/shipments"
+                "main": "/dashboard/services/graph/shipments"
               }
             },
             {
@@ -358,7 +358,7 @@
                 "ROLE_MANAGER"
               ],
               "route": {
-                "main": "/manage/dashboard/services/graph/parcels"
+                "main": "/dashboard/services/graph/parcels"
               }
             },
             {
@@ -368,7 +368,7 @@
                 "ROLE_MANAGER"
               ],
               "route": {
-                "main": "/manage/dashboard/services/graph/vehicles"
+                "main": "/dashboard/services/graph/vehicles"
               }
             }
           ]
@@ -391,7 +391,7 @@
                 "ROLE_ADMIN"
               ],
               "route": {
-                "main": "/manage/dashboard/services/internal/zipkin"
+                "main": "/dashboard/services/internal/zipkin"
               }
             }
           ]
@@ -409,7 +409,7 @@
                 "ROLE_ADMIN"
               ],
               "route": {
-                "main": "/manage/dashboard/services/internal/eureka"
+                "main": "/dashboard/services/internal/eureka"
               }
             }
           ]
@@ -427,7 +427,7 @@
                 "ROLE_ADMIN"
               ],
               "route": {
-                "main": "/manage/dashboard/services/external/stripe"
+                "main": "/dashboard/services/external/stripe"
               }
             }
           ]
@@ -445,7 +445,7 @@
                 "ROLE_ADMIN"
               ],
               "route": {
-                "main": "/manage/dashboard/services/external/firebase"
+                "main": "/dashboard/services/external/firebase"
               }
             }
           ]

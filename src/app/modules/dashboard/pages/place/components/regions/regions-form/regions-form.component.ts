@@ -24,9 +24,9 @@ export class RegionsFormComponent implements OnInit, OnDestroy, CanComponentDeac
   public negativeButton: string;
   public pozitiveButton: string;
 
-  public illustration: string = 'assets/img/place_assistant.svg';
+  public illustration: string = '../../../../../../../../assets/img/place_assistant.svg';
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť nový kraj v aplikácií Blesk.';
-  public assistentOptions: any = [{title: 'Okresy', link: '/manage/dashboard/services/places/districts'}, {title: 'Mestá a obce', link: '/manage/dashboard/services/places/villages'}];
+  public assistentOptions: any = [{title: 'Okresy', link: '/dashboard/services/places/districts'}, {title: 'Mestá a obce', link: '/dashboard/services/places/villages'}];
 
   public formButton: string = 'Vytvoriť';
   public formTitle: string = 'Vytvorenie nového kraja';
@@ -130,7 +130,7 @@ export class RegionsFormComponent implements OnInit, OnDestroy, CanComponentDeac
 
   private onSuccess(): void {
     this.formGroup.reset();
-    this.router.navigate(['/manage/dashboard/services/places/regions']);
+    this.router.navigate(['/dashboard/services/places/regions']);
     return;
   }
 }

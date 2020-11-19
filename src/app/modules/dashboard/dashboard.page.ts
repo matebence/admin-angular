@@ -29,7 +29,7 @@ export class DashboardPage implements OnInit {
 
   public onModalResult(result: boolean): void {
     if (result) {
-      this.router.navigate(['/manage/auth/sign-out']);
+      this.router.navigate(['/auth/sign-out']);
     } else {
       console.log('Dialog dismissed');
     }
