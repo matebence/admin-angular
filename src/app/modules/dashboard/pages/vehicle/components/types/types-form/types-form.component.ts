@@ -24,7 +24,7 @@ export class TypesFormComponent implements OnInit, OnDestroy, CanComponentDeacti
   public negativeButton: string;
   public pozitiveButton: string;
 
-  public illustration: string = '../../../../../../../../assets/img/vehicle_assistant.svg';
+  public illustration: string = 'assets/img/vehicle_assistant.svg';
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť nový dopravný prostriedok v aplikácií Blesk.';
   public assistentOptions: any = [{title: 'Vozidlá', link: '/dashboard/services/vehicles/main'}];
 
