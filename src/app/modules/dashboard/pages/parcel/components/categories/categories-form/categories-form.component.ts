@@ -24,7 +24,7 @@ export class CategoriesFormComponent implements OnInit, OnDestroy, CanComponentD
   public negativeButton: string;
   public pozitiveButton: string;
 
-  public illustration: string = '../../../../../../../../assets/img/parcel_assistant.svg';
+  public illustration: string = 'assets/img/parcel_assistant.svg';
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť novú kategóriu v aplikácií Blesk.';
   public assistentOptions: any = [{title: 'Balíky', link: '/dashboard/services/parcels/main'}, {title: 'Recenzie', link: '/dashboard/services/parcels/ratings'}];
 

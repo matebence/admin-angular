@@ -26,7 +26,7 @@ export class RolesFormComponent implements OnInit, OnDestroy, CanComponentDeacti
   public negativeButton: string;
   public pozitiveButton: string;
 
-  public illustration: string = '../../../../../../../../assets/img/account_assistant.svg';
+  public illustration: string = 'assets/img/account_assistant.svg';
   public assistent: string = 'Výtajte som Váš osobný asistent. Som tu aby som pomohol a vysvetloval. Momentálne sa chystáte vytvoriť novú rolu v aplikácií Blesk.';
   public assistentOptions: any = [{title: 'Kontá', link: '/dashboard/services/accounts/main'}, {title: 'Preferencie', link: '/dashboard/services/accounts/preferences'}, {title: 'Privilégia', link: '/dashboard/services/accounts/privileges'}];
 
